@@ -1,0 +1,92 @@
+﻿<head>
+    <link href="~/Content/JazMaxStyle.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+            var $menu = $("#menu");
+            var $opener = $menu.children().find("span");
+            $opener.each(function () {
+                var $this = $(this);
+                $this.on("click", function () {
+                    $this.toggleClass("drop");
+                    $opener.not($this).removeClass("drop");
+                });
+            });
+            var $menuIcon = $(".menu-icon");
+            var $bars = $(".bar-1, .bar-2, .bar-3");
+            var $sidebar = $(".sidebar");
+            var $main = $("main");
+            $menuIcon.on("click", function () {
+                $main.toggleClass("clicked");
+                $menuIcon.toggleClass("move");
+                $sidebar.toggleClass("hide");
+                $bars.toggleClass("clicked");
+            });
+        });
+
+    </script>
+</head>
+<div class="menu-icon">
+    <div class="bar-1"></div>
+    <div class="bar-2"></div>
+    <div class="bar-3"></div>
+</div>
+<div class="sidebar">
+    <div class="search">
+        <form action="#">
+            <input type="text" placeholder="Search" /><i class="fa fa-search"></i>
+        </form>
+    </div>
+    <nav id="menu">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="#">Lorem Ipsum</a></li>
+            <li><a href="#">Cras Imperdiet</a></li>
+            <li><a href="#">Dolor Sit</a></li>
+            <li>
+                <span class="opener">Dropdown<i class="fa fa-caret-down"></i></span>
+                <ul>
+                    <li><a href="#">Amet Consectetur</a></li>
+                    <li><a href="#">Adipiscing Elit</a></li>
+                    <li><a href="#">Aliquam In</a></li>
+                    <li><a href="#">Amet Consectetur</a></li>
+                    <li><a href="#">Adipiscing Elit</a></li>
+                    <li><a href="#">Aliquam In</a></li>
+                    <li><a href="#">Amet Consectetur</a></li>
+                    <li><a href="#">Adipiscing Elit</a></li>
+                    <li><a href="#">Aliquam In</a></li>
+                    <li><a href="#">Amet Consectetur</a></li>
+                    <li><a href="#">Adipiscing Elit</a></li>
+                    <li><a href="#">Aliquam In</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Risus Relit</a></li>
+            <li><a href="#">Pellentesque</a></li>
+            <li>
+                <span class="opener">Another Dropdown<i class="fa fa-caret-down"></i></span>
+                <ul>
+                    <li><a href="#">Augue Felis</a></li>
+                    <li><a href="#">Suscipit Id</a></li>
+                    <li><a href="#">Lacus Nec</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Ultrices Scelerisque</a></li>
+            <li><a href="#">Duis Blandit</a></li>
+        </ul>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="btn">Log In</div>
+        <div class="btn">Register</div>
+    </div>
+</div>
+<main>
+    <header>
+        <h1>Header Content</h1>
+    </header>
+    <section>
+        <h1>Section Content</h1>
+    </section>
+    <footer>
+        <h1>Footer Content</h1>
+    </footer>
+</main>

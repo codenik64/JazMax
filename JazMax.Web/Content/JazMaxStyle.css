@@ -1,0 +1,240 @@
+﻿@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Open Sans;
+}
+
+.menu-icon {
+    z-index: 9999;
+    transition: 0.3s;
+    cursor: pointer;
+    position: fixed;
+    left: 20.5em;
+    top: 0.5em;
+}
+
+    .menu-icon .bar-1, .menu-icon .bar-2, .menu-icon .bar-3 {
+        width: 30px;
+        height: 5px;
+        margin-top: 5px;
+        background: #666;
+        transition: 0.2s;
+        transition-delay: 0.15s;
+    }
+
+    .menu-icon .bar-1 {
+        margin-top: 0;
+        transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .menu-icon .bar-2 {
+        transform: rotate(90deg);
+        opacity: 0;
+    }
+
+    .menu-icon .bar-3 {
+        transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+        .menu-icon .bar-1.clicked, .menu-icon .bar-2.clicked, .menu-icon .bar-3.clicked {
+            transform: rotate(0deg) translate(0, 0);
+            opacity: 1;
+        }
+
+    .menu-icon.move {
+        left: 5px;
+    }
+
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+    background: #ddd;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #777;
+}
+
+.sidebar::-webkit-scrollbar:horizontal {
+    display: none;
+}
+
+.sidebar {
+    top: 0;
+    user-select: none;
+    transition: 0.3s;
+    position: fixed;
+    height: 100%;
+    width: 20em;
+    background: #eee;
+    overflow-y: scroll;
+    overflow-x: none;
+}
+
+    .sidebar .search {
+        height: 80px;
+        background: #ddd;
+    }
+
+        .sidebar .search form {
+            text-align: center;
+            padding-top: 19px;
+        }
+
+            .sidebar .search form input {
+                color: #666;
+                border: 1px solid #c4c4c4;
+                border-radius: 5px;
+                font-size: 1.3em;
+                height: 37px;
+                width: 13.2em;
+                padding-left: 10px;
+            }
+
+                .sidebar .search form input:focus {
+                    border: 3px solid #16a085;
+                    outline: none;
+                }
+
+                .sidebar .search form input::-webkit-input-placeholder {
+                    color: #666;
+                }
+
+            .sidebar .search form i {
+                position: absolute;
+                right: 27px;
+                top: 29px;
+                font-size: 1.3em;
+                color: #666;
+                transform: rotatey(180deg);
+            }
+
+    .sidebar #menu h2 {
+        display: inline;
+        margin-left: 10px;
+        padding-right: 10px;
+        border-bottom: 3px solid #16a085;
+        line-height: 100px;
+    }
+
+    .sidebar #menu ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 19.8em;
+    }
+
+        .sidebar #menu ul li a, .sidebar #menu ul li span {
+            cursor: pointer;
+            line-height: 45px;
+            font-size: 1.4em;
+            text-decoration: none;
+            color: #444;
+            margin-left: 10px;
+            border-bottom: 1px solid #ccc;
+            display: block;
+        }
+
+            .sidebar #menu ul li a:hover, .sidebar #menu ul li span:hover {
+                color: #16a085;
+            }
+
+                .sidebar #menu ul li a:hover i, .sidebar #menu ul li span:hover i {
+                    color: #16a085;
+                }
+
+            .sidebar #menu ul li a i, .sidebar #menu ul li span i {
+                float: right;
+                position: relative;
+                right: 15px;
+                top: 9px;
+                color: #444;
+            }
+
+        .sidebar #menu ul li .opener.drop + ul {
+            display: block;
+        }
+
+        .sidebar #menu ul li ul {
+            display: none;
+        }
+
+            .sidebar #menu ul li ul li a {
+                margin-left: 20px;
+                color: #444;
+            }
+
+    .sidebar .sidebar-footer {
+        height: 100px;
+        position: relative;
+        bottom: 0;
+        width: 20em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .sidebar .sidebar-footer .btn {
+            transition: 0.2s;
+            display: inline;
+            background: #111;
+            padding: 7px 20px;
+            margin-right: 15px;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #eee;
+        }
+
+            .sidebar .sidebar-footer .btn:last-child {
+                margin-right: 0;
+            }
+
+            .sidebar .sidebar-footer .btn:hover {
+                background: #16a085;
+            }
+
+    .sidebar.hide {
+        width: 0em;
+    }
+
+main.clicked {
+    width: 100%;
+}
+
+main {
+    transition: 0.3s;
+    width: calc(100% - 20em);
+    float: right;
+}
+
+    main header {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ecf0f1;
+    }
+
+    main h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 3em;
+        color: #16a085;
+    }
+
+    main section {
+        height: 600px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    main footer {
+        height: 500px;
+        background: #ecf0f1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
