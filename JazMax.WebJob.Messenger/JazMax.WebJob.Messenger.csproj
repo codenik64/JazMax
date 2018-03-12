@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="BL\MessengerService.cs" />
     <Compile Include="Model\Email.cs" />
+    <Compile Include="Model\EmailType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
