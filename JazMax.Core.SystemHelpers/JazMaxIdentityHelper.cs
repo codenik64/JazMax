@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using JazMax.Core.SystemHelpers.Model;
 
 namespace JazMax.Core.SystemHelpers
 {
@@ -7,7 +8,7 @@ namespace JazMax.Core.SystemHelpers
     {
         private static AzureDataAccess.JazMaxDBProdContext db = new AzureDataAccess.JazMaxDBProdContext();
 
-
+        #region Personal Assisstant
         public static UserInformation GetPAUserInformation(string userName)
         {
             var user = from a in db.CoreUsers
@@ -24,22 +25,22 @@ namespace JazMax.Core.SystemHelpers
 
             return user.FirstOrDefault();
         }
+        #endregion
 
-        public static UserInformation GetTeamLeaderUserInformation(string userName)
+        #region Team Leader
+        public static UserInformation GetTeamLeadersInfo(string userName)
         {
-            var user = from a in db.CoreUsers
-                       join b in db.CoreTeamLeaders
-                       on a.CoreUserId equals b.CoreUserId
-                       join c in db.CoreProvinces
-                       on b.CoreProvinceId equals c.ProvinceId
-                       where a.EmailAddress == userName
-                       select new UserInformation
-                       {
-                           DisplayName = a.FirstName + " " + a.LastName,
-                           Province = c.ProvinceName
-                       };
+          
+            return db.vw_GetTeamLeadersInformation.Where(x => x.EmailAddress == userName).Select(x => new UserInformation
+            {
 
-            return user.FirstOrDefault();
+
+                BranchName = x.BranchName != null ? x.BranchName : "None",
+                DisplayName = x.FirstName + " " + x.LastName,
+                Id = x.CoreUserId.ToString(),
+                Province = x.ProvinceName != null ? x.ProvinceName : "None"
+
+            }).FirstOrDefault();
         }
 
         public List<UserInformation> GetTeamLeaderForProvince(int pId)
@@ -56,14 +57,18 @@ namespace JazMax.Core.SystemHelpers
 
             return q.ToList();
         }
+        #endregion
 
+        public List<UserInformation> GetBranchesBasedOnProvince(int ProvinceId)
+        {
+            return db.CoreBranches.Where(x => x.ProvinceId == ProvinceId).Select(x => new UserInformation
+            {
+                BranchName = x.BranchName,
+                Id = x.BranchId.ToString()
+
+            }).ToList();
+        }
     }
 
-    public class UserInformation
-    {
-        public string DisplayName { get; set; }
-        public string Province { get; set; }
-        public string BranchName { get; set; }
-        public string Id { get; set; }
-    }
+   
 }

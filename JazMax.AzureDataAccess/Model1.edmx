@@ -72,7 +72,6 @@
           </Key>
           <Property Name="CoreAgentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CoreBranchId" Type="int" />
-          <Property Name="CoreTeamLeaderId" Type="int" />
           <Property Name="CoreUserId" Type="int" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
@@ -155,6 +154,23 @@
           <Property Name="UserRoleId" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_GetTeamLeadersInformation">
+          <Key>
+            <PropertyRef Name="CoreUserId" />
+            <PropertyRef Name="CoreTeamLeaderId" />
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="CoreUserId" Type="int" Nullable="false" />
+          <Property Name="CoreTeamLeaderId" Type="int" Nullable="false" />
+          <Property Name="ProvinceName" Type="nvarchar(max)" />
+          <Property Name="BranchName" Type="nvarchar(max)" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="JazMaxDBProdModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -170,6 +186,18 @@
           <EntitySet Name="CoreUser" EntityType="Self.CoreUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoreUserInType" EntityType="Self.CoreUserInType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoreUserType" EntityType="Self.CoreUserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_GetTeamLeadersInformation" EntityType="Self.vw_GetTeamLeadersInformation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_GetTeamLeadersInformation].[EmailAddress] AS [EmailAddress], 
+    [vw_GetTeamLeadersInformation].[FirstName] AS [FirstName], 
+    [vw_GetTeamLeadersInformation].[LastName] AS [LastName], 
+    [vw_GetTeamLeadersInformation].[CoreUserId] AS [CoreUserId], 
+    [vw_GetTeamLeadersInformation].[CoreTeamLeaderId] AS [CoreTeamLeaderId], 
+    [vw_GetTeamLeadersInformation].[ProvinceName] AS [ProvinceName], 
+    [vw_GetTeamLeadersInformation].[BranchName] AS [BranchName], 
+    [vw_GetTeamLeadersInformation].[BranchId] AS [BranchId]
+    FROM [dbo].[vw_GetTeamLeadersInformation] AS [vw_GetTeamLeadersInformation]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -242,7 +270,6 @@
           </Key>
           <Property Name="CoreAgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CoreBranchId" Type="Int32" />
-          <Property Name="CoreTeamLeaderId" Type="Int32" />
           <Property Name="CoreUserId" Type="Int32" />
           <Property Name="IsActive" Type="Boolean" />
         </EntityType>
@@ -340,7 +367,23 @@
           <EntitySet Name="CoreUsers" EntityType="Self.CoreUser" />
           <EntitySet Name="CoreUserInTypes" EntityType="Self.CoreUserInType" />
           <EntitySet Name="CoreUserTypes" EntityType="Self.CoreUserType" />
+          <EntitySet Name="vw_GetTeamLeadersInformation" EntityType="JazMaxDBProdModel.vw_GetTeamLeadersInformation" />
         </EntityContainer>
+        <EntityType Name="vw_GetTeamLeadersInformation">
+          <Key>
+            <PropertyRef Name="CoreUserId" />
+            <PropertyRef Name="CoreTeamLeaderId" />
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CoreUserId" Type="Int32" Nullable="false" />
+          <Property Name="CoreTeamLeaderId" Type="Int32" Nullable="false" />
+          <Property Name="ProvinceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -415,7 +458,6 @@
               <MappingFragment StoreEntitySet="CoreAgent">
                 <ScalarProperty Name="CoreAgentId" ColumnName="CoreAgentId" />
                 <ScalarProperty Name="CoreBranchId" ColumnName="CoreBranchId" />
-                <ScalarProperty Name="CoreTeamLeaderId" ColumnName="CoreTeamLeaderId" />
                 <ScalarProperty Name="CoreUserId" ColumnName="CoreUserId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
@@ -504,6 +546,20 @@
                 <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />
                 <ScalarProperty Name="UserRoleId" ColumnName="UserRoleId" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_GetTeamLeadersInformation">
+            <EntityTypeMapping TypeName="JazMaxDBProdModel.vw_GetTeamLeadersInformation">
+              <MappingFragment StoreEntitySet="vw_GetTeamLeadersInformation">
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+                <ScalarProperty Name="CoreTeamLeaderId" ColumnName="CoreTeamLeaderId" />
+                <ScalarProperty Name="CoreUserId" ColumnName="CoreUserId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

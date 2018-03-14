@@ -1,0 +1,24 @@
+﻿USE [JazMaxDBProd]
+GO
+
+/****** Object:  View [dbo].[vw_GetTeamLeadersInformation]    Script Date: 3/14/2018 8:29:47 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+ALTER view [dbo].[vw_GetTeamLeadersInformation] AS
+
+select a.EmailAddress, a.FirstName, a.LastName, a.CoreUserId, b.CoreTeamLeaderId, c.ProvinceName, d.BranchName, d.BranchId from CoreUser a
+inner join CoreTeamLeader b
+on a.CoreUserId = b.CoreTeamLeaderId
+inner join CoreProvince c
+on c.ProvinceId = b.CoreProvinceId
+inner join CoreBranch d
+on d.CoreTeamLeaderId = b.CoreTeamLeaderId
+
+GO
+
+

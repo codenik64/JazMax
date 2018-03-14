@@ -19,6 +19,7 @@
         <EntityTypeShape EntityType="JazMaxDBProdModel.CoreUser" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JazMaxDBProdModel.CoreUserInType" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JazMaxDBProdModel.CoreUserType" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="JazMaxDBProdModel.vw_GetTeamLeadersInformation" Width="1.5" PointX="5.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

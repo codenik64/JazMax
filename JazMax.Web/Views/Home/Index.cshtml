@@ -1,31 +1,40 @@
 ﻿@using JazMax.Core.SystemHelpers
+@using JazMax.Core.SystemHelpers.Model
+
 
 @{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
-    @*<h1>JazMax CRM Website @ViewBag.Message </h1>*@
-
     
     @if (User.IsInRole("PA"))
     {
+
+        UserInformation a = @JazMaxIdentityHelper.GetPAUserInformation(User.Identity.Name);
     <h2>
-        Welcome back,  @JazMaxIdentityHelper.GetPAUserInformation(User.Identity.Name).DisplayName.ToString()
+        Welcome back,  @a.DisplayName.ToString()
         
     </h2>
     <h3>
-     Province:    @JazMaxIdentityHelper.GetPAUserInformation(User.Identity.Name).Province.ToString()
+      Province:    @a.Province.ToString()
     </h3>
     }
+
+
     else if (User.IsInRole("TeamLeader"))
     {
+        UserInformation a = @JazMaxIdentityHelper.GetTeamLeadersInfo(User.Identity.Name);
+
         <h2>
-            Welcome back,  @JazMaxIdentityHelper.GetTeamLeaderUserInformation(User.Identity.Name).DisplayName.ToString()
+            Welcome back,  @a.DisplayName.ToString()
 
         </h2>
         <h3>
-            Province:    @JazMaxIdentityHelper.GetTeamLeaderUserInformation(User.Identity.Name).Province.ToString()
+            Province:    @a.Province.ToString()
+        </h3>
+        <h3>
+            Branch:     @a.BranchName.ToString()
         </h3>
     }
 

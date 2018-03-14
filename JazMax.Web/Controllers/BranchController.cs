@@ -12,6 +12,7 @@ namespace JazMax.Web.Controllers
     {
         private static CoreBranchService o = new CoreBranchService();
         private static JazMaxIdentityHelper _helper = new JazMaxIdentityHelper();
+
         // GET: Branch
         public ActionResult Index()
         {
@@ -42,17 +43,6 @@ namespace JazMax.Web.Controllers
         public ActionResult Create()
         {
             return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create(JazMax.Web.ViewModel.UserAccountView.CoreBranchView model)
-        {
-            if(ModelState.IsValid)
-            {
-                o.CreateNewBranch(model);
-                return RedirectToAction("Index");
-            }
-            return View(model);
         }
 
         public ActionResult GetTeamLeaderForProvince(int Id)

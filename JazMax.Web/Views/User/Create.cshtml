@@ -6,11 +6,10 @@
 
 <h2>Create</h2>
 
+<div id="createUserForm">
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
+
+
     <div class="form-horizontal">
         <h4>CoreUserView</h4>
         <hr />
@@ -79,30 +78,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.LastUpdatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastUpdatedDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastUpdatedDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
    
         <div class="form-group">
             @Html.LabelFor(model => model.CoreUserTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -116,7 +91,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.CapturePAView.provinceId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.CapturePAView.provinceId, JazMaxDropDownList.GetProvinceNotAssigned(), new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(model => model.CapturePAView.provinceId, JazMaxDropDownList.GetProvinceNotAssigned(), new { htmlAttributes = new { @class = "form-control",  id="dropPro"} })
                     @Html.ValidationMessageFor(model => model.CapturePAView.provinceId, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -133,14 +108,24 @@
             </div>
         </div>
 
+        <div id="hidAgent" hidden>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CaptureAgent.BranchId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div id="dropBranch"></div>
+                    @Html.ValidationMessageFor(model => model.CaptureAgent.BranchId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                @*<input type="submit" value="Create" class="btn btn-default" />*@
+                <input id="Save" type="button" class="btn btn-default" value="Save" onclick="save();" />
             </div>
         </div>
     </div>
-}
+</div>
 
 
 <div>
@@ -157,6 +142,7 @@
     {
         $('#hidPA').hide();
         $('#hidTeamLeader').hide();
+        $('#hidAgent').hide();
 
         var value = $(this).val();
 
@@ -172,6 +158,101 @@
             $("#hidTeamLeader").fadeIn("slow");
             $("#hidTeamLeader").fadeIn(3000);
         }
+        else if (value == '4')
+        {
+            //Province!
+            $('#hidPA').fadeIn();
+            $("#hidPA").fadeIn("slow");
+            $("#hidPA").fadeIn(3000);
+
+            $('#hidAgent').fadeIn();
+            $("#hidAgent").fadeIn("slow");
+            $("#hidAgent").fadeIn(3000);
+
+        
+        }
     });
 
 </script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CapturePAView_provinceId').change(function () {
+
+            $.ajax({
+                type: "post",
+                url: "/User/GetBranchForProvince",
+                data: { Id: $('#CapturePAView_provinceId').val() },
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    var district = "<select id='ddlBranch'>";
+                    district = district + '<option value="">--Select--</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].Id + '>' + data[i].BranchName + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#dropBranch').html(district);
+                }
+            });
+        });
+    });
+</script> 
+
+<script>
+    function save() {
+        debugger;
+
+
+        $.ajax({
+            type: 'Post',
+            dataType: 'Json',
+            data: {
+                FirstName: $('#FirstName').val(),
+                MiddleName: $('#MiddleName').val(),
+                LastName: $('#LastName').val(),
+                IDNumber: $('#IDNumber').val(),
+                PhoneNumber: $('#PhoneNumber').val(),
+                CellPhone: $('#CellPhone').val(),
+                EmailAddress: $('#EmailAddress').val(),
+                GenderId: $('#GenderId').val(),
+
+                CoreUserTypeId: $('#CoreUserTypeId').val(),
+                CapturePAView_provinceId: $('#CapturePAView_provinceId').val(),
+                CaptureTeamLeader_provinceId: $('#CaptureTeamLeader_provinceId').val(),
+                dropBranch: $('#ddlBranch').val(),
+
+
+
+            },
+            url: '@Url.Action("Save", "User")',
+            success: function (da) {
+                if (da.Result == "Success") {
+                    alert('saved sucessfully')
+                    //$('#createDiv').fadeOut();
+                    //$("#createDiv").fadeOut("slow");
+                    //$("#createDiv").fadeOut(3000);
+
+                    //$('#showList').fadeIn();
+                    //$("#showList").fadeIn("slow");
+                    //$("#showList").fadeIn(3000);
+
+
+                } else {
+
+                    alert('Error' + da.Message);
+                }
+            },
+            error: function (da) {
+                alert('Error');
+            }
+        });
+    }
+
+</script> 
+
+
+
+@*TO DO: Add Validation!*@

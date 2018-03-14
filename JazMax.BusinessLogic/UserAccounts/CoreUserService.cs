@@ -68,6 +68,17 @@ namespace JazMax.BusinessLogic.UserAccounts
                     db.CoreTeamLeaders.Add(y);
                     db.SaveChanges();
                 }
+
+                //Agent
+                else if (model.CoreUserTypeId == 4)
+                {
+                    AzureDataAccess.CoreAgent p = new AzureDataAccess.CoreAgent();
+                    p.CoreBranchId = model.CaptureAgent.BranchId;
+                    p.CoreUserId = userId;
+                    p.IsActive = true;
+                    db.CoreAgents.Add(p);
+                    db.SaveChanges();
+                }
             }
             catch
             {

@@ -72,6 +72,8 @@
     <Compile Include="JazMaxCoreViewEngine.cs" />
     <Compile Include="JazMaxDropDownList.cs" />
     <Compile Include="JazMaxIdentityHelper.cs" />
+    <Compile Include="Model\BranchProvince.cs" />
+    <Compile Include="Model\UserInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +85,9 @@
       <Project>{635a8b45-a7ad-47f7-9518-ab35f0c85d90}</Project>
       <Name>JazMax.AzureDataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TempSQL\TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
