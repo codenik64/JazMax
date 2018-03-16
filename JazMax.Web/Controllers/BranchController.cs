@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using JazMax.BusinessLogic.UserAccounts;
 using JazMax.Core.SystemHelpers;
+using JazMax.Core.SystemHelpers.Model;
 
 namespace JazMax.Web.Controllers
 {
@@ -48,6 +49,12 @@ namespace JazMax.Web.Controllers
         public ActionResult GetTeamLeaderForProvince(int Id)
         {
             return Json(_helper.GetTeamLeaderForProvince(Id), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetMyBranches()
+        {
+            UserInformation a = JazMaxIdentityHelper.GetPAUserInformation(User.Identity.Name);
+            return View(o.GetMyBranchs(a.ProvinceId));
         }
     }
 }

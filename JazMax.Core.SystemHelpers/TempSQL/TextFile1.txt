@@ -1,7 +1,7 @@
 ﻿USE [JazMaxDBProd]
 GO
 
-/****** Object:  View [dbo].[vw_GetTeamLeadersInformation]    Script Date: 3/14/2018 8:29:47 PM ******/
+/****** Object:  View [dbo].[vw_GetTeamLeadersInformation]    Script Date: 3/16/2018 9:13:37 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9,11 +9,45 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
+
+
+CREATE view [dbo].[vw_GetAgentsInformation] AS
+
+select b.FirstName, b.LastName, b.MiddleName, b.IDNumber, b.PhoneNumber, b.CellPhone,
+b.EmailAddress,
+b.GenderId, b.CoreUserId, a.CoreAgentId, c.CoreTeamLeaderId, d.FirstName as TeamLeadername, c.BranchId, c.BranchName from CoreAgent a
+inner join CoreUser b
+on a.CoreUserId = b.CoreUserId
+inner join CoreBranch c
+on c.BranchId = a.CoreBranchId
+inner join vw_GetTeamLeadersInformation d
+on c.CoreTeamLeaderId = d.CoreTeamLeaderId
+
+GO
+
+
+
+
+*****************
+
+
+USE [JazMaxDBProd]
+GO
+
+/****** Object:  View [dbo].[vw_GetTeamLeadersInformation]    Script Date: 3/16/2018 7:47:05 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
 ALTER view [dbo].[vw_GetTeamLeadersInformation] AS
 
-select a.EmailAddress, a.FirstName, a.LastName, a.CoreUserId, b.CoreTeamLeaderId, c.ProvinceName, d.BranchName, d.BranchId from CoreUser a
+select a.EmailAddress, a.FirstName, a.LastName, a.CoreUserId, b.CoreTeamLeaderId, c.ProvinceName, d.BranchName, d.BranchId, c.ProvinceId from CoreUser a
 inner join CoreTeamLeader b
-on a.CoreUserId = b.CoreTeamLeaderId
+on a.CoreUserId = b.CoreUserId
 inner join CoreProvince c
 on c.ProvinceId = b.CoreProvinceId
 inner join CoreBranch d

@@ -13,7 +13,7 @@
 
         UserInformation a = @JazMaxIdentityHelper.GetPAUserInformation(User.Identity.Name);
     <h2>
-        Welcome back,  @a.DisplayName.ToString()
+        Welcome back, @a.DisplayName.ToString()
         
     </h2>
     <h3>
@@ -27,7 +27,7 @@
         UserInformation a = @JazMaxIdentityHelper.GetTeamLeadersInfo(User.Identity.Name);
 
         <h2>
-            Welcome back,  @a.DisplayName.ToString()
+            Welcome back, @a.DisplayName.ToString()
 
         </h2>
         <h3>
@@ -37,9 +37,28 @@
             Branch:     @a.BranchName.ToString()
         </h3>
     }
+    else if (User.IsInRole("Agent"))
+    {
+        AgentInformation a = @JazMaxIdentityHelper.GetAgentInformation(User.Identity.Name);
+        <h2>
+            Welcome back, @a.DisplayName.ToString()
+
+        </h2>
+        <h3>
+            Branch:     @a.BranchName.ToString()
+        </h3>
+        <h3>
+            Teamleader: @a.TeamLeaderName.ToString()
+        </h3>
+        <h3>
+            Province:   @a.Province.ToString()
+        </h3>
+       
+       
+    }
 
 
-     
+
 </div>
 
 

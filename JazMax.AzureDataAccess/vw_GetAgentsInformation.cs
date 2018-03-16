@@ -12,16 +12,23 @@ namespace JazMax.AzureDataAccess
     using System;
     using System.Collections.Generic;
     
-    public partial class vw_GetTeamLeadersInformation
+    public partial class vw_GetAgentsInformation
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int CoreUserId { get; set; }
-        public int CoreTeamLeaderId { get; set; }
-        public string ProvinceName { get; set; }
-        public string BranchName { get; set; }
-        public int BranchId { get; set; }
+        public string MiddleName { get; set; }
+        public string IDNumber { get; set; }
+        public string PhoneNumber { get; set; }
+        public string CellPhone { get; set; }
         public string EmailAddress { get; set; }
+        public Nullable<int> GenderId { get; set; }
+        public int CoreUserId { get; set; }
+        public int CoreAgentId { get; set; }
+        public Nullable<int> CoreTeamLeaderId { get; set; }
+        public string TeamLeadername { get; set; }
+        public int BranchId { get; set; }
+        public string BranchName { get; set; }
         public int ProvinceId { get; set; }
+        public string ProvinceName { get; set; }
     }
 }

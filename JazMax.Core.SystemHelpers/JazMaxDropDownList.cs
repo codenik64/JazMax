@@ -54,5 +54,19 @@ namespace JazMax.Core.SystemHelpers
             return q;
         }
 
+        public static IEnumerable<SelectListItem> GetAllBranchesBasedOnProvince(int proId)
+        {
+            var q = from a in dbcon.CoreBranches
+                    where a.ProvinceId == proId
+                    select new SelectListItem
+                    {
+                        Text = a.BranchName,
+                        Value = a.BranchId.ToString()
+                    };
+            return q;
+
+        }
+
+
     }
 }

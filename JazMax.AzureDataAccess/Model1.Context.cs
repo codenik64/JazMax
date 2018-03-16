@@ -40,5 +40,6 @@ namespace JazMax.AzureDataAccess
         public virtual DbSet<CoreUserInType> CoreUserInTypes { get; set; }
         public virtual DbSet<CoreUserType> CoreUserTypes { get; set; }
         public virtual DbSet<vw_GetTeamLeadersInformation> vw_GetTeamLeadersInformation { get; set; }
+        public virtual DbSet<vw_GetAgentsInformation> vw_GetAgentsInformation { get; set; }
     }
 }

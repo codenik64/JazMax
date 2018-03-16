@@ -16,6 +16,12 @@ namespace JazMax.BusinessLogic.UserAccounts
             return ConvertListModelToView(db.CoreBranches.Where(x => x.IsActive == true).ToList());
         }
 
+        //Get Agents Branches
+        public List<CoreBranchView> GetMyBranchs(int provinceId)
+        {
+            return GetAll().Where(x => x.ProvinceId == provinceId).ToList();
+        }
+
         private static List<CoreBranchView> ConvertListModelToView (List<AzureDataAccess.CoreBranch> model)
         {
             return model.Select(x => new CoreBranchView

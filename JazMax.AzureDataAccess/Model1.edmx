@@ -155,12 +155,39 @@
           <Property Name="IsActive" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetAgentsInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_GetAgentsInformation">
+          <Key>
+            <PropertyRef Name="CoreUserId" />
+            <PropertyRef Name="CoreAgentId" />
+            <PropertyRef Name="BranchId" />
+            <PropertyRef Name="ProvinceId" />
+          </Key>
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="MiddleName" Type="nvarchar(max)" />
+          <Property Name="IDNumber" Type="varchar" MaxLength="13" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="10" />
+          <Property Name="CellPhone" Type="varchar" MaxLength="10" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="GenderId" Type="int" />
+          <Property Name="CoreUserId" Type="int" Nullable="false" />
+          <Property Name="CoreAgentId" Type="int" Nullable="false" />
+          <Property Name="CoreTeamLeaderId" Type="int" />
+          <Property Name="TeamLeadername" Type="nvarchar(max)" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="BranchName" Type="nvarchar(max)" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
+          <Property Name="ProvinceName" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_GetTeamLeadersInformation">
           <Key>
             <PropertyRef Name="CoreUserId" />
             <PropertyRef Name="CoreTeamLeaderId" />
             <PropertyRef Name="BranchId" />
+            <PropertyRef Name="ProvinceId" />
           </Key>
           <Property Name="EmailAddress" Type="nvarchar(max)" />
           <Property Name="FirstName" Type="nvarchar(max)" />
@@ -170,6 +197,7 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
           <Property Name="ProvinceName" Type="nvarchar(max)" />
           <Property Name="BranchName" Type="nvarchar(max)" />
           <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="ProvinceId" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="JazMaxDBProdModelStoreContainer">
           <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
@@ -186,6 +214,26 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
           <EntitySet Name="CoreUser" EntityType="Self.CoreUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoreUserInType" EntityType="Self.CoreUserInType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoreUserType" EntityType="Self.CoreUserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_GetAgentsInformation" EntityType="Self.vw_GetAgentsInformation" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_GetAgentsInformation].[FirstName] AS [FirstName], 
+    [vw_GetAgentsInformation].[LastName] AS [LastName], 
+    [vw_GetAgentsInformation].[MiddleName] AS [MiddleName], 
+    [vw_GetAgentsInformation].[IDNumber] AS [IDNumber], 
+    [vw_GetAgentsInformation].[PhoneNumber] AS [PhoneNumber], 
+    [vw_GetAgentsInformation].[CellPhone] AS [CellPhone], 
+    [vw_GetAgentsInformation].[EmailAddress] AS [EmailAddress], 
+    [vw_GetAgentsInformation].[GenderId] AS [GenderId], 
+    [vw_GetAgentsInformation].[CoreUserId] AS [CoreUserId], 
+    [vw_GetAgentsInformation].[CoreAgentId] AS [CoreAgentId], 
+    [vw_GetAgentsInformation].[CoreTeamLeaderId] AS [CoreTeamLeaderId], 
+    [vw_GetAgentsInformation].[TeamLeadername] AS [TeamLeadername], 
+    [vw_GetAgentsInformation].[BranchId] AS [BranchId], 
+    [vw_GetAgentsInformation].[BranchName] AS [BranchName], 
+    [vw_GetAgentsInformation].[ProvinceId] AS [ProvinceId], 
+    [vw_GetAgentsInformation].[ProvinceName] AS [ProvinceName]
+    FROM [dbo].[vw_GetAgentsInformation] AS [vw_GetAgentsInformation]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_GetTeamLeadersInformation" EntityType="Self.vw_GetTeamLeadersInformation" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_GetTeamLeadersInformation].[EmailAddress] AS [EmailAddress], 
@@ -195,7 +243,8 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
     [vw_GetTeamLeadersInformation].[CoreTeamLeaderId] AS [CoreTeamLeaderId], 
     [vw_GetTeamLeadersInformation].[ProvinceName] AS [ProvinceName], 
     [vw_GetTeamLeadersInformation].[BranchName] AS [BranchName], 
-    [vw_GetTeamLeadersInformation].[BranchId] AS [BranchId]
+    [vw_GetTeamLeadersInformation].[BranchId] AS [BranchId], 
+    [vw_GetTeamLeadersInformation].[ProvinceId] AS [ProvinceId]
     FROM [dbo].[vw_GetTeamLeadersInformation] AS [vw_GetTeamLeadersInformation]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -368,12 +417,14 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
           <EntitySet Name="CoreUserInTypes" EntityType="Self.CoreUserInType" />
           <EntitySet Name="CoreUserTypes" EntityType="Self.CoreUserType" />
           <EntitySet Name="vw_GetTeamLeadersInformation" EntityType="JazMaxDBProdModel.vw_GetTeamLeadersInformation" />
+          <EntitySet Name="vw_GetAgentsInformation" EntityType="JazMaxDBProdModel.vw_GetAgentsInformation" />
         </EntityContainer>
         <EntityType Name="vw_GetTeamLeadersInformation">
           <Key>
             <PropertyRef Name="CoreUserId" />
             <PropertyRef Name="CoreTeamLeaderId" />
             <PropertyRef Name="BranchId" />
+            <PropertyRef Name="ProvinceId" />
           </Key>
           <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -383,6 +434,31 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
           <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BranchId" Type="Int32" Nullable="false" />
           <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_GetAgentsInformation">
+          <Key>
+            <PropertyRef Name="CoreUserId" />
+            <PropertyRef Name="CoreAgentId" />
+            <PropertyRef Name="BranchId" />
+            <PropertyRef Name="ProvinceId" />
+          </Key>
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDNumber" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CellPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GenderId" Type="Int32" />
+          <Property Name="CoreUserId" Type="Int32" Nullable="false" />
+          <Property Name="CoreAgentId" Type="Int32" Nullable="false" />
+          <Property Name="CoreTeamLeaderId" Type="Int32" />
+          <Property Name="TeamLeadername" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceId" Type="Int32" Nullable="false" />
+          <Property Name="ProvinceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -552,12 +628,35 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
           <EntitySetMapping Name="vw_GetTeamLeadersInformation">
             <EntityTypeMapping TypeName="JazMaxDBProdModel.vw_GetTeamLeadersInformation">
               <MappingFragment StoreEntitySet="vw_GetTeamLeadersInformation">
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
                 <ScalarProperty Name="BranchName" ColumnName="BranchName" />
                 <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
                 <ScalarProperty Name="CoreTeamLeaderId" ColumnName="CoreTeamLeaderId" />
                 <ScalarProperty Name="CoreUserId" ColumnName="CoreUserId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_GetAgentsInformation">
+            <EntityTypeMapping TypeName="JazMaxDBProdModel.vw_GetAgentsInformation">
+              <MappingFragment StoreEntitySet="vw_GetAgentsInformation">
+                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+                <ScalarProperty Name="ProvinceId" ColumnName="ProvinceId" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="TeamLeadername" ColumnName="TeamLeadername" />
+                <ScalarProperty Name="CoreTeamLeaderId" ColumnName="CoreTeamLeaderId" />
+                <ScalarProperty Name="CoreAgentId" ColumnName="CoreAgentId" />
+                <ScalarProperty Name="CoreUserId" ColumnName="CoreUserId" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="CellPhone" ColumnName="CellPhone" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
               </MappingFragment>

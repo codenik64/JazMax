@@ -20,7 +20,8 @@ namespace JazMax.Core.SystemHelpers
                        select new UserInformation
                        {
                            DisplayName = a.FirstName + " " + a.LastName,
-                           Province = c.ProvinceName
+                           Province = c.ProvinceName,
+                           ProvinceId = (int)b.ProvinceId
                        };
 
             return user.FirstOrDefault();
@@ -30,11 +31,8 @@ namespace JazMax.Core.SystemHelpers
         #region Team Leader
         public static UserInformation GetTeamLeadersInfo(string userName)
         {
-          
             return db.vw_GetTeamLeadersInformation.Where(x => x.EmailAddress == userName).Select(x => new UserInformation
             {
-
-
                 BranchName = x.BranchName != null ? x.BranchName : "None",
                 DisplayName = x.FirstName + " " + x.LastName,
                 Id = x.CoreUserId.ToString(),
@@ -45,10 +43,13 @@ namespace JazMax.Core.SystemHelpers
 
         public List<UserInformation> GetTeamLeaderForProvince(int pId)
         {
+            List<int?> teamLeaderId = db.CoreBranches.Where(x =>x.ProvinceId == pId).Select(x => x.CoreTeamLeaderId).ToList();
+
             var q = from a in db.CoreUsers
                     join b in db.CoreTeamLeaders
                     on a.CoreUserId equals b.CoreUserId
-                    where b.CoreProvinceId == pId
+                    where b.CoreProvinceId == pId &&
+                    !teamLeaderId.Contains(b.CoreTeamLeaderId)
                     select new UserInformation
                     {
                         DisplayName = a.FirstName + " " + a.LastName,
@@ -68,6 +69,33 @@ namespace JazMax.Core.SystemHelpers
 
             }).ToList();
         }
+
+        public static TeamLeaderInfomation GetTeamLeadersInfoNew(string userName)
+        {
+            return db.vw_GetTeamLeadersInformation.Where(x => x.EmailAddress == userName).Select(x => new TeamLeaderInfomation
+            {
+                CoreBranchId = x.BranchId,
+                CoreProvinceId = x.ProvinceId,
+                CoreTeamLeaderId = x.CoreTeamLeaderId,
+                CoreUserId = x.CoreUserId
+
+            }).FirstOrDefault();
+        }
+
+        public static AgentInformation GetAgentInformation(string userName)
+        {
+            return db.vw_GetAgentsInformation.Where(x => x.EmailAddress == userName).Select(x => new AgentInformation
+            {
+                BranchName =  x.BranchName,
+                DisplayName = x.FirstName + " " + x.LastName,
+                Province = x.ProvinceName,
+                TeamLeaderName = x.TeamLeadername
+
+            }).FirstOrDefault();
+
+        }
+
+
     }
 
    

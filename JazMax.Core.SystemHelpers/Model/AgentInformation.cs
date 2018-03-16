@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace JazMax.Core.SystemHelpers.Model
 {
-    public class UserInformation
+    public class AgentInformation
     {
         public string DisplayName { get; set; }
-        public string Province { get; set; }
         public string BranchName { get; set; }
-        public string Id { get; set; }
-        public int ProvinceId { get; set; }
+        public string TeamLeaderName { get; set; }
+        public string Province { get; set; }
+
     }
 }

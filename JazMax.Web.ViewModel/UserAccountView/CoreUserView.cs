@@ -27,5 +27,6 @@ namespace JazMax.Web.ViewModel.UserAccountView
         public CapturePAView CapturePAView { get; set; }
         public CaptureTeamLeader CaptureTeamLeader { get; set; }
         public CaptureAgent CaptureAgent { get; set; }
+        public Nullable<int> BranchIdCapture { get; set; }
     }
 }
