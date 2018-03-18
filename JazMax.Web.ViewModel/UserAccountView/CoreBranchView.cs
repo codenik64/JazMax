@@ -18,5 +18,7 @@ namespace JazMax.Web.ViewModel.UserAccountView
         public string StreetAddress { get; set; }
         public string City { get; set; }
         public string Suburb { get; set; }
+        public string TeamLeaderName { get; set; }
+        public string ProvinceName { get; set; }
     }
 }

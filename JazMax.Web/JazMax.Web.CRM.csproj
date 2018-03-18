@@ -201,6 +201,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\BranchController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PAController.cs" />
@@ -290,6 +291,11 @@
     <Content Include="Views\Agent\MyAgent.cshtml" />
     <Content Include="Views\Branch\GetMyBranches.cshtml" />
     <Content Include="Views\User\CreateAnAgent.cshtml" />
+    <Content Include="Views\Error\Unauthorised.cshtml" />
+    <Content Include="Views\Branch\Details.cshtml" />
+    <Content Include="Views\Branch\Test.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Branch\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

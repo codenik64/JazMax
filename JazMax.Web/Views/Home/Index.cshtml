@@ -26,6 +26,7 @@
     {
         UserInformation a = @JazMaxIdentityHelper.GetTeamLeadersInfo(User.Identity.Name);
 
+       
         <h2>
             Welcome back, @a.DisplayName.ToString()
 
@@ -36,6 +37,9 @@
         <h3>
             Branch:     @a.BranchName.ToString()
         </h3>
+      
+        
+
     }
     else if (User.IsInRole("Agent"))
     {

@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="JazMaxCoreViewEngine.cs" />
     <Compile Include="JazMaxDropDownList.cs" />
+    <Compile Include="JazMaxIdentityAttribute.cs" />
     <Compile Include="JazMaxIdentityHelper.cs" />
     <Compile Include="Model\AgentInformation.cs" />
     <Compile Include="Model\BranchProvince.cs" />

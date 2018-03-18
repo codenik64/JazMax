@@ -1,0 +1,185 @@
+﻿@model JazMax.Web.ViewModel.UserAccountView.BranchDetailsView
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@Model.CoreBranchView.BranchName</h2>
+
+<table class="table">
+    <tr>
+        <td width="30%">
+
+            <div>
+                <hr />
+                <dl>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CoreBranchView.BranchName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CoreBranchView.BranchName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CoreBranchView.Phone)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CoreBranchView.Phone)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CoreBranchView.EmailAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CoreBranchView.EmailAddress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CoreBranchView.StreetAddress)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CoreBranchView.StreetAddress)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CoreBranchView.City)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CoreBranchView.City)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CoreBranchView.Suburb)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CoreBranchView.Suburb)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CoreBranchView.TeamLeaderName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CoreBranchView.TeamLeaderName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CoreBranchView.ProvinceName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CoreBranchView.ProvinceName)
+                    </dd>
+
+                </dl>
+            </div>
+
+
+        </td>
+        <td width="70%">
+            <div id="editTheDiv" hidden>
+                @{
+                    Html.RenderAction("Update", "Branch", Model.CoreBranchView.BranchId);
+                }
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+
+
+<p>
+    <input id="show" type="button" class="btn btn-primary"  value="Edit"/>
+</p>
+
+@if (Model.AgentDetailsView.Any())
+{
+
+<table class="table">
+    <tr>
+        <th>
+            UserId
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            Middle Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        
+        <th>
+            Phone
+        </th>
+        <th>
+            Cell Phone 
+        </th>
+        <th>
+            Email Address 
+        </th>
+        
+        <th>
+            TeamLeader
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.AgentDetailsView)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CoreUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CellPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TeamLeaderName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AgentId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.AgentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AgentId })
+            </td>
+        </tr>
+
+    }
+    
+</table>
+}
+else
+{
+    <p>There are no agents assigned to this branch</p>
+}
+
+<script>
+    $("#show").click(function () {
+        $("#editTheDiv").show();
+    });
+   
+</script>

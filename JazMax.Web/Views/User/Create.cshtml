@@ -1,15 +1,13 @@
 ﻿@model JazMax.Web.ViewModel.UserAccountView.CoreUserView
 @using JazMax.Core.SystemHelpers
 
-@*@{
-    ViewBag.Title = "Create";
-}*@
+@{
+    ViewBag.Title = "Create User";
+}
 
-<h2>Create</h2>
+<h2>Create User</h2>
 
 <div id="createUserForm">
-
-
 
     <div class="form-horizontal">
         <h4>CoreUserView</h4>
@@ -229,16 +227,7 @@
             success: function (da) {
                 if (da.Result == "Success")
                 {
-                    alert('saved sucessfully')
-                    //$('#createDiv').fadeOut();
-                    //$("#createDiv").fadeOut("slow");
-                    //$("#createDiv").fadeOut(3000);
-
-                    //$('#showList').fadeIn();
-                    //$("#showList").fadeIn("slow");
-                    //$("#showList").fadeIn(3000);
-
-
+                    alert('saved sucessfully');
                 }
                 else
                 {

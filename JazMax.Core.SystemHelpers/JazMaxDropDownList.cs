@@ -37,7 +37,6 @@ namespace JazMax.Core.SystemHelpers
             {
                 Text = x.ProvinceName,
                 Value = x.ProvinceId.ToString(),
-
             });
         }
 
@@ -64,8 +63,43 @@ namespace JazMax.Core.SystemHelpers
                         Value = a.BranchId.ToString()
                     };
             return q;
+        }
+
+        public static IEnumerable<SelectListItem> GetAllTeamLeadersBasedOnPAProvince(int proId)
+        {
+            var q = from a in dbcon.CoreUsers
+                    join b in dbcon.CoreTeamLeaders
+                    on a.CoreUserId equals b.CoreUserId
+                    where b.CoreProvinceId == proId
+                    select new SelectListItem
+                    {
+                        Text = a.FirstName + " " + a.LastName,
+                        Value = b.CoreTeamLeaderId.ToString()
+                    };
+            return q;
+        }
+
+        public static IEnumerable<SelectListItem> GetAllTeamLeadersThatAreNotAssigned(int proId)
+        {
+            List<int?> teamLeaderId = dbcon.CoreBranches.Where(x => x.ProvinceId == proId).Select(x => x.CoreTeamLeaderId).ToList();
+
+            var q = from a in dbcon.CoreUsers
+                    join b in dbcon.CoreTeamLeaders
+                    on a.CoreUserId equals b.CoreUserId
+                    where b.CoreProvinceId == proId &&
+                    !teamLeaderId.Contains(b.CoreTeamLeaderId)
+                    select new SelectListItem
+                    {
+                        Text = a.FirstName + " " + a.LastName,
+                        Value = b.CoreTeamLeaderId.ToString()
+                    };
+
+            return q.ToList();
 
         }
+
+
+
 
 
     }

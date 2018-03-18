@@ -7,9 +7,6 @@
 <h2>Capture Agent</h2>
 
 <div id="createUserForm">
-
-
-
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -77,48 +74,6 @@
             </div>
         </div>
 
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.CoreUserTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CoreUserTypeId, JazMaxDropDownList.GetUserTypes(), new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CoreUserTypeId, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        @*<div id="hidPA" hidden>
-            <div class="form-group">
-                @Html.LabelFor(model => model.CapturePAView.provinceId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.CapturePAView.provinceId, JazMaxDropDownList.GetProvinceNotAssigned(), new { htmlAttributes = new { @class = "form-control", id = "dropPro" } })
-                    @Html.ValidationMessageFor(model => model.CapturePAView.provinceId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>*@
-
-        @*<div id="hidTeamLeader" hidden>
-            <div class="form-group">
-                @Html.LabelFor(model => model.CaptureTeamLeader.provinceId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.CaptureTeamLeader.provinceId, JazMaxDropDownList.GetAllProvince(), new
-               {
-                   htmlAttributes = new { @class = "form-control etc" }
-               })
-                    @Html.ValidationMessageFor(model => model.CaptureTeamLeader.provinceId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>*@
-
-        @*<div id="hidAgent" hidden>
-            <div class="form-group">
-                @Html.LabelFor(model => model.CaptureAgent.BranchId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div id="dropBranch"></div>
-                    @Html.ValidationMessageFor(model => model.CaptureAgent.BranchId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>*@
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="Save" type="button" class="btn btn-default" value="Save" onclick="save();" />
@@ -166,16 +121,7 @@
             {
                 if (da.Result == "Success")
                 {
-                    alert('saved sucessfully')
-                    //$('#createDiv').fadeOut();
-                    //$("#createDiv").fadeOut("slow");
-                    //$("#createDiv").fadeOut(3000);
-
-                    //$('#showList').fadeIn();
-                    //$("#showList").fadeIn("slow");
-                    //$("#showList").fadeIn(3000);
-
-
+                    alert('saved sucessfully');
                 }
                 else
                 {

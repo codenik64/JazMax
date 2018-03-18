@@ -2,6 +2,7 @@
 @using JazMax.Core.SystemHelpers
 @{
     ViewBag.Title = "Create";
+    JazMaxIdentityHelper.UserName = User.Identity.Name;
 }
 
 <div id="createDiv">
@@ -58,10 +59,24 @@
             </div>
         </div>
 
+        @if (JazMaxIdentityHelper.IsUserInRole("PA"))
+        {
+            Html.HiddenFor(model => model.ProvinceId);
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CoreTeamLeaderId, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.DropDownListFor(model => model.CoreTeamLeaderId, JazMaxDropDownList.GetAllTeamLeadersThatAreNotAssigned(JazMaxIdentityHelper.GetPAUserInformation(User.Identity.Name).ProvinceId), new { htmlAttributes = new { @class = "form-control" } })
+                <div id="teamDrop"></div>
+                @Html.ValidationMessageFor(model => model.CoreTeamLeaderId, "", new { @class = "text-danger" })
+            </div>
+
+        }
+        else
+        {
         <div class="form-group">
             @Html.LabelFor(model => model.ProvinceId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ProvinceId, JazMaxDropDownList.GetAllProvince(),new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.ProvinceId, JazMaxDropDownList.GetAllProvince(), new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ProvinceId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -76,9 +91,18 @@
             </div>
         </div>
 
+        }
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+                @if (!JazMaxIdentityHelper.IsUserInRole("PA"))
+                {
                 <input id="Save" type="button" class="btn btn-default" value="Save" onclick="save();" />
+                }
+                else
+                {
+                    <input id="Save" type="button" class="btn btn-default" value="Save" onclick="savePA();" />
+                }
             </div>
         </div>
     </div>
@@ -110,8 +134,8 @@
 
 </script>
 
-
-
+@if (!JazMaxIdentityHelper.IsUserInRole("PA"))
+{
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -144,27 +168,27 @@
         var count = 0;
         if ($('#BranchName').val() == '')
         {
-            $('#errorBranch').html('Please enter a branch name');
+            toastr.error('Please enter a branch name');
             count++;
         }
         if ($('#Phone').val() == '') {
-            $('#phoneError').html('Please enter a phone number');
+            toastr.error('Please enter a phone number');
             count++;
         }
         if ($('#EmailAddress').val() == '') {
-            $('#errorEmail').html('Please enter an email address');
+            toastr.error('Please enter an email address');
             count++;
         }
         if ($('#StreetAddress').val() == '') {
-            $('#errorStreetAddress').html('Please enter a street address');
+            toastr.error('Please enter a street address');
             count++;
         }
         if ($('#City').val() == '') {
-            $('#errorCity').html('Please enter a city');
+            toastr.error('Please enter a city');
             count++;
         }
         if ($('#Suburb').val() == '') {
-            $('#errorSuburb').html('Please enter a suburb');
+            toastr.error('Please enter a suburb');
             count++;
         }
 
@@ -195,6 +219,80 @@
                         $("#showList").fadeIn("slow");
                         $("#showList").fadeIn(3000);
    
+
+                    } else {
+
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    alert('Error');
+                }
+            });
+        }
+    }
+</script> 
+
+}
+
+
+<script>
+    function savePA() {
+        debugger;
+        var count = 0;
+
+        if ($('#BranchName').val() == '') {
+            $('#errorBranch').html('Please enter a branch name');
+            count++;
+        }
+        if ($('#Phone').val() == '') {
+            $('#phoneError').html('Please enter a phone number');
+            count++;
+        }
+        if ($('#EmailAddress').val() == '') {
+            $('#errorEmail').html('Please enter an email address');
+            count++;
+        }
+        if ($('#StreetAddress').val() == '') {
+            $('#errorStreetAddress').html('Please enter a street address');
+            count++;
+        }
+        if ($('#City').val() == '') {
+            $('#errorCity').html('Please enter a city');
+            count++;
+        }
+        if ($('#Suburb').val() == '') {
+            $('#errorSuburb').html('Please enter a suburb');
+            count++;
+        }
+
+        if (count == 0) {
+            debugger;
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data: {
+                    CoreTeamLeaderId: $('#CoreTeamLeaderId').val(),
+                    ProvinceId: $('#ProvinceId').val(),
+                    BranchName: $('#BranchName').val(),
+                    Phone: $('#Phone').val(),
+                    EmailAddress: $('#EmailAddress').val(),
+                    StreetAddress: $('#StreetAddress').val(),
+                    City: $('#City').val(),
+                    Suburb: $('#Suburb').val(),
+                },
+                url: '@Url.Action("Save", "Branch")',
+                success: function (da) {
+                    if (da.Result == "Success") {
+                        alertify.message('Normal message');
+                        //$('#createDiv').fadeOut();
+                        //$("#createDiv").fadeOut("slow");
+                        //$("#createDiv").fadeOut(3000);
+
+                        //$('#showList').fadeIn();
+                        //$("#showList").fadeIn("slow");
+                        //$("#showList").fadeIn(3000);
+
 
                     } else {
 

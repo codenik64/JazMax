@@ -2,11 +2,13 @@
 using System.Linq;
 using JazMax.Core.SystemHelpers.Model;
 
+
 namespace JazMax.Core.SystemHelpers
 {
     public class JazMaxIdentityHelper
     {
         private static AzureDataAccess.JazMaxDBProdContext db = new AzureDataAccess.JazMaxDBProdContext();
+        public static string UserName { get; set; }
 
         #region Personal Assisstant
         public static UserInformation GetPAUserInformation(string userName)
@@ -31,14 +33,25 @@ namespace JazMax.Core.SystemHelpers
         #region Team Leader
         public static UserInformation GetTeamLeadersInfo(string userName)
         {
-            return db.vw_GetTeamLeadersInformation.Where(x => x.EmailAddress == userName).Select(x => new UserInformation
+            var q =  db.vw_GetTeamLeadersInformation.Where(x => x.EmailAddress == userName).Select(x => new UserInformation
             {
                 BranchName = x.BranchName != null ? x.BranchName : "None",
-                DisplayName = x.FirstName + " " + x.LastName,
+                DisplayName = x.FirstName + " " + x.LastName != null ? x.FirstName + " " + x.LastName : "None",
                 Id = x.CoreUserId.ToString(),
                 Province = x.ProvinceName != null ? x.ProvinceName : "None"
 
             }).FirstOrDefault();
+
+            if(q == null)
+            {
+                q = new UserInformation
+                {
+                    BranchName = "None",
+                    DisplayName = "None",
+                    Province = "None"
+                };
+            }
+            return q;
         }
 
         public List<UserInformation> GetTeamLeaderForProvince(int pId)
@@ -58,7 +71,7 @@ namespace JazMax.Core.SystemHelpers
 
             return q.ToList();
         }
-        #endregion
+       
 
         public List<UserInformation> GetBranchesBasedOnProvince(int ProvinceId)
         {
@@ -81,7 +94,9 @@ namespace JazMax.Core.SystemHelpers
 
             }).FirstOrDefault();
         }
+        #endregion
 
+        #region Agent
         public static AgentInformation GetAgentInformation(string userName)
         {
             return db.vw_GetAgentsInformation.Where(x => x.EmailAddress == userName).Select(x => new AgentInformation
@@ -92,10 +107,31 @@ namespace JazMax.Core.SystemHelpers
                 TeamLeaderName = x.TeamLeadername
 
             }).FirstOrDefault();
-
         }
+        #endregion
 
+        #region Identity Helper Methods
+        public static int GetCoreUserId()
+        {
+            return db.CoreUsers.Where(x => x.EmailAddress == UserName).FirstOrDefault().CoreUserId;
+        }
+        public static bool IsUserInRole(string roleName)
+        {
+            var q = (from a in db.CoreUsers
+                     join b in db.CoreUserInTypes
+                     on a.CoreUserId equals b.CoreUserId
+                     join c in db.CoreUserTypes
+                     on b.CoreUserTypeId equals c.CoreUserTypeId
+                     where a.EmailAddress == UserName && c.UserTypeName == roleName
+                     select a).Any();
 
+            if(q)
+            {
+                return true;
+            }
+            return false;
+        }
+        #endregion
     }
 
    

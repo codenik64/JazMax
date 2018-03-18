@@ -47,5 +47,19 @@ namespace JazMax.BusinessLogic.UserAccounts
             return GetAll().Where(x => x.CoreTeamLeaderId == (int)teamLeaderId).AsQueryable();
 
         }
+
+        public IQueryable<AgentDetailsView> GetMyAgentInProvince(int proId)
+        {
+            return GetAll().Where(x => x.ProvinceId == (int)proId).AsQueryable();
+
+        }
+
+        public List<AgentDetailsView> GetMyAgentInBranch(int branchId)
+        {
+            return GetAll().Where(x => x.BranchId == (int)branchId).ToList();
+
+        }
+
+
     }
 }

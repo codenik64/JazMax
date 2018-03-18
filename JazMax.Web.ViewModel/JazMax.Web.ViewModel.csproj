@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAccountView\AgentDetailsView.cs" />
+    <Compile Include="UserAccountView\BranchDetailsView.cs" />
     <Compile Include="UserAccountView\CaptureAgent.cs" />
     <Compile Include="UserAccountView\CapturePAView.cs" />
     <Compile Include="UserAccountView\CaptureTeamLeader.cs" />

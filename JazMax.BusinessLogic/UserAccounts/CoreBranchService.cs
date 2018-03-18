@@ -69,5 +69,77 @@ namespace JazMax.BusinessLogic.UserAccounts
             return a;
         }
 
+        public BranchDetailsView Details(int branchId)
+        {
+            AgentService bb = new AgentService();
+
+            var query = from a in db.CoreBranches
+                        join b in db.CoreTeamLeaders
+                        on a.CoreTeamLeaderId equals b.CoreTeamLeaderId
+                        join c in db.CoreUsers
+                        on b.CoreUserId equals c.CoreUserId
+                        join d in db.CoreProvinces
+                        on a.ProvinceId equals d.ProvinceId
+                        where a.BranchId == branchId
+                        select new CoreBranchView
+                        {
+                            BranchId = a.BranchId,
+                            EmailAddress = a.EmailAddress,
+                            IsActive = a.IsActive,
+                            StreetAddress = a.StreetAddress,
+                            BranchName = a.BranchName,
+                            City = a.City,
+                            CoreTeamLeaderId = a.CoreTeamLeaderId,
+                            Phone = a.Phone,
+                            ProvinceId = a.ProvinceId,
+                            ProvinceName = d.ProvinceName,
+                            Suburb = a.Suburb,
+                            TeamLeaderName = c.FirstName + " " + c.LastName
+                        };
+
+            
+            List<AgentDetailsView> y = bb.GetMyAgentInBranch(branchId);
+            BranchDetailsView bru = new BranchDetailsView();
+            bru.AgentDetailsView = y;
+            bru.CoreBranchView = query.FirstOrDefault();
+
+            return bru;
+        }
+
+        public bool Update(CoreBranchView model)
+        {
+            try
+            {
+                var data = (from a in db.CoreBranches
+                            where model.BranchId == a.BranchId
+                            select a).FirstOrDefault();
+
+
+                data.BranchName = model.BranchName;
+                data.City = model.City;
+
+                if (model.CoreTeamLeaderId == null)
+                {
+                    data.CoreTeamLeaderId = data.CoreTeamLeaderId;
+                }
+                else
+                {
+                    data.CoreTeamLeaderId = model.CoreTeamLeaderId;
+                }
+                data.EmailAddress = model.EmailAddress;
+                data.IsActive = model.IsActive;
+                data.Phone = model.Phone;
+                data.ProvinceId = model.ProvinceId;
+                data.StreetAddress = model.StreetAddress;
+                data.Suburb = model.Suburb;
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
 }
