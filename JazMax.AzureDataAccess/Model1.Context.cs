@@ -41,5 +41,9 @@ namespace JazMax.AzureDataAccess
         public virtual DbSet<CoreUserType> CoreUserTypes { get; set; }
         public virtual DbSet<vw_GetTeamLeadersInformation> vw_GetTeamLeadersInformation { get; set; }
         public virtual DbSet<vw_GetAgentsInformation> vw_GetAgentsInformation { get; set; }
+        public virtual DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; }
+        public virtual DbSet<MessengerType> MessengerTypes { get; set; }
+        public virtual DbSet<SystemSettingsData> SystemSettingsDatas { get; set; }
+        public virtual DbSet<SystemErrorLog1> SystemErrorLog1 { get; set; }
     }
 }

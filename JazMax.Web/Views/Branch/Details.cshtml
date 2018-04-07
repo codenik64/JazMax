@@ -1,11 +1,21 @@
 ﻿@model JazMax.Web.ViewModel.UserAccountView.BranchDetailsView
+@using JazMax.Core.SystemHelpers;
 
 @{
     ViewBag.Title = "Details";
+    JazMaxIdentityHelper.UserName = User.Identity.Name;
 }
 
 <h2>@Model.CoreBranchView.BranchName</h2>
+<hr />
 
+@if (JazMaxIdentityHelper.IsUserInRole("PA,CEO"))
+{
+<div class="btn-group btn-group-justified">
+    <a href="#"  id="show"  class="btn btn-primary" value="Edit">Update</a>
+    
+</div>
+}
 <table class="table">
     <tr>
         <td width="30%">
@@ -93,12 +103,9 @@
     </tr>
 </table>
 
-
-
-
-<p>
-    <input id="show" type="button" class="btn btn-primary"  value="Edit"/>
-</p>
+<hr />
+<h3>Agents</h3>
+<hr />
 
 @if (Model.AgentDetailsView.Any())
 {
@@ -161,11 +168,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TeamLeaderName)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AgentId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.AgentId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.AgentId })
-            </td>
         </tr>
 
     }
@@ -179,7 +181,7 @@ else
 
 <script>
     $("#show").click(function () {
-        $("#editTheDiv").show();
+        $("#editTheDiv").toggle();
     });
    
 </script>

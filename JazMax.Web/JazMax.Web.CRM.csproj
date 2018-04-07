@@ -222,6 +222,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\JazMaxStyle.css" />
+    <Content Include="css\sb-admin.css" />
+    <Content Include="css\sb-admin.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -232,6 +234,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\JazMaxToastr.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -293,9 +296,12 @@
     <Content Include="Views\User\CreateAnAgent.cshtml" />
     <Content Include="Views\Error\Unauthorised.cshtml" />
     <Content Include="Views\Branch\Details.cshtml" />
-    <Content Include="Views\Branch\Test.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Branch\Update.cshtml" />
+    <Content Include="Views\Shared\_JazMaxAgent.cshtml" />
+    <Content Include="Views\Shared\_JazMaxTeamleader.cshtml" />
+    <Content Include="Views\Shared\_JazMaxPA.cshtml" />
+    <Content Include="Views\Error\Deactive.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -317,10 +323,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JazMax.AzureDataAccess\JazMax.AzureDataAccess.csproj">
-      <Project>{635a8b45-a7ad-47f7-9518-ab35f0c85d90}</Project>
-      <Name>JazMax.AzureDataAccess</Name>
-    </ProjectReference>
     <ProjectReference Include="..\JazMax.BusinessLogic\JazMax.BusinessLogic.csproj">
       <Project>{95d501fc-6e06-4a01-9887-94ea243b86dc}</Project>
       <Name>JazMax.BusinessLogic</Name>
@@ -328,6 +330,10 @@
     <ProjectReference Include="..\JazMax.Core.SystemHelpers\JazMax.Core.SystemHelpers.csproj">
       <Project>{82fa27cf-5676-4490-b12e-025dbe4603e8}</Project>
       <Name>JazMax.Core.SystemHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.DataAccess\JazMax.DataAccess.csproj">
+      <Project>{629737f1-f624-4835-9794-0727b8c4dc96}</Project>
+      <Name>JazMax.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\JazMax.Web.ViewModel\JazMax.Web.ViewModel.csproj">
       <Project>{ebc8eb41-67f0-43cc-9760-15039ca7d307}</Project>

@@ -9,7 +9,7 @@ namespace JazMax.BusinessLogic.UserAccounts
 {
     public class CoreUserService
     {
-        private static JazMax.AzureDataAccess.JazMaxDBProdContext db = new AzureDataAccess.JazMaxDBProdContext();
+        private static JazMax.DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
 
         public List<CoreUserView> GetAll()
         {
@@ -27,14 +27,14 @@ namespace JazMax.BusinessLogic.UserAccounts
 
             try
             {
-                AzureDataAccess.CoreUser a = new AzureDataAccess.CoreUser();
+                DataAccess.CoreUser a = new DataAccess.CoreUser();
                 a.CellPhone = model.CellPhone;
                 a.CreatedBy = model.CreatedBy;
                 a.CreatedDate = DateTime.Now;
                 a.EmailAddress = model.EmailAddress;
                 a.FirstName = model.FirstName;
                 a.GenderId = model.GenderId;
-                a.IDNumber = model.IDNumber;
+                a.IdNumber = model.IDNumber;
                 a.IsActive = true;
                 a.LastName = model.LastName;
                 a.LastUpdatedDate = DateTime.Now;
@@ -48,11 +48,13 @@ namespace JazMax.BusinessLogic.UserAccounts
                 //PA
                 if(model.CoreUserTypeId == 5)
                 {
-                    AzureDataAccess.CorePA z = new AzureDataAccess.CorePA();
-                    z.CoreUserId = userId;
-                    z.ProvinceId = model.CapturePAView.provinceId;
-                    z.IsActive = true;
-                    db.CorePAs.Add(z);
+                    DataAccess.CorePa z = new DataAccess.CorePa()
+                    {
+                        CoreUserId = userId,
+                        ProvinceId = model.CapturePAView.provinceId,
+                        IsActive = true
+                    };
+                    db.CorePas.Add(z);
                     db.SaveChanges();
 
                     updateProvinceToAssigned(model.CapturePAView.provinceId);
@@ -61,10 +63,12 @@ namespace JazMax.BusinessLogic.UserAccounts
                 //TeamLeader
                 else if(model.CoreUserTypeId == 3)
                 {
-                    AzureDataAccess.CoreTeamLeader y = new AzureDataAccess.CoreTeamLeader();
-                    y.CoreProvinceId = model.CaptureTeamLeader.provinceId;
-                    y.CoreUserId = userId;
-                    y.IsActive = true;
+                    DataAccess.CoreTeamLeader y = new DataAccess.CoreTeamLeader()
+                    {
+                        CoreProvinceId = model.CaptureTeamLeader.provinceId,
+                        CoreUserId = userId,
+                        IsActive = true
+                    };
                     db.CoreTeamLeaders.Add(y);
                     db.SaveChanges();
                 }
@@ -72,16 +76,19 @@ namespace JazMax.BusinessLogic.UserAccounts
                 //Agent
                 else if (model.CoreUserTypeId == 4)
                 {
-                    AzureDataAccess.CoreAgent p = new AzureDataAccess.CoreAgent();
-                    p.CoreBranchId = model.CaptureAgent.BranchId;
-                    p.CoreUserId = userId;
-                    p.IsActive = true;
+                    DataAccess.CoreAgent p = new DataAccess.CoreAgent()
+                    {
+                        CoreBranchId = model.CaptureAgent.BranchId,
+                        CoreUserId = userId,
+                        IsActive = true
+                    };
                     db.CoreAgents.Add(p);
                     db.SaveChanges();
                 }
             }
-            catch
+            catch (Exception e)
             {
+                AuditLog.ErrorLog.LogError(db, e, 0);
                 userId = -1;
             }
 
@@ -92,9 +99,16 @@ namespace JazMax.BusinessLogic.UserAccounts
         #region Update Priovince After Assigned
         public void updateProvinceToAssigned(int proId)
         {
-            AzureDataAccess.CoreProvince d = db.CoreProvinces.FirstOrDefault(x => x.ProvinceId == proId);
-            d.IsAssigned = true;
-            db.SaveChanges();
+            try
+            {
+                DataAccess.CoreProvince d = db.CoreProvinces.FirstOrDefault(x => x.ProvinceId == proId);
+                d.IsAssigned = true;
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                AuditLog.ErrorLog.LogError(db, e, 0);
+            }
         }
         #endregion
 
@@ -118,27 +132,53 @@ namespace JazMax.BusinessLogic.UserAccounts
 
         public void AddUserToAspUserRole(string userId, string roleId)
         {
-            AzureDataAccess.AspNetUserRole r = new AzureDataAccess.AspNetUserRole();
-            r.RoleId = roleId;
-            r.UserId = userId;
-            db.AspNetUserRoles.Add(r);
-            db.SaveChanges();
+            try
+            {
+                DataAccess.AspNetUserRole r = new DataAccess.AspNetUserRole()
+                {
+                    RoleId = roleId,
+                    UserId = userId
+                };
+                db.AspNetUserRoles.Add(r);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                AuditLog.ErrorLog.LogError(db, e, 0);
+            }
         }
 
         public void AddUserToType(int coreUserId, int coreUserTypeId)
         {
-            AzureDataAccess.CoreUserInType a = new AzureDataAccess.CoreUserInType();
-            a.CoreUserId = coreUserId;
-            a.CoreUserTypeId = coreUserTypeId;
-            a.IsUserTypeActive = true;
-            db.CoreUserInTypes.Add(a);
-            db.SaveChanges();
+            try
+            {
+                DataAccess.CoreUserInType a = new DataAccess.CoreUserInType()
+                {
+                    CoreUserId = coreUserId,
+                    CoreUserTypeId = coreUserTypeId,
+                    IsUserTypeActive = true
+                };
+                db.CoreUserInTypes.Add(a);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                AuditLog.ErrorLog.LogError(db, e, 0);
+            }
+        }
+
+        //UPDATE
+        //Use external DB Context - Avoids multiple hits 
+        public static string GetAspUserEmailById(DataAccess.JazMaxDBProdContext dbcon, string UserId)
+        {
+            var a = dbcon.AspNetUsers.FirstOrDefault(x => x.Id == UserId).Email;
+            return a;
         }
 
         #endregion
 
         #region Model Helpers Because Why Not!
-        public List<CoreUserView> ConvertListModelToView(List<AzureDataAccess.CoreUser> modol)
+        public List<CoreUserView> ConvertListModelToView(List<DataAccess.CoreUser> modol)
         {
             return modol.Select(x => new CoreUserView
             {
@@ -150,7 +190,7 @@ namespace JazMax.BusinessLogic.UserAccounts
                 CreatedDate = x.CreatedDate,
                 FirstName = x.FirstName,
                 GenderId = x.GenderId,
-                IDNumber = x.IDNumber,
+                IDNumber = x.IdNumber,
                 LastName = x.LastName,
                 LastUpdatedDate = x.LastUpdatedDate,
                 MiddleName = x.MiddleName,

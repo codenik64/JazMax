@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -84,13 +85,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JazMax.AzureDataAccess\JazMax.AzureDataAccess.csproj">
-      <Project>{635a8b45-a7ad-47f7-9518-ab35f0c85d90}</Project>
-      <Name>JazMax.AzureDataAccess</Name>
-    </ProjectReference>
+    <Content Include="TempSQL\TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TempSQL\TextFile1.txt" />
+    <ProjectReference Include="..\JazMax.DataAccess\JazMax.DataAccess.csproj">
+      <Project>{629737f1-f624-4835-9794-0727b8c4dc96}</Project>
+      <Name>JazMax.DataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

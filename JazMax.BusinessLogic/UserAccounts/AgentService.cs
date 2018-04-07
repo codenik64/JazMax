@@ -9,7 +9,7 @@ namespace JazMax.BusinessLogic.UserAccounts
 {
     public class AgentService
     {
-        private static JazMax.AzureDataAccess.JazMaxDBProdContext db = new AzureDataAccess.JazMaxDBProdContext();
+        private static JazMax.DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
 
         public IQueryable<AgentDetailsView> GetAll()
         {
@@ -18,7 +18,7 @@ namespace JazMax.BusinessLogic.UserAccounts
                         on a.CoreUserId equals b.CoreUserId
                         join c in db.CoreBranches
                         on b.CoreBranchId equals c.BranchId
-                        join d in db.vw_GetTeamLeadersInformation
+                        join d in db.VwGetTeamLeadersInformations
                         on c.CoreTeamLeaderId equals d.CoreTeamLeaderId
                         select new AgentDetailsView
                         {
@@ -31,7 +31,7 @@ namespace JazMax.BusinessLogic.UserAccounts
                             CoreTeamLeaderId = c.CoreTeamLeaderId,
                             CoreUserId = a.CoreUserId,
                             FirstName = a.FirstName,
-                            IDNumber = a.IDNumber,
+                            IDNumber = a.IdNumber,
                             LastName = a.LastName,
                             MiddleName = a.MiddleName,
                             PhoneNumber = a.PhoneNumber,

@@ -9,7 +9,7 @@ namespace JazMax.BusinessLogic.UserAccounts
 {
     public class CoreProvinceService
     {
-        private static JazMax.AzureDataAccess.JazMaxDBProdContext db = new AzureDataAccess.JazMaxDBProdContext();
+        private static JazMax.DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
 
         public List<CoreProvinceView> GetAll()
         {
@@ -27,9 +27,9 @@ namespace JazMax.BusinessLogic.UserAccounts
                 db.CoreProvinces.Add(ConvertToView(view));
                 db.SaveChanges();
             }
-            catch
+            catch (Exception e)
             {
-               
+                AuditLog.ErrorLog.LogError(db, e, 0);
             }
         }
 
@@ -41,7 +41,7 @@ namespace JazMax.BusinessLogic.UserAccounts
         }
 
         #region Helpers
-        private List<CoreProvinceView> ConvertListToView(List<AzureDataAccess.CoreProvince> model)
+        private List<CoreProvinceView> ConvertListToView(List<DataAccess.CoreProvince> model)
         {
             return model.Select(t => new CoreProvinceView
             {
@@ -53,23 +53,27 @@ namespace JazMax.BusinessLogic.UserAccounts
             }).ToList();
         }
 
-        private CoreProvinceView ConvertModelToView(AzureDataAccess.CoreProvince v)
+        private CoreProvinceView ConvertModelToView(DataAccess.CoreProvince v)
         {
-            CoreProvinceView model = new CoreProvinceView();
-            model.IsActive = v.IsActive;
-            model.IsAssigned = v.IsAssigned;
-            model.ProvinceId = v.ProvinceId;
-            model.ProvinceName = v.ProvinceName;
+            CoreProvinceView model = new CoreProvinceView()
+            {
+                IsActive = v.IsActive,
+                IsAssigned = v.IsAssigned,
+                ProvinceId = v.ProvinceId,
+                ProvinceName = v.ProvinceName
+            };
             return model;
         }
 
-        private AzureDataAccess.CoreProvince ConvertToView(CoreProvinceView v)
+        private DataAccess.CoreProvince ConvertToView(CoreProvinceView v)
         {
-            AzureDataAccess.CoreProvince model = new AzureDataAccess.CoreProvince();
-            model.IsActive = v.IsActive;
-            model.IsAssigned = v.IsAssigned;
-            model.ProvinceId = v.ProvinceId;
-            model.ProvinceName = v.ProvinceName;
+            DataAccess.CoreProvince model = new DataAccess.CoreProvince()
+            {
+                IsActive = v.IsActive,
+                IsAssigned = v.IsAssigned,
+                ProvinceId = v.ProvinceId,
+                ProvinceName = v.ProvinceName
+            };
             return model;
         }
         #endregion

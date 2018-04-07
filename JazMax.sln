@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JazMax.AzureDataAccess", "JazMax.AzureDataAccess\JazMax.AzureDataAccess.csproj", "{635A8B45-A7AD-47F7-9518-AB35F0C85D90}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JazMax.BusinessLogic", "JazMax.BusinessLogic\JazMax.BusinessLogic.csproj", "{95D501FC-6E06-4A01-9887-94EA243B86DC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JazMax.Web.CRM", "JazMax.Web\JazMax.Web.CRM.csproj", "{35CE0A7C-F975-4EEE-97D5-0F65932AB86E}"
@@ -25,16 +23,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JazMax.Web.PropertyWebsite"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JazMax.Core.SystemHelpers", "JazMax.Core.SystemHelpers\JazMax.Core.SystemHelpers.csproj", "{82FA27CF-5676-4490-B12E-025DBE4603E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JazMax.AzureDataAccess", "JazMax.AzureDataAccess\JazMax.AzureDataAccess.csproj", "{635A8B45-A7AD-47F7-9518-AB35F0C85D90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JazMax.DataAccess", "JazMax.DataAccess\JazMax.DataAccess.csproj", "{629737F1-F624-4835-9794-0727B8C4DC96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{635A8B45-A7AD-47F7-9518-AB35F0C85D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{635A8B45-A7AD-47F7-9518-AB35F0C85D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{635A8B45-A7AD-47F7-9518-AB35F0C85D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{635A8B45-A7AD-47F7-9518-AB35F0C85D90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{95D501FC-6E06-4A01-9887-94EA243B86DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{95D501FC-6E06-4A01-9887-94EA243B86DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95D501FC-6E06-4A01-9887-94EA243B86DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,17 +57,26 @@ Global
 		{82FA27CF-5676-4490-B12E-025DBE4603E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82FA27CF-5676-4490-B12E-025DBE4603E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82FA27CF-5676-4490-B12E-025DBE4603E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{635A8B45-A7AD-47F7-9518-AB35F0C85D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{635A8B45-A7AD-47F7-9518-AB35F0C85D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{635A8B45-A7AD-47F7-9518-AB35F0C85D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{635A8B45-A7AD-47F7-9518-AB35F0C85D90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{629737F1-F624-4835-9794-0727B8C4DC96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{629737F1-F624-4835-9794-0727B8C4DC96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{629737F1-F624-4835-9794-0727B8C4DC96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{629737F1-F624-4835-9794-0727B8C4DC96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{635A8B45-A7AD-47F7-9518-AB35F0C85D90} = {3BA96378-704F-4612-8C72-36857CB12027}
 		{95D501FC-6E06-4A01-9887-94EA243B86DC} = {1DC10499-C8EA-4C39-8427-0EAEE4155DCF}
 		{35CE0A7C-F975-4EEE-97D5-0F65932AB86E} = {CE3B07A8-C079-4C3F-95F3-4D5B5093E253}
 		{EBC8EB41-67F0-43CC-9760-15039CA7D307} = {1DC10499-C8EA-4C39-8427-0EAEE4155DCF}
 		{0977E2F0-63C0-42F0-A88F-9A3FF7875E93} = {9796A00E-CCD7-408C-9382-3AED861568CB}
 		{D2619F73-7496-418D-9CC7-80607B45F2EA} = {CE3B07A8-C079-4C3F-95F3-4D5B5093E253}
 		{82FA27CF-5676-4490-B12E-025DBE4603E8} = {CE3B07A8-C079-4C3F-95F3-4D5B5093E253}
+		{635A8B45-A7AD-47F7-9518-AB35F0C85D90} = {3BA96378-704F-4612-8C72-36857CB12027}
+		{629737F1-F624-4835-9794-0727B8C4DC96} = {3BA96378-704F-4612-8C72-36857CB12027}
 	EndGlobalSection
 EndGlobal

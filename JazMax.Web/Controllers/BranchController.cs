@@ -30,14 +30,15 @@ namespace JazMax.Web.Controllers
 
         public ActionResult Save(string CoreTeamLeaderId, string ProvinceId, string BranchName, string Phone, string EmailAddress, string StreetAddress, string City, string Suburb)
         {
-            JazMax.Web.ViewModel.UserAccountView.CoreBranchView m = new ViewModel.UserAccountView.CoreBranchView();
-            m.BranchName = BranchName;
-            m.City = City;
-            m.CoreTeamLeaderId = Convert.ToInt32(CoreTeamLeaderId);
-            m.EmailAddress = EmailAddress;
-            m.IsActive = true;
-            m.Phone = Phone;
-
+            JazMax.Web.ViewModel.UserAccountView.CoreBranchView m = new ViewModel.UserAccountView.CoreBranchView()
+            {
+                BranchName = BranchName,
+                City = City,
+                CoreTeamLeaderId = Convert.ToInt32(CoreTeamLeaderId),
+                EmailAddress = EmailAddress,
+                IsActive = true,
+                Phone = Phone
+            };
             JazMaxIdentityHelper.UserName = User.Identity.Name;
             if (JazMaxIdentityHelper.IsUserInRole("PA"))
             {
@@ -76,13 +77,16 @@ namespace JazMax.Web.Controllers
         {
             try
             {
-                JazMax.Web.ViewModel.UserAccountView.CoreBranchView m = new ViewModel.UserAccountView.CoreBranchView();
-                m.BranchId = Convert.ToInt16(BranchId);
-                m.BranchName = BranchName;
-                m.City = City;
+                JazMax.Web.ViewModel.UserAccountView.CoreBranchView m = new ViewModel.UserAccountView.CoreBranchView()
+                {
+                    BranchId = Convert.ToInt16(BranchId),
+                    BranchName = BranchName,
+                    City = City
+                };
                 if (CoreTeamLeaderId == null)
                 {
-
+                    //DO Nothing.
+                    //Do not update the TeamLeaderID
                 }
                 else
                 {

@@ -10,8 +10,6 @@ namespace JazMax.Web.Controllers
     public class ErrorController : Controller
     {
         
-       
-        // GET: Error
         public ActionResult Unauthorised()
         {
             JazMaxIdentityHelper.UserName = User.Identity.Name;
@@ -29,6 +27,11 @@ namespace JazMax.Web.Controllers
         }
 
         public ActionResult NotFound()
+        {
+            return View();
+        }
+
+        public ActionResult Deactive()
         {
             return View();
         }

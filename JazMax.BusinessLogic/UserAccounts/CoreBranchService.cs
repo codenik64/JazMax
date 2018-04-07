@@ -9,20 +9,20 @@ namespace JazMax.BusinessLogic.UserAccounts
 {
     public class CoreBranchService
     {
-        private static JazMax.AzureDataAccess.JazMaxDBProdContext db = new AzureDataAccess.JazMaxDBProdContext();
+        private static JazMax.DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
 
         public List<CoreBranchView> GetAll()
         {
             return ConvertListModelToView(db.CoreBranches.Where(x => x.IsActive == true).ToList());
         }
 
-        //Get Agents Branches
+        //Get Agents Branches Based on ProvineID
         public List<CoreBranchView> GetMyBranchs(int provinceId)
         {
             return GetAll().Where(x => x.ProvinceId == provinceId).ToList();
         }
 
-        private static List<CoreBranchView> ConvertListModelToView (List<AzureDataAccess.CoreBranch> model)
+        private static List<CoreBranchView> ConvertListModelToView (List<DataAccess.CoreBranch> model)
         {
             return model.Select(x => new CoreBranchView
             {
@@ -46,16 +46,15 @@ namespace JazMax.BusinessLogic.UserAccounts
                 db.CoreBranches.Add(ConvertViewToModel(model));
                 db.SaveChanges();
             }
-            catch
+            catch(Exception e)
             {
-                //Error Logging Goes Here 
-                //April 2018
+                AuditLog.ErrorLog.LogError(db, e, 0);
             }
         }
 
-        private static AzureDataAccess.CoreBranch ConvertViewToModel(CoreBranchView m)
+        private static DataAccess.CoreBranch ConvertViewToModel(CoreBranchView m)
         {
-            AzureDataAccess.CoreBranch a = new AzureDataAccess.CoreBranch();
+            DataAccess.CoreBranch a = new DataAccess.CoreBranch();
             a.BranchId = m.BranchId;
             a.BranchName = m.BranchName;
             a.City = m.City;
@@ -99,10 +98,11 @@ namespace JazMax.BusinessLogic.UserAccounts
 
             
             List<AgentDetailsView> y = bb.GetMyAgentInBranch(branchId);
-            BranchDetailsView bru = new BranchDetailsView();
-            bru.AgentDetailsView = y;
-            bru.CoreBranchView = query.FirstOrDefault();
-
+            BranchDetailsView bru = new BranchDetailsView()
+            {
+                AgentDetailsView = y,
+                CoreBranchView = query.FirstOrDefault()
+            };
             return bru;
         }
 
@@ -135,8 +135,9 @@ namespace JazMax.BusinessLogic.UserAccounts
                 db.SaveChanges();
                 return true;
             }
-            catch
+            catch (Exception e)
             {
+                AuditLog.ErrorLog.LogError(db, e, 0);
                 return false;
             }
         }

@@ -18,6 +18,7 @@ namespace JazMax.Web.Controllers
     {
         private static CoreUserService obj = new CoreUserService();
         private static JazMaxIdentityHelper _helper = new JazMaxIdentityHelper();
+
         // GET: User
         public ActionResult Index()
         {
@@ -35,15 +36,17 @@ namespace JazMax.Web.Controllers
             try
             {
                 #region Capture CoreUser Details
-                JazMax.Web.ViewModel.UserAccountView.CoreUserView m = new ViewModel.UserAccountView.CoreUserView();
-                m.FirstName = FirstName;
-                m.MiddleName = MiddleName;
-                m.LastName = LastName;
-                m.EmailAddress = EmailAddress;
-                m.IsActive = true;
-                m.IDNumber = IDNumber;
-                m.PhoneNumber = PhoneNumber;
-                m.CellPhone = CellPhone;
+                JazMax.Web.ViewModel.UserAccountView.CoreUserView m = new ViewModel.UserAccountView.CoreUserView()
+                {
+                    FirstName = FirstName,
+                    MiddleName = MiddleName,
+                    LastName = LastName,
+                    EmailAddress = EmailAddress,
+                    IsActive = true,
+                    IDNumber = IDNumber,
+                    PhoneNumber = PhoneNumber,
+                    CellPhone = CellPhone
+                };
                 m.EmailAddress = EmailAddress;
 
                 m.GenderId = Convert.ToInt32(GenderId);
@@ -88,8 +91,9 @@ namespace JazMax.Web.Controllers
 
                 return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception e)
             {
+                BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
                 return Json(new { Result = "Fail", Message = "Error, Could not save user. Please try again" }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -106,18 +110,22 @@ namespace JazMax.Web.Controllers
             try
             {
                 #region Capture CoreUser Details
-                JazMax.Core.SystemHelpers.Model.TeamLeaderInfomation team = new Core.SystemHelpers.Model.TeamLeaderInfomation();
-                team = JazMaxIdentityHelper.GetTeamLeadersInfoNew(User.Identity.Name);
+                TeamLeaderInfomation team = new TeamLeaderInfomation();
 
-                JazMax.Web.ViewModel.UserAccountView.CoreUserView m = new ViewModel.UserAccountView.CoreUserView();
-                m.FirstName = FirstName;
-                m.MiddleName = MiddleName;
-                m.LastName = LastName;
-                m.EmailAddress = EmailAddress;
-                m.IsActive = true;
-                m.IDNumber = IDNumber;
-                m.PhoneNumber = PhoneNumber;
-                m.CellPhone = CellPhone;
+                JazMaxIdentityHelper.UserName = User.Identity.Name;
+                team = JazMaxIdentityHelper.GetTeamLeadersInfoNew();
+
+                CoreUserView m = new CoreUserView()
+                {
+                    FirstName = FirstName,
+                    MiddleName = MiddleName,
+                    LastName = LastName,
+                    EmailAddress = EmailAddress,
+                    IsActive = true,
+                    IDNumber = IDNumber,
+                    PhoneNumber = PhoneNumber,
+                    CellPhone = CellPhone
+                };
                 m.EmailAddress = EmailAddress;
 
                 m.GenderId = Convert.ToInt32(GenderId);
@@ -159,8 +167,9 @@ namespace JazMax.Web.Controllers
 
                 return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception e)
             {
+                BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
                 return Json(new { Result = "Fail", Message = "Error, Could not save user. Please try again" }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -172,23 +181,25 @@ namespace JazMax.Web.Controllers
             return View();
         }
 
-        public ActionResult SaveAnAgent(string FirstName, string MiddleName, string LastName, string IDNumber, string PhoneNumber, string CellPhone, string EmailAddress, string GenderId, string BranchIdCapture)
+        public ActionResult SaveAnAgent(string FirstName, string MiddleName, string LastName, string IDNumber, string PhoneNumber, string CellPhone, string EmailAddress, string GenderId, string dropBranch)
         {
             try
             {
                 #region Capture CoreUser Details
 
-                JazMax.Web.ViewModel.UserAccountView.CoreUserView m = new ViewModel.UserAccountView.CoreUserView();
-                m.FirstName = FirstName;
-                m.MiddleName = MiddleName;
-                m.LastName = LastName;
+                JazMax.Web.ViewModel.UserAccountView.CoreUserView m = new ViewModel.UserAccountView.CoreUserView()
+                {
+                    FirstName = FirstName,
+                    MiddleName = MiddleName,
+                    LastName = LastName,
+                    EmailAddress = EmailAddress,
+                    IsActive = true,
+                    IDNumber = IDNumber,
+                    PhoneNumber = PhoneNumber,
+                    CellPhone = CellPhone
+                };
                 m.EmailAddress = EmailAddress;
-                m.IsActive = true;
-                m.IDNumber = IDNumber;
-                m.PhoneNumber = PhoneNumber;
-                m.CellPhone = CellPhone;
-                m.EmailAddress = EmailAddress;
-                m.BranchIdCapture = Convert.ToInt16(BranchIdCapture);
+                m.BranchIdCapture = Convert.ToInt16(dropBranch);
 
                 m.GenderId = Convert.ToInt32(GenderId);
                 m.CoreUserTypeId = Convert.ToInt32(4);
@@ -206,7 +217,7 @@ namespace JazMax.Web.Controllers
 
                 CaptureAgent yy = new CaptureAgent()
                 {
-                    BranchId = Convert.ToInt16(BranchIdCapture)
+                    BranchId = Convert.ToInt16(dropBranch)
                 };
 
                 m.CapturePAView = mm;
@@ -229,9 +240,10 @@ namespace JazMax.Web.Controllers
 
                 return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
             }
-            catch
+            catch (Exception e)
             {
-                return Json(new { Result = "Fail", Message = "Error, Could not save user. Please try again" }, JsonRequestBehavior.AllowGet);
+                BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
+                return Json(new { Result = "Fail", Message = "Error, Could not save Agent. Please try again" }, JsonRequestBehavior.AllowGet);
             }
         }
         #endregion

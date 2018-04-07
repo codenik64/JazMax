@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JazMax.WebJob.Messenger.Model
+namespace JazMax.DataAccess
 {
-    public enum EmailType
+    public class Class1
     {
-        
     }
 }

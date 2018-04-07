@@ -9,23 +9,26 @@ namespace JazMax.BusinessLogic.UserAccounts
 {
     public class UserGroupService
     {
-        private static JazMax.AzureDataAccess.JazMaxDBProdContext db = new AzureDataAccess.JazMaxDBProdContext();
+        private static JazMax.DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
 
         public Guid? CreateUserRole(string roleName)
         {
             Guid random = Guid.NewGuid();
             try
             {
-                AzureDataAccess.AspNetRole r = new AzureDataAccess.AspNetRole();
-                r.Id = random.ToString();
-                r.Name = roleName;
+                DataAccess.AspNetRole r = new DataAccess.AspNetRole()
+                {
+                    Id = random.ToString(),
+                    Name = roleName
+                };
                 db.AspNetRoles.Add(r);
                 db.SaveChanges();
 
                 return random;
             }
-            catch
+            catch (Exception e)
             {
+                AuditLog.ErrorLog.LogError(db, e, 0);
                 return null;
             }
         }
@@ -38,15 +41,20 @@ namespace JazMax.BusinessLogic.UserAccounts
                 db.CoreUserTypes.Add(ConvertToModel(model));
                 db.SaveChanges();
             }
-            catch { }
+            catch(Exception e)
+            {
+                AuditLog.ErrorLog.LogError(db, e, 0);
+            }
         }
 
-        private AzureDataAccess.CoreUserType ConvertToModel(CoreUserTypeView m)
+        private DataAccess.CoreUserType ConvertToModel(CoreUserTypeView m)
         {
-            AzureDataAccess.CoreUserType a = new AzureDataAccess.CoreUserType();
-            a.IsActive = m.IsActive;
-            a.UserRoleId = m.UserRoleId;
-            a.UserTypeName = m.UserTypeName;
+            DataAccess.CoreUserType a = new DataAccess.CoreUserType()
+            {
+                IsActive = m.IsActive,
+                UserRoleId = m.UserRoleId,
+                UserTypeName = m.UserTypeName
+            };
             return a;
         }
 

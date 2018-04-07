@@ -9,7 +9,7 @@ namespace JazMax.Core.SystemHelpers
 {
     public class JazMaxDropDownList
     {
-        private static JazMax.AzureDataAccess.JazMaxDBProdContext dbcon = new AzureDataAccess.JazMaxDBProdContext();
+        private static JazMax.DataAccess.JazMaxDBProdContext dbcon = new DataAccess.JazMaxDBProdContext();
 
         public static IEnumerable<SelectListItem> GetUserTypes()
         {

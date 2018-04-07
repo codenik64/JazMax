@@ -16,7 +16,7 @@ namespace JazMax.Core.SystemHelpers
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            AzureDataAccess.JazMaxDBProdContext db = new AzureDataAccess.JazMaxDBProdContext();
+            DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
 
             List<string> SeperatedString = UserGroup.Split(',').ToList();
 

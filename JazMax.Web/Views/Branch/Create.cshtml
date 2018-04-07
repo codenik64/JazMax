@@ -97,12 +97,14 @@
             <div class="col-md-offset-2 col-md-10">
                 @if (!JazMaxIdentityHelper.IsUserInRole("PA"))
                 {
-                <input id="Save" type="button" class="btn btn-default" value="Save" onclick="save();" />
+                <input id="Save" type="button" class="btn btn-success" value="Save" onclick="save();" />
                 }
                 else
                 {
-                    <input id="Save" type="button" class="btn btn-default" value="Save" onclick="savePA();" />
+                 <input id="Save" type="button" class="btn btn-success" value="Save" onclick="savePA();" />
                 }
+
+                <input id="Reset" type="button" class="btn btn-info" value="Reset" onclick="Reset();" />
             </div>
         </div>
     </div>
@@ -235,10 +237,10 @@
 
 }
 
-
+@*Save as a personal assistant*@
 <script>
-    function savePA() {
-        debugger;
+    function savePA()
+    {
         var count = 0;
 
         if ($('#BranchName').val() == '') {
@@ -285,15 +287,6 @@
                 success: function (da) {
                     if (da.Result == "Success") {
                         alertify.message('Normal message');
-                        //$('#createDiv').fadeOut();
-                        //$("#createDiv").fadeOut("slow");
-                        //$("#createDiv").fadeOut(3000);
-
-                        //$('#showList').fadeIn();
-                        //$("#showList").fadeIn("slow");
-                        //$("#showList").fadeIn(3000);
-
-
                     } else {
 
                         alert('Error' + da.Message);
@@ -306,3 +299,18 @@
         }
     }
 </script> 
+
+@*Reset page*@
+<script>
+    function Reset()
+    {
+        $('#BranchName').val(null);
+        $('#Phone').val(null);
+        $('#EmailAddress').val(null);
+        $('#StreetAddress').val(null);
+        $('#City').val(null);
+        $('#Suburb').val(null);
+        $('#ddlDistrict').val(null);
+        $('#ashBranch').hide();
+    }
+</script>

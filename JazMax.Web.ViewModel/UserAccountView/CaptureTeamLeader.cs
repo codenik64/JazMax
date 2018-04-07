@@ -9,7 +9,7 @@ namespace JazMax.Web.ViewModel.UserAccountView
 {
     public class CaptureTeamLeader
     {
-        [DisplayName("Team Leaders Province")]
+        [DisplayName("Province")]
         public int provinceId { get; set; }
     }
 }

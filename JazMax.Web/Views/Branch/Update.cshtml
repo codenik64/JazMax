@@ -69,8 +69,6 @@
             @Html.LabelFor(model => model.CoreBranchView.ProvinceId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.CoreBranchView.ProvinceId, JazMaxDropDownList.GetAllProvince(),new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.EditorFor(model => model.CoreBranchView.ProvinceId, new { htmlAttributes = new { @class = "form-control" } })*@
-              
             </div>
         </div>
 
@@ -90,7 +88,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="Save" type="button" class="btn btn-success" value="Save" onclick="Update();" />
-                <input id="Ref" type="button" class="btn btn-success" value="Reset" onclick="Reset();" />
+                <input id="Ref" type="button" class="btn btn-info" value="Reset" onclick="Reset();" />
             </div>
         </div>
     </div>

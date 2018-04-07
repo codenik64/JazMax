@@ -154,6 +154,50 @@
           <Property Name="UserRoleId" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" />
         </EntityType>
+        <EntityType Name="MessengerCoreLog">
+          <Key>
+            <PropertyRef Name="MessengerCoreLogId" />
+          </Key>
+          <Property Name="MessengerCoreLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessenegerTypeId" Type="int" Nullable="false" />
+          <Property Name="MessageFrom" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MessageTo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="MessageSubject" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MessageBody" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsHTML" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateSent" Type="datetime" />
+          <Property Name="MessengerResponse" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsSent" Type="bit" />
+        </EntityType>
+        <EntityType Name="MessengerType">
+          <Key>
+            <PropertyRef Name="MessengerTypeId" />
+          </Key>
+          <Property Name="MessengerTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageType" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemErrorLog">
+          <Key>
+            <PropertyRef Name="SystemErrorLogId" />
+          </Key>
+          <Property Name="SystemErrorLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemErrorMessage" Type="nvarchar(max)" />
+          <Property Name="ErrorDateTime" Type="datetime" />
+          <Property Name="CoreUserId" Type="int" />
+        </EntityType>
+        <EntityType Name="SystemSettingsData">
+          <Key>
+            <PropertyRef Name="SystemSettingsDataId" />
+          </Key>
+          <Property Name="SystemSettingsDataId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SettingName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SettingValueA" Type="nvarchar(max)" />
+          <Property Name="SettingValueB" Type="nvarchar(max)" />
+          <Property Name="SettingValueC" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetAgentsInformation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_GetAgentsInformation">
@@ -214,6 +258,10 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
           <EntitySet Name="CoreUser" EntityType="Self.CoreUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoreUserInType" EntityType="Self.CoreUserInType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CoreUserType" EntityType="Self.CoreUserType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessengerCoreLog" EntityType="Self.MessengerCoreLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MessengerType" EntityType="Self.MessengerType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemErrorLog" EntityType="Self.SystemErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemSettingsData" EntityType="Self.SystemSettingsData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vw_GetAgentsInformation" EntityType="Self.vw_GetAgentsInformation" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_GetAgentsInformation].[FirstName] AS [FirstName], 
@@ -418,6 +466,10 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
           <EntitySet Name="CoreUserTypes" EntityType="Self.CoreUserType" />
           <EntitySet Name="vw_GetTeamLeadersInformation" EntityType="JazMaxDBProdModel.vw_GetTeamLeadersInformation" />
           <EntitySet Name="vw_GetAgentsInformation" EntityType="JazMaxDBProdModel.vw_GetAgentsInformation" />
+          <EntitySet Name="MessengerCoreLogs" EntityType="JazMaxDBProdModel.MessengerCoreLog" />
+          <EntitySet Name="MessengerTypes" EntityType="JazMaxDBProdModel.MessengerType" />
+          <EntitySet Name="SystemSettingsDatas" EntityType="JazMaxDBProdModel.SystemSettingsData" />
+          <EntitySet Name="SystemErrorLog1" EntityType="JazMaxDBProdModel.SystemErrorLog1" />
         </EntityContainer>
         <EntityType Name="vw_GetTeamLeadersInformation">
           <Key>
@@ -459,6 +511,50 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
           <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ProvinceId" Type="Int32" Nullable="false" />
           <Property Name="ProvinceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MessengerCoreLog">
+          <Key>
+            <PropertyRef Name="MessengerCoreLogId" />
+          </Key>
+          <Property Name="MessengerCoreLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessenegerTypeId" Type="Int32" Nullable="false" />
+          <Property Name="MessageFrom" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MessageTo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MessageSubject" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MessageBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsHTML" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateSent" Type="DateTime" Precision="3" />
+          <Property Name="MessengerResponse" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsSent" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MessengerType">
+          <Key>
+            <PropertyRef Name="MessengerTypeId" />
+          </Key>
+          <Property Name="MessengerTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageType" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemSettingsData">
+          <Key>
+            <PropertyRef Name="SystemSettingsDataId" />
+          </Key>
+          <Property Name="SystemSettingsDataId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SettingName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SettingValueA" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SettingValueB" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SettingValueC" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemErrorLog1">
+          <Key>
+            <PropertyRef Name="SystemErrorLogId" />
+          </Key>
+          <Property Name="SystemErrorLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CoreUserId" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -659,6 +755,54 @@ warning 6002: The table/view 'JazMaxDBProd.dbo.vw_GetTeamLeadersInformation' doe
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessengerCoreLogs">
+            <EntityTypeMapping TypeName="JazMaxDBProdModel.MessengerCoreLog">
+              <MappingFragment StoreEntitySet="MessengerCoreLog">
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="MessengerResponse" ColumnName="MessengerResponse" />
+                <ScalarProperty Name="DateSent" ColumnName="DateSent" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsHTML" ColumnName="IsHTML" />
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="MessageSubject" ColumnName="MessageSubject" />
+                <ScalarProperty Name="MessageTo" ColumnName="MessageTo" />
+                <ScalarProperty Name="MessageFrom" ColumnName="MessageFrom" />
+                <ScalarProperty Name="MessenegerTypeId" ColumnName="MessenegerTypeId" />
+                <ScalarProperty Name="MessengerCoreLogId" ColumnName="MessengerCoreLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MessengerTypes">
+            <EntityTypeMapping TypeName="JazMaxDBProdModel.MessengerType">
+              <MappingFragment StoreEntitySet="MessengerType">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="MessengerTypeId" ColumnName="MessengerTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemSettingsDatas">
+            <EntityTypeMapping TypeName="JazMaxDBProdModel.SystemSettingsData">
+              <MappingFragment StoreEntitySet="SystemSettingsData">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SettingValueC" ColumnName="SettingValueC" />
+                <ScalarProperty Name="SettingValueB" ColumnName="SettingValueB" />
+                <ScalarProperty Name="SettingValueA" ColumnName="SettingValueA" />
+                <ScalarProperty Name="SettingName" ColumnName="SettingName" />
+                <ScalarProperty Name="SystemSettingsDataId" ColumnName="SystemSettingsDataId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemErrorLog1">
+            <EntityTypeMapping TypeName="JazMaxDBProdModel.SystemErrorLog1">
+              <MappingFragment StoreEntitySet="SystemErrorLog">
+                <ScalarProperty Name="CoreUserId" ColumnName="CoreUserId" />
+                <ScalarProperty Name="ErrorDateTime" ColumnName="ErrorDateTime" />
+                <ScalarProperty Name="SystemErrorMessage" ColumnName="SystemErrorMessage" />
+                <ScalarProperty Name="SystemErrorLogId" ColumnName="SystemErrorLogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

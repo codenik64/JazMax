@@ -32,7 +32,7 @@ namespace JazMax.Web.Controllers
             {
                 if (JazMaxIdentityHelper.IsUserInRole("TeamLeader"))
                 {
-                    teamLeaderId = JazMaxIdentityHelper.GetTeamLeadersInfoNew(User.Identity.Name).CoreTeamLeaderId;
+                    teamLeaderId = JazMaxIdentityHelper.GetTeamLeadersInfoNew().CoreTeamLeaderId;
                     return View(o.GetMyAgents(teamLeaderId));
                 }
                 else if (JazMaxIdentityHelper.IsUserInRole("PA"))
@@ -41,8 +41,9 @@ namespace JazMax.Web.Controllers
                     return View(o.GetMyAgentInProvince(provinceId));
                 }
             }
-            catch
+            catch (Exception e)
             {
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
                 teamLeaderId = 0;
             }
             return RedirectToAction("Index");

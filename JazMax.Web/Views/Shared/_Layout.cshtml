@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using JazMax.Core.SystemHelpers
+
+@{ 
+    JazMaxIdentityHelper.UserName = User.Identity.Name;
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -27,8 +33,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Agents", "Index", "Agents")</li>
+                    <li>@Html.ActionLink("Branches", "Index", "branch")</li>
+                    <li>@Html.ActionLink("Users", "Index", "User")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -38,6 +45,8 @@
         @RenderBody()
         <hr />
     </div>
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
