@@ -2,6 +2,7 @@
 using System.Linq;
 using JazMax.BusinessLogic.UserAccounts;
 using JazMax.BusinessLogic.AuditLog;
+using JazMax.Web.ViewModel.Messenger;
 
 namespace JazMax.BusinessLogic.Messenger
 {
@@ -9,20 +10,14 @@ namespace JazMax.BusinessLogic.Messenger
     {
         private static JazMax.DataAccess.JazMaxDBProdContext db = new JazMax.DataAccess.JazMaxDBProdContext();
 
-        public static string SendTo { get; set; }
-        public static string Subject { get; set; }
-        public static string Message { get; set; }
-        public static bool IsBodyHtml { get; set; }
-        public static bool IsAspUserId { get; set; }
-
-        public static void SendSingleMail()
+        public static void SendMail(Email model)
         {
-            string ToAddress = SendTo;
-            if (IsAspUserId == true)
+            string ToAddress = model.SendTo;
+            if (model.IsAspUserId == true)
             {
-                ToAddress = CoreUserService.GetAspUserEmailById(db, SendTo);
+                ToAddress = CoreUserService.GetAspUserEmailById(db, model.SendTo);
             }
-            SaveMessenger(ToAddress, Message, Subject, IsBodyHtml);
+            SaveMessenger(ToAddress, model.Message, model.Subject, model.IsBodyHtml);
         }
 
         private static void SaveMessenger(string toAddress, string messageBody, string messageSubject, bool isBodyHtml)
@@ -39,7 +34,7 @@ namespace JazMax.BusinessLogic.Messenger
                     MessageTo = toAddress,
                     IsSent = false,
                     MessenegerTypeId = -1,
-                    MessageSubject = Subject
+                    MessageSubject = messageSubject
                 };
                 db.MessengerCoreLogs.Add(log);
                 db.SaveChanges();

@@ -15,15 +15,14 @@ namespace JazMax.BusinessLogic.AuditLog
         //This should be used in the Controllers
         public static void LogError(Exception e, int coreUserId = 0)
         {
-            JazMax.DataAccess.SystemErrorLog a = new JazMax.DataAccess.SystemErrorLog();
-
-            a.CoreUserId = coreUserId;
-            a.SystemErrorMessage = e.Message.ToString();
-            a.Source = e.Source.ToString();
-            a.StackTrace = e.StackTrace.ToString();
-            a.ErrorDateTime = (DateTime)DateTime.Now;
-
-
+            JazMax.DataAccess.SystemErrorLog a = new DataAccess.SystemErrorLog()
+            {
+                CoreUserId = coreUserId,
+                SystemErrorMessage = e.Message.ToString(),
+                Source = e.Source.ToString(),
+                StackTrace = e.StackTrace.ToString(),
+                ErrorDateTime = (DateTime)DateTime.Now
+            };
             db.SystemErrorLogs.Add(a);
             db.SaveChanges();
         }
@@ -37,7 +36,7 @@ namespace JazMax.BusinessLogic.AuditLog
             {
                 CoreUserId = 0,
                 SystemErrorMessage = e.Message.ToString() != null ? e.Message.ToString() : "Bad",
-                ErrorDateTime = DateTime.Now != null ? DateTime.Now : DateTime.Now
+                ErrorDateTime = DateTime.Now
             };
 
             dbcontext.SystemErrorLogs.Add(a);

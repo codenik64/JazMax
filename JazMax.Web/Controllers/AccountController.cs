@@ -222,12 +222,14 @@ namespace JazMax.Web.Controllers
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                JazMaxMail.SendTo = user.Id;
-                JazMaxMail.Message = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>";
-                JazMaxMail.Subject = "Confirm your account";
-                JazMaxMail.IsAspUserId = true;
-                JazMaxMail.IsBodyHtml = true;
-                JazMaxMail.SendSingleMail();
+                JazMaxMail.SendMail( new ViewModel.Messenger.Email
+                {
+                    SendTo = user.Id,
+                    IsAspUserId = true,
+                    IsBodyHtml = true,
+                    Message = "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>",
+                    Subject = "Confirm your account"
+                });
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }

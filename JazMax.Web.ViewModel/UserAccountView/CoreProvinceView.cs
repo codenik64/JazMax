@@ -12,6 +12,11 @@ namespace JazMax.Web.ViewModel.UserAccountView
         public int ProvinceId { get; set; }
         [DisplayName("Province")]
         public string ProvinceName { get; set; }
+
+        [DisplayName("PA")]
+        public string PAName { get; set; }
+
+
         public Nullable<bool> IsAssigned { get; set; }
         public Nullable<bool> IsActive { get; set; }
     }

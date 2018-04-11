@@ -7,7 +7,7 @@
 // Do not make changes directly to this file - edit the template instead.
 //
 // The following connection settings were used to generate this file:
-//     Configuration file:     "JazMax.Web\Web.config"
+//     Configuration file:     "JazMax.WebJob.Messenger\App.config"
 //     Connection String Name: "JazMaxDBProdContextA"
 //     Connection String:      "Data Source=ASH\SQLEXPRESS;initial catalog=JazMaxDBProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"
 // ------------------------------------------------------------------------------------------------
@@ -41,6 +41,8 @@ namespace JazMax.DataAccess
         System.Data.Entity.DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } // AspNetUserClaims
         System.Data.Entity.DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } // AspNetUserLogins
         System.Data.Entity.DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
+        System.Data.Entity.DbSet<AzureWebJob> AzureWebJobs { get; set; } // AzureWebJob
+        System.Data.Entity.DbSet<AzureWebJobLog> AzureWebJobLogs { get; set; } // AzureWebJobLog
         System.Data.Entity.DbSet<CoreAgent> CoreAgents { get; set; } // CoreAgent
         System.Data.Entity.DbSet<CoreBranch> CoreBranches { get; set; } // CoreBranch
         System.Data.Entity.DbSet<CorePa> CorePas { get; set; } // CorePA
@@ -82,6 +84,8 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<AspNetUserClaim> AspNetUserClaims { get; set; } // AspNetUserClaims
         public System.Data.Entity.DbSet<AspNetUserLogin> AspNetUserLogins { get; set; } // AspNetUserLogins
         public System.Data.Entity.DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
+        public System.Data.Entity.DbSet<AzureWebJob> AzureWebJobs { get; set; } // AzureWebJob
+        public System.Data.Entity.DbSet<AzureWebJobLog> AzureWebJobLogs { get; set; } // AzureWebJobLog
         public System.Data.Entity.DbSet<CoreAgent> CoreAgents { get; set; } // CoreAgent
         public System.Data.Entity.DbSet<CoreBranch> CoreBranches { get; set; } // CoreBranch
         public System.Data.Entity.DbSet<CorePa> CorePas { get; set; } // CorePA
@@ -150,6 +154,8 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new AspNetUserClaimConfiguration());
             modelBuilder.Configurations.Add(new AspNetUserLoginConfiguration());
             modelBuilder.Configurations.Add(new AspNetUserRoleConfiguration());
+            modelBuilder.Configurations.Add(new AzureWebJobConfiguration());
+            modelBuilder.Configurations.Add(new AzureWebJobLogConfiguration());
             modelBuilder.Configurations.Add(new CoreAgentConfiguration());
             modelBuilder.Configurations.Add(new CoreBranchConfiguration());
             modelBuilder.Configurations.Add(new CorePaConfiguration());
@@ -173,6 +179,8 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new AspNetUserClaimConfiguration(schema));
             modelBuilder.Configurations.Add(new AspNetUserLoginConfiguration(schema));
             modelBuilder.Configurations.Add(new AspNetUserRoleConfiguration(schema));
+            modelBuilder.Configurations.Add(new AzureWebJobConfiguration(schema));
+            modelBuilder.Configurations.Add(new AzureWebJobLogConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreAgentConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreBranchConfiguration(schema));
             modelBuilder.Configurations.Add(new CorePaConfiguration(schema));
@@ -214,6 +222,8 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public System.Data.Entity.DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public System.Data.Entity.DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
+        public System.Data.Entity.DbSet<AzureWebJob> AzureWebJobs { get; set; }
+        public System.Data.Entity.DbSet<AzureWebJobLog> AzureWebJobLogs { get; set; }
         public System.Data.Entity.DbSet<CoreAgent> CoreAgents { get; set; }
         public System.Data.Entity.DbSet<CoreBranch> CoreBranches { get; set; }
         public System.Data.Entity.DbSet<CorePa> CorePas { get; set; }
@@ -236,6 +246,8 @@ namespace JazMax.DataAccess
             AspNetUserClaims = new FakeDbSet<AspNetUserClaim>("Id");
             AspNetUserLogins = new FakeDbSet<AspNetUserLogin>("LoginProvider", "ProviderKey", "UserId");
             AspNetUserRoles = new FakeDbSet<AspNetUserRole>("UserId", "RoleId");
+            AzureWebJobs = new FakeDbSet<AzureWebJob>("AzureWebJobId");
+            AzureWebJobLogs = new FakeDbSet<AzureWebJobLog>("AzureWebJobLogId");
             CoreAgents = new FakeDbSet<CoreAgent>("CoreAgentId");
             CoreBranches = new FakeDbSet<CoreBranch>("BranchId");
             CorePas = new FakeDbSet<CorePa>("CorePaId");
@@ -622,6 +634,25 @@ namespace JazMax.DataAccess
         public string RoleId { get; set; } // RoleId (Primary key) (length: 128)
     }
 
+    // AzureWebJob
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class AzureWebJob
+    {
+        public int AzureWebJobId { get; set; } // AzureWebJobId (Primary key)
+        public string WebJobName { get; set; } // WebJobName (length: 100)
+    }
+
+    // AzureWebJobLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class AzureWebJobLog
+    {
+        public int AzureWebJobLogId { get; set; } // AzureWebJobLogId (Primary key)
+        public string AzureWebJobId { get; set; } // AzureWebJobId (length: 100)
+        public System.DateTime StartDateTime { get; set; } // StartDateTime
+        public System.DateTime EndDateTime { get; set; } // EndDateTime
+        public string RecordsAffected { get; set; } // RecordsAffected (length: 1)
+    }
+
     // CoreAgent
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class CoreAgent
@@ -914,6 +945,47 @@ namespace JazMax.DataAccess
 
             Property(x => x.UserId).HasColumnName(@"UserId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
             Property(x => x.RoleId).HasColumnName(@"RoleId").HasColumnType("nvarchar").IsRequired().HasMaxLength(128).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // AzureWebJob
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class AzureWebJobConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AzureWebJob>
+    {
+        public AzureWebJobConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AzureWebJobConfiguration(string schema)
+        {
+            ToTable("AzureWebJob", schema);
+            HasKey(x => x.AzureWebJobId);
+
+            Property(x => x.AzureWebJobId).HasColumnName(@"AzureWebJobId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.WebJobName).HasColumnName(@"WebJobName").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+        }
+    }
+
+    // AzureWebJobLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class AzureWebJobLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<AzureWebJobLog>
+    {
+        public AzureWebJobLogConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public AzureWebJobLogConfiguration(string schema)
+        {
+            ToTable("AzureWebJobLog", schema);
+            HasKey(x => x.AzureWebJobLogId);
+
+            Property(x => x.AzureWebJobLogId).HasColumnName(@"AzureWebJobLogId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.AzureWebJobId).HasColumnName(@"AzureWebJobId").HasColumnType("nvarchar").IsRequired().HasMaxLength(100);
+            Property(x => x.StartDateTime).HasColumnName(@"StartDateTime").HasColumnType("datetime").IsRequired();
+            Property(x => x.EndDateTime).HasColumnName(@"EndDateTime").HasColumnType("datetime").IsRequired();
+            Property(x => x.RecordsAffected).HasColumnName(@"RecordsAffected").HasColumnType("nvarchar").IsRequired().HasMaxLength(1);
         }
     }
 

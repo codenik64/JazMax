@@ -1,0 +1,160 @@
+﻿@model JazMax.Web.ViewModel.UserAccountView.CoreUserDetails
+
+@{
+    ViewBag.Title = "User Details";
+}
+
+<h3>@Model.FirstName @Model.LastName</h3>
+<h4>Type: @Model.UserType</h4>
+<h4>Status: @if (Model.isActive)
+{ <span class="glyphicon glyphicon-ok"></span> }
+else
+{ <span class="glyphicon glyphicon-remove"></span> }</h4>
+<div class="modal-body row">
+    <div class="col-md-3">
+      
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Image</div>
+                <div class="panel-body">
+
+                    [BLOB USER IMAGE GOES HERE]
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">User</div>
+                <div class="panel-body">
+
+                    <div>
+                        <dl>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.FirstName)
+                            </dd>
+
+                            @if (Model.MiddleName == null)
+                            { }
+                            else
+                            {
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.MiddleName)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.MiddleName)
+                                </dd>
+                            }
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.LastName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.IDNumber)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.IDNumber)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.PhoneNumber)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CellPhone)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CellPhone)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.EmailAddress)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.EmailAddress)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.GenderId)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.GenderId)
+                            </dd>
+                        </dl>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <div class="col-md-3">
+
+        @if (Model.CoreUserTypeId == 3 || Model.CoreUserTypeId == 4)
+        {
+           
+
+
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Branch</div>
+                    <div class="panel-body">
+
+                        @Html.Partial("_UserBranchDetails", Model.UserBranchDetails)
+
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+    <div class="col-md-3">
+        @if (Model.CoreUserTypeId == 4)
+        {
+           
+
+
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Province</div>
+                    <div class="panel-body">
+                        @Html.Partial("_UserProvinceDetails", Model.UserProvinceDetails)
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+   
+</div>
+
+
+
+
+

@@ -73,6 +73,10 @@
       <Project>{629737f1-f624-4835-9794-0727b8c4dc96}</Project>
       <Name>JazMax.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JazMax.Web.ViewModel\JazMax.Web.ViewModel.csproj">
+      <Project>{ebc8eb41-67f0-43cc-9760-15039ca7d307}</Project>
+      <Name>JazMax.Web.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -22,7 +22,12 @@ namespace JazMax.Web.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View(obj.GetAll());
+            return View(obj.GetAllSystemUsers( new List<bool> { true, false }));
+        }
+
+        public ActionResult Details(int id)
+        {
+            return View(obj.GetUserDetails(id));
         }
 
         #region Create Core User Global

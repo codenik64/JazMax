@@ -1,26 +1,7 @@
-﻿
-@model IEnumerable<JazMax.Web.ViewModel.UserAccountView.CoreBranchView>
-
-
-<h2>Index Partail</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+﻿@model IEnumerable<JazMax.Web.ViewModel.UserAccountView.CoreBranchView>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BranchId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CoreTeamLeaderId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProvinceId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.BranchName)
         </th>
@@ -39,24 +20,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Suburb)
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BranchId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoreTeamLeaderId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProvinceId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BranchName)
             </td>
@@ -75,12 +43,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Suburb)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
         </tr>
     }
 
 </table>
+

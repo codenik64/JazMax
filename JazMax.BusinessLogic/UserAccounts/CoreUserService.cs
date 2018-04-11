@@ -11,6 +11,7 @@ namespace JazMax.BusinessLogic.UserAccounts
     {
         private static JazMax.DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
 
+        //LEGACY CODE
         public List<CoreUserView> GetAll()
         {
             var query = from t in db.CoreUsers
@@ -19,6 +20,110 @@ namespace JazMax.BusinessLogic.UserAccounts
 
             return ConvertListModelToView(query.ToList());
         }
+
+        //Retrun a List Of All Core System Users
+        //Searching Will Be Done on This Baby
+        public IQueryable<CoreUserDetails> GetAllSystemUsers(List<bool> isActiveList)
+        {
+            IQueryable<CoreUserDetails> coreUserList = (from a in db.CoreUsers
+                                                        join b in db.CoreUserInTypes
+                                                        on a.CoreUserId equals b.CoreUserId
+                                                        join c in db.CoreUserTypes
+                                                        on b.CoreUserTypeId equals c.CoreUserTypeId
+                                                        where a.IsActive == isActiveList.Contains((bool)a.IsActive)
+                                                        select new CoreUserDetails
+                                                        {
+                                                            CellPhone = a.CellPhone,
+                                                            EmailAddress = a.EmailAddress,
+                                                            FirstName = a.FirstName,
+                                                            GenderId = a.GenderId == 1 ? "Male" : "Female",
+                                                            IDNumber = a.IdNumber,
+                                                            LastName = a.LastName,
+                                                            MiddleName = a.MiddleName,
+                                                            PhoneNumber = a.PhoneNumber,
+                                                            UserType = c.UserTypeName
+                                                        }).AsQueryable();
+
+            return coreUserList;
+        }
+
+        public CoreUserDetails GetUserDetails(int coreUserID)
+        {
+            CoreUserDetails coreUserList = (from a in db.CoreUsers
+                                            join b in db.CoreUserInTypes
+                                            on a.CoreUserId equals b.CoreUserId
+                                            join c in db.CoreUserTypes
+                                            on b.CoreUserTypeId equals c.CoreUserTypeId
+                                            where a.CoreUserId == coreUserID
+                                            select new CoreUserDetails
+                                            {
+                                                CellPhone = a.CellPhone,
+                                                EmailAddress = a.EmailAddress,
+                                                FirstName = a.FirstName,
+                                                GenderId = a.GenderId == 1 ? "Male" : "Female",
+                                                IDNumber = a.IdNumber,
+                                                LastName = a.LastName,
+                                                MiddleName = a.MiddleName,
+                                                PhoneNumber = a.PhoneNumber,
+                                                UserType = c.UserTypeName,
+                                                CoreUserId = a.CoreUserId,
+                                                CoreUserTypeId = b.CoreUserTypeId,
+                                                isActive = (bool)a.IsActive
+                                            }).AsQueryable().FirstOrDefault();
+
+            //Gets The Branch Details For The User
+            coreUserList.UserBranchDetails = GetBranchDetailsForUser(coreUserList.CoreUserId, coreUserList.CoreUserTypeId);
+
+            //Get Provbince Details For user
+            coreUserList.UserProvinceDetails = GetProvineDetailsForUser(coreUserList.CoreUserId, coreUserList.CoreUserTypeId);
+            return coreUserList;
+        }
+
+        public static UserBranchDetails GetBranchDetailsForUser(int CoreUserId, int coreUserType)
+        {
+            UserBranchDetails m = new UserBranchDetails();
+            //AGENT 
+            if (coreUserType == 4)
+            {
+                int GetAgentBranchId = (int)db.CoreAgents.FirstOrDefault(x => x.CoreUserId == CoreUserId).CoreBranchId;
+                CoreBranchView model = CoreBranchService.DetailsNew(db, GetAgentBranchId).CoreBranchView;
+                m.BranchName = model.BranchName;
+                m.BranchId = model.BranchId;
+                m.Province = model.ProvinceName;
+                m.TeamLeader = model.TeamLeaderName;
+            }
+            //TeamLeader
+            else if (coreUserType == 3)
+            {
+                int GetTeamLeaderBranch = db.CoreTeamLeaders.FirstOrDefault(x => x.CoreUserId == CoreUserId).CoreTeamLeaderId;
+                int GetBranchId = db.CoreBranches.FirstOrDefault(x => x.CoreTeamLeaderId == GetTeamLeaderBranch).BranchId;
+
+                CoreBranchView model = CoreBranchService.DetailsNew(db, GetBranchId).CoreBranchView;
+                m.BranchName = model.BranchName;
+                m.BranchId = model.BranchId;
+                m.Province = model.ProvinceName;
+                m.TeamLeader = model.TeamLeaderName;
+            }
+            return m;
+
+        }
+
+        public static UserProvinceDetails GetProvineDetailsForUser(int ProvinceId, int UserTypeId)
+        {
+            if (UserTypeId == 4)
+            {
+                UserProvinceDetails b = new UserProvinceDetails();
+
+                var model = CoreProvinceService.GetProvinceDetails(ProvinceId);
+                b.Pronvince = model.ProvinceName;
+                b.PAInfo = model.PAName;
+
+                return b;
+            }
+            return null;
+
+        }
+
 
         #region Create A New Core System User 
         public int? CreateNewCoreUser(CoreUserView model)
@@ -57,7 +162,7 @@ namespace JazMax.BusinessLogic.UserAccounts
                     db.CorePas.Add(z);
                     db.SaveChanges();
 
-                    updateProvinceToAssigned(model.CapturePAView.provinceId);
+                    UpdateProvinceToAssigned(model.CapturePAView.provinceId);
                 }
 
                 //TeamLeader
@@ -96,8 +201,9 @@ namespace JazMax.BusinessLogic.UserAccounts
         }
         #endregion
 
+        //TO DO: Check Why This Is NOT working!
         #region Update Priovince After Assigned
-        public void updateProvinceToAssigned(int proId)
+        public void UpdateProvinceToAssigned(int proId)
         {
             try
             {

@@ -106,6 +106,47 @@ namespace JazMax.BusinessLogic.UserAccounts
             return bru;
         }
 
+
+        public static BranchDetailsView DetailsNew(JazMax.DataAccess.JazMaxDBProdContext dbcon, int branchId)
+        {
+            AgentService bb = new AgentService();
+
+            var query = from a in dbcon.CoreBranches
+                        join b in dbcon.CoreTeamLeaders
+                        on a.CoreTeamLeaderId equals b.CoreTeamLeaderId
+                        join c in dbcon.CoreUsers
+                        on b.CoreUserId equals c.CoreUserId
+                        join d in dbcon.CoreProvinces
+                        on a.ProvinceId equals d.ProvinceId
+                        where a.BranchId == branchId
+                        select new CoreBranchView
+                        {
+                            BranchId = a.BranchId,
+                            EmailAddress = a.EmailAddress,
+                            IsActive = a.IsActive,
+                            StreetAddress = a.StreetAddress,
+                            BranchName = a.BranchName,
+                            City = a.City,
+                            CoreTeamLeaderId = a.CoreTeamLeaderId,
+                            Phone = a.Phone,
+                            ProvinceId = a.ProvinceId,
+                            ProvinceName = d.ProvinceName,
+                            Suburb = a.Suburb,
+                            TeamLeaderName = c.FirstName + " " + c.LastName
+                        };
+
+
+            List<AgentDetailsView> y = bb.GetMyAgentInBranch(branchId);
+            BranchDetailsView bru = new BranchDetailsView()
+            {
+                AgentDetailsView = y,
+                CoreBranchView = query.FirstOrDefault()
+            };
+            return bru;
+        }
+
+
+
         public bool Update(CoreBranchView model)
         {
             try

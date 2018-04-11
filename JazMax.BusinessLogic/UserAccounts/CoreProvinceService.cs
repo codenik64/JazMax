@@ -20,6 +20,22 @@ namespace JazMax.BusinessLogic.UserAccounts
             return ConvertListToView(query.ToList());
         }
 
+        public static CoreProvinceView GetProvinceDetails(int ProvinceId)
+        {
+            var query = (from a in db.CoreProvinces
+                         join b in db.CorePas
+                         on a.ProvinceId equals b.CorePaId
+                         join c in db.CoreUsers
+                         on b.CoreUserId equals c.CoreUserId
+                         select new CoreProvinceView
+                         {
+                             PAName = c.FirstName + " " + c.LastName,
+                             ProvinceId = a.ProvinceId,
+                             ProvinceName = a.ProvinceName,
+                         }).FirstOrDefault();
+            return query;
+        }
+
         public void Create(CoreProvinceView view)
         {
             try

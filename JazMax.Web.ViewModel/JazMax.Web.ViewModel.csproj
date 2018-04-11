@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messenger\Email.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAccountView\AgentDetailsView.cs" />
     <Compile Include="UserAccountView\BranchDetailsView.cs" />
@@ -75,8 +76,13 @@
     <Compile Include="UserAccountView\CaptureTeamLeader.cs" />
     <Compile Include="UserAccountView\CoreBranchView.cs" />
     <Compile Include="UserAccountView\CoreProvinceView.cs" />
+    <Compile Include="UserAccountView\CoreUserDetails.cs" />
     <Compile Include="UserAccountView\CoreUserTypeView.cs" />
     <Compile Include="UserAccountView\CoreUserView.cs" />
+    <Compile Include="UserAccountView\UserBranchDetails.cs" />
+    <Compile Include="UserAccountView\UserProvinceDetails.cs" />
+    <Compile Include="UserAccountView\UserTeamLeaderDetails.cs" />
+    <Compile Include="WebJob\JobModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
