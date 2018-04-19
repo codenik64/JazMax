@@ -12,5 +12,6 @@ namespace JazMax.Web.ViewModel.UserAccountView
         public string BranchName { get; set; }
         public string TeamLeader { get; set; }
         public string Province { get; set; }
+        public bool HasResult { get; set; }
     }
 }

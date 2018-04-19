@@ -1,4 +1,7 @@
 ﻿@model JazMax.Web.ViewModel.UserAccountView.UserBranchDetails
+
+@if (Model.HasResult)
+{
 <div>
     <dl>
         <dt>
@@ -27,4 +30,9 @@
 
     </dl>
 </div>
+}
+else
+{
+    <p>No branch has been assigned to this user</p>
+}
 

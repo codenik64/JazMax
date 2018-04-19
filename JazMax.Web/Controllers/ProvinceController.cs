@@ -11,13 +11,16 @@ namespace JazMax.Web.Controllers
     public class ProvinceController : Controller
     {
         private static CoreProvinceService obj = new CoreProvinceService();
-        // GET: Province
-
+  
+        #region Get All 
         [JazMaxIdentity(UserGroup = "TeamLeader")]
         public ActionResult Index()
         {
             return View(obj.GetAll());
         }
+        #endregion
+
+        #region Create Province
         public ActionResult Create()
         {
             return View();
@@ -36,6 +39,7 @@ namespace JazMax.Web.Controllers
 
             return View(model);
         }
+#endregion
 
 
     }

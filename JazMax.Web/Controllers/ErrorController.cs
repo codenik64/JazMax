@@ -9,7 +9,6 @@ namespace JazMax.Web.Controllers
 {
     public class ErrorController : Controller
     {
-        
         public ActionResult Unauthorised()
         {
             JazMaxIdentityHelper.UserName = User.Identity.Name;

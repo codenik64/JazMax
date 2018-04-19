@@ -37,6 +37,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messenger", "Messenger", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JazMax.WebJob.LeadCore", "JazMax.WebJob.LeadCore\JazMax.WebJob.LeadCore.csproj", "{56839273-AA2E-43C4-88D3-3FFFBD4D21B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "JazMaxWinServices", "JazMaxWinServices", "{FCB91F1E-A973-434F-8A5E-75444500FD37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JazMax.Win.Messenger", "JazMax.Win.Messenger\JazMax.Win.Messenger.csproj", "{38742AB7-3266-42A8-8CEB-18464A43ED27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,10 @@ Global
 		{56839273-AA2E-43C4-88D3-3FFFBD4D21B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56839273-AA2E-43C4-88D3-3FFFBD4D21B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56839273-AA2E-43C4-88D3-3FFFBD4D21B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38742AB7-3266-42A8-8CEB-18464A43ED27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38742AB7-3266-42A8-8CEB-18464A43ED27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38742AB7-3266-42A8-8CEB-18464A43ED27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38742AB7-3266-42A8-8CEB-18464A43ED27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,5 +113,6 @@ Global
 		{D2F292EF-2D7F-42E1-8832-55AEE9F9212E} = {9796A00E-CCD7-408C-9382-3AED861568CB}
 		{320FF094-5D0F-4C04-B8E4-22BBA311AB30} = {9796A00E-CCD7-408C-9382-3AED861568CB}
 		{56839273-AA2E-43C4-88D3-3FFFBD4D21B4} = {D2F292EF-2D7F-42E1-8832-55AEE9F9212E}
+		{38742AB7-3266-42A8-8CEB-18464A43ED27} = {FCB91F1E-A973-434F-8A5E-75444500FD37}
 	EndGlobalSection
 EndGlobal

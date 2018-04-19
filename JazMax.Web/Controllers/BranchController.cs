@@ -14,7 +14,6 @@ namespace JazMax.Web.Controllers
         private static CoreBranchService o = new CoreBranchService();
         private static JazMaxIdentityHelper _helper = new JazMaxIdentityHelper();
 
-        // GET: Branch
         #region Get All Branches
         public ActionResult Index()
         {
@@ -55,6 +54,7 @@ namespace JazMax.Web.Controllers
         }
         #endregion
 
+        #region Branch Details
         public ActionResult Details(int? id)
         {
             if(id == null)
@@ -63,7 +63,9 @@ namespace JazMax.Web.Controllers
             }
             return View(o.Details((int)id));
         }
+        #endregion
 
+        #region Update Branch
         public ActionResult Update(int? id)
         {
             if (id == null)
@@ -115,20 +117,22 @@ namespace JazMax.Web.Controllers
                 return Json(new { Result = "Error!", Message = "Branch could not be updated" }, JsonRequestBehavior.AllowGet);
             }
         }
+        #endregion
+
+        #region Get PA Branches
+        [JazMaxIdentity(UserGroup = "PA")]
+        public ActionResult GetMyBranches()
+        {
+            UserInformation a = JazMaxIdentityHelper.GetPAUserInformation(User.Identity.Name);
+            return View(o.GetMyBranchs(a.ProvinceId));
+        }
+        #endregion
 
         #region AJAX Helpers
         public ActionResult GetTeamLeaderForProvince(int Id)
         {
             return Json(_helper.GetTeamLeaderForProvince(Id), JsonRequestBehavior.AllowGet);
         }
-
-        [JazMaxIdentity(UserGroup ="PA")]
-        public ActionResult GetMyBranches()
-        {
-            UserInformation a = JazMaxIdentityHelper.GetPAUserInformation(User.Identity.Name);
-            return View(o.GetMyBranchs(a.ProvinceId));
-        }
-
         public ActionResult GetBranch(int ID)
         {
             return Json(o.Details(ID), JsonRequestBehavior.AllowGet);

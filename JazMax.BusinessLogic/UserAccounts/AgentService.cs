@@ -20,6 +20,7 @@ namespace JazMax.BusinessLogic.UserAccounts
                         on b.CoreBranchId equals c.BranchId
                         join d in db.VwGetTeamLeadersInformations
                         on c.CoreTeamLeaderId equals d.CoreTeamLeaderId
+                        
                         select new AgentDetailsView
                         {
                             AgentId = b.CoreAgentId,

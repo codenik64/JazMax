@@ -10,12 +10,15 @@ namespace JazMax.Web.Controllers
     public class UserGroupController : Controller
     {
         private static UserGroupService obj = new UserGroupService();
-        // GET: UserGroup
+
+        #region Get All
         public ActionResult Index()
         {
             return View(obj.GetAll());
         }
+        #endregion
 
+        #region Create User Group
         public ActionResult Create()
         {
             return View();
@@ -33,5 +36,6 @@ namespace JazMax.Web.Controllers
 
             return View(model);
         }
+#endregion
     }
 }

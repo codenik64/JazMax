@@ -19,16 +19,23 @@ namespace JazMax.Web.Controllers
         private static CoreUserService obj = new CoreUserService();
         private static JazMaxIdentityHelper _helper = new JazMaxIdentityHelper();
 
-        // GET: User
+        #region Get All
         public ActionResult Index()
         {
             return View(obj.GetAllSystemUsers( new List<bool> { true, false }));
         }
+        #endregion
 
-        public ActionResult Details(int id)
+        #region CoreUser Details
+        public ActionResult Details(int? id)
         {
-            return View(obj.GetUserDetails(id));
+            if(id == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return View(obj.GetUserDetails((int)id));
         }
+        #endregion
 
         #region Create Core User Global
         public ActionResult Create()
@@ -249,6 +256,37 @@ namespace JazMax.Web.Controllers
             {
                 BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
                 return Json(new { Result = "Fail", Message = "Error, Could not save Agent. Please try again" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
+        public ActionResult Update(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+           return View(obj.GetUserDetails((int)id));
+        }
+       
+
+        #region Update CoreUser
+        public ActionResult UpdateCoreUser(string coreUserId, string FirstName, string LastName, string MiddleName, string PhoneNumber, string CellPhone)
+        {
+            try
+            {
+                CoreUserDetails m = new CoreUserDetails();
+                m.FirstName = FirstName;
+                m.LastName = LastName;
+                m.MiddleName = MiddleName;
+                m.PhoneNumber = CellPhone;
+                m.CellPhone = CellPhone;
+                obj.UpdateCoreUser(Convert.ToInt32(coreUserId), m);
+                return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { Result = "Error!", Message = "Branch could not be updated" }, JsonRequestBehavior.AllowGet);
             }
         }
         #endregion

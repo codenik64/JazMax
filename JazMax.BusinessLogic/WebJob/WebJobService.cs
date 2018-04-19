@@ -23,6 +23,12 @@ namespace JazMax.BusinessLogic.WebJob
             }
         }
 
+        //2018-03-30 -------- Checking Azure Web Job Logging
+        //Catch all records and update. Does not log (See Exception Log ID : 58)
+
+        //2018-04-11 ----- This seems to be working but why?
+        //I am 99.9999999999% sure this works.
+
         public static void LogWebJob(JazMax.Web.ViewModel.WebJob.JobModel model)
         {
             try

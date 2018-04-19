@@ -36,10 +36,5 @@ namespace JazMax.Web.ViewModel.UserAccountView
         public UserBranchDetails UserBranchDetails { get; set; }
         public UserProvinceDetails UserProvinceDetails { get; set; }
         public UserTeamLeaderDetails UserTeamLeaderDetails { get; set; }
-
-        public static implicit operator int(CoreUserDetails v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -6,13 +6,15 @@
 
 <h3>@Model.FirstName @Model.LastName</h3>
 <h4>Type: @Model.UserType</h4>
-<h4>Status: @if (Model.isActive)
-{ <span class="glyphicon glyphicon-ok"></span> }
-else
-{ <span class="glyphicon glyphicon-remove"></span> }</h4>
+<h4>
+    Status: @if (Model.isActive)
+    { <span class="glyphicon glyphicon-ok"></span> }
+    else
+    { <span class="glyphicon glyphicon-remove"></span> }
+</h4>
 <div class="modal-body row">
     <div class="col-md-3">
-      
+
         <div class="panel-group">
             <div class="panel panel-primary">
                 <div class="panel-heading">Image</div>
@@ -31,7 +33,10 @@ else
             <div class="panel panel-primary">
                 <div class="panel-heading">User</div>
                 <div class="panel-body">
+                    <div class="btn-group btn-group-justified">
+                        <a href="#" id="show" class="btn btn-primary" value="Edit">Update</a>
 
+                    </div>
                     <div>
                         <dl>
                             <dt>
@@ -104,8 +109,7 @@ else
                             </dd>
                         </dl>
                     </div>
-
-
+                    
                 </div>
             </div>
         </div>
@@ -117,9 +121,6 @@ else
 
         @if (Model.CoreUserTypeId == 3 || Model.CoreUserTypeId == 4)
         {
-           
-
-
             <div class="panel-group">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Branch</div>
@@ -137,24 +138,52 @@ else
     <div class="col-md-3">
         @if (Model.CoreUserTypeId == 4)
         {
-           
-
 
             <div class="panel-group">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Province</div>
                     <div class="panel-body">
                         @Html.Partial("_UserProvinceDetails", Model.UserProvinceDetails)
-
+                       
                     </div>
                 </div>
             </div>
-        }
+                                }
+                                else
+                                {
+                                    <div class="panel-group">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">Edit</div>
+                                            <div class="panel-body">
+                                             
+                                                <div id="editTheDiv" hidden>
+                                                    @{
+                                                        Html.RenderAction("Update", "User", Model.CoreUserId);
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                        }
     </div>
-   
+
 </div>
 
+<div class="col-lg-offset-1">
+    @*<div id="editTheDiv" hidden>
+        @{
+            Html.RenderAction("Update", "User", Model.CoreUserId);
+        }
+    </div>*@
 
+</div>
+
+<script>
+    $("#show").click(function () {
+        $("#editTheDiv").toggle();
+    });
+
+</script>
 
 
 

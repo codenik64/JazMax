@@ -21,8 +21,7 @@ namespace JazMax.BusinessLogic.UserAccounts
             return ConvertListModelToView(query.ToList());
         }
 
-        //Retrun a List Of All Core System Users
-        //Searching Will Be Done on This Baby
+        #region Get All CoreUsers
         public IQueryable<CoreUserDetails> GetAllSystemUsers(List<bool> isActiveList)
         {
             IQueryable<CoreUserDetails> coreUserList = (from a in db.CoreUsers
@@ -46,9 +45,12 @@ namespace JazMax.BusinessLogic.UserAccounts
 
             return coreUserList;
         }
+        #endregion    
 
+        #region Gets Core User Details    
         public CoreUserDetails GetUserDetails(int coreUserID)
         {
+
             CoreUserDetails coreUserList = (from a in db.CoreUsers
                                             join b in db.CoreUserInTypes
                                             on a.CoreUserId equals b.CoreUserId
@@ -85,24 +87,62 @@ namespace JazMax.BusinessLogic.UserAccounts
             //AGENT 
             if (coreUserType == 4)
             {
-                int GetAgentBranchId = (int)db.CoreAgents.FirstOrDefault(x => x.CoreUserId == CoreUserId).CoreBranchId;
-                CoreBranchView model = CoreBranchService.DetailsNew(db, GetAgentBranchId).CoreBranchView;
-                m.BranchName = model.BranchName;
-                m.BranchId = model.BranchId;
-                m.Province = model.ProvinceName;
-                m.TeamLeader = model.TeamLeaderName;
+                int GetAgentBranchId = 0;
+                try
+                {
+                    GetAgentBranchId = (int)db.CoreAgents.FirstOrDefault(x => x.CoreUserId == CoreUserId).CoreBranchId;
+                }
+                catch
+                {
+                    GetAgentBranchId = 0;
+                }
+
+                //The agent has a branch assigned to them
+                if (GetAgentBranchId > 0)
+                {
+                    CoreBranchView model = CoreBranchService.DetailsNew(db, GetAgentBranchId).CoreBranchView;
+                    m.BranchName = model.BranchName;
+                    m.BranchId = model.BranchId;
+                    m.Province = model.ProvinceName;
+                    m.TeamLeader = model.TeamLeaderName;
+                    m.HasResult = true;
+                }
+                //if they do not, dont break the front end
+                else
+                {
+                    m.HasResult = false;
+                }
             }
             //TeamLeader
             else if (coreUserType == 3)
             {
-                int GetTeamLeaderBranch = db.CoreTeamLeaders.FirstOrDefault(x => x.CoreUserId == CoreUserId).CoreTeamLeaderId;
-                int GetBranchId = db.CoreBranches.FirstOrDefault(x => x.CoreTeamLeaderId == GetTeamLeaderBranch).BranchId;
+                int GetTeamLeaderBranch = 0;
+                int GetBranchId = 0;
 
-                CoreBranchView model = CoreBranchService.DetailsNew(db, GetBranchId).CoreBranchView;
-                m.BranchName = model.BranchName;
-                m.BranchId = model.BranchId;
-                m.Province = model.ProvinceName;
-                m.TeamLeader = model.TeamLeaderName;
+                try
+                {
+                    GetTeamLeaderBranch = db.CoreTeamLeaders.FirstOrDefault(x => x.CoreUserId == CoreUserId).CoreTeamLeaderId;
+                }
+                catch
+                {
+                    GetTeamLeaderBranch = 0;
+                }
+
+                if (GetTeamLeaderBranch != 0)
+                {
+                    GetBranchId = db.CoreBranches.FirstOrDefault(x => x.CoreTeamLeaderId == GetTeamLeaderBranch).BranchId;
+                    CoreBranchView model = CoreBranchService.DetailsNew(db, GetBranchId).CoreBranchView;
+                    m.BranchName = model.BranchName;
+                    m.BranchId = model.BranchId;
+                    m.Province = model.ProvinceName;
+                    m.TeamLeader = model.TeamLeaderName;
+                    m.HasResult = true;
+                }
+                else
+                {
+                    m.BranchName = "No Branch Assigned To Teamleader";
+                    m.HasResult = false;
+                }
             }
             return m;
 
@@ -123,7 +163,7 @@ namespace JazMax.BusinessLogic.UserAccounts
             return null;
 
         }
-
+        #endregion
 
         #region Create A New Core System User 
         public int? CreateNewCoreUser(CoreUserView model)
@@ -201,7 +241,6 @@ namespace JazMax.BusinessLogic.UserAccounts
         }
         #endregion
 
-        //TO DO: Check Why This Is NOT working!
         #region Update Priovince After Assigned
         public void UpdateProvinceToAssigned(int proId)
         {
@@ -214,6 +253,26 @@ namespace JazMax.BusinessLogic.UserAccounts
             catch (Exception e)
             {
                 AuditLog.ErrorLog.LogError(db, e, 0);
+            }
+        }
+        #endregion
+
+        #region Update CoreUser Details
+        public void UpdateCoreUser(int coreUserId, CoreUserDetails model)
+        {
+            if (coreUserId > 0)
+            {
+                var user = db.CoreUsers.FirstOrDefault(x => x.CoreUserId == coreUserId);
+                if(user != null)
+                {
+                    user.FirstName = model.FirstName;
+                    user.LastName = model.LastName;
+                    user.LastUpdatedDate = DateTime.Now;
+                    user.MiddleName = model.MiddleName;
+                    user.PhoneNumber = model.PhoneNumber;
+                    user.CellPhone = model.CellPhone;
+                    db.SaveChanges();
+                }
             }
         }
         #endregion

@@ -76,6 +76,7 @@
     <Compile Include="UserAccountView\CaptureTeamLeader.cs" />
     <Compile Include="UserAccountView\CoreBranchView.cs" />
     <Compile Include="UserAccountView\CoreProvinceView.cs" />
+    <Compile Include="UserAccountView\CoreSearch\UserSearchParameters.cs" />
     <Compile Include="UserAccountView\CoreUserDetails.cs" />
     <Compile Include="UserAccountView\CoreUserTypeView.cs" />
     <Compile Include="UserAccountView\CoreUserView.cs" />
