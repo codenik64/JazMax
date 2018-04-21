@@ -1,7 +1,9 @@
 ﻿@model JazMax.Web.ViewModel.UserAccountView.CoreUserDetails
-
+@using JazMax.Core.SystemHelpers
 @{
     ViewBag.Title = "User Details";
+    JazMaxIdentityHelper.UserName = User.Identity.Name;
+    
 }
 
 <h3>@Model.FirstName @Model.LastName</h3>
@@ -12,6 +14,7 @@
     else
     { <span class="glyphicon glyphicon-remove"></span> }
 </h4>
+
 <div class="modal-body row">
     <div class="col-md-3">
 
@@ -28,86 +31,70 @@
 
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-5">
         <div class="panel-group">
             <div class="panel panel-primary">
                 <div class="panel-heading">User</div>
                 <div class="panel-body">
-                    <div class="btn-group btn-group-justified">
-                        <a href="#" id="show" class="btn btn-primary" value="Edit">Update</a>
+                    <div class="form-horizontal" align="center">
+                  
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                    </div>
-                    <div>
-                        <dl>
-                            <dt>
-                                @Html.DisplayNameFor(model => model.FirstName)
-                            </dt>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MiddleName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.MiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.FirstName)
-                            </dd>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                            @if (Model.MiddleName == null)
-                            { }
-                            else
-                            {
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.MiddleName)
-                                </dt>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IDNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.IDNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IDNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                                <dd>
-                                    @Html.DisplayFor(model => model.MiddleName)
-                                </dd>
-                            }
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                            <dt>
-                                @Html.DisplayNameFor(model => model.LastName)
-                            </dt>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CellPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.CellPhone, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CellPhone, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
 
-                            <dd>
-                                @Html.DisplayFor(model => model.LastName)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.IDNumber)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.IDNumber)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.PhoneNumber)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.PhoneNumber)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.CellPhone)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.CellPhone)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.EmailAddress)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.EmailAddress)
-                            </dd>
-
-                            <dt>
-                                @Html.DisplayNameFor(model => model.GenderId)
-                            </dt>
-
-                            <dd>
-                                @Html.DisplayFor(model => model.GenderId)
-                            </dd>
-                        </dl>
+                      
+                        @if (JazMaxIdentityHelper.IsUserInRole("Admin,CEO,TeamLeader,PA"))
+                        {
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input id="Save" type="button" class="btn btn-success" value="Save" onclick="Update();" />
+                            </div>
+                        </div>
+                        }
                     </div>
 
                 </div>
@@ -117,7 +104,7 @@
 
 
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
 
         @if (Model.CoreUserTypeId == 3 || Model.CoreUserTypeId == 4)
         {
@@ -135,7 +122,7 @@
 
 
     </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         @if (Model.CoreUserTypeId == 4)
         {
 
@@ -149,25 +136,57 @@
                 </div>
             </div>
         }
-       
 
-</div>
 
-<div class="col-lg-offset-1">
-    <div id="editTheDiv" hidden>
+    </div>
+
+    <div class="col-lg-offset-1">
+        <div id="editTheDiv" hidden>
             @{
                 Html.RenderAction("Update", "User", Model.CoreUserId);
             }
         </div>
 
-</div>
+    </div>
 
-<script>
-    $("#show").click(function () {
-        $("#editTheDiv").toggle();
-    });
+    <script>
+        $("#show").click(function () {
+            $("#editTheDiv").toggle();
+        });
 
-</script>
+    </script>
 
 
+    <script>
+    function Update() {
+        debugger;
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data: {
+                    coreUserId: @Model.CoreUserId,
+                    FirstName: $('#FirstName').val(),
+                    LastName: $('#LastName').val(),
+                    MiddleName: $('#MiddleName').val(),
+                    PhoneNumber: $('#PhoneNumber').val(),
+                    CellPhone: $('#CellPhone').val(),
+                    IDNumber: $('#IDNumber').val(),
+
+                },
+                url: '@Url.Action("UpdateCoreUser", "User")',
+                success: function (da) {
+                    if (da.Result == "Success") {
+                        toastr.success('user has been updated');
+                        document.location.reload(true)
+                    } else {
+
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    alert('Error');
+                }
+            });
+    }
+    </script>
 

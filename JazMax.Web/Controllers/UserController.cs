@@ -271,16 +271,19 @@ namespace JazMax.Web.Controllers
        
 
         #region Update CoreUser
-        public ActionResult UpdateCoreUser(string coreUserId, string FirstName, string LastName, string MiddleName, string PhoneNumber, string CellPhone)
+        public ActionResult UpdateCoreUser(string coreUserId, string FirstName, string LastName, string MiddleName, string PhoneNumber, string CellPhone, string IdNumber)
         {
             try
             {
-                CoreUserDetails m = new CoreUserDetails();
-                m.FirstName = FirstName;
-                m.LastName = LastName;
-                m.MiddleName = MiddleName;
-                m.PhoneNumber = CellPhone;
-                m.CellPhone = CellPhone;
+                CoreUserDetails m = new CoreUserDetails()
+                {
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    MiddleName = MiddleName,
+                    PhoneNumber = CellPhone,
+                    CellPhone = CellPhone,
+                    IDNumber = IdNumber
+                };
                 obj.UpdateCoreUser(Convert.ToInt32(coreUserId), m);
                 return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
             }
@@ -303,5 +306,16 @@ namespace JazMax.Web.Controllers
             return Json(_helper.GetBranchesBasedOnProvince(a.ProvinceId), JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return View(obj.GetUserDetails((int)id));
+        }
+
+
     }
 }
