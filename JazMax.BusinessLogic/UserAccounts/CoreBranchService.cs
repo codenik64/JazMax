@@ -54,17 +54,19 @@ namespace JazMax.BusinessLogic.UserAccounts
 
         private static DataAccess.CoreBranch ConvertViewToModel(CoreBranchView m)
         {
-            DataAccess.CoreBranch a = new DataAccess.CoreBranch();
-            a.BranchId = m.BranchId;
-            a.BranchName = m.BranchName;
-            a.City = m.City;
-            a.CoreTeamLeaderId = m.CoreTeamLeaderId;
-            a.EmailAddress = m.EmailAddress;
-            a.IsActive = m.IsActive;
-            a.Phone = m.Phone;
-            a.ProvinceId = m.ProvinceId;
-            a.StreetAddress = m.StreetAddress;
-            a.Suburb = m.Suburb;
+            DataAccess.CoreBranch a = new DataAccess.CoreBranch()
+            {
+                BranchId = m.BranchId,
+                BranchName = m.BranchName,
+                City = m.City,
+                CoreTeamLeaderId = m.CoreTeamLeaderId,
+                EmailAddress = m.EmailAddress,
+                IsActive = m.IsActive,
+                Phone = m.Phone,
+                ProvinceId = m.ProvinceId,
+                StreetAddress = m.StreetAddress,
+                Suburb = m.Suburb
+            };
             return a;
         }
 

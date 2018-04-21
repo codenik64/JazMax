@@ -109,7 +109,7 @@
                             </dd>
                         </dl>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -144,37 +144,21 @@
                     <div class="panel-heading">Province</div>
                     <div class="panel-body">
                         @Html.Partial("_UserProvinceDetails", Model.UserProvinceDetails)
-                       
+
                     </div>
                 </div>
             </div>
-                                }
-                                else
-                                {
-                                    <div class="panel-group">
-                                        <div class="panel panel-primary">
-                                            <div class="panel-heading">Edit</div>
-                                            <div class="panel-body">
-                                             
-                                                <div id="editTheDiv" hidden>
-                                                    @{
-                                                        Html.RenderAction("Update", "User", Model.CoreUserId);
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                                        }
-    </div>
+        }
+       
 
 </div>
 
 <div class="col-lg-offset-1">
-    @*<div id="editTheDiv" hidden>
-        @{
-            Html.RenderAction("Update", "User", Model.CoreUserId);
-        }
-    </div>*@
+    <div id="editTheDiv" hidden>
+            @{
+                Html.RenderAction("Update", "User", Model.CoreUserId);
+            }
+        </div>
 
 </div>
 
