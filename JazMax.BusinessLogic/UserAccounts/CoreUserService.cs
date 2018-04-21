@@ -271,6 +271,7 @@ namespace JazMax.BusinessLogic.UserAccounts
                     user.MiddleName = model.MiddleName;
                     user.PhoneNumber = model.PhoneNumber;
                     user.CellPhone = model.CellPhone;
+                    user.IdNumber = model.IDNumber;
                     db.SaveChanges();
                 }
             }
