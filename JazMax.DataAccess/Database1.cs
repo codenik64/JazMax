@@ -53,6 +53,7 @@ namespace JazMax.DataAccess
         System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; } // CoreUserType
         System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; } // MessengerCoreLog
         System.Data.Entity.DbSet<MessengerType> MessengerTypes { get; set; } // MessengerType
+        System.Data.Entity.DbSet<SystemEditLog> SystemEditLogs { get; set; } // SystemEditLog
         System.Data.Entity.DbSet<SystemErrorLog> SystemErrorLogs { get; set; } // SystemErrorLog
         System.Data.Entity.DbSet<SystemSettingsData> SystemSettingsDatas { get; set; } // SystemSettingsData
         System.Data.Entity.DbSet<VwGetAgentsInformation> VwGetAgentsInformations { get; set; } // vw_GetAgentsInformation
@@ -70,6 +71,11 @@ namespace JazMax.DataAccess
         System.Data.Entity.DbSet Set(System.Type entityType);
         System.Data.Entity.DbSet<TEntity> Set<TEntity>() where TEntity : class;
         string ToString();
+
+        // Stored Procedures
+        int SpSaveEditLog(string tableName, string tableColum, int? tableKey, string valueBefore, string valueAfer, int? coreUserId, string comment);
+        // SpSaveEditLogAsync cannot be created due to having out parameters, or is relying on the procedure result (int)
+
     }
 
     #endregion
@@ -96,6 +102,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; } // CoreUserType
         public System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; } // MessengerCoreLog
         public System.Data.Entity.DbSet<MessengerType> MessengerTypes { get; set; } // MessengerType
+        public System.Data.Entity.DbSet<SystemEditLog> SystemEditLogs { get; set; } // SystemEditLog
         public System.Data.Entity.DbSet<SystemErrorLog> SystemErrorLogs { get; set; } // SystemErrorLog
         public System.Data.Entity.DbSet<SystemSettingsData> SystemSettingsDatas { get; set; } // SystemSettingsData
         public System.Data.Entity.DbSet<VwGetAgentsInformation> VwGetAgentsInformations { get; set; } // vw_GetAgentsInformation
@@ -166,6 +173,7 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new CoreUserTypeConfiguration());
             modelBuilder.Configurations.Add(new MessengerCoreLogConfiguration());
             modelBuilder.Configurations.Add(new MessengerTypeConfiguration());
+            modelBuilder.Configurations.Add(new SystemEditLogConfiguration());
             modelBuilder.Configurations.Add(new SystemErrorLogConfiguration());
             modelBuilder.Configurations.Add(new SystemSettingsDataConfiguration());
             modelBuilder.Configurations.Add(new VwGetAgentsInformationConfiguration());
@@ -191,12 +199,52 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new CoreUserTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new MessengerCoreLogConfiguration(schema));
             modelBuilder.Configurations.Add(new MessengerTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new SystemEditLogConfiguration(schema));
             modelBuilder.Configurations.Add(new SystemErrorLogConfiguration(schema));
             modelBuilder.Configurations.Add(new SystemSettingsDataConfiguration(schema));
             modelBuilder.Configurations.Add(new VwGetAgentsInformationConfiguration(schema));
             modelBuilder.Configurations.Add(new VwGetTeamLeadersInformationConfiguration(schema));
             return modelBuilder;
         }
+
+        // Stored Procedures
+        public int SpSaveEditLog(string tableName, string tableColum, int? tableKey, string valueBefore, string valueAfer, int? coreUserId, string comment)
+        {
+            var tableNameParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@tableName", SqlDbType = System.Data.SqlDbType.NVarChar, Direction = System.Data.ParameterDirection.Input, Value = tableName, Size = 50 };
+            if (tableNameParam.Value == null)
+                tableNameParam.Value = System.DBNull.Value;
+
+            var tableColumParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@tableColum", SqlDbType = System.Data.SqlDbType.NVarChar, Direction = System.Data.ParameterDirection.Input, Value = tableColum, Size = 50 };
+            if (tableColumParam.Value == null)
+                tableColumParam.Value = System.DBNull.Value;
+
+            var tableKeyParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@tableKey", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = tableKey.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!tableKey.HasValue)
+                tableKeyParam.Value = System.DBNull.Value;
+
+            var valueBeforeParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@valueBefore", SqlDbType = System.Data.SqlDbType.NVarChar, Direction = System.Data.ParameterDirection.Input, Value = valueBefore, Size = 50 };
+            if (valueBeforeParam.Value == null)
+                valueBeforeParam.Value = System.DBNull.Value;
+
+            var valueAferParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@valueAfer", SqlDbType = System.Data.SqlDbType.NVarChar, Direction = System.Data.ParameterDirection.Input, Value = valueAfer, Size = 50 };
+            if (valueAferParam.Value == null)
+                valueAferParam.Value = System.DBNull.Value;
+
+            var coreUserIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@coreUserId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = coreUserId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!coreUserId.HasValue)
+                coreUserIdParam.Value = System.DBNull.Value;
+
+            var commentParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@Comment", SqlDbType = System.Data.SqlDbType.NVarChar, Direction = System.Data.ParameterDirection.Input, Value = comment, Size = 50 };
+            if (commentParam.Value == null)
+                commentParam.Value = System.DBNull.Value;
+
+            var procResultParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@procResult", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Output };
+
+            Database.ExecuteSqlCommand(System.Data.Entity.TransactionalBehavior.DoNotEnsureTransaction, "EXEC @procResult = [dbo].[SPSaveEditLog] @tableName, @tableColum, @tableKey, @valueBefore, @valueAfer, @coreUserId, @Comment", tableNameParam, tableColumParam, tableKeyParam, valueBeforeParam, valueAferParam, coreUserIdParam, commentParam, procResultParam);
+
+            return (int) procResultParam.Value;
+        }
+
     }
     #endregion
 
@@ -234,6 +282,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; }
         public System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; }
         public System.Data.Entity.DbSet<MessengerType> MessengerTypes { get; set; }
+        public System.Data.Entity.DbSet<SystemEditLog> SystemEditLogs { get; set; }
         public System.Data.Entity.DbSet<SystemErrorLog> SystemErrorLogs { get; set; }
         public System.Data.Entity.DbSet<SystemSettingsData> SystemSettingsDatas { get; set; }
         public System.Data.Entity.DbSet<VwGetAgentsInformation> VwGetAgentsInformations { get; set; }
@@ -258,6 +307,7 @@ namespace JazMax.DataAccess
             CoreUserTypes = new FakeDbSet<CoreUserType>("CoreUserTypeId");
             MessengerCoreLogs = new FakeDbSet<MessengerCoreLog>("MessengerCoreLogId");
             MessengerTypes = new FakeDbSet<MessengerType>("MessengerTypeId");
+            SystemEditLogs = new FakeDbSet<SystemEditLog>("SystemEditLogId");
             SystemErrorLogs = new FakeDbSet<SystemErrorLog>("SystemErrorLogId");
             SystemSettingsDatas = new FakeDbSet<SystemSettingsData>("SystemSettingsDataId");
             VwGetAgentsInformations = new FakeDbSet<VwGetAgentsInformation>("CoreUserId", "CoreAgentId", "BranchId", "ProvinceId");
@@ -321,6 +371,14 @@ namespace JazMax.DataAccess
         public override string ToString()
         {
             throw new System.NotImplementedException();
+        }
+
+
+        // Stored Procedures
+        public int SpSaveEditLog(string tableName, string tableColum, int? tableKey, string valueBefore, string valueAfer, int? coreUserId, string comment)
+        {
+
+            return 0;
         }
 
     }
@@ -775,6 +833,21 @@ namespace JazMax.DataAccess
         public bool IsActive { get; set; } // IsActive
     }
 
+    // SystemEditLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class SystemEditLog
+    {
+        public int SystemEditLogId { get; set; } // SystemEditLogId (Primary key)
+        public string TableName { get; set; } // TableName (length: 255)
+        public string TableColumn { get; set; } // TableColumn (length: 255)
+        public int? TablePrimaryKey { get; set; } // TablePrimaryKey
+        public string ValueBefore { get; set; } // ValueBefore (length: 1)
+        public string ValueAfter { get; set; } // ValueAfter (length: 1)
+        public System.DateTime? ChangeDate { get; set; } // ChangeDate
+        public int? CoreUserId { get; set; } // CoreUserId
+        public string Comment { get; set; } // Comment
+    }
+
     // SystemErrorLog
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class SystemErrorLog
@@ -1221,6 +1294,32 @@ namespace JazMax.DataAccess
         }
     }
 
+    // SystemEditLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class SystemEditLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SystemEditLog>
+    {
+        public SystemEditLogConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public SystemEditLogConfiguration(string schema)
+        {
+            ToTable("SystemEditLog", schema);
+            HasKey(x => x.SystemEditLogId);
+
+            Property(x => x.SystemEditLogId).HasColumnName(@"SystemEditLogId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TableName).HasColumnName(@"TableName").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
+            Property(x => x.TableColumn).HasColumnName(@"TableColumn").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
+            Property(x => x.TablePrimaryKey).HasColumnName(@"TablePrimaryKey").HasColumnType("int").IsOptional();
+            Property(x => x.ValueBefore).HasColumnName(@"ValueBefore").HasColumnType("nvarchar").IsOptional().HasMaxLength(1);
+            Property(x => x.ValueAfter).HasColumnName(@"ValueAfter").HasColumnType("nvarchar").IsOptional().HasMaxLength(1);
+            Property(x => x.ChangeDate).HasColumnName(@"ChangeDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsOptional();
+            Property(x => x.Comment).HasColumnName(@"Comment").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+        }
+    }
+
     // SystemErrorLog
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class SystemErrorLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<SystemErrorLog>
@@ -1325,6 +1424,10 @@ namespace JazMax.DataAccess
             Property(x => x.ProvinceId).HasColumnName(@"ProvinceId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
         }
     }
+
+    #endregion
+
+    #region Stored procedure return models
 
     #endregion
 

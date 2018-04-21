@@ -74,6 +74,7 @@
     <Compile Include="JazMaxDropDownList.cs" />
     <Compile Include="JazMaxIdentityAttribute.cs" />
     <Compile Include="JazMaxIdentityHelper.cs" />
+    <Compile Include="JazMaxMvcExtensions.cs" />
     <Compile Include="Model\AgentInformation.cs" />
     <Compile Include="Model\BranchProvince.cs" />
     <Compile Include="Model\TeamLeaderInfomation.cs" />

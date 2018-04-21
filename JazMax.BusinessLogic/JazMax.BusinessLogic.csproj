@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuditLog\ErrorLog.cs" />
+    <Compile Include="ChangeLog\ChangeLogService.cs" />
     <Compile Include="Messenger\JazMaxMail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAccounts\AgentService.cs" />

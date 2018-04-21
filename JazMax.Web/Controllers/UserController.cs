@@ -275,16 +275,17 @@ namespace JazMax.Web.Controllers
         {
             try
             {
+                JazMaxIdentityHelper.UserName = User.Identity.Name;
                 CoreUserDetails m = new CoreUserDetails()
                 {
                     FirstName = FirstName,
                     LastName = LastName,
                     MiddleName = MiddleName,
-                    PhoneNumber = CellPhone,
+                    PhoneNumber = PhoneNumber,
                     CellPhone = CellPhone,
                     IDNumber = IdNumber
                 };
-                obj.UpdateCoreUser(Convert.ToInt32(coreUserId), m);
+                obj.UpdateCoreUser(Convert.ToInt32(coreUserId), m, JazMaxIdentityHelper.GetCoreUserId());
                 return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
             }
             catch

@@ -3,8 +3,10 @@
 @{
     ViewBag.Title = "User Details";
     JazMaxIdentityHelper.UserName = User.Identity.Name;
-    
+
 }
+
+
 
 <h3>@Model.FirstName @Model.LastName</h3>
 <h4>Type: @Model.UserType</h4>
@@ -14,13 +16,12 @@
     else
     { <span class="glyphicon glyphicon-remove"></span> }
 </h4>
-
 <div class="modal-body row">
     <div class="col-md-3">
 
         <div class="panel-group">
             <div class="panel panel-primary">
-                <div class="panel-heading">Image</div>
+                <div class="panel-heading">Profile Picture</div>
                 <div class="panel-body">
 
                     [BLOB USER IMAGE GOES HERE]
@@ -36,8 +37,8 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">User</div>
                 <div class="panel-body">
-                    <div class="form-horizontal" align="center">
-                  
+                    <div class="form-horizontal">
+
                         <div class="form-group">
                             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
                             <div class="col-md-10">
@@ -86,17 +87,15 @@
                             </div>
                         </div>
 
-                      
                         @if (JazMaxIdentityHelper.IsUserInRole("Admin,CEO,TeamLeader,PA"))
                         {
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input id="Save" type="button" class="btn btn-success" value="Save" onclick="Update();" />
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input id="Save" type="button" class="btn btn-success" value="Save" onclick="Update();" />
+                                </div>
                             </div>
-                        </div>
                         }
                     </div>
-
                 </div>
             </div>
         </div>
@@ -140,14 +139,8 @@
 
     </div>
 
-    <div class="col-lg-offset-1">
-        <div id="editTheDiv" hidden>
-            @{
-                Html.RenderAction("Update", "User", Model.CoreUserId);
-            }
-        </div>
+  </div> 
 
-    </div>
 
     <script>
         $("#show").click(function () {

@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeLog\EditLogView.cs" />
     <Compile Include="Messenger\Email.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserAccountView\AgentDetailsView.cs" />

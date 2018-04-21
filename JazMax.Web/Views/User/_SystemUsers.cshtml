@@ -1,9 +1,11 @@
 ﻿@model IEnumerable<JazMax.Web.ViewModel.UserAccountView.CoreUserDetails>
+@using JazMax.Core.SystemHelpers;
 
-<table class="table">
+<table class="table table-bordered table-hover dt-responsive">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
+           
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MiddleName)
@@ -35,34 +37,37 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
+               @Html.JazMaxUserDetails(item.FirstName, new { id = item.CoreUserId }) 
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MiddleName)
+                @Html.JazMaxUserDetails(item.MiddleName, new { id = item.CoreUserId })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.JazMaxUserDetails(item.LastName,new { id = item.CoreUserId })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IDNumber)
+                @Html.JazMaxUserDetails(item.IDNumber, new { id = item.CoreUserId })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
+                @Html.JazMaxUserDetails(item.PhoneNumber, new { id = item.CoreUserId })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CellPhone)
+                @Html.JazMaxUserDetails(item.CellPhone, new { id = item.CoreUserId })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EmailAddress)
+                @Html.JazMaxUserDetails(item.EmailAddress, new { id = item.CoreUserId })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.GenderId)
+                @Html.JazMaxUserDetails(item.GenderId, new { id = item.CoreUserId })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UserType)
+                @Html.JazMaxUserDetails(item.UserType, new { id = item.CoreUserId })
             </td>
         </tr>
     }
 
 </table>
 
+<script>
+    $('table').DataTable();
+</script>

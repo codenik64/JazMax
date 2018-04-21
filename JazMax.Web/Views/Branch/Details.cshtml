@@ -112,9 +112,7 @@
 
 <table class="table">
     <tr>
-        <th>
-            UserId
-        </th>
+      
         <th>
             First Name
         </th>
@@ -134,19 +132,15 @@
         <th>
             Email Address 
         </th>
-        
-        <th>
-            TeamLeader
-        </th>
+ 
+      
         <th></th>
     </tr>
 
     @foreach (var item in Model.AgentDetailsView)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CoreUserId)
-            </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
@@ -164,9 +158,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EmailAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TeamLeaderName)
             </td>
         </tr>
 

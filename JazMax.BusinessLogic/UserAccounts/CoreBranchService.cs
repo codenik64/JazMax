@@ -149,7 +149,7 @@ namespace JazMax.BusinessLogic.UserAccounts
 
 
 
-        public bool Update(CoreBranchView model)
+        public bool Update(CoreBranchView model, int CoreSystemUserId)
         {
             try
             {
@@ -158,8 +158,7 @@ namespace JazMax.BusinessLogic.UserAccounts
                             select a).FirstOrDefault();
 
 
-                data.BranchName = model.BranchName;
-                data.City = model.City;
+            
 
                 if (model.CoreTeamLeaderId == null)
                 {
@@ -167,8 +166,23 @@ namespace JazMax.BusinessLogic.UserAccounts
                 }
                 else
                 {
+                    ChangeLog.ChangeLogService.LogChange(data.BranchId, data.CoreTeamLeaderId.ToString(), model.CoreTeamLeaderId.ToString(), CoreSystemUserId, "CoreBranch", "CoreTeamLeaderId");
                     data.CoreTeamLeaderId = model.CoreTeamLeaderId;
+
                 }
+
+                #region Edit Log
+                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.BranchName, model.BranchName, CoreSystemUserId, "CoreBranch", "BranchName");
+                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.City, model.City, CoreSystemUserId, "CoreBranch", "City");
+                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.EmailAddress, model.EmailAddress, CoreSystemUserId, "CoreBranch", "EmailAddress");
+                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.IsActive.ToString(), model.IsActive.ToString(), CoreSystemUserId, "CoreBranch", "IsActive");
+                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.Phone, model.Phone, CoreSystemUserId, "CoreBranch", "Phone");
+                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.ProvinceId.ToString(), model.ProvinceId.ToString(), CoreSystemUserId, "CoreBranch", "ProvinceId");
+                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.StreetAddress, model.StreetAddress, CoreSystemUserId, "CoreBranch", "StreetAddress");
+                #endregion
+
+                data.BranchName = model.BranchName;
+                data.City = model.City;
                 data.EmailAddress = model.EmailAddress;
                 data.IsActive = model.IsActive;
                 data.Phone = model.Phone;

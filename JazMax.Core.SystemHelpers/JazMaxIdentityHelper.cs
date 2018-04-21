@@ -149,7 +149,14 @@ namespace JazMax.Core.SystemHelpers
         #region Identity Helper Methods
         public static int GetCoreUserId()
         {
-            return db.CoreUsers.Where(x => x.EmailAddress == UserName).FirstOrDefault().CoreUserId;
+            try
+            {
+                return db.CoreUsers.Where(x => x.EmailAddress == UserName).FirstOrDefault().CoreUserId;
+            }
+            catch 
+            {
+                return 0;   
+            }
         }
 
         public static bool IsUserInRole(string roleName)

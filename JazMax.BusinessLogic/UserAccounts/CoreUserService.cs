@@ -40,7 +40,8 @@ namespace JazMax.BusinessLogic.UserAccounts
                                                             LastName = a.LastName,
                                                             MiddleName = a.MiddleName,
                                                             PhoneNumber = a.PhoneNumber,
-                                                            UserType = c.UserTypeName
+                                                            UserType = c.UserTypeName,
+                                                            CoreUserId = a.CoreUserId
                                                         }).AsQueryable();
 
             return coreUserList;
@@ -258,13 +259,21 @@ namespace JazMax.BusinessLogic.UserAccounts
         #endregion
 
         #region Update CoreUser Details
-        public void UpdateCoreUser(int coreUserId, CoreUserDetails model)
+        public void UpdateCoreUser(int coreUserId, CoreUserDetails model, int CoreSystemUserId)
         {
             if (coreUserId > 0)
             {
                 var user = db.CoreUsers.FirstOrDefault(x => x.CoreUserId == coreUserId);
-                if(user != null)
+                if (user != null)
                 {
+                    #region Edit Logging
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.FirstName, model.FirstName, CoreSystemUserId, "CoreUser", "FirstName");
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.LastName, model.LastName, CoreSystemUserId, "CoreUser", "LastName");
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.MiddleName, model.MiddleName, CoreSystemUserId, "CoreUser", "MiddleName");
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.PhoneNumber, model.PhoneNumber, CoreSystemUserId, "CoreUser", "PhoneNumber");
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.IdNumber, model.IDNumber, CoreSystemUserId, "CoreUser", "IdNumber");
+                    #endregion
+
                     user.FirstName = model.FirstName;
                     user.LastName = model.LastName;
                     user.LastUpdatedDate = DateTime.Now;
@@ -275,6 +284,19 @@ namespace JazMax.BusinessLogic.UserAccounts
                     db.SaveChanges();
                 }
             }
+        }
+        #endregion
+
+        #region Move Agent
+        public void MoveAgent(int CoreUserId, int BranchId)
+        {
+            var Agent = db.CoreAgents.FirstOrDefault(x => x.CoreUserId == CoreUserId);
+
+            if(Agent != null)
+            {
+                Agent.CoreBranchId = BranchId;
+            }
+            db.SaveChanges();
         }
         #endregion
 
