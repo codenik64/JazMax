@@ -17,9 +17,7 @@ namespace JazMax.Core.SystemHelpers
             {
                 return MvcHtmlString.Empty;
             }
-
             return htmlHelper.ActionLink(linkText, "Details", "User", routeValues, null);
-
         }
         
 

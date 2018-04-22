@@ -29,7 +29,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="col-md-5">
@@ -118,10 +117,8 @@
                 </div>
             </div>
         }
+        <br />
 
-
-    </div>
-    <div class="col-md-4">
         @if (Model.CoreUserTypeId == 4)
         {
 
@@ -136,10 +133,24 @@
             </div>
         }
 
-
     </div>
-
+ 
   </div> 
+<div class="modal-body row">
+    <div class="col-lg-offset-0">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Edit Log</div>
+                <div class="panel-body">
+
+                    @{
+                        Html.RenderAction("GetLog", "Log", new { tableName = "CoreUser", id = Model.CoreUserId });
+                    }
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
 
 
     <script>

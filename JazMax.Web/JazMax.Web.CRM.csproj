@@ -203,6 +203,7 @@
     <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PAController.cs" />
     <Compile Include="Controllers\ProvinceController.cs" />
@@ -313,6 +314,8 @@
     <Content Include="Views\User\UpdateCoreUser.cshtml" />
     <Content Include="Views\User\Update.cshtml" />
     <Content Include="Views\User\EditBranch.cshtml" />
+    <Content Include="Views\Log\GetLog.cshtml" />
+    <Content Include="Views\User\_UserEditLog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

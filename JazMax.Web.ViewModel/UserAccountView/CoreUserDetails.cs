@@ -9,7 +9,7 @@ namespace JazMax.Web.ViewModel.UserAccountView
 {
     public class CoreUserDetails
     {
-    
+
         public int CoreUserId { get; set; }
         public int CoreUserTypeId { get; set; }
         [Display(Name = "First Name")]
@@ -36,5 +36,6 @@ namespace JazMax.Web.ViewModel.UserAccountView
         public UserBranchDetails UserBranchDetails { get; set; }
         public UserProvinceDetails UserProvinceDetails { get; set; }
         public UserTeamLeaderDetails UserTeamLeaderDetails { get; set; }
+        public List<ChangeLog.EditLogView> UserEditLog { get; set; }
     }
 }

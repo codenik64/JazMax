@@ -79,6 +79,11 @@ namespace JazMax.BusinessLogic.UserAccounts
 
             //Get Provbince Details For user
             coreUserList.UserProvinceDetails = GetProvineDetailsForUser(coreUserList.CoreUserId, coreUserList.CoreUserTypeId);
+
+            //Gets Edit Log For User <List>
+            //Swicthed off for now
+            //coreUserList.UserEditLog = GetUserEditLog(coreUserList.CoreUserId);
+
             return coreUserList;
         }
 
@@ -163,6 +168,11 @@ namespace JazMax.BusinessLogic.UserAccounts
             }
             return null;
 
+        }
+
+        public static List<JazMax.Web.ViewModel.ChangeLog.EditLogView> GetUserEditLog(int coreUserId)
+        {
+            return ChangeLog.ChangeLogService.GetEditLog("CoreUser", coreUserId);
         }
         #endregion
 
