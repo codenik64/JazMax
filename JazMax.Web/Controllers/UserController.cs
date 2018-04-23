@@ -269,7 +269,6 @@ namespace JazMax.Web.Controllers
            return View(obj.GetUserDetails((int)id));
         }
        
-
         #region Update CoreUser
         public ActionResult UpdateCoreUser(string coreUserId, string FirstName, string LastName, string MiddleName, string PhoneNumber, string CellPhone, string IdNumber)
         {

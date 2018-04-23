@@ -17,6 +17,7 @@
     { <span class="glyphicon glyphicon-remove"></span> }
 </h4>
 <div class="modal-body row">
+
     <div class="col-md-3">
 
         <div class="panel-group">
@@ -102,10 +103,12 @@
 
 
     </div>
+
     <div class="col-md-4">
 
         @if (Model.CoreUserTypeId == 3 || Model.CoreUserTypeId == 4)
         {
+
             <div class="panel-group">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Branch</div>
@@ -116,6 +119,7 @@
                     </div>
                 </div>
             </div>
+
         }
         <br />
 
@@ -131,11 +135,13 @@
                     </div>
                 </div>
             </div>
+
         }
 
     </div>
- 
-  </div> 
+
+</div>
+
 <div class="modal-body row">
     <div class="col-lg-offset-0">
         <div class="panel-group">
@@ -144,24 +150,22 @@
                 <div class="panel-body">
 
                     @{
-                        Html.RenderAction("GetLog", "Log", new { tableName = "CoreUser", id = Model.CoreUserId });
+    Html.RenderAction("GetLog", "Log", new { tableName = "CoreUser", id = Model.CoreUserId });
                     }
                 </div>
             </div>
         </div>
-        </div>
     </div>
+</div>
 
+<script>
+    $("#show").click(function () {
+        $("#editTheDiv").toggle();
+    });
 
-    <script>
-        $("#show").click(function () {
-            $("#editTheDiv").toggle();
-        });
+</script>
 
-    </script>
-
-
-    <script>
+<script>
     function Update() {
         debugger;
             $.ajax({
@@ -180,8 +184,8 @@
                 url: '@Url.Action("UpdateCoreUser", "User")',
                 success: function (da) {
                     if (da.Result == "Success") {
-                        toastr.success('user has been updated');
                         document.location.reload(true)
+                        toastr.success('user has been updated');
                     } else {
 
                         alert('Error' + da.Message);
@@ -192,5 +196,5 @@
                 }
             });
     }
-    </script>
+</script>
 

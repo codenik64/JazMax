@@ -236,6 +236,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="App_Code\JazMaxHelper.cshtml" />
+    <Content Include="JazMax.sitemap" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\JazMaxToastr.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

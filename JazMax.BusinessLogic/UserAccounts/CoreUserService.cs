@@ -277,11 +277,11 @@ namespace JazMax.BusinessLogic.UserAccounts
                 if (user != null)
                 {
                     #region Edit Logging
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.FirstName, model.FirstName, CoreSystemUserId, "CoreUser", "FirstName");
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.LastName, model.LastName, CoreSystemUserId, "CoreUser", "LastName");
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.MiddleName, model.MiddleName, CoreSystemUserId, "CoreUser", "MiddleName");
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.PhoneNumber, model.PhoneNumber, CoreSystemUserId, "CoreUser", "PhoneNumber");
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.IdNumber, model.IDNumber, CoreSystemUserId, "CoreUser", "IdNumber");
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.FirstName, model.FirstName, CoreSystemUserId, "CoreUser", "First Name");
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.LastName, model.LastName, CoreSystemUserId, "CoreUser", "Last Name");
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.MiddleName, model.MiddleName, CoreSystemUserId, "CoreUser", "Middle Name");
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.PhoneNumber, model.PhoneNumber, CoreSystemUserId, "CoreUser", "Phone Number");
+                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.IdNumber, model.IDNumber, CoreSystemUserId, "CoreUser", "ID Number");
                     #endregion
 
                     user.FirstName = model.FirstName;
