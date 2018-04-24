@@ -43,6 +43,7 @@ namespace JazMax.DataAccess
         System.Data.Entity.DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
         System.Data.Entity.DbSet<AzureWebJob> AzureWebJobs { get; set; } // AzureWebJob
         System.Data.Entity.DbSet<AzureWebJobLog> AzureWebJobLogs { get; set; } // AzureWebJobLog
+        System.Data.Entity.DbSet<BlobCoreStorage> BlobCoreStorages { get; set; } // BlobCoreStorage
         System.Data.Entity.DbSet<CoreAgent> CoreAgents { get; set; } // CoreAgent
         System.Data.Entity.DbSet<CoreBranch> CoreBranches { get; set; } // CoreBranch
         System.Data.Entity.DbSet<CorePa> CorePas { get; set; } // CorePA
@@ -92,6 +93,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<AspNetUserRole> AspNetUserRoles { get; set; } // AspNetUserRoles
         public System.Data.Entity.DbSet<AzureWebJob> AzureWebJobs { get; set; } // AzureWebJob
         public System.Data.Entity.DbSet<AzureWebJobLog> AzureWebJobLogs { get; set; } // AzureWebJobLog
+        public System.Data.Entity.DbSet<BlobCoreStorage> BlobCoreStorages { get; set; } // BlobCoreStorage
         public System.Data.Entity.DbSet<CoreAgent> CoreAgents { get; set; } // CoreAgent
         public System.Data.Entity.DbSet<CoreBranch> CoreBranches { get; set; } // CoreBranch
         public System.Data.Entity.DbSet<CorePa> CorePas { get; set; } // CorePA
@@ -163,6 +165,7 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new AspNetUserRoleConfiguration());
             modelBuilder.Configurations.Add(new AzureWebJobConfiguration());
             modelBuilder.Configurations.Add(new AzureWebJobLogConfiguration());
+            modelBuilder.Configurations.Add(new BlobCoreStorageConfiguration());
             modelBuilder.Configurations.Add(new CoreAgentConfiguration());
             modelBuilder.Configurations.Add(new CoreBranchConfiguration());
             modelBuilder.Configurations.Add(new CorePaConfiguration());
@@ -189,6 +192,7 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new AspNetUserRoleConfiguration(schema));
             modelBuilder.Configurations.Add(new AzureWebJobConfiguration(schema));
             modelBuilder.Configurations.Add(new AzureWebJobLogConfiguration(schema));
+            modelBuilder.Configurations.Add(new BlobCoreStorageConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreAgentConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreBranchConfiguration(schema));
             modelBuilder.Configurations.Add(new CorePaConfiguration(schema));
@@ -272,6 +276,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<AspNetUserRole> AspNetUserRoles { get; set; }
         public System.Data.Entity.DbSet<AzureWebJob> AzureWebJobs { get; set; }
         public System.Data.Entity.DbSet<AzureWebJobLog> AzureWebJobLogs { get; set; }
+        public System.Data.Entity.DbSet<BlobCoreStorage> BlobCoreStorages { get; set; }
         public System.Data.Entity.DbSet<CoreAgent> CoreAgents { get; set; }
         public System.Data.Entity.DbSet<CoreBranch> CoreBranches { get; set; }
         public System.Data.Entity.DbSet<CorePa> CorePas { get; set; }
@@ -297,6 +302,7 @@ namespace JazMax.DataAccess
             AspNetUserRoles = new FakeDbSet<AspNetUserRole>("UserId", "RoleId");
             AzureWebJobs = new FakeDbSet<AzureWebJob>("AzureWebJobId");
             AzureWebJobLogs = new FakeDbSet<AzureWebJobLog>("AzureWebJobLogId");
+            BlobCoreStorages = new FakeDbSet<BlobCoreStorage>("BlobId");
             CoreAgents = new FakeDbSet<CoreAgent>("CoreAgentId");
             CoreBranches = new FakeDbSet<CoreBranch>("BranchId");
             CorePas = new FakeDbSet<CorePa>("CorePaId");
@@ -711,6 +717,20 @@ namespace JazMax.DataAccess
         public string RecordsAffected { get; set; } // RecordsAffected (length: 1)
     }
 
+    // BlobCoreStorage
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class BlobCoreStorage
+    {
+        public int BlobId { get; set; } // BlobId (Primary key)
+        public string BlobType { get; set; } // BlobType (length: 100)
+        public string BlobFileType { get; set; } // BlobFileType (length: 100)
+        public string BlobFileName { get; set; } // BlobFileName
+        public string BlobFileExtension { get; set; } // BlobFileExtension
+        public int BlobFileSize { get; set; } // BlobFileSize
+        public string BlobUrl { get; set; } // BlobUrl
+        public bool IsActive { get; set; } // IsActive
+    }
+
     // CoreAgent
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class CoreAgent
@@ -841,8 +861,8 @@ namespace JazMax.DataAccess
         public string TableName { get; set; } // TableName (length: 255)
         public string TableColumn { get; set; } // TableColumn (length: 255)
         public int? TablePrimaryKey { get; set; } // TablePrimaryKey
-        public string ValueBefore { get; set; } // ValueBefore (length: 1)
-        public string ValueAfter { get; set; } // ValueAfter (length: 1)
+        public string ValueBefore { get; set; } // ValueBefore (length: 255)
+        public string ValueAfter { get; set; } // ValueAfter (length: 255)
         public System.DateTime? ChangeDate { get; set; } // ChangeDate
         public int? CoreUserId { get; set; } // CoreUserId
         public string Comment { get; set; } // Comment
@@ -1059,6 +1079,31 @@ namespace JazMax.DataAccess
             Property(x => x.StartDateTime).HasColumnName(@"StartDateTime").HasColumnType("datetime").IsRequired();
             Property(x => x.EndDateTime).HasColumnName(@"EndDateTime").HasColumnType("datetime").IsRequired();
             Property(x => x.RecordsAffected).HasColumnName(@"RecordsAffected").HasColumnType("nvarchar").IsRequired().HasMaxLength(1);
+        }
+    }
+
+    // BlobCoreStorage
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class BlobCoreStorageConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<BlobCoreStorage>
+    {
+        public BlobCoreStorageConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public BlobCoreStorageConfiguration(string schema)
+        {
+            ToTable("BlobCoreStorage", schema);
+            HasKey(x => x.BlobId);
+
+            Property(x => x.BlobId).HasColumnName(@"BlobId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.BlobType).HasColumnName(@"BlobType").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.BlobFileType).HasColumnName(@"BlobFileType").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(100);
+            Property(x => x.BlobFileName).HasColumnName(@"BlobFileName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.BlobFileExtension).HasColumnName(@"BlobFileExtension").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.BlobFileSize).HasColumnName(@"BlobFileSize").HasColumnType("int").IsRequired();
+            Property(x => x.BlobUrl).HasColumnName(@"BlobUrl").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
         }
     }
 
@@ -1312,8 +1357,8 @@ namespace JazMax.DataAccess
             Property(x => x.TableName).HasColumnName(@"TableName").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
             Property(x => x.TableColumn).HasColumnName(@"TableColumn").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
             Property(x => x.TablePrimaryKey).HasColumnName(@"TablePrimaryKey").HasColumnType("int").IsOptional();
-            Property(x => x.ValueBefore).HasColumnName(@"ValueBefore").HasColumnType("nvarchar").IsOptional().HasMaxLength(1);
-            Property(x => x.ValueAfter).HasColumnName(@"ValueAfter").HasColumnType("nvarchar").IsOptional().HasMaxLength(1);
+            Property(x => x.ValueBefore).HasColumnName(@"ValueBefore").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
+            Property(x => x.ValueAfter).HasColumnName(@"ValueAfter").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
             Property(x => x.ChangeDate).HasColumnName(@"ChangeDate").HasColumnType("datetime").IsOptional();
             Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsOptional();
             Property(x => x.Comment).HasColumnName(@"Comment").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);

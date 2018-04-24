@@ -200,6 +200,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgentController.cs" />
+    <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PhotoUpload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -317,6 +319,7 @@
     <Content Include="Views\User\EditBranch.cshtml" />
     <Content Include="Views\Log\GetLog.cshtml" />
     <Content Include="Views\User\_UserEditLog.cshtml" />
+    <Content Include="Views\Blob\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -341,6 +344,10 @@
     <ProjectReference Include="..\JazMax.BusinessLogic\JazMax.BusinessLogic.csproj">
       <Project>{95d501fc-6e06-4a01-9887-94ea243b86dc}</Project>
       <Name>JazMax.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.Core.Blob\JazMax.Core.Blob.csproj">
+      <Project>{0672ce51-2f3b-4b48-916a-e4b10edf202d}</Project>
+      <Name>JazMax.Core.Blob</Name>
     </ProjectReference>
     <ProjectReference Include="..\JazMax.Core.SystemHelpers\JazMax.Core.SystemHelpers.csproj">
       <Project>{82fa27cf-5676-4490-b12e-025dbe4603e8}</Project>
