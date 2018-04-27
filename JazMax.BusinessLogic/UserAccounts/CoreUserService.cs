@@ -297,16 +297,60 @@ namespace JazMax.BusinessLogic.UserAccounts
         }
         #endregion
 
+        public static void DeactiveCoreUser(int coreUserId, int LoggedInUserId, bool isActiveAction)
+        {
+            try
+            {
+                var user = db.CoreUsers.FirstOrDefault(x => x.CoreUserId == coreUserId);
+
+                if (user != null)
+
+                    if (isActiveAction)
+                    {
+                        ChangeLog.ChangeLogService.LogChange(coreUserId,
+                            ChangeLog.ChangeLogService.GetBoolString((bool)user.IsActive),
+                            ChangeLog.ChangeLogService.GetBoolString(false), LoggedInUserId,
+                            "CoreUser", "Account Status");
+
+                        user.IsActive = false;
+                    }
+                    else
+                    {
+                        ChangeLog.ChangeLogService.LogChange(coreUserId,
+                          ChangeLog.ChangeLogService.GetBoolString((bool)user.IsActive),
+                          ChangeLog.ChangeLogService.GetBoolString(true), LoggedInUserId,
+                          "CoreUser", "Account Status");
+                        user.IsActive = true;
+                    }
+
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                AuditLog.ErrorLog.LogError(e, 0);
+            }
+        }
+        
+
         #region Move Agent
-        public void MoveAgent(int CoreUserId, int BranchId)
+        public static void MoveAgent(int CoreUserId, int LoggedInUserId, int BranchId)
         {
             var Agent = db.CoreAgents.FirstOrDefault(x => x.CoreUserId == CoreUserId);
 
             if(Agent != null)
             {
+                ChangeLog.ChangeLogService.LogChange(CoreUserId,
+                           GetBranchNamne((int)Agent.CoreBranchId),
+                            GetBranchNamne(BranchId), LoggedInUserId,
+                            "CoreUser", "Branch");
                 Agent.CoreBranchId = BranchId;
             }
             db.SaveChanges();
+        }
+
+        private static string GetBranchNamne(int BranchId)
+        {
+            return db.CoreBranches.Where(x => x.BranchId == BranchId).FirstOrDefault().BranchName;
         }
         #endregion
 

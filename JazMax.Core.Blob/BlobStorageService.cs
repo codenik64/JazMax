@@ -17,8 +17,9 @@ namespace JazMax.Core.Blob
         private static JazMax.DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
         private static CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
 
-        public static void UploadToBlob (string BlobType, string FileType, HttpPostedFileBase file)
+        public static int UploadToBlob(string BlobType, string FileType, HttpPostedFileBase file)
         {
+            int blobId = 0;
             try
             {
                 var container = GetBlobContainer(BlobType);
@@ -28,13 +29,14 @@ namespace JazMax.Core.Blob
                     var fileName = Path.GetFileName(file.FileName);
                     var blockBlob = container.GetBlockBlobReference(fileName);
                     blockBlob.UploadFromStream(file.InputStream);
-                    SaveImage(blockBlob.Uri.AbsolutePath, BlobType, FileType, file.FileName, file.ContentType, file.ContentLength);
+                    blobId = SaveImage(blockBlob.Uri.AbsolutePath, BlobType, FileType, file.FileName, file.ContentType, file.ContentLength);
                 }
             }
             catch (Exception e)
             {
                 JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 1);
             }
+            return blobId;
         }
 
         private static int SaveImage(string url, string type, string fileType, string fileName, string fileExtension, int fileSize)

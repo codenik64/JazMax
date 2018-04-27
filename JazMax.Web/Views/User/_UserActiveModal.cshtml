@@ -1,0 +1,50 @@
+﻿@model JazMax.Web.ViewModel.UserAccountView.CoreUserDetails
+@using JazMax.Core.SystemHelpers
+
+@{
+    JazMaxIdentityHelper.UserName = User.Identity.Name;
+}
+
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idDeactivate">
+    @if (Model.isActive)
+    {
+        <span>Deactivate User</span>
+    }
+    else
+    {
+        <span>Activate User</span>
+    }
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="idDeactivate" tabindex="-1" role="dialog" aria-labelledby="idDeactivateLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="idDeactivateLabel">User Activation</h4>
+            </div>
+            <div class="modal-body">
+
+                @if (Model.isActive)
+                {
+                    <p>Are you sure you want to deactivate @Model.FirstName?</p>
+                                    <br />
+                                    <button type="button" class="btn btn-danger" onclick="DeactivateUser()">Deactivate</button>
+                }
+                else
+                {
+                    <p>Are you sure you want to activate @Model.FirstName?</p>
+                                        <br />
+                                        <button type="button" class="btn btn-success" onclick="ActivateUser()">Activate</button>
+                }
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

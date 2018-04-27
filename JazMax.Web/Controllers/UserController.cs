@@ -316,6 +316,46 @@ namespace JazMax.Web.Controllers
             return View(obj.GetUserDetails((int)id));
         }
 
+        public JsonResult Deactivate(string coreUserId)
+        {
+            try
+            {
+                JazMaxIdentityHelper.UserName = User.Identity.Name;
+                CoreUserService.DeactiveCoreUser(Convert.ToInt32(coreUserId), JazMaxIdentityHelper.GetCoreUserId(), true);
+                return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
+        public JsonResult Activate(string coreUserId)
+        {
+            try
+            {
+                JazMaxIdentityHelper.UserName = User.Identity.Name;
+                CoreUserService.DeactiveCoreUser(Convert.ToInt32(coreUserId), JazMaxIdentityHelper.GetCoreUserId(), false);
+                return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult MoveAgent(string coreUserId, string ddlDropBranch)
+        {
+            try
+            {
+                JazMaxIdentityHelper.UserName = User.Identity.Name;
+                CoreUserService.MoveAgent(Convert.ToInt32(coreUserId), JazMaxIdentityHelper.GetCoreUserId(), Convert.ToInt32(ddlDropBranch));
+                return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

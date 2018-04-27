@@ -320,6 +320,8 @@
     <Content Include="Views\Log\GetLog.cshtml" />
     <Content Include="Views\User\_UserEditLog.cshtml" />
     <Content Include="Views\Blob\Upload.cshtml" />
+    <Content Include="Views\User\_UserActiveModal.cshtml" />
+    <Content Include="Views\User\_UserMoveBranch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

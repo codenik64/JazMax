@@ -43,7 +43,16 @@ namespace JazMax.BusinessLogic.ChangeLog
                              ValueBefore = b.ValueBefore
                          }).OrderByDescending(x =>x.ChangeDate).ToList(); 
             return query;
-        }   
+        }
+        
+        public static string GetBoolString(bool value)
+        {
+            if(value)
+            {
+                return "Active";
+            }
+            return "Deactivated";
+        }
 
     }
 }

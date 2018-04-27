@@ -31,6 +31,16 @@ namespace JazMax.Core.SystemHelpers
             });
         }
 
+        public static IEnumerable<SelectListItem> GetAllBranches()
+        {
+            return dbcon.CoreBranches.Where(x => x.IsActive == true).Select(x => new SelectListItem
+            {
+                Text = x.BranchName,
+                Value = x.BranchId.ToString(),
+
+            });
+        }
+
         public static IEnumerable<SelectListItem> GetProvinceNotAssigned()
         {
             return dbcon.CoreProvinces.Where(x => x.IsActive == true && x.IsAssigned == false).Select(x => new SelectListItem
