@@ -43,7 +43,7 @@ namespace JazMax.Web.Controllers
             }
             catch (Exception e)
             {
-                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
+                //JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
                 teamLeaderId = 0;
             }
             return RedirectToAction("Index");

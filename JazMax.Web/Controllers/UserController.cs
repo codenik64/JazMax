@@ -105,7 +105,7 @@ namespace JazMax.Web.Controllers
             }
             catch (Exception e)
             {
-                BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
+              //  BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
                 return Json(new { Result = "Fail", Message = "Error, Could not save user. Please try again" }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -181,7 +181,7 @@ namespace JazMax.Web.Controllers
             }
             catch (Exception e)
             {
-                BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
+               // BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
                 return Json(new { Result = "Fail", Message = "Error, Could not save user. Please try again" }, JsonRequestBehavior.AllowGet);
             }
         }
@@ -254,7 +254,7 @@ namespace JazMax.Web.Controllers
             }
             catch (Exception e)
             {
-                BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
+                //BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
                 return Json(new { Result = "Fail", Message = "Error, Could not save Agent. Please try again" }, JsonRequestBehavior.AllowGet);
             }
         }
