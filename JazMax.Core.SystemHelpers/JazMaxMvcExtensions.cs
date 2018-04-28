@@ -20,5 +20,7 @@ namespace JazMax.Core.SystemHelpers
             return htmlHelper.ActionLink(linkText, "Details", "User", routeValues, null);
         }
 
+       
+
     }
 }

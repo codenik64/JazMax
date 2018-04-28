@@ -54,6 +54,14 @@ namespace JazMax.DataAccess
         System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; } // CoreUserType
         System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; } // MessengerCoreLog
         System.Data.Entity.DbSet<MessengerType> MessengerTypes { get; set; } // MessengerType
+        System.Data.Entity.DbSet<PropertyFeature> PropertyFeatures { get; set; } // PropertyFeature
+        System.Data.Entity.DbSet<PropertyImage> PropertyImages { get; set; } // PropertyImages
+        System.Data.Entity.DbSet<PropertyListing> PropertyListings { get; set; } // PropertyListing
+        System.Data.Entity.DbSet<PropertyListingAgent> PropertyListingAgents { get; set; } // PropertyListingAgents
+        System.Data.Entity.DbSet<PropertyListingDetail> PropertyListingDetails { get; set; } // PropertyListingDetail
+        System.Data.Entity.DbSet<PropertyType> PropertyTypes { get; set; } // PropertyType
+        System.Data.Entity.DbSet<ProprtyListingFeature> ProprtyListingFeatures { get; set; } // ProprtyListingFeatures
+        System.Data.Entity.DbSet<ProprtyListingYoutubeLibrary> ProprtyListingYoutubeLibraries { get; set; } // ProprtyListingYoutubeLibrary
         System.Data.Entity.DbSet<SystemEditLog> SystemEditLogs { get; set; } // SystemEditLog
         System.Data.Entity.DbSet<SystemErrorLog> SystemErrorLogs { get; set; } // SystemErrorLog
         System.Data.Entity.DbSet<SystemSettingsData> SystemSettingsDatas { get; set; } // SystemSettingsData
@@ -104,6 +112,14 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; } // CoreUserType
         public System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; } // MessengerCoreLog
         public System.Data.Entity.DbSet<MessengerType> MessengerTypes { get; set; } // MessengerType
+        public System.Data.Entity.DbSet<PropertyFeature> PropertyFeatures { get; set; } // PropertyFeature
+        public System.Data.Entity.DbSet<PropertyImage> PropertyImages { get; set; } // PropertyImages
+        public System.Data.Entity.DbSet<PropertyListing> PropertyListings { get; set; } // PropertyListing
+        public System.Data.Entity.DbSet<PropertyListingAgent> PropertyListingAgents { get; set; } // PropertyListingAgents
+        public System.Data.Entity.DbSet<PropertyListingDetail> PropertyListingDetails { get; set; } // PropertyListingDetail
+        public System.Data.Entity.DbSet<PropertyType> PropertyTypes { get; set; } // PropertyType
+        public System.Data.Entity.DbSet<ProprtyListingFeature> ProprtyListingFeatures { get; set; } // ProprtyListingFeatures
+        public System.Data.Entity.DbSet<ProprtyListingYoutubeLibrary> ProprtyListingYoutubeLibraries { get; set; } // ProprtyListingYoutubeLibrary
         public System.Data.Entity.DbSet<SystemEditLog> SystemEditLogs { get; set; } // SystemEditLog
         public System.Data.Entity.DbSet<SystemErrorLog> SystemErrorLogs { get; set; } // SystemErrorLog
         public System.Data.Entity.DbSet<SystemSettingsData> SystemSettingsDatas { get; set; } // SystemSettingsData
@@ -176,6 +192,14 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new CoreUserTypeConfiguration());
             modelBuilder.Configurations.Add(new MessengerCoreLogConfiguration());
             modelBuilder.Configurations.Add(new MessengerTypeConfiguration());
+            modelBuilder.Configurations.Add(new PropertyFeatureConfiguration());
+            modelBuilder.Configurations.Add(new PropertyImageConfiguration());
+            modelBuilder.Configurations.Add(new PropertyListingConfiguration());
+            modelBuilder.Configurations.Add(new PropertyListingAgentConfiguration());
+            modelBuilder.Configurations.Add(new PropertyListingDetailConfiguration());
+            modelBuilder.Configurations.Add(new PropertyTypeConfiguration());
+            modelBuilder.Configurations.Add(new ProprtyListingFeatureConfiguration());
+            modelBuilder.Configurations.Add(new ProprtyListingYoutubeLibraryConfiguration());
             modelBuilder.Configurations.Add(new SystemEditLogConfiguration());
             modelBuilder.Configurations.Add(new SystemErrorLogConfiguration());
             modelBuilder.Configurations.Add(new SystemSettingsDataConfiguration());
@@ -203,6 +227,14 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new CoreUserTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new MessengerCoreLogConfiguration(schema));
             modelBuilder.Configurations.Add(new MessengerTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new PropertyFeatureConfiguration(schema));
+            modelBuilder.Configurations.Add(new PropertyImageConfiguration(schema));
+            modelBuilder.Configurations.Add(new PropertyListingConfiguration(schema));
+            modelBuilder.Configurations.Add(new PropertyListingAgentConfiguration(schema));
+            modelBuilder.Configurations.Add(new PropertyListingDetailConfiguration(schema));
+            modelBuilder.Configurations.Add(new PropertyTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new ProprtyListingFeatureConfiguration(schema));
+            modelBuilder.Configurations.Add(new ProprtyListingYoutubeLibraryConfiguration(schema));
             modelBuilder.Configurations.Add(new SystemEditLogConfiguration(schema));
             modelBuilder.Configurations.Add(new SystemErrorLogConfiguration(schema));
             modelBuilder.Configurations.Add(new SystemSettingsDataConfiguration(schema));
@@ -287,6 +319,14 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; }
         public System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; }
         public System.Data.Entity.DbSet<MessengerType> MessengerTypes { get; set; }
+        public System.Data.Entity.DbSet<PropertyFeature> PropertyFeatures { get; set; }
+        public System.Data.Entity.DbSet<PropertyImage> PropertyImages { get; set; }
+        public System.Data.Entity.DbSet<PropertyListing> PropertyListings { get; set; }
+        public System.Data.Entity.DbSet<PropertyListingAgent> PropertyListingAgents { get; set; }
+        public System.Data.Entity.DbSet<PropertyListingDetail> PropertyListingDetails { get; set; }
+        public System.Data.Entity.DbSet<PropertyType> PropertyTypes { get; set; }
+        public System.Data.Entity.DbSet<ProprtyListingFeature> ProprtyListingFeatures { get; set; }
+        public System.Data.Entity.DbSet<ProprtyListingYoutubeLibrary> ProprtyListingYoutubeLibraries { get; set; }
         public System.Data.Entity.DbSet<SystemEditLog> SystemEditLogs { get; set; }
         public System.Data.Entity.DbSet<SystemErrorLog> SystemErrorLogs { get; set; }
         public System.Data.Entity.DbSet<SystemSettingsData> SystemSettingsDatas { get; set; }
@@ -313,6 +353,14 @@ namespace JazMax.DataAccess
             CoreUserTypes = new FakeDbSet<CoreUserType>("CoreUserTypeId");
             MessengerCoreLogs = new FakeDbSet<MessengerCoreLog>("MessengerCoreLogId");
             MessengerTypes = new FakeDbSet<MessengerType>("MessengerTypeId");
+            PropertyFeatures = new FakeDbSet<PropertyFeature>("PropertyFeatureId", "FeatureName", "IsFeatureActive");
+            PropertyImages = new FakeDbSet<PropertyImage>("PropertyListingId", "BlobId", "IsActive");
+            PropertyListings = new FakeDbSet<PropertyListing>("PropertyListingId", "PropertyTypeId", "BranchId", "ProvinceId", "FriendlyName", "Price", "IsPricePerAMonth", "IsPriceCash", "IsPricePerAMeter", "ListingDate", "LastUpdate", "ProprtyDesciption", "IsListingActive");
+            PropertyListingAgents = new FakeDbSet<PropertyListingAgent>("PropertyListingAgentsId");
+            PropertyListingDetails = new FakeDbSet<PropertyListingDetail>("PropertyListingDetailId", "PropertyListingId");
+            PropertyTypes = new FakeDbSet<PropertyType>("PropertyTypeId", "TypeName", "IsActive");
+            ProprtyListingFeatures = new FakeDbSet<ProprtyListingFeature>("ProprtyListingFeaturesId", "PropertyFeatureId", "PropertyListingId", "IsFeatureActive");
+            ProprtyListingYoutubeLibraries = new FakeDbSet<ProprtyListingYoutubeLibrary>("ProprtyListingYoutubeLibraryId", "PrfoprtyListingId", "YoutubeVideoLink", "IsVideoActive");
             SystemEditLogs = new FakeDbSet<SystemEditLog>("SystemEditLogId");
             SystemErrorLogs = new FakeDbSet<SystemErrorLog>("SystemErrorLogId");
             SystemSettingsDatas = new FakeDbSet<SystemSettingsData>("SystemSettingsDataId");
@@ -853,6 +901,95 @@ namespace JazMax.DataAccess
         public bool IsActive { get; set; } // IsActive
     }
 
+    // PropertyFeature
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyFeature
+    {
+        public int PropertyFeatureId { get; set; } // PropertyFeatureId (Primary key)
+        public string FeatureName { get; set; } // FeatureName (Primary key) (length: 255)
+        public bool IsFeatureActive { get; set; } // IsFeatureActive (Primary key)
+    }
+
+    // PropertyImages
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyImage
+    {
+        public int PropertyListingId { get; set; } // PropertyListingId (Primary key)
+        public int BlobId { get; set; } // BlobId (Primary key)
+        public bool IsActive { get; set; } // IsActive (Primary key)
+    }
+
+    // PropertyListing
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyListing
+    {
+        public int PropertyListingId { get; set; } // PropertyListingId (Primary key)
+        public int PropertyTypeId { get; set; } // PropertyTypeId (Primary key)
+        public int BranchId { get; set; } // BranchId (Primary key)
+        public int ProvinceId { get; set; } // ProvinceId (Primary key)
+        public string FriendlyName { get; set; } // FriendlyName (Primary key) (length: 255)
+        public decimal Price { get; set; } // Price (Primary key)
+        public bool IsPricePerAMonth { get; set; } // IsPricePerAMonth (Primary key)
+        public bool IsPriceCash { get; set; } // IsPriceCash (Primary key)
+        public bool IsPricePerAMeter { get; set; } // IsPricePerAMeter (Primary key)
+        public System.DateTime ListingDate { get; set; } // ListingDate (Primary key)
+        public System.DateTime LastUpdate { get; set; } // LastUpdate (Primary key)
+        public string ProprtyDesciption { get; set; } // ProprtyDesciption (Primary key)
+        public bool IsListingActive { get; set; } // IsListingActive (Primary key)
+    }
+
+    // PropertyListingAgents
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyListingAgent
+    {
+        public int PropertyListingAgentsId { get; set; } // PropertyListingAgentsId (Primary key)
+        public int PropertyListingId { get; set; } // PropertyListingId
+        public int AgentId { get; set; } // AgentId
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // PropertyListingDetail
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyListingDetail
+    {
+        public int PropertyListingDetailId { get; set; } // PropertyListingDetailId (Primary key)
+        public int PropertyListingId { get; set; } // PropertyListingId (Primary key)
+        public decimal? NumberOfBathRooms { get; set; } // NumberOfBathRooms
+        public decimal? NumberOfBedrooms { get; set; } // NumberOfBedrooms
+        public int? NumberOfGarages { get; set; } // NumberOfGarages
+        public int? NumberOfSquareMeters { get; set; } // NumberOfSquareMeters
+        public decimal? RatesAndTaxes { get; set; } // RatesAndTaxes
+    }
+
+    // PropertyType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyType
+    {
+        public int PropertyTypeId { get; set; } // PropertyTypeId (Primary key)
+        public string TypeName { get; set; } // TypeName (Primary key) (length: 200)
+        public bool IsActive { get; set; } // IsActive (Primary key)
+    }
+
+    // ProprtyListingFeatures
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class ProprtyListingFeature
+    {
+        public int ProprtyListingFeaturesId { get; set; } // ProprtyListingFeaturesId (Primary key)
+        public int PropertyFeatureId { get; set; } // PropertyFeatureId (Primary key)
+        public int PropertyListingId { get; set; } // PropertyListingId (Primary key)
+        public bool IsFeatureActive { get; set; } // IsFeatureActive (Primary key)
+    }
+
+    // ProprtyListingYoutubeLibrary
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class ProprtyListingYoutubeLibrary
+    {
+        public int ProprtyListingYoutubeLibraryId { get; set; } // ProprtyListingYoutubeLibraryId (Primary key)
+        public int PrfoprtyListingId { get; set; } // PrfoprtyListingId (Primary key)
+        public string YoutubeVideoLink { get; set; } // YoutubeVideoLink (Primary key)
+        public bool IsVideoActive { get; set; } // IsVideoActive (Primary key)
+    }
+
     // SystemEditLog
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class SystemEditLog
@@ -1336,6 +1473,183 @@ namespace JazMax.DataAccess
             Property(x => x.MessengerTypeId).HasColumnName(@"MessengerTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
             Property(x => x.MessageType).HasColumnName(@"MessageType").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(55);
             Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // PropertyFeature
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyFeatureConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<PropertyFeature>
+    {
+        public PropertyFeatureConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public PropertyFeatureConfiguration(string schema)
+        {
+            ToTable("PropertyFeature", schema);
+            HasKey(x => new { x.PropertyFeatureId, x.FeatureName, x.IsFeatureActive });
+
+            Property(x => x.PropertyFeatureId).HasColumnName(@"PropertyFeatureId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.FeatureName).HasColumnName(@"FeatureName").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsFeatureActive).HasColumnName(@"IsFeatureActive").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // PropertyImages
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyImageConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<PropertyImage>
+    {
+        public PropertyImageConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public PropertyImageConfiguration(string schema)
+        {
+            ToTable("PropertyImages", schema);
+            HasKey(x => new { x.PropertyListingId, x.BlobId, x.IsActive });
+
+            Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.BlobId).HasColumnName(@"BlobId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // PropertyListing
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyListingConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<PropertyListing>
+    {
+        public PropertyListingConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public PropertyListingConfiguration(string schema)
+        {
+            ToTable("PropertyListing", schema);
+            HasKey(x => new { x.PropertyListingId, x.PropertyTypeId, x.BranchId, x.ProvinceId, x.FriendlyName, x.Price, x.IsPricePerAMonth, x.IsPriceCash, x.IsPricePerAMeter, x.ListingDate, x.LastUpdate, x.ProprtyDesciption, x.IsListingActive });
+
+            Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.PropertyTypeId).HasColumnName(@"PropertyTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.BranchId).HasColumnName(@"BranchId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.ProvinceId).HasColumnName(@"ProvinceId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.FriendlyName).HasColumnName(@"FriendlyName").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal").IsRequired().HasPrecision(18,0).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsPricePerAMonth).HasColumnName(@"IsPricePerAMonth").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsPriceCash).HasColumnName(@"IsPriceCash").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsPricePerAMeter).HasColumnName(@"IsPricePerAMeter").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.ListingDate).HasColumnName(@"ListingDate").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.LastUpdate).HasColumnName(@"LastUpdate").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.ProprtyDesciption).HasColumnName(@"ProprtyDesciption").HasColumnType("nvarchar(max)").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsListingActive).HasColumnName(@"IsListingActive").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // PropertyListingAgents
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyListingAgentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<PropertyListingAgent>
+    {
+        public PropertyListingAgentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public PropertyListingAgentConfiguration(string schema)
+        {
+            ToTable("PropertyListingAgents", schema);
+            HasKey(x => x.PropertyListingAgentsId);
+
+            Property(x => x.PropertyListingAgentsId).HasColumnName(@"PropertyListingAgentsId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingId").HasColumnType("int").IsRequired();
+            Property(x => x.AgentId).HasColumnName(@"AgentId").HasColumnType("int").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // PropertyListingDetail
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyListingDetailConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<PropertyListingDetail>
+    {
+        public PropertyListingDetailConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public PropertyListingDetailConfiguration(string schema)
+        {
+            ToTable("PropertyListingDetail", schema);
+            HasKey(x => new { x.PropertyListingDetailId, x.PropertyListingId });
+
+            Property(x => x.PropertyListingDetailId).HasColumnName(@"PropertyListingDetailId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NumberOfBathRooms).HasColumnName(@"NumberOfBathRooms").HasColumnType("decimal").IsOptional().HasPrecision(18,0);
+            Property(x => x.NumberOfBedrooms).HasColumnName(@"NumberOfBedrooms").HasColumnType("decimal").IsOptional().HasPrecision(18,0);
+            Property(x => x.NumberOfGarages).HasColumnName(@"NumberOfGarages").HasColumnType("int").IsOptional();
+            Property(x => x.NumberOfSquareMeters).HasColumnName(@"NumberOfSquareMeters").HasColumnType("int").IsOptional();
+            Property(x => x.RatesAndTaxes).HasColumnName(@"RatesAndTaxes").HasColumnType("decimal").IsOptional().HasPrecision(18,0);
+        }
+    }
+
+    // PropertyType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<PropertyType>
+    {
+        public PropertyTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public PropertyTypeConfiguration(string schema)
+        {
+            ToTable("PropertyType", schema);
+            HasKey(x => new { x.PropertyTypeId, x.TypeName, x.IsActive });
+
+            Property(x => x.PropertyTypeId).HasColumnName(@"PropertyTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TypeName).HasColumnName(@"TypeName").HasColumnType("nvarchar").IsRequired().HasMaxLength(200).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // ProprtyListingFeatures
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class ProprtyListingFeatureConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ProprtyListingFeature>
+    {
+        public ProprtyListingFeatureConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ProprtyListingFeatureConfiguration(string schema)
+        {
+            ToTable("ProprtyListingFeatures", schema);
+            HasKey(x => new { x.ProprtyListingFeaturesId, x.PropertyFeatureId, x.PropertyListingId, x.IsFeatureActive });
+
+            Property(x => x.ProprtyListingFeaturesId).HasColumnName(@"ProprtyListingFeaturesId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.PropertyFeatureId).HasColumnName(@"PropertyFeatureId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsFeatureActive).HasColumnName(@"IsFeatureActive").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // ProprtyListingYoutubeLibrary
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class ProprtyListingYoutubeLibraryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<ProprtyListingYoutubeLibrary>
+    {
+        public ProprtyListingYoutubeLibraryConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public ProprtyListingYoutubeLibraryConfiguration(string schema)
+        {
+            ToTable("ProprtyListingYoutubeLibrary", schema);
+            HasKey(x => new { x.ProprtyListingYoutubeLibraryId, x.PrfoprtyListingId, x.YoutubeVideoLink, x.IsVideoActive });
+
+            Property(x => x.ProprtyListingYoutubeLibraryId).HasColumnName(@"ProprtyListingYoutubeLibraryId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.PrfoprtyListingId).HasColumnName(@"PrfoprtyListingId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.YoutubeVideoLink).HasColumnName(@"YoutubeVideoLink").HasColumnType("nvarchar(max)").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsVideoActive).HasColumnName(@"IsVideoActive").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
         }
     }
 

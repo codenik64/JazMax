@@ -23,9 +23,6 @@
                 
                     <p>Move @Model.FirstName from @Model.UserBranchDetails.BranchName to 
                 
-                      
-                @*@Html.DropDownList("ddlDropBranch", )*@
-
                         @Html.DropDownList("ddlDropBranch", @JazMaxDropDownList.GetAllBranches(), new { @class = "foo" })
                     </p>
                     <br />

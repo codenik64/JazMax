@@ -1,0 +1,74 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.PropertyManagement.PropertyFeatureView>
+
+
+<br />
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#idFeature">
+    Add New
+</button>
+<br />
+
+<!-- Modal -->
+<div class="modal fade" id="idFeature" tabindex="-1" role="dialog" aria-labelledby="idFeatureLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="idFeatureLabel">Add New Property Feature</h4>
+            </div>
+            <div class="modal-body">
+
+                Property Feature:  @Html.Editor("txtFeature", new { htmlAttributes = new { @class = "form-control" } })
+
+                <br />
+                <button type="button" class="btn btn-success" onclick="CreateFeature()">Create</button>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="panel-group">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Property Features</div>
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <th>
+                            Feature
+                        </th>
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FeatureName)
+                        </td>
+                        <td>
+                            @if (item.IsFeatureActive)
+                            { <span class="glyphicon glyphicon-ok"></span> }
+                            else
+                            { <span class="glyphicon glyphicon-remove"></span> }
+                        </td>
+
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</div>

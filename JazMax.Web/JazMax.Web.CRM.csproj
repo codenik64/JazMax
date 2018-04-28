@@ -198,6 +198,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Property\Controllers\PropertyFeatureController.cs" />
+    <Compile Include="Areas\Property\Controllers\PropertyListingController.cs" />
+    <Compile Include="Areas\Property\Controllers\PropertyTypeController.cs" />
+    <Compile Include="Areas\Property\PropertyAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgentController.cs" />
     <Compile Include="Controllers\BlobController.cs" />
@@ -226,6 +230,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\JazMaxStyle.css" />
     <Content Include="Content\JazMaxTable.css" />
+    <Content Include="Content\loading.gif" />
     <Content Include="css\sb-admin.css" />
     <Content Include="css\sb-admin.min.css" />
     <Content Include="favicon.ico" />
@@ -239,11 +244,21 @@
     </Content>
     <Content Include="App_Code\JazMaxHelper.cshtml" />
     <Content Include="JazMax.sitemap" />
+    <Content Include="Areas\Property\Views\web.config" />
+    <Content Include="Areas\Property\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Property\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Property\Views\PropertyType\Index.cshtml" />
+    <Content Include="Areas\Property\Views\PropertyType\Details.cshtml" />
+    <Content Include="Areas\Property\Views\PropertyFeature\Index.cshtml" />
+    <Content Include="Areas\Property\Views\PropertyFeature\_List.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\JazMaxMethods.js" />
     <Content Include="Scripts\JazMaxToastr.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -325,6 +340,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Property\Views\PropertyListing\" />
     <Folder Include="Views\PA\" />
   </ItemGroup>
   <ItemGroup>

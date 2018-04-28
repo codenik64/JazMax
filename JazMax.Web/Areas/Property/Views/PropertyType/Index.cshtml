@@ -1,0 +1,145 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.PropertyManagement.PropertyTypeView>
+
+@{
+    ViewBag.Title = "Property Types";
+}
+
+<br />
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#idType">
+    Add New Type
+</button>
+<br />
+
+<!-- Modal -->
+<div class="modal fade" id="idType" tabindex="-1" role="dialog" aria-labelledby="idTypeLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="idTypeLabel">Add New Property Type</h4>
+            </div>
+            <div class="modal-body">
+
+                Property Type:  @Html.Editor("txtTypeName", new { htmlAttributes = new { @class = "form-control" } })
+
+                <br />
+                <button type="button" class="btn btn-success" onclick="CreateType()">Create</button>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div>
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Property Types</div>
+            <div class="panel-body">
+              
+                <table id="tblType" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                               Property Type
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                           
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TypeName)
+                            </td>
+                            <td>
+                                @if (item.isActive)
+                                { <span class="glyphicon glyphicon-ok"></span> }
+                                else
+                                { <span class="glyphicon glyphicon-remove"></span> }
+                            </td>
+                            
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#tblType').DataTable();
+</script>
+
+<script>
+    function CreateType() {
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data:
+                {
+                    txtTypeName: $('#txtTypeName').val()
+                },
+                url: '@Url.Action("CreateType", "PropertyType", new { Area = "Property" })',
+                success: function (da) {
+                    if (da.Result == "Success") {
+
+                        document.location.reload(true)
+                    }
+                    else {
+   
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    debugger;
+                    alert('Error');
+                }
+            });
+        
+      
+    }
+</script>
+
+<style>
+    .modal-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+    }
+</style>
+
+<!-- Modal -->
+<div class="modal fade" id="idDetail" tabindex="-1" role="dialog" aria-labelledby="idDetailLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="idDetailLabel">Details</h4>
+            </div>
+            <div class="modal-body">
+
+               <div id="divDetails">
+
+               </div>
+
+                <br />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

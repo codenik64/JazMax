@@ -70,6 +70,10 @@
     <Compile Include="ChangeLog\EditLogView.cs" />
     <Compile Include="Messenger\Email.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyManagement\PropertyFeatureView.cs" />
+    <Compile Include="PropertyManagement\PropertyListingAgentsView.cs" />
+    <Compile Include="PropertyManagement\PropertyListingView.cs" />
+    <Compile Include="PropertyManagement\PropertyTypeView.cs" />
     <Compile Include="UserAccountView\AgentDetailsView.cs" />
     <Compile Include="UserAccountView\BranchDetailsView.cs" />
     <Compile Include="UserAccountView\CaptureAgent.cs" />

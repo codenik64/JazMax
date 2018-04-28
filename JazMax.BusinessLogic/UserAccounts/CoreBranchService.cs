@@ -11,6 +11,7 @@ namespace JazMax.BusinessLogic.UserAccounts
     {
         private static JazMax.DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
 
+
         public List<CoreBranchView> GetAll()
         {
             return ConvertListModelToView(db.CoreBranches.Where(x => x.IsActive == true).ToList());
@@ -153,12 +154,16 @@ namespace JazMax.BusinessLogic.UserAccounts
         {
             try
             {
+            
+
                 var data = (from a in db.CoreBranches
                             where model.BranchId == a.BranchId
                             select a).FirstOrDefault();
 
 
-            
+                ChangeLog.ChangeLogService.tableName = "CoreBranch";
+                ChangeLog.ChangeLogService.tableKey = data.BranchId;
+                ChangeLog.ChangeLogService.LoggedInUserId = CoreSystemUserId;
 
                 if (model.CoreTeamLeaderId == null)
                 {
@@ -166,19 +171,19 @@ namespace JazMax.BusinessLogic.UserAccounts
                 }
                 else
                 {
-                    ChangeLog.ChangeLogService.LogChange(data.BranchId, data.CoreTeamLeaderId.ToString(), model.CoreTeamLeaderId.ToString(), CoreSystemUserId, "CoreBranch", "CoreTeamLeaderId");
+                    ChangeLog.ChangeLogService.LogChange(data.CoreTeamLeaderId.ToString(), model.CoreTeamLeaderId.ToString(), "CoreTeamLeaderId");
                     data.CoreTeamLeaderId = model.CoreTeamLeaderId;
 
                 }
 
                 #region Edit Log
-                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.BranchName, model.BranchName, CoreSystemUserId, "CoreBranch", "BranchName");
-                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.City, model.City, CoreSystemUserId, "CoreBranch", "City");
-                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.EmailAddress, model.EmailAddress, CoreSystemUserId, "CoreBranch", "EmailAddress");
-                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.IsActive.ToString(), model.IsActive.ToString(), CoreSystemUserId, "CoreBranch", "IsActive");
-                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.Phone, model.Phone, CoreSystemUserId, "CoreBranch", "Phone");
-                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.ProvinceId.ToString(), model.ProvinceId.ToString(), CoreSystemUserId, "CoreBranch", "ProvinceId");
-                ChangeLog.ChangeLogService.LogChange(data.BranchId, data.StreetAddress, model.StreetAddress, CoreSystemUserId, "CoreBranch", "StreetAddress");
+                ChangeLog.ChangeLogService.LogChange(data.BranchName, model.BranchName, "BranchName");
+                ChangeLog.ChangeLogService.LogChange(data.City, model.City, "City");
+                ChangeLog.ChangeLogService.LogChange(data.EmailAddress, model.EmailAddress, "EmailAddress");
+                ChangeLog.ChangeLogService.LogChange(data.IsActive.ToString(), model.IsActive.ToString(), "IsActive");
+                ChangeLog.ChangeLogService.LogChange(data.Phone, model.Phone, "Phone");
+                ChangeLog.ChangeLogService.LogChange(data.ProvinceId.ToString(), model.ProvinceId.ToString(), "ProvinceId");
+                ChangeLog.ChangeLogService.LogChange(data.StreetAddress, model.StreetAddress, "StreetAddress");
                 #endregion
 
                 data.BranchName = model.BranchName;

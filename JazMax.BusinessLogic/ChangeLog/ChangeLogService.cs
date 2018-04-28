@@ -8,16 +8,20 @@ namespace JazMax.BusinessLogic.ChangeLog
 {
     public static class ChangeLogService
     {
+        public static string tableName { get; set; }
+        public static int tableKey { get; set; }
+        public static int LoggedInUserId { get; set; }
+
         private static JazMax.DataAccess.JazMaxDBProdContext db = new JazMax.DataAccess.JazMaxDBProdContext();
 
-        public static void LogChange(int tableKey, string beforeValue, string afterValue, int coreUserId, string tableName, string tableColumn)
+        public static void LogChange(string beforeValue, string afterValue, string tableColumn)
         {
             try
             {
                 if (beforeValue.ToLower() != afterValue.ToLower())
                 {
-                    db.SpSaveEditLog(tableName, tableColumn, tableKey, beforeValue, afterValue, coreUserId, null);
-                }   
+                    db.SpSaveEditLog(tableName, tableColumn, tableKey, beforeValue, afterValue, LoggedInUserId, null);
+                }
             }
             catch (Exception e)
             {
@@ -41,13 +45,13 @@ namespace JazMax.BusinessLogic.ChangeLog
                              TableName = b.TableName,
                              ValueAfter = b.ValueAfter,
                              ValueBefore = b.ValueBefore
-                         }).OrderByDescending(x =>x.ChangeDate).ToList(); 
+                         }).OrderByDescending(x => x.ChangeDate).ToList();
             return query;
         }
-        
+
         public static string GetBoolString(bool value)
         {
-            if(value)
+            if (value)
             {
                 return "Active";
             }

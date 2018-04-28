@@ -1,7 +1,4 @@
-﻿@{
-    Layout = null;
-}
-
+﻿
 @helper GenderHelper(string genderId)
 {
 if (genderId == "1")
@@ -14,3 +11,14 @@ else
 }
 }
 
+@helper IsActiveToString(string isActive)
+{
+if (isActive == "true")
+{
+        <span>Active</span>
+}
+else
+{
+        <span>Deactivated</span>
+}
+}

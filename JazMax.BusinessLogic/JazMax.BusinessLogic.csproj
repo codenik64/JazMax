@@ -45,6 +45,9 @@
     <Compile Include="ChangeLog\ChangeLogService.cs" />
     <Compile Include="Messenger\JazMaxMail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyManagement\PropertyFeatureService.cs" />
+    <Compile Include="PropertyManagement\PropertyListingCoreService.cs" />
+    <Compile Include="PropertyManagement\PropertyTypeService.cs" />
     <Compile Include="UserAccounts\AgentService.cs" />
     <Compile Include="UserAccounts\CoreBranchService.cs" />
     <Compile Include="UserAccounts\CoreProvinceService.cs" />

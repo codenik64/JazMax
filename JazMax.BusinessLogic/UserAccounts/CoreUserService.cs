@@ -276,12 +276,16 @@ namespace JazMax.BusinessLogic.UserAccounts
                 var user = db.CoreUsers.FirstOrDefault(x => x.CoreUserId == coreUserId);
                 if (user != null)
                 {
+                    ChangeLog.ChangeLogService.tableName = "CoreUser";
+                    ChangeLog.ChangeLogService.tableKey = user.CoreUserId;
+                    ChangeLog.ChangeLogService.LoggedInUserId = CoreSystemUserId;
+
                     #region Edit Logging
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.FirstName, model.FirstName, CoreSystemUserId, "CoreUser", "First Name");
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.LastName, model.LastName, CoreSystemUserId, "CoreUser", "Last Name");
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.MiddleName, model.MiddleName, CoreSystemUserId, "CoreUser", "Middle Name");
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.PhoneNumber, model.PhoneNumber, CoreSystemUserId, "CoreUser", "Phone Number");
-                    ChangeLog.ChangeLogService.LogChange(user.CoreUserId, user.IdNumber, model.IDNumber, CoreSystemUserId, "CoreUser", "ID Number");
+                    ChangeLog.ChangeLogService.LogChange(user.FirstName, model.FirstName, "First Name");
+                    ChangeLog.ChangeLogService.LogChange(user.LastName, model.LastName, "Last Name");
+                    ChangeLog.ChangeLogService.LogChange(user.MiddleName, model.MiddleName, "Middle Name");
+                    ChangeLog.ChangeLogService.LogChange(user.PhoneNumber, model.PhoneNumber, "Phone Number");
+                    ChangeLog.ChangeLogService.LogChange(user.IdNumber, model.IDNumber, "ID Number");
                     #endregion
 
                     user.FirstName = model.FirstName;
@@ -303,23 +307,21 @@ namespace JazMax.BusinessLogic.UserAccounts
             {
                 var user = db.CoreUsers.FirstOrDefault(x => x.CoreUserId == coreUserId);
 
+                ChangeLog.ChangeLogService.tableName = "CoreUser";
+                ChangeLog.ChangeLogService.tableKey = user.CoreUserId;
+                ChangeLog.ChangeLogService.LoggedInUserId = LoggedInUserId;
+
                 if (user != null)
 
                     if (isActiveAction)
                     {
-                        ChangeLog.ChangeLogService.LogChange(coreUserId,
-                            ChangeLog.ChangeLogService.GetBoolString((bool)user.IsActive),
-                            ChangeLog.ChangeLogService.GetBoolString(false), LoggedInUserId,
-                            "CoreUser", "Account Status");
+                        ChangeLog.ChangeLogService.LogChange(ChangeLog.ChangeLogService.GetBoolString((bool)user.IsActive), ChangeLog.ChangeLogService.GetBoolString(false), "Account Status");
 
                         user.IsActive = false;
                     }
                     else
                     {
-                        ChangeLog.ChangeLogService.LogChange(coreUserId,
-                          ChangeLog.ChangeLogService.GetBoolString((bool)user.IsActive),
-                          ChangeLog.ChangeLogService.GetBoolString(true), LoggedInUserId,
-                          "CoreUser", "Account Status");
+                        ChangeLog.ChangeLogService.LogChange(ChangeLog.ChangeLogService.GetBoolString((bool)user.IsActive),ChangeLog.ChangeLogService.GetBoolString(true), "Account Status");
                         user.IsActive = true;
                     }
 
@@ -339,10 +341,13 @@ namespace JazMax.BusinessLogic.UserAccounts
 
             if(Agent != null)
             {
-                ChangeLog.ChangeLogService.LogChange(CoreUserId,
+                ChangeLog.ChangeLogService.tableName = "CoreUser";
+                ChangeLog.ChangeLogService.tableKey = CoreUserId;
+                ChangeLog.ChangeLogService.LoggedInUserId = LoggedInUserId;
+
+                ChangeLog.ChangeLogService.LogChange(
                            GetBranchNamne((int)Agent.CoreBranchId),
-                            GetBranchNamne(BranchId), LoggedInUserId,
-                            "CoreUser", "Branch");
+                            GetBranchNamne(BranchId), "Branch");
                 Agent.CoreBranchId = BranchId;
             }
             db.SaveChanges();
