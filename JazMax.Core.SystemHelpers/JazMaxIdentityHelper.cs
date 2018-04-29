@@ -135,7 +135,7 @@ namespace JazMax.Core.SystemHelpers
         #region Agent
         public static AgentInformation GetAgentInformation(string userName)
         {
-            return db.VwGetTeamLeadersInformations.Where(x => x.EmailAddress == userName).Select(x => new AgentInformation
+            return db.VwGetAgentsInformations.Where(x => x.EmailAddress == userName).Select(x => new AgentInformation
             {
                 BranchName =  x.BranchName,
                 DisplayName = x.FirstName + " " + x.LastName,

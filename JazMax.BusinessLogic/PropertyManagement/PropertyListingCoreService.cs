@@ -124,7 +124,6 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
         }
 
-
         public void MainInsert(NewListingView model)
         {
             int Id = CaptureListing(model.PropertyListingView);
