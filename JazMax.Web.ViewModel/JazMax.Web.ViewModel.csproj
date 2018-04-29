@@ -70,9 +70,14 @@
     <Compile Include="ChangeLog\EditLogView.cs" />
     <Compile Include="Messenger\Email.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyManagement\CaptureListing\NewListingView.cs" />
     <Compile Include="PropertyManagement\PropertyFeatureView.cs" />
+    <Compile Include="PropertyManagement\PropertyImagesView.cs" />
     <Compile Include="PropertyManagement\PropertyListingAgentsView.cs" />
+    <Compile Include="PropertyManagement\PropertyListingDetailView.cs" />
+    <Compile Include="PropertyManagement\PropertyListingFeature.cs" />
     <Compile Include="PropertyManagement\PropertyListingView.cs" />
+    <Compile Include="PropertyManagement\PropertyListingYoutubeView.cs" />
     <Compile Include="PropertyManagement\PropertyTypeView.cs" />
     <Compile Include="UserAccountView\AgentDetailsView.cs" />
     <Compile Include="UserAccountView\BranchDetailsView.cs" />

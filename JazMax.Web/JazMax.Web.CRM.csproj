@@ -259,6 +259,8 @@
     <Content Include="Areas\Leads\Views\Leads\Index.cshtml" />
     <Content Include="Areas\Messenger\Views\web.config" />
     <Content Include="Areas\Messenger\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Property\Views\PropertyListing\Create.cshtml" />
+    <Content Include="Areas\Property\Views\PropertyListing\View.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\JazMaxMethods.js" />
     <Content Include="Scripts\JazMaxToastr.js" />
@@ -353,7 +355,6 @@
     <Folder Include="Areas\Messenger\Controllers\" />
     <Folder Include="Areas\Messenger\Models\" />
     <Folder Include="Areas\Messenger\Views\Shared\" />
-    <Folder Include="Areas\Property\Views\PropertyListing\" />
     <Folder Include="Views\PA\" />
   </ItemGroup>
   <ItemGroup>

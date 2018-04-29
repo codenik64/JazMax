@@ -354,8 +354,8 @@ namespace JazMax.DataAccess
             MessengerCoreLogs = new FakeDbSet<MessengerCoreLog>("MessengerCoreLogId");
             MessengerTypes = new FakeDbSet<MessengerType>("MessengerTypeId");
             PropertyFeatures = new FakeDbSet<PropertyFeature>("PropertyFeatureId", "FeatureName", "IsFeatureActive");
-            PropertyImages = new FakeDbSet<PropertyImage>("PropertyListingId", "BlobId", "IsActive");
-            PropertyListings = new FakeDbSet<PropertyListing>("PropertyListingId", "PropertyTypeId", "BranchId", "ProvinceId", "FriendlyName", "Price", "IsPricePerAMonth", "IsPriceCash", "IsPricePerAMeter", "ListingDate", "LastUpdate", "ProprtyDesciption", "IsListingActive");
+            PropertyImages = new FakeDbSet<PropertyImage>("PropertyImagesId");
+            PropertyListings = new FakeDbSet<PropertyListing>("PropertyListingId");
             PropertyListingAgents = new FakeDbSet<PropertyListingAgent>("PropertyListingAgentsId");
             PropertyListingDetails = new FakeDbSet<PropertyListingDetail>("PropertyListingDetailId", "PropertyListingId");
             PropertyTypes = new FakeDbSet<PropertyType>("PropertyTypeId", "TypeName", "IsActive");
@@ -914,9 +914,10 @@ namespace JazMax.DataAccess
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class PropertyImage
     {
-        public int PropertyListingId { get; set; } // PropertyListingId (Primary key)
-        public int BlobId { get; set; } // BlobId (Primary key)
-        public bool IsActive { get; set; } // IsActive (Primary key)
+        public int PropertyImagesId { get; set; } // PropertyImagesId (Primary key)
+        public int PropertyListingId { get; set; } // PropertyListingId
+        public int BlobId { get; set; } // BlobId
+        public bool IsActive { get; set; } // IsActive
     }
 
     // PropertyListing
@@ -924,18 +925,18 @@ namespace JazMax.DataAccess
     public class PropertyListing
     {
         public int PropertyListingId { get; set; } // PropertyListingId (Primary key)
-        public int PropertyTypeId { get; set; } // PropertyTypeId (Primary key)
-        public int BranchId { get; set; } // BranchId (Primary key)
-        public int ProvinceId { get; set; } // ProvinceId (Primary key)
-        public string FriendlyName { get; set; } // FriendlyName (Primary key) (length: 255)
-        public decimal Price { get; set; } // Price (Primary key)
-        public bool IsPricePerAMonth { get; set; } // IsPricePerAMonth (Primary key)
-        public bool IsPriceCash { get; set; } // IsPriceCash (Primary key)
-        public bool IsPricePerAMeter { get; set; } // IsPricePerAMeter (Primary key)
-        public System.DateTime ListingDate { get; set; } // ListingDate (Primary key)
-        public System.DateTime LastUpdate { get; set; } // LastUpdate (Primary key)
-        public string ProprtyDesciption { get; set; } // ProprtyDesciption (Primary key)
-        public bool IsListingActive { get; set; } // IsListingActive (Primary key)
+        public int PropertyTypeId { get; set; } // PropertyTypeId
+        public int BranchId { get; set; } // BranchId
+        public int ProvinceId { get; set; } // ProvinceId
+        public string FriendlyName { get; set; } // FriendlyName (length: 255)
+        public decimal Price { get; set; } // Price
+        public bool IsPricePerAMonth { get; set; } // IsPricePerAMonth
+        public bool IsPriceCash { get; set; } // IsPriceCash
+        public bool IsPricePerAMeter { get; set; } // IsPricePerAMeter
+        public System.DateTime ListingDate { get; set; } // ListingDate
+        public System.DateTime LastUpdate { get; set; } // LastUpdate
+        public string ProprtyDesciption { get; set; } // ProprtyDesciption
+        public bool IsListingActive { get; set; } // IsListingActive
     }
 
     // PropertyListingAgents
@@ -1508,11 +1509,12 @@ namespace JazMax.DataAccess
         public PropertyImageConfiguration(string schema)
         {
             ToTable("PropertyImages", schema);
-            HasKey(x => new { x.PropertyListingId, x.BlobId, x.IsActive });
+            HasKey(x => x.PropertyImagesId);
 
-            Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.BlobId).HasColumnName(@"BlobId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.PropertyImagesId).HasColumnName(@"PropertyImagesId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingId").HasColumnType("int").IsRequired();
+            Property(x => x.BlobId).HasColumnName(@"BlobId").HasColumnType("int").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
         }
     }
 
@@ -1528,21 +1530,21 @@ namespace JazMax.DataAccess
         public PropertyListingConfiguration(string schema)
         {
             ToTable("PropertyListing", schema);
-            HasKey(x => new { x.PropertyListingId, x.PropertyTypeId, x.BranchId, x.ProvinceId, x.FriendlyName, x.Price, x.IsPricePerAMonth, x.IsPriceCash, x.IsPricePerAMeter, x.ListingDate, x.LastUpdate, x.ProprtyDesciption, x.IsListingActive });
+            HasKey(x => x.PropertyListingId);
 
             Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
-            Property(x => x.PropertyTypeId).HasColumnName(@"PropertyTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.BranchId).HasColumnName(@"BranchId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.ProvinceId).HasColumnName(@"ProvinceId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.FriendlyName).HasColumnName(@"FriendlyName").HasColumnType("nvarchar").IsRequired().HasMaxLength(255).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal").IsRequired().HasPrecision(18,0).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.IsPricePerAMonth).HasColumnName(@"IsPricePerAMonth").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.IsPriceCash).HasColumnName(@"IsPriceCash").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.IsPricePerAMeter).HasColumnName(@"IsPricePerAMeter").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.ListingDate).HasColumnName(@"ListingDate").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.LastUpdate).HasColumnName(@"LastUpdate").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.ProprtyDesciption).HasColumnName(@"ProprtyDesciption").HasColumnType("nvarchar(max)").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
-            Property(x => x.IsListingActive).HasColumnName(@"IsListingActive").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.PropertyTypeId).HasColumnName(@"PropertyTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.BranchId).HasColumnName(@"BranchId").HasColumnType("int").IsRequired();
+            Property(x => x.ProvinceId).HasColumnName(@"ProvinceId").HasColumnType("int").IsRequired();
+            Property(x => x.FriendlyName).HasColumnName(@"FriendlyName").HasColumnType("nvarchar").IsRequired().HasMaxLength(255);
+            Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal").IsRequired().HasPrecision(18,0);
+            Property(x => x.IsPricePerAMonth).HasColumnName(@"IsPricePerAMonth").HasColumnType("bit").IsRequired();
+            Property(x => x.IsPriceCash).HasColumnName(@"IsPriceCash").HasColumnType("bit").IsRequired();
+            Property(x => x.IsPricePerAMeter).HasColumnName(@"IsPricePerAMeter").HasColumnType("bit").IsRequired();
+            Property(x => x.ListingDate).HasColumnName(@"ListingDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.LastUpdate).HasColumnName(@"LastUpdate").HasColumnType("datetime").IsRequired();
+            Property(x => x.ProprtyDesciption).HasColumnName(@"ProprtyDesciption").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.IsListingActive).HasColumnName(@"IsListingActive").HasColumnType("bit").IsRequired();
         }
     }
 

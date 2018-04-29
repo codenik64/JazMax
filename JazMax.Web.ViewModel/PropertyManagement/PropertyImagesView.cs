@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace JazMax.Web.ViewModel.PropertyManagement
 {
-    public class PropertyListingAgentsView
+    public class PropertyImagesView
     {
-        public int PropertyListingAgentsId { get; set; } // PropertyListingAgentsId (Primary key)
+        public int PropertyImagesId { get; set; } // PropertyImagesId (Primary key)
         public int PropertyListingId { get; set; } // PropertyListingId
-        public int AgentId { get; set; } // AgentId
+        public int BlobId { get; set; } // BlobId
         public bool IsActive { get; set; } // IsActive
     }
 }

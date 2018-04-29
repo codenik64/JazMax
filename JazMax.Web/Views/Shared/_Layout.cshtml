@@ -31,6 +31,7 @@
     <script src="~/Scripts/JazMaxMethods.js"></script>
 
     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -55,9 +56,49 @@
             </div>
         </div>
     </div>
+    @*<div class="sidenav">
+        <div class="container">
+            @Html.ActionLink("Home", "Index", "Home")
+            @Html.ActionLink("Test", "Index", "Home")
+            @Html.ActionLink("PlaceHolder", "Index", "Home")
+            @Html.ActionLink("JustAnotherLlink", "Index", "Home")
+            <button class="dropdown-btn">
+                TestDrop Down
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                @Html.ActionLink("This", "Index", "Home")
+                @Html.ActionLink("Is", "Index", "Home")
+                @Html.ActionLink("A", "Index", "Home")
+                @Html.ActionLink("MultiLevelDropDown", "Index", "Home")
+                <button class="dropdown-btn">
+                    Level2
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-container">
+                    <a href="#">Normal Link</a>
+                    <a href="#">Normal Link 2</a>
+                    <button class="dropdown-btn">
+                        Dropdown Level 3
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-container">
+                        @Html.ActionLink("You", "Index", "Home")
+                        @Html.ActionLink("Can", "Index", "Home")
+                        @Html.ActionLink("Go", "Index", "Home")
+                        @Html.ActionLink("Crazy Now", "Index", "Home")
+                    </div>
+                    <a href="#">Link 3</a>
+                </div>
+                <a href="#">Just a normal link</a>
+            </div>
+            <a href="#contact">Search</a>
+        </div>
+    </div>*@
     <div>
         @*You are here : @Html.MvcSiteMap().SiteMapPath()*@
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -80,3 +121,5 @@
         transform: translate(-50%, -50%) !important;
     }
 </style>
+
+

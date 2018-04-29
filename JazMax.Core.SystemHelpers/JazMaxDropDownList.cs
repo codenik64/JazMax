@@ -108,6 +108,51 @@ namespace JazMax.Core.SystemHelpers
 
         }
 
+        public static IEnumerable<SelectListItem> GetAllPropertyFeatures()
+        {
+            var q = from a in dbcon.PropertyFeatures
+                    where a.IsFeatureActive == true
+                    select new SelectListItem
+                    {
+                        Text = a.FeatureName,
+                        Value = a.PropertyFeatureId.ToString()
+                    };
+            return q;
+        }
+
+        public static IEnumerable<SelectListItem> GetAllPropertyTypes()
+        {
+            var q = from a in dbcon.PropertyTypes
+                    where a.IsActive == true
+                    select new SelectListItem
+                    {
+                        Text = a.TypeName,
+                        Value = a.PropertyTypeId.ToString()
+                    };
+            return q;
+        }
+
+        //Gets a list of agents for a branch
+        //Text - Core User Name
+        //Value - CoreAgentId
+        public static IEnumerable<SelectListItem> GetAgentsForBranch(int BranchId)
+        {
+            var q = from a in dbcon.CoreUsers
+                    join b in  dbcon.CoreAgents
+                    on a.CoreUserId equals b.CoreUserId
+                    join c in dbcon.CoreBranches
+                    on b.CoreBranchId equals c.BranchId
+                    where c.BranchId == BranchId
+                    select new SelectListItem
+                    {
+                        Text = a.FirstName + " " + a.LastName,
+                        Value = b.CoreAgentId.ToString()
+                    };
+            return q;
+        }
+
+
+
 
 
 
