@@ -78,6 +78,7 @@
     <Compile Include="PropertyManagement\PropertyListingFeature.cs" />
     <Compile Include="PropertyManagement\PropertyListingView.cs" />
     <Compile Include="PropertyManagement\PropertyListingYoutubeView.cs" />
+    <Compile Include="PropertyManagement\PropertyPricingTypesView.cs" />
     <Compile Include="PropertyManagement\PropertyTypeView.cs" />
     <Compile Include="UserAccountView\AgentDetailsView.cs" />
     <Compile Include="UserAccountView\BranchDetailsView.cs" />

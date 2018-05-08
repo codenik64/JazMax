@@ -19,12 +19,12 @@
         <EntityTypeShape EntityType="JazMaxDBProdModel.CoreUser" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JazMaxDBProdModel.CoreUserInType" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="JazMaxDBProdModel.CoreUserType" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="JazMaxDBProdModel.vw_GetTeamLeadersInformation" Width="1.5" PointX="5.375" PointY="9.75" />
-        <EntityTypeShape EntityType="JazMaxDBProdModel.vw_GetAgentsInformation" Width="1.5" PointX="7.375" PointY="9.75" />
-        <EntityTypeShape EntityType="JazMaxDBProdModel.MessengerCoreLog" Width="1.5" PointX="9.375" PointY="9.75" />
-        <EntityTypeShape EntityType="JazMaxDBProdModel.MessengerType" Width="1.5" PointX="11.375" PointY="0.75" />
-        <EntityTypeShape EntityType="JazMaxDBProdModel.SystemSettingsData" Width="1.5" PointX="11.375" PointY="6.75" />
-        <EntityTypeShape EntityType="JazMaxDBProdModel.SystemErrorLog1" Width="1.5" PointX="11.375" PointY="9.75" />
+        <EntityTypeShape EntityType="JazMaxDBProdModel.vw_GetTeamLeadersInformation" Width="1.5" PointX="4.75" PointY="9.75" />
+        <EntityTypeShape EntityType="JazMaxDBProdModel.vw_GetAgentsInformation" Width="1.5" PointX="6.75" PointY="9.75" />
+        <EntityTypeShape EntityType="JazMaxDBProdModel.MessengerCoreLog" Width="1.5" PointX="8.75" PointY="9.75" />
+        <EntityTypeShape EntityType="JazMaxDBProdModel.MessengerType" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="JazMaxDBProdModel.SystemSettingsData" Width="1.5" PointX="10.75" PointY="3.75" />
+        <EntityTypeShape EntityType="JazMaxDBProdModel.SystemErrorLog1" Width="1.5" PointX="10.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -69,34 +69,14 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.IsPricePerAMonth, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.PropertyListingView.PropertyListingPricingTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.PropertyListingView.IsPricePerAMonth)
-                        @Html.ValidationMessageFor(model => model.PropertyListingView.IsPricePerAMonth, "", new { @class = "text-danger" })
-                    </div>
+                    @*@Html.EditorFor(model => model.PropertyListingView.ProvinceId, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.PropertyListingView.PropertyListingPricingTypeId, JazMaxDropDownList.GetAllPropertyPriceTypes(), new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.PropertyListingPricingTypeId, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.IsPriceCash, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.PropertyListingView.IsPriceCash)
-                        @Html.ValidationMessageFor(model => model.PropertyListingView.IsPriceCash, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.IsPricePerAMeter, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.PropertyListingView.IsPricePerAMeter)
-                        @Html.ValidationMessageFor(model => model.PropertyListingView.IsPricePerAMeter, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
+           
 
             <div class="form-group">
                 @Html.LabelFor(model => model.PropertyListingView.ListingDate, htmlAttributes: new { @class = "control-label col-md-2" })

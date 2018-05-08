@@ -203,6 +203,7 @@
     <Compile Include="Areas\Messenger\MessengerAreaRegistration.cs" />
     <Compile Include="Areas\Property\Controllers\PropertyFeatureController.cs" />
     <Compile Include="Areas\Property\Controllers\PropertyListingController.cs" />
+    <Compile Include="Areas\Property\Controllers\PropertyPriceController.cs" />
     <Compile Include="Areas\Property\Controllers\PropertyTypeController.cs" />
     <Compile Include="Areas\Property\PropertyAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -234,8 +235,6 @@
     <Content Include="Content\JazMaxStyle.css" />
     <Content Include="Content\JazMaxTable.css" />
     <Content Include="Content\loading.gif" />
-    <Content Include="css\sb-admin.css" />
-    <Content Include="css\sb-admin.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -261,6 +260,8 @@
     <Content Include="Areas\Messenger\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Property\Views\PropertyListing\Create.cshtml" />
     <Content Include="Areas\Property\Views\PropertyListing\View.cshtml" />
+    <Content Include="Areas\Property\Views\PropertyPrice\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\jazmax - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\JazMaxMethods.js" />
     <Content Include="Scripts\JazMaxToastr.js" />
@@ -356,6 +357,7 @@
     <Folder Include="Areas\Messenger\Controllers\" />
     <Folder Include="Areas\Messenger\Models\" />
     <Folder Include="Areas\Messenger\Views\Shared\" />
+    <Folder Include="css\" />
     <Folder Include="Views\PA\" />
   </ItemGroup>
   <ItemGroup>
@@ -377,6 +379,10 @@
     <ProjectReference Include="..\JazMax.BusinessLogic\JazMax.BusinessLogic.csproj">
       <Project>{95d501fc-6e06-4a01-9887-94ea243b86dc}</Project>
       <Name>JazMax.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.Common\JazMax.Common.csproj">
+      <Project>{fe4d7bd5-3cf8-4b41-ad27-ae7500110afc}</Project>
+      <Name>JazMax.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\JazMax.Core.Blob\JazMax.Core.Blob.csproj">
       <Project>{0672ce51-2f3b-4b48-916a-e4b10edf202d}</Project>

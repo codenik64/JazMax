@@ -59,6 +59,7 @@ namespace JazMax.DataAccess
         System.Data.Entity.DbSet<PropertyListing> PropertyListings { get; set; } // PropertyListing
         System.Data.Entity.DbSet<PropertyListingAgent> PropertyListingAgents { get; set; } // PropertyListingAgents
         System.Data.Entity.DbSet<PropertyListingDetail> PropertyListingDetails { get; set; } // PropertyListingDetail
+        System.Data.Entity.DbSet<PropertyListingPricingType> PropertyListingPricingTypes { get; set; } // PropertyListingPricingType
         System.Data.Entity.DbSet<PropertyType> PropertyTypes { get; set; } // PropertyType
         System.Data.Entity.DbSet<ProprtyListingFeature> ProprtyListingFeatures { get; set; } // ProprtyListingFeatures
         System.Data.Entity.DbSet<ProprtyListingYoutubeLibrary> ProprtyListingYoutubeLibraries { get; set; } // ProprtyListingYoutubeLibrary
@@ -117,6 +118,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<PropertyListing> PropertyListings { get; set; } // PropertyListing
         public System.Data.Entity.DbSet<PropertyListingAgent> PropertyListingAgents { get; set; } // PropertyListingAgents
         public System.Data.Entity.DbSet<PropertyListingDetail> PropertyListingDetails { get; set; } // PropertyListingDetail
+        public System.Data.Entity.DbSet<PropertyListingPricingType> PropertyListingPricingTypes { get; set; } // PropertyListingPricingType
         public System.Data.Entity.DbSet<PropertyType> PropertyTypes { get; set; } // PropertyType
         public System.Data.Entity.DbSet<ProprtyListingFeature> ProprtyListingFeatures { get; set; } // ProprtyListingFeatures
         public System.Data.Entity.DbSet<ProprtyListingYoutubeLibrary> ProprtyListingYoutubeLibraries { get; set; } // ProprtyListingYoutubeLibrary
@@ -197,6 +199,7 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new PropertyListingConfiguration());
             modelBuilder.Configurations.Add(new PropertyListingAgentConfiguration());
             modelBuilder.Configurations.Add(new PropertyListingDetailConfiguration());
+            modelBuilder.Configurations.Add(new PropertyListingPricingTypeConfiguration());
             modelBuilder.Configurations.Add(new PropertyTypeConfiguration());
             modelBuilder.Configurations.Add(new ProprtyListingFeatureConfiguration());
             modelBuilder.Configurations.Add(new ProprtyListingYoutubeLibraryConfiguration());
@@ -232,6 +235,7 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new PropertyListingConfiguration(schema));
             modelBuilder.Configurations.Add(new PropertyListingAgentConfiguration(schema));
             modelBuilder.Configurations.Add(new PropertyListingDetailConfiguration(schema));
+            modelBuilder.Configurations.Add(new PropertyListingPricingTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new PropertyTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new ProprtyListingFeatureConfiguration(schema));
             modelBuilder.Configurations.Add(new ProprtyListingYoutubeLibraryConfiguration(schema));
@@ -324,6 +328,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<PropertyListing> PropertyListings { get; set; }
         public System.Data.Entity.DbSet<PropertyListingAgent> PropertyListingAgents { get; set; }
         public System.Data.Entity.DbSet<PropertyListingDetail> PropertyListingDetails { get; set; }
+        public System.Data.Entity.DbSet<PropertyListingPricingType> PropertyListingPricingTypes { get; set; }
         public System.Data.Entity.DbSet<PropertyType> PropertyTypes { get; set; }
         public System.Data.Entity.DbSet<ProprtyListingFeature> ProprtyListingFeatures { get; set; }
         public System.Data.Entity.DbSet<ProprtyListingYoutubeLibrary> ProprtyListingYoutubeLibraries { get; set; }
@@ -358,6 +363,7 @@ namespace JazMax.DataAccess
             PropertyListings = new FakeDbSet<PropertyListing>("PropertyListingId");
             PropertyListingAgents = new FakeDbSet<PropertyListingAgent>("PropertyListingAgentsId");
             PropertyListingDetails = new FakeDbSet<PropertyListingDetail>("PropertyListingDetailId", "PropertyListingId");
+            PropertyListingPricingTypes = new FakeDbSet<PropertyListingPricingType>("PropertyListingPricingTypeId", "TypeName", "IsActive");
             PropertyTypes = new FakeDbSet<PropertyType>("PropertyTypeId", "TypeName", "IsActive");
             ProprtyListingFeatures = new FakeDbSet<ProprtyListingFeature>("ProprtyListingFeaturesId", "PropertyFeatureId", "PropertyListingId", "IsFeatureActive");
             ProprtyListingYoutubeLibraries = new FakeDbSet<ProprtyListingYoutubeLibrary>("ProprtyListingYoutubeLibraryId", "PrfoprtyListingId", "YoutubeVideoLink", "IsVideoActive");
@@ -930,13 +936,13 @@ namespace JazMax.DataAccess
         public int ProvinceId { get; set; } // ProvinceId
         public string FriendlyName { get; set; } // FriendlyName (length: 255)
         public decimal Price { get; set; } // Price
-        public bool IsPricePerAMonth { get; set; } // IsPricePerAMonth
-        public bool IsPriceCash { get; set; } // IsPriceCash
-        public bool IsPricePerAMeter { get; set; } // IsPricePerAMeter
+        public int PropertyListingPricingTypeId { get; set; } // PropertyListingPricingTypeId
         public System.DateTime ListingDate { get; set; } // ListingDate
         public System.DateTime LastUpdate { get; set; } // LastUpdate
         public string ProprtyDesciption { get; set; } // ProprtyDesciption
         public bool IsListingActive { get; set; } // IsListingActive
+        public int CreatedBy { get; set; } // CreatedBy
+        public int? DeletedBy { get; set; } // DeletedBy
     }
 
     // PropertyListingAgents
@@ -960,6 +966,15 @@ namespace JazMax.DataAccess
         public int? NumberOfGarages { get; set; } // NumberOfGarages
         public int? NumberOfSquareMeters { get; set; } // NumberOfSquareMeters
         public decimal? RatesAndTaxes { get; set; } // RatesAndTaxes
+    }
+
+    // PropertyListingPricingType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyListingPricingType
+    {
+        public int PropertyListingPricingTypeId { get; set; } // PropertyListingPricingTypeId (Primary key)
+        public string TypeName { get; set; } // TypeName (Primary key) (length: 200)
+        public bool IsActive { get; set; } // IsActive (Primary key)
     }
 
     // PropertyType
@@ -1538,13 +1553,13 @@ namespace JazMax.DataAccess
             Property(x => x.ProvinceId).HasColumnName(@"ProvinceId").HasColumnType("int").IsRequired();
             Property(x => x.FriendlyName).HasColumnName(@"FriendlyName").HasColumnType("nvarchar").IsRequired().HasMaxLength(255);
             Property(x => x.Price).HasColumnName(@"Price").HasColumnType("decimal").IsRequired().HasPrecision(18,0);
-            Property(x => x.IsPricePerAMonth).HasColumnName(@"IsPricePerAMonth").HasColumnType("bit").IsRequired();
-            Property(x => x.IsPriceCash).HasColumnName(@"IsPriceCash").HasColumnType("bit").IsRequired();
-            Property(x => x.IsPricePerAMeter).HasColumnName(@"IsPricePerAMeter").HasColumnType("bit").IsRequired();
+            Property(x => x.PropertyListingPricingTypeId).HasColumnName(@"PropertyListingPricingTypeId").HasColumnType("int").IsRequired();
             Property(x => x.ListingDate).HasColumnName(@"ListingDate").HasColumnType("datetime").IsRequired();
             Property(x => x.LastUpdate).HasColumnName(@"LastUpdate").HasColumnType("datetime").IsRequired();
             Property(x => x.ProprtyDesciption).HasColumnName(@"ProprtyDesciption").HasColumnType("nvarchar(max)").IsRequired();
             Property(x => x.IsListingActive).HasColumnName(@"IsListingActive").HasColumnType("bit").IsRequired();
+            Property(x => x.CreatedBy).HasColumnName(@"CreatedBy").HasColumnType("int").IsRequired();
+            Property(x => x.DeletedBy).HasColumnName(@"DeletedBy").HasColumnType("int").IsOptional();
         }
     }
 
@@ -1590,6 +1605,26 @@ namespace JazMax.DataAccess
             Property(x => x.NumberOfGarages).HasColumnName(@"NumberOfGarages").HasColumnType("int").IsOptional();
             Property(x => x.NumberOfSquareMeters).HasColumnName(@"NumberOfSquareMeters").HasColumnType("int").IsOptional();
             Property(x => x.RatesAndTaxes).HasColumnName(@"RatesAndTaxes").HasColumnType("decimal").IsOptional().HasPrecision(18,0);
+        }
+    }
+
+    // PropertyListingPricingType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class PropertyListingPricingTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<PropertyListingPricingType>
+    {
+        public PropertyListingPricingTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public PropertyListingPricingTypeConfiguration(string schema)
+        {
+            ToTable("PropertyListingPricingType", schema);
+            HasKey(x => new { x.PropertyListingPricingTypeId, x.TypeName, x.IsActive });
+
+            Property(x => x.PropertyListingPricingTypeId).HasColumnName(@"PropertyListingPricingTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TypeName).HasColumnName(@"TypeName").HasColumnType("nvarchar").IsRequired().HasMaxLength(200).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
         }
     }
 

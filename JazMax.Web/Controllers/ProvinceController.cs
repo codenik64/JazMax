@@ -13,7 +13,7 @@ namespace JazMax.Web.Controllers
         private static CoreProvinceService obj = new CoreProvinceService();
   
         #region Get All 
-        [JazMaxIdentity(UserGroup = "TeamLeader")]
+        [JazMaxIdentity(UserGroup = "TeamLeader,CEO")]
         public ActionResult Index()
         {
             return View(obj.GetAll());

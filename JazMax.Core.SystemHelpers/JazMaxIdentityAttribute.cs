@@ -14,6 +14,8 @@ namespace JazMax.Core.SystemHelpers
     {
         public string UserGroup { get; set; }
 
+
+        //TO DO: Force For CEO
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();

@@ -13,5 +13,6 @@ namespace JazMax.Web.ViewModel.PropertyManagement.CaptureListing
         public PropertyListingDetailView PropertyListingDetailView { get; set; }
         public PropertyListingYoutubeView PropertyListingYoutubeView { get; set; }
         public PropertyListingFeatureView PropertyListingFeatureView { get; set; }
+      
     }
 }

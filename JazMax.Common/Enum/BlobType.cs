@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace JazMax.Core.Blob.Model
+namespace JazMax.Common.Enum
 {
-    public  enum BlobFileType
+    public enum BlobType
     {
-        Image,
-        File,
-        LeadFile
+        Branch,
+        UserImage,
+        PropertyImage,
+        LeadImage
     }
 }

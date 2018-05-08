@@ -24,5 +24,10 @@ namespace JazMax.Web.Controllers
         {
             return View();
         }
+
+        public int test()
+        {
+            return (int)JazMax.Common.Enum.UserType.PA;
+        }
     }
 }

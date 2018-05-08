@@ -89,6 +89,10 @@
     <Content Include="TempSQL\TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\JazMax.Common\JazMax.Common.csproj">
+      <Project>{fe4d7bd5-3cf8-4b41-ad27-ae7500110afc}</Project>
+      <Name>JazMax.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\JazMax.DataAccess\JazMax.DataAccess.csproj">
       <Project>{629737f1-f624-4835-9794-0727b8c4dc96}</Project>
       <Name>JazMax.DataAccess</Name>

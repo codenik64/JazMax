@@ -64,14 +64,28 @@ namespace JazMax.Web.Controllers
                 m.GenderId = Convert.ToInt32(GenderId);
                 m.CoreUserTypeId = Convert.ToInt32(CoreUserTypeId);
 
-                CapturePAView mm = new CapturePAView()
+                CapturePAView mm = new CapturePAView();
+                try
                 {
-                    provinceId = Convert.ToInt16(CapturePAView_provinceId)
-                };
-                CaptureTeamLeader zz = new CaptureTeamLeader()
+                    mm.provinceId = Convert.ToInt16(CapturePAView_provinceId);
+                }
+                catch
                 {
-                    provinceId = Convert.ToInt32(CaptureTeamLeader_provinceId)
-                };
+                    mm.provinceId = 0;
+                }
+
+
+                CaptureTeamLeader zz = new CaptureTeamLeader();
+
+                try
+                {
+                    zz.provinceId = Convert.ToInt32(CaptureTeamLeader_provinceId);
+                }
+                catch
+                {
+                    zz.provinceId = 0;
+                }
+
                 CaptureAgent yy = new CaptureAgent();
                 try
                 {

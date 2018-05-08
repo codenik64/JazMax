@@ -151,11 +151,22 @@ namespace JazMax.Core.SystemHelpers
             return q;
         }
 
+        public static IEnumerable<SelectListItem> GetAllPropertyPriceTypes()
+        {
+            return (from a in dbcon.PropertyListingPricingTypes
+                    where a.IsActive == true
+                    select new SelectListItem
+                    {
+                        Text = a.TypeName,
+                        Value = a.PropertyListingPricingTypeId.ToString()
+                    });
+        }
 
 
 
 
 
 
-    }
+
+        }
 }
