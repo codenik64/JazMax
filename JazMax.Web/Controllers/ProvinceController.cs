@@ -50,7 +50,7 @@ namespace JazMax.Web.Controllers
             {
                 return RedirectToAction("NotFound", "Error");
             }
-            return View(CoreProvinceService.GetProvinceDetails((int)id));
+            return View(CoreProvinceService.GetProvinceDetailsNew((int)id));
         }
 
 

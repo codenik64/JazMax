@@ -36,6 +36,19 @@ namespace JazMax.BusinessLogic.UserAccounts
             return query;
         }
 
+
+        public static CoreProvinceView GetProvinceDetailsNew(int ProvinceId)
+        {
+            var query = (from a in db.CoreProvinces
+                         select new CoreProvinceView
+                         {
+                             ProvinceId = a.ProvinceId,
+                             ProvinceName = a.ProvinceName,
+                             IsActive = a.IsActive
+                         }).FirstOrDefault();
+            return query;
+        }
+
         public void Create(CoreProvinceView view)
         {
             try
