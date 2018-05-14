@@ -24,6 +24,7 @@ namespace JazMax.Web.ViewModel.UserAccountView
         [Display(Name = "Cell Number")]
         public string CellPhone { get; set; }
         [Display(Name = "Email Address")]
+       
         public string EmailAddress { get; set; }
         [Display(Name = "Gender")]
         public Nullable<int> GenderId { get; set; }

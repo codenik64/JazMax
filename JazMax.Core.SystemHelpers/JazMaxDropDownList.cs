@@ -162,11 +162,31 @@ namespace JazMax.Core.SystemHelpers
                     });
         }
 
+        public static IEnumerable<SelectListItem> GetGender()
+        {
 
+            List<SelectListItem> listItems = new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "Male",
+                    Value = "1"
+                },
+                new SelectListItem
+                {
+                    Text = "Female",
+                    Value = "2",
+                }
+            };
 
-
-
-
-
+            return listItems;
         }
+
+
+
+
+
+
+
+    }
 }
