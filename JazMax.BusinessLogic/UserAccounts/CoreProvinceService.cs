@@ -40,6 +40,7 @@ namespace JazMax.BusinessLogic.UserAccounts
         public static CoreProvinceView GetProvinceDetailsNew(int ProvinceId)
         {
             var query = (from a in db.CoreProvinces
+                         where a.ProvinceId == ProvinceId
                          select new CoreProvinceView
                          {
                              ProvinceId = a.ProvinceId,

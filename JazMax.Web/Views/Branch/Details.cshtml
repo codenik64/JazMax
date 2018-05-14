@@ -22,7 +22,7 @@
     <div>
         <div class="panel-group">
             <div class="panel panel-primary">
-                <div class="panel-heading">Agents</div>
+                <div class="panel-heading">Branch</div>
                 <div class="panel-body">
                     <table class="table">
                         <tr>
@@ -157,7 +157,7 @@
                                     </th>
 
 
-                                 
+
                                 </tr>
                             </thead>
                             @foreach (var item in Model.AgentDetailsView)
@@ -165,22 +165,28 @@
                                 <tr>
 
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.FirstName)
+
+                                        @Html.JazMaxUserDetails(item.FirstName, new { id = item.CoreUserId })
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.MiddleName)
+
+                                        @Html.JazMaxUserDetails(item.MiddleName, new { id = item.CoreUserId })
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LastName)
+
+                                        @Html.JazMaxUserDetails(item.LastName, new { id = item.CoreUserId })
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+
+                                        @Html.JazMaxUserDetails(item.PhoneNumber, new { id = item.CoreUserId })
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.CellPhone)
+
+                                        @Html.JazMaxUserDetails(item.CellPhone, new { id = item.CoreUserId })
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.EmailAddress)
+
+                                        @Html.JazMaxUserDetails(item.EmailAddress, new { id = item.CoreUserId })
                                     </td>
                                 </tr>
 
