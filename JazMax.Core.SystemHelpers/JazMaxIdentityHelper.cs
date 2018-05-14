@@ -111,7 +111,7 @@ namespace JazMax.Core.SystemHelpers
        
         public List<UserInformation> GetBranchesBasedOnProvince(int ProvinceId)
         {
-            return db.CoreBranches.Where(x => x.ProvinceId == ProvinceId).Select(x => new UserInformation
+            return db.CoreBranches.Where(x => x.ProvinceId == ProvinceId && x.IsActive == true).Select(x => new UserInformation
             {
                 BranchName = x.BranchName,
                 Id = x.BranchId.ToString()

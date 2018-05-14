@@ -17,8 +17,7 @@
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })*@
-                <div id="firstName"></div>
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -73,7 +72,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.GenderId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CoreUserTypeId, JazMaxDropDownList.GetGender(), new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.GenderId, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.GenderId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -123,6 +122,9 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="Save" type="button" class="btn btn-default" value="Save" onclick="save();" />
+                <div id="loading">
+                    <img src="~/Content/LoadCon.gif" id="myimage" width="50px" height="50px" hidden/>
+                </div>
             </div>
         </div>
     </div>
@@ -199,9 +201,8 @@
 </script>
 
 <script>
-    function save()
-    {
-        debugger;
+    function save() {
+
         var count = 0;
         if ($('#FirstName').val() == '') {
             toastr.error('Please enter first name');
@@ -233,62 +234,61 @@
             count++;
         }
 
-
-
-
         if (count == 0) {
 
-              $.ajax({
-            type: 'Post',
-            dataType: 'Json',
-            data: {
-                FirstName: $('#FirstName').val(),
-                MiddleName: $('#MiddleName').val(),
-                LastName: $('#LastName').val(),
-                IDNumber: $('#IDNumber').val(),
-                PhoneNumber: $('#PhoneNumber').val(),
-                CellPhone: $('#CellPhone').val(),
-                EmailAddress: $('#EmailAddress').val(),
-                GenderId: $('#GenderId').val(),
+            $("#Save").attr("disabled", true);
+            $('#myimage').show();
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data: {
+                    FirstName: $('#FirstName').val(),
+                    MiddleName: $('#MiddleName').val(),
+                    LastName: $('#LastName').val(),
+                    IDNumber: $('#IDNumber').val(),
+                    PhoneNumber: $('#PhoneNumber').val(),
+                    CellPhone: $('#CellPhone').val(),
+                    EmailAddress: $('#EmailAddress').val(),
+                    GenderId: $('#GenderId').val(),
 
-                CoreUserTypeId: $('#CoreUserTypeId').val(),
-                CapturePAView_provinceId: $('#CapturePAView_provinceId').val(),
-                CaptureTeamLeader_provinceId: $('#CaptureTeamLeader_provinceId').val(),
-                dropBranch: $('#ddlBranch').val(),
+                    CoreUserTypeId: $('#CoreUserTypeId').val(),
+                    CapturePAView_provinceId: $('#CapturePAView_provinceId').val(),
+                    CaptureTeamLeader_provinceId: $('#CaptureTeamLeader_provinceId').val(),
+                    dropBranch: $('#ddlBranch').val(),
 
 
 
-            },
-            url: '@Url.Action("Save", "User")',
-            success: function (da) {
-                if (da.Result == "Success")
-                {
-                    toastr.success('User saved!');
-                    $('#FirstName').empty();
-                    $('#MiddleName').empty();
-                    $('#LastName').empty();
-                    $('#IDNumber').empty();
-                    $('#PhoneNumber').empty();
-                    $('#CellPhone').empty();
-                    $('#EmailAddress').empty();
-                    $('#GenderId').empty();
+                },
+                url: '@Url.Action("Save", "User")',
+                success: function (da) {
+                    if (da.Result == "Success") {
+                        toastr.success('User saved!');
+                        $('#FirstName').val(null);
+                        $('#MiddleName').val(null);
+                        $('#LastName').val(null);
+                        $('#IDNumber').val(null);
+                        $('#PhoneNumber').val(null);
+                        $('#CellPhone').val(null);
+                        $('#EmailAddress').val(null);
+                        $('#GenderId').val(null);
+                        $('#Save').removeAttr("disabled");
+                        $('#myimage').hide();
+                    }
+                    else {
+
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    alert('Error');
                 }
-                else
-                {
-
-                    alert('Error' + da.Message);
-                }
-            },
-            error: function (da) {
-                alert('Error');
             }
-        });
-        }
 
+            );
+        }
     }
 
 </script>
-
 
 
 

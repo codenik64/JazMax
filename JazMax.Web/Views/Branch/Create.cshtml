@@ -73,23 +73,23 @@
         }
         else
         {
-        <div class="form-group">
-            @Html.LabelFor(model => model.ProvinceId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ProvinceId, JazMaxDropDownList.GetAllProvince(), new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ProvinceId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div id="ashBranch" hidden>
             <div class="form-group">
-                @Html.LabelFor(model => model.CoreTeamLeaderId, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ProvinceId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <div id="teamDrop"></div>
-                    @Html.ValidationMessageFor(model => model.CoreTeamLeaderId, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.ProvinceId, JazMaxDropDownList.GetAllProvince(), new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProvinceId, "", new { @class = "text-danger" })
                 </div>
             </div>
-        </div>
+
+            <div id="ashBranch" hidden>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CoreTeamLeaderId, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div id="teamDrop"></div>
+                        @Html.ValidationMessageFor(model => model.CoreTeamLeaderId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
 
         }
 
@@ -97,20 +97,24 @@
             <div class="col-md-offset-2 col-md-10">
                 @if (!JazMaxIdentityHelper.IsUserInRole("PA"))
                 {
-                <input id="Save" type="button" class="btn btn-success" value="Save" onclick="save();" />
+                    <input id="Save" type="button" class="btn btn-success" value="Save" onclick="save();" />
                 }
                 else
                 {
-                 <input id="Save" type="button" class="btn btn-success" value="Save" onclick="savePA();" />
+                    <input id="Save" type="button" class="btn btn-success" value="Save" onclick="savePA();" />
                 }
 
                 <input id="Reset" type="button" class="btn btn-info" value="Reset" onclick="Reset();" />
             </div>
         </div>
+
+        <div id="loading">
+            <img src="~/Content/LoadCon.gif" id="myimage" width="50px" height="50px" hidden />
+        </div>
     </div>
 </div>
 <div id="showList" hidden>
-    @{ 
+    @{
         Html.RenderAction("Index", "Branch");
     }
 </div>
@@ -138,33 +142,33 @@
 
 @if (!JazMaxIdentityHelper.IsUserInRole("PA"))
 {
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    $(document).ready(function () {
- 
-        $('#ProvinceId').change(function () {
-  
-            $.ajax({
-                type: "post",
-                url: "/Branch/GetTeamLeaderForProvince",
-                data: { Id: $('#ProvinceId').val() },
-                datatype: "json",
-                traditional: true,
-                success: function (data) {
-                    var district = "<select id='ddlDistrict'>";
-                    district = district + '<option value="">--Select--</option>';
-                    for (var i = 0; i < data.length; i++) {
-                        district = district + '<option value=' + data[i].Id + '>' + data[i].DisplayName + '</option>';
+        $(document).ready(function () {
+
+            $('#ProvinceId').change(function () {
+
+                $.ajax({
+                    type: "post",
+                    url: "/Branch/GetTeamLeaderForProvince",
+                    data: { Id: $('#ProvinceId').val() },
+                    datatype: "json",
+                    traditional: true,
+                    success: function (data) {
+                        var district = "<select id='ddlDistrict'>";
+                        district = district + '<option value="-999">--Select--</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            district = district + '<option value=' + data[i].Id + '>' + data[i].DisplayName + '</option>';
+                        }
+                        district = district + '</select>';
+                        $('#teamDrop').html(district);
                     }
-                    district = district + '</select>';
-                    $('#teamDrop').html(district);
-                }
+                });
             });
         });
-    });
-</script> 
+    </script>
 
-<script>
+    <script>
     function save() {
         debugger;
         var count = 0;
@@ -194,8 +198,14 @@
             count++;
         }
 
-        if (count == 0) {
+        if($('#ddlDistrict').val() == '-999')
+        {
+            toastr.error('Please choose a teamleader');
+        }
 
+        if (count == 0) {
+            $("#Save").attr("disabled", true);
+            $('#myimage').show();
             $.ajax({
                 type: 'Post',
                 dataType: 'Json',
@@ -212,15 +222,16 @@
                 url: '@Url.Action("Save", "Branch")',
                 success: function (da) {
                     if (da.Result == "Success") {
-                        //alert('saved sucessfully')
-                        $('#createDiv').fadeOut();
-                        $("#createDiv").fadeOut("slow");
-                        $("#createDiv").fadeOut(3000);
-
-                        $('#showList').fadeIn();
-                        $("#showList").fadeIn("slow");
-                        $("#showList").fadeIn(3000);
-   
+                        toastr.success('Saved Sucessfully')
+                            $('#BranchName').val(null);
+                            $('#EmailAddress').val(null);
+                            $('#Phone').val(null);
+                            $('#EmailAddress').val(null);
+                            $('#StreetAddress').val(null);
+                            $('#City').val(null);
+                            $('#Suburb').val(null);
+                        $('#Save').removeAttr("disabled");
+                        $('#myimage').hide();
 
                     } else {
 
@@ -233,12 +244,12 @@
             });
         }
     }
-</script> 
+    </script>
 
 }
 
-@*Save as a personal assistant*@
-<script>
+    @*Save as a personal assistant*@
+    <script>
     function savePA()
     {
         var count = 0;
@@ -269,6 +280,9 @@
         }
 
         if (count == 0) {
+
+            $("#Save").attr("disabled", true);
+            $('#myimage').show();
             debugger;
             $.ajax({
                 type: 'Post',
@@ -286,7 +300,20 @@
                 url: '@Url.Action("Save", "Branch")',
                 success: function (da) {
                     if (da.Result == "Success") {
-                        alertify.message('Normal message');
+                        toastr.success('Saved Sucessfully')
+
+                        $('#BranchName').val(null);
+                        $('#EmailAddress').val(null);
+                        $('#Phone').val(null);
+                        $('#EmailAddress').val(null);
+                        $('#StreetAddress').val(null);
+                        $('#City').val(null);
+                        $('#Suburb').val(null);
+
+                        $('#Save').removeAttr("disabled");
+                        $('#myimage').hide();
+
+
                     } else {
 
                         alert('Error' + da.Message);
@@ -298,19 +325,18 @@
             });
         }
     }
-</script> 
+    </script>
 
-@*Reset page*@
-<script>
-    function Reset()
-    {
-        $('#BranchName').val(null);
-        $('#Phone').val(null);
-        $('#EmailAddress').val(null);
-        $('#StreetAddress').val(null);
-        $('#City').val(null);
-        $('#Suburb').val(null);
-        $('#ddlDistrict').val(null);
-        $('#ashBranch').hide();
-    }
-</script>
+    @*Reset page*@
+    <script>
+        function Reset() {
+            $('#BranchName').val(null);
+            $('#Phone').val(null);
+            $('#EmailAddress').val(null);
+            $('#StreetAddress').val(null);
+            $('#City').val(null);
+            $('#Suburb').val(null);
+            $('#ddlDistrict').val(null);
+            $('#ashBranch').hide();
+        }
+    </script>

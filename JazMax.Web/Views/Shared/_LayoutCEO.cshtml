@@ -1,7 +1,7 @@
 ﻿@using JazMax.Core.SystemHelpers
 @using JazMax.Web.Models
 
-@{ 
+@{
     JazMaxIdentityHelper.UserName = User.Identity.Name;
 }
 
@@ -14,8 +14,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-   
-  
+    @Html.Partial("_PartialRef", null)
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -31,50 +31,53 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Province", "Index", "Province", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Branches", "Index", "Branch", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Users", "Index", "User", new { area = "" }, null)</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     @*<div class="sidenav">
-        <div class="container">
-            @Html.ActionLink("Home", "Index", "Home")
-            @Html.ActionLink("Test", "Index", "Home")
-            @Html.ActionLink("PlaceHolder", "Index", "Home")
-            @Html.ActionLink("JustAnotherLlink", "Index", "Home")
-            <button class="dropdown-btn">
-                TestDrop Down
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-container">
-                @Html.ActionLink("This", "Index", "Home")
-                @Html.ActionLink("Is", "Index", "Home")
-                @Html.ActionLink("A", "Index", "Home")
-                @Html.ActionLink("MultiLevelDropDown", "Index", "Home")
+            <div class="container">
+                @Html.ActionLink("Home", "Index", "Home")
+                @Html.ActionLink("Test", "Index", "Home")
+                @Html.ActionLink("PlaceHolder", "Index", "Home")
+                @Html.ActionLink("JustAnotherLlink", "Index", "Home")
                 <button class="dropdown-btn">
-                    Level2
+                    TestDrop Down
                     <i class="fa fa-caret-down"></i>
                 </button>
                 <div class="dropdown-container">
-                    <a href="#">Normal Link</a>
-                    <a href="#">Normal Link 2</a>
+                    @Html.ActionLink("This", "Index", "Home")
+                    @Html.ActionLink("Is", "Index", "Home")
+                    @Html.ActionLink("A", "Index", "Home")
+                    @Html.ActionLink("MultiLevelDropDown", "Index", "Home")
                     <button class="dropdown-btn">
-                        Dropdown Level 3
+                        Level2
                         <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-container">
-                        @Html.ActionLink("You", "Index", "Home")
-                        @Html.ActionLink("Can", "Index", "Home")
-                        @Html.ActionLink("Go", "Index", "Home")
-                        @Html.ActionLink("Crazy Now", "Index", "Home")
+                        <a href="#">Normal Link</a>
+                        <a href="#">Normal Link 2</a>
+                        <button class="dropdown-btn">
+                            Dropdown Level 3
+                            <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-container">
+                            @Html.ActionLink("You", "Index", "Home")
+                            @Html.ActionLink("Can", "Index", "Home")
+                            @Html.ActionLink("Go", "Index", "Home")
+                            @Html.ActionLink("Crazy Now", "Index", "Home")
+                        </div>
+                        <a href="#">Link 3</a>
                     </div>
-                    <a href="#">Link 3</a>
+                    <a href="#">Just a normal link</a>
                 </div>
-                <a href="#">Just a normal link</a>
+                <a href="#contact">Search</a>
             </div>
-            <a href="#contact">Search</a>
-        </div>
-    </div>*@
+        </div>*@
     <div>
         @*You are here : @Html.MvcSiteMap().SiteMapPath()*@
     </div>

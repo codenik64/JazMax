@@ -32,6 +32,7 @@ namespace JazMax.Web.ViewModel.UserAccountView
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public Nullable<System.DateTime> LastUpdatedDate { get; set; }
         public Nullable<bool> IsActive { get; set; }
+        [Display(Name = "User Type")]
         public int CoreUserTypeId { get; set; }
         public CapturePAView CapturePAView { get; set; }
         public CaptureTeamLeader CaptureTeamLeader { get; set; }

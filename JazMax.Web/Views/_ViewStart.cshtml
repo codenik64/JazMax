@@ -19,6 +19,10 @@ else if (JazMaxIdentityHelper.IsUserInRole("Agent"))
 {
     Layout = "~/Views/Shared/_JazMaxAgent.cshtml";
 }
+else if (JazMaxIdentityHelper.IsUserInRole("CEO"))
+{
+    Layout = "~/Views/Shared/_LayoutCEO.cshtml";
+}
 else
 {
     Layout = "~/Views/Shared/_Layout.cshtml";
