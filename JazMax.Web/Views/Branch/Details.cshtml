@@ -16,162 +16,190 @@
 
     </div>
 }
-<table class="table">
-    <tr>
-        <td width="30%">
-            <div>
-                <hr />
-                <dl>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CoreBranchView.BranchName)
-                    </dt>
+<div class="modal-body row">
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CoreBranchView.BranchName)
-                    </dd>
+    <div>
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Agents</div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tr>
+                            <td width="30%">
+                                <div>
+                                    <hr />
+                                    <dl>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CoreBranchView.Phone)
-                    </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.CoreBranchView.BranchName)
+                                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CoreBranchView.Phone)
-                    </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.CoreBranchView.BranchName)
+                                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CoreBranchView.EmailAddress)
-                    </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.CoreBranchView.Phone)
+                                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CoreBranchView.EmailAddress)
-                    </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.CoreBranchView.Phone)
+                                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CoreBranchView.StreetAddress)
-                    </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.CoreBranchView.EmailAddress)
+                                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CoreBranchView.StreetAddress)
-                    </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.CoreBranchView.EmailAddress)
+                                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CoreBranchView.City)
-                    </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.CoreBranchView.StreetAddress)
+                                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CoreBranchView.City)
-                    </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.CoreBranchView.StreetAddress)
+                                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CoreBranchView.Suburb)
-                    </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.CoreBranchView.City)
+                                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CoreBranchView.Suburb)
-                    </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.CoreBranchView.City)
+                                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CoreBranchView.TeamLeaderName)
-                    </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.CoreBranchView.Suburb)
+                                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CoreBranchView.TeamLeaderName)
-                    </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.CoreBranchView.Suburb)
+                                        </dd>
 
-                    <dt>
-                        @Html.DisplayNameFor(model => model.CoreBranchView.ProvinceName)
-                    </dt>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.CoreBranchView.TeamLeaderName)
+                                        </dt>
 
-                    <dd>
-                        @Html.DisplayFor(model => model.CoreBranchView.ProvinceName)
-                    </dd>
+                                        <dd>
+                                            @Html.DisplayFor(model => model.CoreBranchView.TeamLeaderName)
+                                        </dd>
 
-                </dl>
+                                        <dt>
+                                            @Html.DisplayNameFor(model => model.CoreBranchView.ProvinceName)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.CoreBranchView.ProvinceName)
+                                        </dd>
+
+                                    </dl>
+                                </div>
+
+
+                            </td>
+                            <td width="70%">
+                                <div id="editTheDiv" hidden>
+                                    @{
+                                        Html.RenderAction("Update", "Branch", Model.CoreBranchView.BranchId);
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
             </div>
-
-
-        </td>
-        <td width="70%">
-            <div id="editTheDiv" hidden>
-                @{
-                    Html.RenderAction("Update", "Branch", Model.CoreBranchView.BranchId);
-                }
-            </div>
-        </td>
-    </tr>
-</table>
+        </div>
+    </div>
+</div>
 
 <hr />
-<h3>Agents</h3>
-<hr />
 
-@if (Model.AgentDetailsView.Any())
-{
+<div class="modal-body row">
 
-    <table id="tblAgent" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+    <div>
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Agents</div>
+                <div class="panel-body">
 
-        <thead>
+                    @if (Model.AgentDetailsView.Any())
+                    {
 
+                        <table id="tblAgent" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
 
-            <tr>
-
-                <th>
-                    First Name
-                </th>
-                <th>
-                    Middle Name
-                </th>
-                <th>
-                    Last Name
-                </th>
-
-                <th>
-                    Phone
-                </th>
-                <th>
-                    Cell Phone
-                </th>
-                <th>
-                    Email Address
-                </th>
+                            <thead>
 
 
-                <th></th>
-            </tr>
-        </thead>
-        @foreach (var item in Model.AgentDetailsView)
-        {
-            <tr>
+                                <tr>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MiddleName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CellPhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmailAddress)
-                </td>
-            </tr>
+                                    <th>
+                                        First Name
+                                    </th>
+                                    <th>
+                                        Middle Name
+                                    </th>
+                                    <th>
+                                        Last Name
+                                    </th>
 
-        }
+                                    <th>
+                                        Phone
+                                    </th>
+                                    <th>
+                                        Cell Phone
+                                    </th>
+                                    <th>
+                                        Email Address
+                                    </th>
 
-    </table>
-}
-else
-{
-    <p>There are no agents assigned to this branch</p>
-}
+
+                                 
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.AgentDetailsView)
+                            {
+                                <tr>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MiddleName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CellPhone)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </table>
+                    }
+                    else
+                    {
+                        <p>There are no agents assigned to this branch</p>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $('#tblAgent').DataTable();
