@@ -17,7 +17,8 @@ namespace JazMax.Web.Controllers
         #region Get All Branches
         public ActionResult Index()
         {
-            return View(o.GetAll());
+            //return View(o.GetAll());
+            return View(o.GetAllBranches());
         }
         #endregion
 

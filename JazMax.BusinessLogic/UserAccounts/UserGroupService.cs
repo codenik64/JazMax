@@ -28,7 +28,7 @@ namespace JazMax.BusinessLogic.UserAccounts
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(db, e, 0);
+                AuditLog.ErrorLog.LogError(e, 0);
                 return null;
             }
         }
@@ -43,7 +43,7 @@ namespace JazMax.BusinessLogic.UserAccounts
             }
             catch(Exception e)
             {
-                AuditLog.ErrorLog.LogError(db, e, 0);
+                AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 

@@ -20,7 +20,24 @@ namespace JazMax.Core.SystemHelpers
             return htmlHelper.ActionLink(linkText, "Details", "User", routeValues, null);
         }
 
-       
+        public static MvcHtmlString JazMaxProvinceDetails(this HtmlHelper htmlHelper, string linkText, object routeValues)
+        {
+            if (linkText == "")
+            {
+                return MvcHtmlString.Empty;
+            }
+            return htmlHelper.ActionLink(linkText, "Details", "Province", routeValues, null);
+        }
+
+        public static MvcHtmlString JazMaxBranchDetails(this HtmlHelper htmlHelper, string linkText, object routeValues)
+        {
+            if (linkText == "")
+            {
+                return MvcHtmlString.Empty;
+            }
+            return htmlHelper.ActionLink(linkText, "Details", "Branch", routeValues, null);
+        }
+
 
     }
 }

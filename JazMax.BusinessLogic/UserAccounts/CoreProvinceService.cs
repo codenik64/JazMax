@@ -14,7 +14,6 @@ namespace JazMax.BusinessLogic.UserAccounts
         public List<CoreProvinceView> GetAll()
         {
             var query = from t in db.CoreProvinces
-                        where t.IsActive == true
                         select t;
 
             return ConvertListToView(query.ToList());
@@ -32,6 +31,7 @@ namespace JazMax.BusinessLogic.UserAccounts
                              PAName = c.FirstName + " " + c.LastName,
                              ProvinceId = a.ProvinceId,
                              ProvinceName = a.ProvinceName,
+                             IsActive = a.IsActive
                          }).FirstOrDefault();
             return query;
         }
@@ -54,6 +54,69 @@ namespace JazMax.BusinessLogic.UserAccounts
             var query = db.CoreProvinces.FirstOrDefault(x => x.ProvinceId == Id);
 
             return ConvertModelToView(query);
+        }
+
+        public static void Update(string ProvinceName, int LoggedInCoreUserId, int ProvinceId)
+        {
+            try
+            {
+                if(ProvinceId > 0)
+                {
+                    var table = db.CoreProvinces.FirstOrDefault(x => x.ProvinceId == ProvinceId);
+                    PrepareLogging(ProvinceId, LoggedInCoreUserId);
+                    ChangeLog.ChangeLogService.LogChange(table.ProvinceName, ProvinceName, "Province Name");
+
+                    if (table != null)
+                    {
+                        table.ProvinceName = ProvinceName;
+                    }
+
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                AuditLog.ErrorLog.LogError(e, 0);
+            }
+        }
+
+        public static void DeactiveCoreProvince(int ProvinceId, int LoggedInUserId, bool isActiveAction)
+        {
+            try
+            {
+                var user = db.CoreProvinces.FirstOrDefault(x => x.ProvinceId == ProvinceId);
+
+                PrepareLogging(ProvinceId, LoggedInUserId);
+
+                if (user != null)
+
+                    if (isActiveAction)
+                    {
+                        ChangeLog.ChangeLogService.LogChange(ChangeLog.ChangeLogService.GetBoolString((bool)user.IsActive), ChangeLog.ChangeLogService.GetBoolString(false), "Status");
+
+                        user.IsActive = false;
+                    }
+                    else
+                    {
+                        ChangeLog.ChangeLogService.LogChange(ChangeLog.ChangeLogService.GetBoolString((bool)user.IsActive), ChangeLog.ChangeLogService.GetBoolString(true), "Status");
+                        user.IsActive = true;
+                    }
+
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                AuditLog.ErrorLog.LogError(e, 0);
+            }
+        }
+
+
+
+        private static void PrepareLogging(int PriamryKey, int LoggedInUserId)
+        {
+            ChangeLog.ChangeLogService.tableName = "CoreProvince";
+            ChangeLog.ChangeLogService.tableKey = PriamryKey;
+            ChangeLog.ChangeLogService.LoggedInUserId = LoggedInUserId;
         }
 
         #region Helpers

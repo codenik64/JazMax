@@ -1,0 +1,156 @@
+﻿@model JazMax.Web.ViewModel.UserAccountView.CoreProvinceView
+@using JazMax.Core.SystemHelpers
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="modal-body row">
+    <div class="col-lg-offset-0">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Province</div>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProvinceName, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.ProvinceName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ProvinceName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input id="Save" type="button" class="btn btn-success" value="Save" onclick="UpdateProvince();" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (JazMaxIdentityHelper.IsUserInRole("Admin,CEO,TeamLeader,PA"))
+{
+    <div class="panel-group">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Quick Actions</div>
+            <div class="panel-body">
+
+
+
+
+                @Html.Partial("_ProvinceActiveModal", Model)
+                <br />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="modal-body row">
+    <div class="col-lg-offset-0">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Edit Log</div>
+                <div class="panel-body">
+
+                    @{
+                        Html.RenderAction("GetLog", "Log", new { tableName = "CoreProvince", id = Model.ProvinceId });
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    function UpdateProvince() {
+        debugger;
+        $.ajax({
+            type: 'Post',
+            dataType: 'Json',
+            data:
+            {
+                ProvinceName: $('#ProvinceName').val(),
+                ProvinceId: @Model.ProvinceId
+        },
+            url: '/Province/UpdateProvince',
+            success: function (da) {
+                if (da.Result == "Success") {
+                    document.location.reload(true)
+                }
+                else {
+
+                    alert('Error' + da.Message);
+                }
+            },
+            error: function (da) {
+
+                alert('Error');
+            }
+        });
+
+
+    }
+</script>
+
+
+
+<script>
+    function DeactivateProvince() {
+
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data: {
+                    ProvinceId: @Model.ProvinceId
+                },
+                url: '@Url.Action("Deactivate", "Province")',
+                success: function (da) {
+                    if (da.Result == "Success") {
+                        document.location.reload(true)
+                       // toastr.success('user has been updated');
+                    } else {
+
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    alert('Error');
+                }
+            });
+    }
+</script>
+
+<script>
+    function ActivateProvince() {
+
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data: {
+                    ProvinceId: @Model.ProvinceId
+                },
+                url: '@Url.Action("Activate", "Province")',
+                success: function (da) {
+                    if (da.Result == "Success") {
+                        document.location.reload(true)
+                       // toastr.success('user has been updated');
+                    } else {
+
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    alert('Error');
+                }
+            });
+    }
+</script>

@@ -26,20 +26,76 @@ namespace JazMax.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Create(JazMax.Web.ViewModel.UserAccountView.CoreProvinceView model)
+        public JsonResult CreateValue (string txtProvince)
         {
-            if (ModelState.IsValid)
+            try
             {
+                JazMax.Web.ViewModel.UserAccountView.CoreProvinceView model = new ViewModel.UserAccountView.CoreProvinceView();
+                model.ProvinceName = txtProvince;
                 model.IsActive = true;
                 model.IsAssigned = false;
                 obj.Create(model);
-                return RedirectToAction("Index");
+                return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
             }
-
-            return View(model);
+            catch
+            {
+                return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
+            }
         }
         #endregion
+
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("NotFound", "Error");
+            }
+            return View(CoreProvinceService.GetProvinceDetails((int)id));
+        }
+
+
+        public JsonResult UpdateProvince(string ProvinceName, string ProvinceId)
+        {
+            try
+            {
+                JazMaxIdentityHelper.UserName = User.Identity.Name;
+                CoreProvinceService.Update(ProvinceName, JazMaxIdentityHelper.GetCoreUserId(), Convert.ToInt32(ProvinceId));
+                return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public JsonResult Activate(string ProvinceId)
+        {
+            try
+            {
+                JazMaxIdentityHelper.UserName = User.Identity.Name;
+                CoreProvinceService.DeactiveCoreProvince(Convert.ToInt32(ProvinceId), JazMaxIdentityHelper.GetCoreUserId(), false);
+                return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        public JsonResult Deactivate(string ProvinceId)
+        {
+            try
+            {
+                JazMaxIdentityHelper.UserName = User.Identity.Name;
+                CoreProvinceService.DeactiveCoreProvince(Convert.ToInt32(ProvinceId), JazMaxIdentityHelper.GetCoreUserId(), true);
+                return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
 
     }

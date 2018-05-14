@@ -109,6 +109,35 @@ namespace JazMax.BusinessLogic.UserAccounts
             return bru;
         }
 
+        public List<CoreBranchView> GetAllBranches()
+        {
+
+            var query = from a in db.CoreBranches
+                        join b in db.CoreTeamLeaders
+                        on a.CoreTeamLeaderId equals b.CoreTeamLeaderId
+                        join c in db.CoreUsers
+                        on b.CoreUserId equals c.CoreUserId
+                        join d in db.CoreProvinces
+                        on a.ProvinceId equals d.ProvinceId
+                        select new CoreBranchView
+                        {
+                            BranchId = a.BranchId,
+                            EmailAddress = a.EmailAddress,
+                            IsActive = a.IsActive,
+                            StreetAddress = a.StreetAddress,
+                            BranchName = a.BranchName,
+                            City = a.City,
+                            CoreTeamLeaderId = a.CoreTeamLeaderId,
+                            Phone = a.Phone,
+                            ProvinceId = a.ProvinceId,
+                            ProvinceName = d.ProvinceName,
+                            Suburb = a.Suburb,
+                            TeamLeaderName = c.FirstName + " " + c.LastName
+                        };
+           
+            return query.ToList();
+        }
+
 
         public static BranchDetailsView DetailsNew(JazMax.DataAccess.JazMaxDBProdContext dbcon, int branchId)
         {

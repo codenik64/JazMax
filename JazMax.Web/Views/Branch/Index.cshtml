@@ -1,99 +1,89 @@
 ﻿@model IEnumerable<JazMax.Web.ViewModel.UserAccountView.CoreBranchView>
-
+@using JazMax.Core.SystemHelpers
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table id="tblBranch" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
-    <thead>
-
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BranchId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CoreTeamLeaderId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProvinceId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BranchName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StreetAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Suburb)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-
-    @foreach (var item in Model)
-    {
-        <tbody>
 
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BranchId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CoreTeamLeaderId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProvinceId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsActive)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BranchName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmailAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StreetAddress)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Suburb)
-                </td>
-                <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.BranchId })
 
-                </td>
-            </tr>
-        </tbody>
-    }
 
-</table>
+<div class="modal-body row">
+
+    <div>
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Branches</div>
+                <div class="panel-body">
+                    <span>
+                        @Html.ActionLink("Create Branch", "Create")
+                    </span>
+                    <table id="branchGrid" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                        <tr>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.BranchName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Phone)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EmailAddress)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StreetAddress)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.City)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Suburb)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TeamLeaderName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProvinceName)
+                            </th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.JazMaxBranchDetails(item.BranchName, new { id = item.BranchId })
+                                </td>
+                                <td>
+                                    @Html.JazMaxBranchDetails(item.Phone, new { id = item.BranchId })
+                                </td>
+                                <td>
+                                    @Html.JazMaxBranchDetails(item.EmailAddress, new { id = item.BranchId })
+                                </td>
+                                <td>
+                                    @Html.JazMaxBranchDetails(item.StreetAddress, new { id = item.BranchId })
+                                </td>
+                                <td>
+                                    @Html.JazMaxBranchDetails(item.City, new { id = item.BranchId })
+                                </td>
+                                <td>
+                                    @Html.JazMaxBranchDetails(item.Suburb, new { id = item.BranchId })
+                                </td>
+                                <td>
+                                    @Html.JazMaxBranchDetails(item.TeamLeaderName, new { id = item.BranchId })
+                                </td>
+                                <td>
+                                    @Html.JazMaxBranchDetails(item.ProvinceName, new { id = item.BranchId })
+                                </td>
+
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    $('#tblBranch').DataTable();
+    $('#branchGrid').DataTable();
 </script>
-

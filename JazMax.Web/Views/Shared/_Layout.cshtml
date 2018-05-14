@@ -31,10 +31,9 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Agents", "Index", "Agents", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Branches", "Index", "branch", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Province", "Index", "Province", new { area = "" }, null)</li>
+                    <li>@Html.ActionLink("Branches", "Index", "Branch", new { area = "" }, null)</li>
                     <li>@Html.ActionLink("Users", "Index", "User", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("Property Types", "Index", new { area = "Property", controller = "PropertyType" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

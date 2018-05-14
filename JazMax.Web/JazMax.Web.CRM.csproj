@@ -313,11 +313,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Province\Index.cshtml" />
     <Content Include="Views\UserGroup\Index.cshtml" />
-    <Content Include="Views\Province\Create.cshtml" />
     <Content Include="Views\UserGroup\Create.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Shared\_JazMaxLayout.cshtml" />
-    <Content Include="Views\Branch\Index.cshtml" />
     <Content Include="Views\Branch\Create.cshtml" />
     <Content Include="Views\Branch\_List.cshtml" />
     <Content Include="Views\User\CreateAgent.cshtml" />
@@ -349,6 +347,9 @@
     <Content Include="Views\User\_UserActiveModal.cshtml" />
     <Content Include="Views\User\_UserMoveBranch.cshtml" />
     <Content Include="Views\Shared\_PartialRef.cshtml" />
+    <Content Include="Views\Province\Details.cshtml" />
+    <Content Include="Views\Province\_ProvinceActiveModal.cshtml" />
+    <Content Include="Views\Branch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
