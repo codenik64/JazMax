@@ -77,6 +77,9 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="Save" type="button" class="btn btn-default" value="Save" onclick="save();" />
+                <div id="loading">
+                    <img src="~/Content/LoadCon.gif" id="myimage" width="50px" height="50px" hidden />
+                </div>
             </div>
         </div>
     </div>
@@ -95,44 +98,88 @@
 <script>
     function save()
     {
-        $.ajax({
-            type: 'Post',
-            dataType: 'Json',
-            data: {
-                FirstName: $('#FirstName').val(),
-                MiddleName: $('#MiddleName').val(),
-                LastName: $('#LastName').val(),
-                IDNumber: $('#IDNumber').val(),
-                PhoneNumber: $('#PhoneNumber').val(),
-                CellPhone: $('#CellPhone').val(),
-                EmailAddress: $('#EmailAddress').val(),
-                GenderId: $('#GenderId').val(),
-
-                CoreUserTypeId: $('#CoreUserTypeId').val(),
-                CapturePAView_provinceId: $('#CapturePAView_provinceId').val(),
-                CaptureTeamLeader_provinceId: $('#CaptureTeamLeader_provinceId').val(),
-                dropBranch: $('#ddlBranch').val(),
 
 
+        var count = 0;
+        if ($('#FirstName').val() == '') {
+            toastr.error('Please enter first name');
+            count++;
+        }
 
-            },
-            url: '@Url.Action("SaveAgent", "User")',
-            success: function (da)
-            {
-                if (da.Result == "Success")
-                {
-                    alert('saved sucessfully');
+        if ($('#LastName').val() == '') {
+            toastr.error('Please enter last name');
+            count++;
+        }
+        if ($('#PhoneNumber').val() == '') {
+            toastr.error('Please enter a phone number');
+            count++;
+        }
+        if ($('#IDNumber').val() == '') {
+            toastr.error('Please enter a valid Identity Number');
+            count++;
+        }
+        if ($('#CellPhone').val() == '') {
+            toastr.error('Please enter a valid cellphone Number');
+            count++;
+        }
+
+        var email = $('#EmailAddress').val();
+        var pattern = ".+\\@@.+\\..+";
+        var valid = email.match(pattern);
+        if (valid == null) {
+            toastr.error('Please enter a vaild email address');
+            count++;
+        }
+
+        if (count == 0) {
+
+            $("#Save").attr("disabled", true);
+            $('#myimage').show();
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data: {
+                    FirstName: $('#FirstName').val(),
+                    MiddleName: $('#MiddleName').val(),
+                    LastName: $('#LastName').val(),
+                    IDNumber: $('#IDNumber').val(),
+                    PhoneNumber: $('#PhoneNumber').val(),
+                    CellPhone: $('#CellPhone').val(),
+                    EmailAddress: $('#EmailAddress').val(),
+                    GenderId: $('#GenderId').val(),
+
+                    CoreUserTypeId: $('#CoreUserTypeId').val(),
+                    CapturePAView_provinceId: $('#CapturePAView_provinceId').val(),
+                    CaptureTeamLeader_provinceId: $('#CaptureTeamLeader_provinceId').val(),
+                    dropBranch: $('#ddlBranch').val(),
+
+
+
+                },
+                url: '@Url.Action("SaveAgent", "User")',
+                success: function (da) {
+                    if (da.Result == "Success") {
+                        toastr.success('User saved!');
+                        $('#FirstName').val(null);
+                        $('#MiddleName').val(null);
+                        $('#LastName').val(null);
+                        $('#IDNumber').val(null);
+                        $('#PhoneNumber').val(null);
+                        $('#CellPhone').val(null);
+                        $('#EmailAddress').val(null);
+                        $('#Save').removeAttr("disabled");
+                        $('#myimage').hide();
+                    }
+                    else {
+
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    alert('Error');
                 }
-                else
-                {
-
-                    alert('Error' + da.Message);
-                }
-            },
-            error: function (da) {
-                alert('Error');
-            }
-        });
+            });
+        }
     }
 
 </script>
