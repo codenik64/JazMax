@@ -263,6 +263,8 @@
     <Content Include="Areas\Property\Views\PropertyListing\View.cshtml" />
     <Content Include="Areas\Property\Views\PropertyPrice\Index.cshtml" />
     <None Include="Properties\PublishProfiles\jazmax - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\jazmaxlive - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\jazmaxlive - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\JazMaxMethods.js" />
     <Content Include="Scripts\JazMaxToastr.js" />

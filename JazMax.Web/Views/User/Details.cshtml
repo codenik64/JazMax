@@ -46,8 +46,10 @@
                     <br />
                     <br />
 
+                    @if (Model.CoreUserTypeId == 4)
+                    {
                     @Html.Partial("_UserMoveBranch", Model)
-      
+                    }
 
                 </div>
             </div>
