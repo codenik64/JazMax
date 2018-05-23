@@ -31,6 +31,8 @@ namespace JazMax.Core.Blob
                     blockBlob.UploadFromStream(file.InputStream);
                     blobId = SaveImage(blockBlob.Uri.AbsolutePath, BlobType, FileType, file.FileName, file.ContentType, file.ContentLength);
                 }
+
+                blobId = -1;
             }
             catch (Exception e)
             {
