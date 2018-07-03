@@ -8,10 +8,17 @@
 <br />
 
 <br />
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#idProvince">
+<button type="button" id="myButton" class="btn btn-success" data-toggle="modal" data-target="#idProvince">
     Add New
 </button>
 <br />
+@Html.Raw(JazMaxMvcExtensions.DrawPanel(new JazMaxPanel
+{
+    PanelId = "ErrorMessage2",
+    isHidden = true,
+    Message = "You can no longer add any provinces as there is alreday 9 active provinces.",
+    PanelType = PanelType.Warning
+}))
 
 <!-- Modal -->
 <div class="modal fade" id="idProvince" tabindex="-1" role="dialog" aria-labelledby="idProvinceLabel" aria-hidden="true">
@@ -27,8 +34,16 @@
                 <div id="errorProvince"></div>
 
                 <br />
-                <button type="button" class="btn btn-success" onclick="CreateProvince()">Create</button>
-
+                <button type="button" class="btn btn-success" onclick="CreateProvince()">Create</button>  
+                <button type="button" class="btn btn-primary" onclick="ResetForm()">Reset</button>
+                <br />
+                @Html.Raw(JazMaxMvcExtensions.DrawPanel(new JazMaxPanel
+          {
+              PanelId = "ErrorMessage",
+              isHidden = true,
+              Message = "Error, the following Province already exists",
+              PanelType = PanelType.Danger
+          }))
 
             </div>
             <div class="modal-footer">
@@ -62,7 +77,6 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-
                             <td>
                                 @Html.JazMaxProvinceDetails(item.ProvinceName, new { id = item.ProvinceId })
                             </td>
@@ -78,6 +92,10 @@
                     }
 
                 </table>
+                <div>
+                    <h6 id="active"></h6>
+                    <h6 id="disabled"></h6>
+                </div>
 
             </div>
         </div>
@@ -89,17 +107,20 @@
 
 <script>
 
-
-
+    function ResetForm()
+    {
+        $('#txtProvince').val(' ');
+        $('#ErrorMessage').hide();
+    }
 
     function CreateProvince() {
-        debugger;
+
         var count = 0;
-        if ($('#txtProvince').val() == '') {
+        if ($('#txtProvince').val() == '')
+        {
             toastr.error('Please enter a province name');
             count++;
         }
-
 
         if (count == 0) {
             $.ajax({
@@ -115,6 +136,10 @@
 
                         document.location.reload(true)
                     }
+                    else if (da.Result == "Exists")
+                    {
+                        $('#ErrorMessage').show();
+                    }
                     else {
 
                         alert('Error' + da.Message);
@@ -126,7 +151,68 @@
                 }
             });
         }
-        }
-      
+    }
 
+
+</script>
+
+<script>
+
+ 
+    $(document).ready(function () {
+        CheckButton();
+        CountProvinces();
+    });
+
+    function CheckButton()
+    {
+        $.ajax({
+            type: 'POST',
+            dataType: 'Json',
+            data: null,
+            url: '/Province/CheckCount',
+            success: function (da) {
+                if (da.Result == "Success")
+                {
+                    $('#myButton').removeAttr("disabled");
+                  
+                }
+                else if (da.Result == "Error")
+                {
+                    $('#ErrorMessage2').show();
+                    $('#myButton').attr("disabled", true);
+                }
+            },
+            error: function (da) {
+
+                alert('Error');
+            }
+        });
+    }
+
+    //function CountProvinces() {
+        
+    //    $.ajax({
+    //        type: 'POST',
+    //        dataType: 'Json',
+    //        data: null,
+    //        url: '/Province/ProvinceCount',
+    //        success: function (da) {
+    //            if (da.Result == "Success") {
+    //                debugger;
+    //                var result = da.data;
+    //                var result2 = da.data2;
+
+    //                $('#active').html(da.Message1);
+    //                $('#disabled').html(da.Message2);
+
+    //            }
+              
+    //        },
+    //        error: function (da) {
+
+    //            alert('Error');
+    //        }
+        //});
+    //}
 </script>

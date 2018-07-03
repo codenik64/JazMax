@@ -274,6 +274,7 @@ namespace JazMax.Web.Controllers
         }
         #endregion
 
+        #region Update
         public ActionResult Update(int? id)
         {
             if (id == null)
@@ -282,7 +283,8 @@ namespace JazMax.Web.Controllers
             }
            return View(obj.GetUserDetails((int)id));
         }
-       
+        #endregion
+        
         #region Update CoreUser
         public ActionResult UpdateCoreUser(string coreUserId, string FirstName, string LastName, string MiddleName, string PhoneNumber, string CellPhone, string IdNumber)
         {
@@ -319,8 +321,7 @@ namespace JazMax.Web.Controllers
             UserInformation a = JazMaxIdentityHelper.GetPAUserInformation(User.Identity.Name);
             return Json(_helper.GetBranchesBasedOnProvince(a.ProvinceId), JsonRequestBehavior.AllowGet);
         }
-        #endregion
-
+       
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -371,5 +372,8 @@ namespace JazMax.Web.Controllers
                 return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
             }
         }
+        #endregion
+
+
     }
 }

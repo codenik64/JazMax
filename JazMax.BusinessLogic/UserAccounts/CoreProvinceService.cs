@@ -50,16 +50,27 @@ namespace JazMax.BusinessLogic.UserAccounts
             return query;
         }
 
-        public void Create(CoreProvinceView view)
+        public bool Create(CoreProvinceView view)
         {
+           
             try
             {
-                db.CoreProvinces.Add(ConvertToView(view));
-                db.SaveChanges();
+                if (CheckExist(view.ProvinceName) == false)
+                {
+                    db.CoreProvinces.Add(ConvertToView(view));
+                    db.SaveChanges();
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+                
             }
             catch (Exception e)
             {
                 AuditLog.ErrorLog.LogError(db, e, 0);
+                return true;
             }
         }
 
@@ -131,6 +142,48 @@ namespace JazMax.BusinessLogic.UserAccounts
             ChangeLog.ChangeLogService.tableName = "CoreProvince";
             ChangeLog.ChangeLogService.tableKey = PriamryKey;
             ChangeLog.ChangeLogService.LoggedInUserId = LoggedInUserId;
+        }
+
+        public bool CheckExist(string ProvinceName)
+        {
+            var query = db.CoreProvinces.Where(x => x.ProvinceName.ToLower() == ProvinceName.ToLower()).Any();
+
+            if(query)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool CheckCount()
+        {
+            try
+            {
+                var query = db.CoreProvinces.Where(x => x.IsActive == true).Count();
+
+                if (query >= 9)
+                {
+                    return true;
+
+                }
+            }
+
+            catch (Exception e)
+            {
+                AuditLog.ErrorLog.LogError(e, 0);
+            }
+
+            return false;
+        }
+
+        public int[] Count()
+        {
+            int []result = new int[2];
+
+            result[0] = db.CoreProvinces.Where(x => x.IsActive == true).Count();
+            result[1] = db.CoreProvinces.Where(x => x.IsActive == false).Count();
+
+            return result;
         }
 
         #region Helpers

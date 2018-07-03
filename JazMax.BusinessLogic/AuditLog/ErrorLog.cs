@@ -27,6 +27,20 @@ namespace JazMax.BusinessLogic.AuditLog
             db.SaveChanges();
         }
 
+        public static void LogError(ErrorMessage model)
+        {
+            JazMax.DataAccess.SystemErrorLog a = new DataAccess.SystemErrorLog()
+            {
+                CoreUserId = model.CoreUserId,
+                SystemErrorMessage = model.Message,
+                Source = model.Source,
+                StackTrace = model.StackTrace,
+                ErrorDateTime = (DateTime)DateTime.Now
+            };
+            db.SystemErrorLogs.Add(a);
+            db.SaveChanges();
+        }
+
         //Uses the current open DB connection to log error
         //This should be used in the Business Logic
         public static void LogError(JazMax.DataAccess.JazMaxDBProdContext dbcontext, Exception e, int coreUserId = 0)
@@ -41,6 +55,14 @@ namespace JazMax.BusinessLogic.AuditLog
 
             dbcontext.SystemErrorLogs.Add(a);
             dbcontext.SaveChanges();
+        }
+
+        public class ErrorMessage
+        {
+            public string Message { get; set; }
+            public string Source { get; set; }
+            public string StackTrace { get; set; }
+            public int CoreUserId { get; set; }
         }
     }
 }

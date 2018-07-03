@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using JazMax.BusinessLogic.PropertyManagement;
 using JazMax.Web.ViewModel.PropertyManagement;
-
+using JazMax.Core.Property.PropertyManagement;
 namespace JazMax.Web.Areas.Property.Controllers
 {
     public class PropertyPriceController : Controller

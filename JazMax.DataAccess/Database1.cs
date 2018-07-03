@@ -50,6 +50,7 @@ namespace JazMax.DataAccess
         System.Data.Entity.DbSet<CoreProvince> CoreProvinces { get; set; } // CoreProvince
         System.Data.Entity.DbSet<CoreTeamLeader> CoreTeamLeaders { get; set; } // CoreTeamLeader
         System.Data.Entity.DbSet<CoreUser> CoreUsers { get; set; } // CoreUser
+        System.Data.Entity.DbSet<CoreUserBranchMoveRequest> CoreUserBranchMoveRequests { get; set; } // CoreUserBranchMoveRequest
         System.Data.Entity.DbSet<CoreUserInType> CoreUserInTypes { get; set; } // CoreUserInType
         System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; } // CoreUserType
         System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; } // MessengerCoreLog
@@ -109,6 +110,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<CoreProvince> CoreProvinces { get; set; } // CoreProvince
         public System.Data.Entity.DbSet<CoreTeamLeader> CoreTeamLeaders { get; set; } // CoreTeamLeader
         public System.Data.Entity.DbSet<CoreUser> CoreUsers { get; set; } // CoreUser
+        public System.Data.Entity.DbSet<CoreUserBranchMoveRequest> CoreUserBranchMoveRequests { get; set; } // CoreUserBranchMoveRequest
         public System.Data.Entity.DbSet<CoreUserInType> CoreUserInTypes { get; set; } // CoreUserInType
         public System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; } // CoreUserType
         public System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; } // MessengerCoreLog
@@ -190,6 +192,7 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new CoreProvinceConfiguration());
             modelBuilder.Configurations.Add(new CoreTeamLeaderConfiguration());
             modelBuilder.Configurations.Add(new CoreUserConfiguration());
+            modelBuilder.Configurations.Add(new CoreUserBranchMoveRequestConfiguration());
             modelBuilder.Configurations.Add(new CoreUserInTypeConfiguration());
             modelBuilder.Configurations.Add(new CoreUserTypeConfiguration());
             modelBuilder.Configurations.Add(new MessengerCoreLogConfiguration());
@@ -226,6 +229,7 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new CoreProvinceConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreTeamLeaderConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreUserConfiguration(schema));
+            modelBuilder.Configurations.Add(new CoreUserBranchMoveRequestConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreUserInTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreUserTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new MessengerCoreLogConfiguration(schema));
@@ -319,6 +323,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<CoreProvince> CoreProvinces { get; set; }
         public System.Data.Entity.DbSet<CoreTeamLeader> CoreTeamLeaders { get; set; }
         public System.Data.Entity.DbSet<CoreUser> CoreUsers { get; set; }
+        public System.Data.Entity.DbSet<CoreUserBranchMoveRequest> CoreUserBranchMoveRequests { get; set; }
         public System.Data.Entity.DbSet<CoreUserInType> CoreUserInTypes { get; set; }
         public System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; }
         public System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; }
@@ -354,6 +359,7 @@ namespace JazMax.DataAccess
             CoreProvinces = new FakeDbSet<CoreProvince>("ProvinceId");
             CoreTeamLeaders = new FakeDbSet<CoreTeamLeader>("CoreTeamLeaderId");
             CoreUsers = new FakeDbSet<CoreUser>("CoreUserId");
+            CoreUserBranchMoveRequests = new FakeDbSet<CoreUserBranchMoveRequest>("CoreUserMoveRequestId");
             CoreUserInTypes = new FakeDbSet<CoreUserInType>("CoreUserInTypeId");
             CoreUserTypes = new FakeDbSet<CoreUserType>("CoreUserTypeId");
             MessengerCoreLogs = new FakeDbSet<MessengerCoreLog>("MessengerCoreLogId");
@@ -859,6 +865,24 @@ namespace JazMax.DataAccess
         public System.DateTime? CreatedDate { get; set; } // CreatedDate
         public System.DateTime? LastUpdatedDate { get; set; } // LastUpdatedDate
         public bool? IsActive { get; set; } // IsActive
+    }
+
+    // CoreUserBranchMoveRequest
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreUserBranchMoveRequest
+    {
+        public int CoreUserMoveRequestId { get; set; } // CoreUserMoveRequestId (Primary key)
+        public int CoreUserId { get; set; } // CoreUserId
+        public int CoreBranchId { get; set; } // CoreBranchId
+        public string MoveRequestComment { get; set; } // MoveRequestComment
+        public System.DateTime RequestedDate { get; set; } // RequestedDate
+        public bool HasBeenApproved { get; set; } // HasBeenApproved
+        public int ApprovedBy { get; set; } // ApprovedBy
+        public System.DateTime? ApprovedDate { get; set; } // ApprovedDate
+        public System.DateTime? EffectiveDate { get; set; } // EffectiveDate
+        public string ApproverComments { get; set; } // ApproverComments
+        public bool HasBeenCompleted { get; set; } // HasBeenCompleted
+        public bool WebJobUpdateCompleted { get; set; } // WebJobUpdateCompleted
     }
 
     // CoreUserInType
@@ -1399,6 +1423,35 @@ namespace JazMax.DataAccess
             Property(x => x.CreatedDate).HasColumnName(@"CreatedDate").HasColumnType("datetime").IsOptional();
             Property(x => x.LastUpdatedDate).HasColumnName(@"LastUpdatedDate").HasColumnType("datetime").IsOptional();
             Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsOptional();
+        }
+    }
+
+    // CoreUserBranchMoveRequest
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreUserBranchMoveRequestConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreUserBranchMoveRequest>
+    {
+        public CoreUserBranchMoveRequestConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CoreUserBranchMoveRequestConfiguration(string schema)
+        {
+            ToTable("CoreUserBranchMoveRequest", schema);
+            HasKey(x => x.CoreUserMoveRequestId);
+
+            Property(x => x.CoreUserMoveRequestId).HasColumnName(@"CoreUserMoveRequestId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsRequired();
+            Property(x => x.CoreBranchId).HasColumnName(@"CoreBranchId").HasColumnType("int").IsRequired();
+            Property(x => x.MoveRequestComment).HasColumnName(@"MoveRequestComment").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.RequestedDate).HasColumnName(@"RequestedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.HasBeenApproved).HasColumnName(@"HasBeenApproved").HasColumnType("bit").IsRequired();
+            Property(x => x.ApprovedBy).HasColumnName(@"ApprovedBy").HasColumnType("int").IsRequired();
+            Property(x => x.ApprovedDate).HasColumnName(@"ApprovedDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.EffectiveDate).HasColumnName(@"EffectiveDate").HasColumnType("datetime").IsOptional();
+            Property(x => x.ApproverComments).HasColumnName(@"ApproverComments").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.HasBeenCompleted).HasColumnName(@"HasBeenCompleted").HasColumnType("bit").IsRequired();
+            Property(x => x.WebJobUpdateCompleted).HasColumnName(@"WebJobUpdateCompleted").HasColumnType("bit").IsRequired();
         }
     }
 

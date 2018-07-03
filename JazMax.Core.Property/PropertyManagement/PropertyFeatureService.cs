@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using JazMax.Web.ViewModel.PropertyManagement;
 
-namespace JazMax.BusinessLogic.PropertyManagement
+
+namespace JazMax.Core.Property.PropertyManagement
 {
     public class PropertyFeatureService
     {
@@ -37,7 +38,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
@@ -48,7 +49,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             {
                 if (Id != null)
                 {
-                    model = (db.PropertyFeatures.Where(x => x.PropertyFeatureId == Id).Select( x => new PropertyFeatureView
+                    model = (db.PropertyFeatures.Where(x => x.PropertyFeatureId == Id).Select(x => new PropertyFeatureView
                     {
                         FeatureName = x.FeatureName,
                         IsFeatureActive = x.IsFeatureActive,
@@ -60,7 +61,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
             return model;
         }
@@ -73,7 +74,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
 
                 LoadEditLogDetails(table.PropertyFeatureId, CoreSystemUserId);
 
-                ChangeLog.ChangeLogService.LogChange(table.FeatureName, model.FeatureName, "Feature Name");
+                JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(table.FeatureName, model.FeatureName, "Feature Name");
 
                 if (table != null)
                 {
@@ -84,7 +85,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
@@ -99,17 +100,17 @@ namespace JazMax.BusinessLogic.PropertyManagement
                 {
                     if (isAction)
                     {
-                        ChangeLog.ChangeLogService.LogChange(
-                            ChangeLog.ChangeLogService.GetBoolString(table.IsFeatureActive),
-                            ChangeLog.ChangeLogService.GetBoolString(true), "Active Status");
+                        JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(
+                             JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(table.IsFeatureActive),
+                             JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(true), "Active Status");
 
                         table.IsFeatureActive = true;
                     }
                     else
                     {
-                        ChangeLog.ChangeLogService.LogChange(
-                           ChangeLog.ChangeLogService.GetBoolString(table.IsFeatureActive),
-                           ChangeLog.ChangeLogService.GetBoolString(false), "Active Status");
+                        JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(
+                            JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(table.IsFeatureActive),
+                            JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(false), "Active Status");
 
                         table.IsFeatureActive = false;
                     }
@@ -118,15 +119,15 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
         private void LoadEditLogDetails(int PrimaryKey, int UserId)
         {
-            ChangeLog.ChangeLogService.tableName = "PropertyFeature";
-            ChangeLog.ChangeLogService.tableKey = PrimaryKey;
-            ChangeLog.ChangeLogService.LoggedInUserId = UserId;
+            JazMax.BusinessLogic.ChangeLog.ChangeLogService.tableName = "PropertyFeature";
+            JazMax.BusinessLogic.ChangeLog.ChangeLogService.tableKey = PrimaryKey;
+            JazMax.BusinessLogic.ChangeLog.ChangeLogService.LoggedInUserId = UserId;
         }
     }
 }

@@ -9,25 +9,17 @@ using System.Web.Mvc;
 
 namespace JazMax.Web.Controllers
 {
-    public class PAController : Controller
+    public class PAController : Core.SystemHelpers.JazMaxControllerCore
     {
         // GET: PA
         public ActionResult Index()
         {
-           
-            return View();
+            return JazMaxView();
         }
 
-      
-
-        public ActionResult CreateAgent()
+        public PartialViewResult CreateAgent()
         {
-            return View();
-        }
-
-        public int test()
-        {
-            return (int)JazMax.Common.Enum.UserType.PA;
+            return PartialView();
         }
     }
 }

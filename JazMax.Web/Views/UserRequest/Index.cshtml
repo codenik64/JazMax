@@ -1,0 +1,87 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.UserAccountView.UserBranchMoveView>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CoreUserMoveRequestId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoreUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CoreBranchId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoveRequestComment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RequestedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasBeenApproved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApproverComments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HasBeenCompleted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CoreUserMoveRequestId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CoreUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CoreBranchId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MoveRequestComment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RequestedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HasBeenApproved)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApproverComments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HasBeenCompleted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

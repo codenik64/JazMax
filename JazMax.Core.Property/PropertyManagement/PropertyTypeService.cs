@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JazMax.Web.ViewModel.PropertyManagement;
 
-namespace JazMax.BusinessLogic.PropertyManagement
+namespace JazMax.Core.Property.PropertyManagement
 {
     public class PropertyTypeService
     {
@@ -42,7 +42,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
             return model;
         }
@@ -61,7 +61,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
@@ -73,7 +73,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
 
                 LoadEditLogDetails(table.PropertyTypeId, CoreSystemUserId);
 
-                ChangeLog.ChangeLogService.LogChange(table.TypeName, model.TypeName, "Property Type");
+                 JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(table.TypeName, model.TypeName, "Property Type");
 
                 if (table != null)
                 {
@@ -84,7 +84,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
@@ -99,17 +99,17 @@ namespace JazMax.BusinessLogic.PropertyManagement
                 {
                     if (isAction)
                     {
-                        ChangeLog.ChangeLogService.LogChange(
-                            ChangeLog.ChangeLogService.GetBoolString(table.IsActive),
-                            ChangeLog.ChangeLogService.GetBoolString(true), "Active Status");
+                        JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(
+                             JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(table.IsActive),
+                             JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(true), "Active Status");
 
                         table.IsActive = true;
                     }
                     else
                     {
-                        ChangeLog.ChangeLogService.LogChange(
-                           ChangeLog.ChangeLogService.GetBoolString(table.IsActive),
-                           ChangeLog.ChangeLogService.GetBoolString(false), "Active Status");
+                        JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(
+                            JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(table.IsActive),
+                            JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(false), "Active Status");
 
                         table.IsActive = false;
                     }
@@ -118,15 +118,15 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
         private void LoadEditLogDetails(int PrimaryKey, int UserId)
         {
-            ChangeLog.ChangeLogService.tableName = "PropertyType";
-            ChangeLog.ChangeLogService.tableKey = PrimaryKey;
-            ChangeLog.ChangeLogService.LoggedInUserId = UserId;
+            JazMax.BusinessLogic.ChangeLog.ChangeLogService.tableName = "PropertyType";
+            JazMax.BusinessLogic.ChangeLog.ChangeLogService.tableKey = PrimaryKey;
+            JazMax.BusinessLogic.ChangeLog.ChangeLogService.LoggedInUserId = UserId;
         }
     }
 }

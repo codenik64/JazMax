@@ -6,12 +6,15 @@ using System.Web.Mvc;
 using JazMax.BusinessLogic.UserAccounts;
 using JazMax.Web.Models;
 using JazMax.Core.SystemHelpers;
+using JazMax.BusinessLogic.Cache;
+using System.Runtime.Caching;
+
 namespace JazMax.Web.Controllers
 {
     public class ProvinceController : Controller
     {
         private static CoreProvinceService obj = new CoreProvinceService();
-  
+
         #region Get All 
         [JazMaxIdentity(UserGroup = "TeamLeader,CEO")]
         public ActionResult Index()
@@ -26,20 +29,41 @@ namespace JazMax.Web.Controllers
             return View();
         }
 
-        public JsonResult CreateValue (string txtProvince)
+        public JsonResult CreateValue(string txtProvince)
         {
             try
             {
-                JazMax.Web.ViewModel.UserAccountView.CoreProvinceView model = new ViewModel.UserAccountView.CoreProvinceView();
-                model.ProvinceName = txtProvince;
-                model.IsActive = true;
-                model.IsAssigned = false;
-                obj.Create(model);
-                return Json(new { Result = "Success", Message = "Saved Successfully" }, JsonRequestBehavior.AllowGet);
+                JazMax.Web.ViewModel.UserAccountView.CoreProvinceView model = new ViewModel.UserAccountView.CoreProvinceView()
+                {
+                    ProvinceName = txtProvince,
+                    IsActive = true,
+                    IsAssigned = false
+                };
+
+                if (obj.Create(model) == false)
+                {
+                    return Json(new JazMaxJsonHelper
+                    {
+                        Result = Common.Models.JsonResult.Success,
+                        Message = Common.Models.JsonMessage.Saved,
+                    });
+                }
+                else
+                {
+                    return Json(new JazMaxJsonHelper
+                    {
+                        Result = Common.Models.JsonResult.Exists,
+                        Message = "Error, Province Already exists",
+                    });
+                }
             }
             catch
             {
-                return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
+                return Json(new JazMaxJsonHelper
+                {
+                    Result = Common.Models.JsonResult.Error,
+                    Message = Common.Models.JsonMessage.Error,
+                });
             }
         }
         #endregion
@@ -97,6 +121,49 @@ namespace JazMax.Web.Controllers
             }
         }
 
+        public JsonResult CheckCount()
+        {
+            if (obj.CheckCount() == false)
+            {
+                return Json(new JazMaxJsonHelper
+                {
+                    Result = Common.Models.JsonResult.Success,
+                });
+            }
+            else
+            {
+                return Json(new JazMaxJsonHelper
+                {
+                    Result = Common.Models.JsonResult.Error,
+                });
+            }
+        }
+
+        public JsonResult ProvinceCount()
+        {
+            return Json(new JazMaxMultipleResultHelper
+            {
+                Result = Common.Models.JsonResult.Success,
+                Message1 = "Total Active Provinces " +  obj.Count()[0].ToString(),
+                Message2 = "Total Disabled Provines "+ obj.Count()[1].ToString()
+            });
+
+        }
+
+        public string test()
+        {
+            
+
+            var cache = MemoryCache.Default;
+
+            var key = "myKey2";
+            var value = obj.Count();
+            var policy = new CacheItemPolicy { SlidingExpiration = new TimeSpan(0, 0, 30) };
+            cache.Add(key, value, policy);
+
+            int[] st = (int[])cache["myKey2"];
+            return "Total Active Provinces " + st[0].ToString() + "<br/> " + "Total Disabled Provines " + st[1].ToString();
+        }
 
     }
 }

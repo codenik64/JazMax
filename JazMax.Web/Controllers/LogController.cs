@@ -6,14 +6,14 @@ using System.Web.Mvc;
 
 namespace JazMax.Web.Controllers
 {
-    public class LogController : Controller
+    public class LogController : JazMax.Core.SystemHelpers.JazMaxControllerCore
     {
 
         // GET: Log
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //   // return GetAuditLog();
+        //}
 
         public ActionResult GetLog(string tableName, int Id)
         {

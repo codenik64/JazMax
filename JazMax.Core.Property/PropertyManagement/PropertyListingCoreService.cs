@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using JazMax.Web.ViewModel.PropertyManagement;
-using JazMax.Web.ViewModel.PropertyManagement.CaptureListing;
 
-namespace JazMax.BusinessLogic.PropertyManagement
+namespace JazMax.Core.Property.PropertyManagement
 {
     public class PropertyListingCoreService
     {
@@ -36,7 +35,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
             return ListingId;
         }
@@ -56,7 +55,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
@@ -78,7 +77,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
@@ -97,7 +96,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
@@ -110,7 +109,7 @@ namespace JazMax.BusinessLogic.PropertyManagement
                     IsFeatureActive = true,
                     PropertyListingId = PropetyListingId,
                     PropertyFeatureId = model.PropertyFeatureId,
-                    
+
                 };
 
                 db.ProprtyListingFeatures.Add(table);
@@ -118,11 +117,11 @@ namespace JazMax.BusinessLogic.PropertyManagement
             }
             catch (Exception e)
             {
-                AuditLog.ErrorLog.LogError(e, 0);
+                JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 0);
             }
         }
 
-        public void MainInsert(NewListingView model)
+        public void MainInsert(Web.ViewModel.PropertyManagement.CaptureListing.NewListingView model)
         {
             int Id = CaptureListing(model.PropertyListingView);
             CaptureListingAgents(model.PropertyListingAgentsView, Id);
@@ -132,6 +131,6 @@ namespace JazMax.BusinessLogic.PropertyManagement
 
         }
 
-       
+
     }
 }

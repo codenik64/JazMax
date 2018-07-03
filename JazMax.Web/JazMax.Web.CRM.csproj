@@ -55,6 +55,7 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -218,6 +219,7 @@
     <Compile Include="Controllers\ProvinceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserGroupController.cs" />
+    <Compile Include="Controllers\UserRequestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -354,6 +356,9 @@
     <Content Include="Views\Province\_ProvinceActiveModal.cshtml" />
     <Content Include="Views\Branch\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutCEO.cshtml" />
+    <Content Include="Views\PA\Index.cshtml" />
+    <Content Include="Views\UserRequest\Capture.cshtml" />
+    <Content Include="Views\UserRequest\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -363,7 +368,6 @@
     <Folder Include="Areas\Messenger\Models\" />
     <Folder Include="Areas\Messenger\Views\Shared\" />
     <Folder Include="css\" />
-    <Folder Include="Views\PA\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -392,6 +396,10 @@
     <ProjectReference Include="..\JazMax.Core.Blob\JazMax.Core.Blob.csproj">
       <Project>{0672ce51-2f3b-4b48-916a-e4b10edf202d}</Project>
       <Name>JazMax.Core.Blob</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.Core.Property\JazMax.Core.Property.csproj">
+      <Project>{574405bb-bf3a-432d-aeee-f27890edfe29}</Project>
+      <Name>JazMax.Core.Property</Name>
     </ProjectReference>
     <ProjectReference Include="..\JazMax.Core.SystemHelpers\JazMax.Core.SystemHelpers.csproj">
       <Project>{82fa27cf-5676-4490-b12e-025dbe4603e8}</Project>

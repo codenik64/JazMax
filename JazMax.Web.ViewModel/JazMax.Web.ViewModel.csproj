@@ -81,6 +81,7 @@
     <Compile Include="PropertyManagement\PropertyPricingTypesView.cs" />
     <Compile Include="PropertyManagement\PropertyTypeView.cs" />
     <Compile Include="UserAccountView\AgentDetailsView.cs" />
+    <Compile Include="UserAccountView\ApproveRequestView.cs" />
     <Compile Include="UserAccountView\BranchDetailsView.cs" />
     <Compile Include="UserAccountView\CaptureAgent.cs" />
     <Compile Include="UserAccountView\CapturePAView.cs" />
@@ -91,7 +92,9 @@
     <Compile Include="UserAccountView\CoreUserDetails.cs" />
     <Compile Include="UserAccountView\CoreUserTypeView.cs" />
     <Compile Include="UserAccountView\CoreUserView.cs" />
+    <Compile Include="UserAccountView\RequestBranchMoveView.cs" />
     <Compile Include="UserAccountView\UserBranchDetails.cs" />
+    <Compile Include="UserAccountView\UserBranchMoveView.cs" />
     <Compile Include="UserAccountView\UserProvinceDetails.cs" />
     <Compile Include="UserAccountView\UserTeamLeaderDetails.cs" />
     <Compile Include="WebJob\JobModel.cs" />

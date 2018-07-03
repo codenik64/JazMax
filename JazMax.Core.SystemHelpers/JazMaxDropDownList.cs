@@ -182,11 +182,5 @@ namespace JazMax.Core.SystemHelpers
             return listItems;
         }
 
-
-
-
-
-
-
     }
 }
