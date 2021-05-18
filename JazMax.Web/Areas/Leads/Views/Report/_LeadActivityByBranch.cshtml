@@ -1,0 +1,74 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.Leads.Reports.LeadActivityByBranch>
+
+<div class="panel - group">
+    <div class="col-md-0">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Leads Activities</div>
+            <div class="panel-body">
+
+                @if (Model.Any())
+                {
+
+                    <table class="table">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LeadID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateCreated)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.BranchName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NumberOfActivities)
+                            </th>
+                            <td>
+                                @Html.DisplayNameFor(model => model.StatusName)
+                            </td>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LeadID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateCreated)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BranchName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NumberOfActivities)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StatusName)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Details", "Details", "Leads" , new { id=item.LeadID , area = "Leads" })
+                                </td>
+                            </tr>
+
+                        }
+                    </table>
+                }
+                else
+                {
+                    <p>No Records Found</p>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#LeadGrid').dataTable({
+        "searching": true,
+        "pageLength": 50,
+        "lengthMenu": [5, 10, 20, 50, 100]
+    });
+</script>

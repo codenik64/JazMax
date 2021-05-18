@@ -1,0 +1,15 @@
+﻿
+@model IEnumerable<JazMax.Web.ViewModel.Leads.LinkedLeadsList>
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+           
+            <td>
+                @Html.ActionLink(item.LinkedLeadId.ToString(), "Details", "Leads", new { id = item.LinkedLeadId }, null)
+            </td>
+           
+        </tr>
+    }
+</table>

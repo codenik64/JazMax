@@ -10,6 +10,8 @@ namespace JazMax.WebJob.LeadCore
     {
         static void Main(string[] args)
         {
+            LeadCoreDataExtractor core = new LeadCoreDataExtractor();
+            core.DoWork();
         }
     }
 }

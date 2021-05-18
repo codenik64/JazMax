@@ -30,8 +30,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +49,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity\ActivityCreation.cs" />
+    <Compile Include="Activity\ActivityLogic.cs" />
+    <Compile Include="Activity\ActivityTypeLogic.cs" />
+    <Compile Include="Creation\LeadCreation.cs" />
+    <Compile Include="Lead Attachments\LeadAttachmentService.cs" />
+    <Compile Include="LeadPerfomance\LeadProcessor.cs" />
+    <Compile Include="Logic\LeadHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reminder\ReminderCreation.cs" />
+    <Compile Include="Reminder\ReminderLogic.cs" />
+    <Compile Include="Reports\LeadReportCore.cs" />
+    <Compile Include="Services\DataExtractor.cs" />
+    <Compile Include="Services\LeadCommunication.cs" />
+    <Compile Include="Status\LeadStatusLogic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JazMax.BusinessLogic\JazMax.BusinessLogic.csproj">
+      <Project>{95d501fc-6e06-4a01-9887-94ea243b86dc}</Project>
+      <Name>JazMax.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.DataAccess\JazMax.DataAccess.csproj">
+      <Project>{629737f1-f624-4835-9794-0727b8c4dc96}</Project>
+      <Name>JazMax.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.Web.ViewModel\JazMax.Web.ViewModel.csproj">
+      <Project>{ebc8eb41-67f0-43cc-9760-15039ca7d307}</Project>
+      <Name>JazMax.Web.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,30 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.PropertyManagement.PropertyListingAgentsView>
+
+@{
+    ViewBag.Title = "View";
+}
+<link href="~/Content/Property CSS/ContactCard.css" rel="stylesheet" />
+<table class="table">
+    @foreach (var item in Model)
+    {
+
+        <ul class="list-group" id="contact-list">
+            <li class="list-group-item">
+                <div class="col-xs-12 col-sm-3">
+                    <img src="http://api.randomuser.me/portraits/men/49.jpg" alt="Scott Stevens" class="img-responsive img-circle" />
+                </div>
+                <div class="col-xs-12 col-sm-9">
+                    <span class="name">@Html.DisplayFor(modelItem => item.AgentName)</span><br />
+                    <span class="glyphicon glyphicon-map-marker text-muted c-info" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.Address)"></span>
+                    <span class="visible-xs"> <span class="text-muted">Unknown</span><br /></span>
+                    <span class="glyphicon glyphicon-earphone text-muted c-info" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.Contact)"></span>
+                    <span class="visible-xs"> <span class="text-muted">@Html.DisplayFor(modelItem => item.Contact)</span><br /></span>
+                    <span class="fa fa-comments text-muted c-info" data-toggle="tooltip" title="@Html.DisplayFor(modelItem => item.Email)"></span>
+                    <span class="visible-xs"> <span class="text-muted">@Html.DisplayFor(modelItem => item.Email)</span><br /></span>
+                </div>
+                <div class="clearfix"></div>
+            </li>
+            </ul>
+       }
+</table>
+

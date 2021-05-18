@@ -1,0 +1,12 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.PropertyManagement.PropertyImagesView>
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.BlobImagePath)" />
+            </td>
+        </tr>
+    }
+</table>

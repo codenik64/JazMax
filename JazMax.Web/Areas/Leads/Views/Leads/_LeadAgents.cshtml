@@ -1,0 +1,17 @@
+﻿
+
+@model IEnumerable<JazMax.Web.ViewModel.Leads.LeadAgents>
+
+@{
+    ViewBag.Title = "View";
+}
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FriendlyName)
+            </td>
+        </tr>
+    }
+</table>

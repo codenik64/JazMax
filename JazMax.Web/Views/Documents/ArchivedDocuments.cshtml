@@ -1,0 +1,103 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.Documents.UploadView>
+@using (Html.BeginForm("ArchivedDocuments", "Documents", FormMethod.Post))
+{
+    <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+    <br/>
+    <br/>
+<p>
+   
+    <button class="btn btn-primary btn-sm" type="submit" onclick="return confirm('Are you sure?')"><i class="fa fa-archive"></i>Recover All</button>
+</p>
+<table  id="arc" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                <input type="checkbox" id="CheckAll" />
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileNames)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FileDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SentFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SentTo)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+@foreach (var item in Model)
+{
+    <tr>
+        <td><input type="checkbox" class="CheckBoxId" value="@item.FileUploadId" name="FileUploadId" /></td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileNames)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SentFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SentTo)
+        </td>
+        <td>
+
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-sm"  data-toggle="dropdown">
+                   Quick Actions <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                   
+                    <li><a href="@Url.Action("Details", "Documents", new { id = item.FileUploadId })">Details</a></li>
+                    <li><a href="@Url.Action("Delete", "Documents", new { id = item.FileUploadId })">Delete Document</a></li>
+                    <li><a href="@Url.Action("Recover", "Documents", new { id = item.FileUploadId })">Recover Document</a></li>
+                    <li><a href="@Url.Action("Forward", "Documents", new { id = item.FileUploadId })">Forward Document</a></li>
+                    <li><a href="@Url.Action("DownLoad", "Documents", new { id = item.FileUploadId })">Download Document</a></li>
+                </ul>
+            </div>
+
+        </td>
+    </tr>
+}
+
+</table>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#CheckAll').click(function () {
+            if ($(this).is(":checked"))
+                $('.CheckBoxId').prop('checked', true);
+            else
+                $('.CheckBoxId').prop('checked', false);
+
+        });
+    });
+</script>
+<script>
+    $('#arc').DataTable();
+</script>

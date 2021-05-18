@@ -10,7 +10,7 @@ namespace JazMax.Web.PropertyWebsite.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "PropertyListing");
         }
 
         public ActionResult About()

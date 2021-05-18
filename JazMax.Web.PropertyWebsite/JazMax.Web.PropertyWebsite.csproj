@@ -56,7 +56,6 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -191,7 +190,10 @@
     <Compile Include="Areas\Listing\ListingAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeadsController.cs" />
+    <Compile Include="Controllers\ListingController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PropertyListingController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -204,6 +206,71 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Card.css" />
+    <Content Include="Content\mytemplate\css\custom.css" />
+    <Content Include="Content\mytemplate\css\default-skin\default-skin.css" />
+    <Content Include="Content\mytemplate\css\default-skin\default-skin.png" />
+    <Content Include="Content\mytemplate\css\default-skin\default-skin.svg" />
+    <Content Include="Content\mytemplate\css\default-skin\preloader.gif" />
+    <Content Include="Content\mytemplate\css\style.css" />
+    <Content Include="Content\mytemplate\css\style.min.css" />
+    <Content Include="Content\mytemplate\css\styles-merged.css" />
+    <Content Include="Content\mytemplate\css\vendor\animate.css" />
+    <Content Include="Content\mytemplate\css\vendor\bootstrap.min.css" />
+    <Content Include="Content\mytemplate\css\vendor\default-skin.css" />
+    <Content Include="Content\mytemplate\css\vendor\flexslider.css" />
+    <Content Include="Content\mytemplate\css\vendor\icomoon.css" />
+    <Content Include="Content\mytemplate\css\vendor\magnific-popup.css" />
+    <Content Include="Content\mytemplate\css\vendor\owl.carousel.min.css" />
+    <Content Include="Content\mytemplate\css\vendor\owl.theme.default.min.css" />
+    <Content Include="Content\mytemplate\css\vendor\photoswipe.css" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\demo-files\demo.css" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\demo-files\demo.js" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\demo.html" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\fonts\icomoon.svg" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\Read Me.txt" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\style.css" />
+    <Content Include="Content\mytemplate\fonts\icomoon\icomoon.svg" />
+    <Content Include="Content\mytemplate\img\flaticon\backup.txt" />
+    <Content Include="Content\mytemplate\img\flaticon\svg\001-prize.svg" />
+    <Content Include="Content\mytemplate\img\flaticon\svg\002-camera.svg" />
+    <Content Include="Content\mytemplate\img\flaticon\svg\003-fence.svg" />
+    <Content Include="Content\mytemplate\img\flaticon\svg\004-house.svg" />
+    <Content Include="Content\mytemplate\img\flaticon\svg\005-new.svg" />
+    <Content Include="Content\mytemplate\img\flaticon\svg\006-coin.svg" />
+    <Content Include="Content\mytemplate\img\loc.png" />
+    <Content Include="Content\mytemplate\img\person_1.jpg" />
+    <Content Include="Content\mytemplate\img\person_2.jpg" />
+    <Content Include="Content\mytemplate\img\person_3.jpg" />
+    <Content Include="Content\mytemplate\img\person_4.jpg" />
+    <Content Include="Content\mytemplate\img\preloader.gif" />
+    <Content Include="Content\mytemplate\img\slider_1.jpg" />
+    <Content Include="Content\mytemplate\img\slider_2.jpg" />
+    <Content Include="Content\mytemplate\img\slider_3.jpg" />
+    <Content Include="Content\mytemplate\img\slider_4.jpg" />
+    <Content Include="Content\mytemplate\img\slider_5.jpg" />
+    <Content Include="Content\mytemplate\js\custom.js" />
+    <Content Include="Content\mytemplate\js\google-map.js" />
+    <Content Include="Content\mytemplate\js\main.js" />
+    <Content Include="Content\mytemplate\js\main.min.js" />
+    <Content Include="Content\mytemplate\js\scripts.js" />
+    <Content Include="Content\mytemplate\js\scripts.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\bootstrap.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\circle-progress.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\html5shiv.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\jquery.appear.js" />
+    <Content Include="Content\mytemplate\js\vendor\jquery.appear.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\jquery.countTo.js" />
+    <Content Include="Content\mytemplate\js\vendor\jquery.easing.1.3.js" />
+    <Content Include="Content\mytemplate\js\vendor\jquery.flexslider-min.js" />
+    <Content Include="Content\mytemplate\js\vendor\jquery.magnific-popup.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\jquery.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\jquery.stellar.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\jquery.waypoints.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\owl.carousel.min.js" />
+    <Content Include="Content\mytemplate\js\vendor\respond.min.js" />
+    <Content Include="Content\NavTab.css" />
+    <Content Include="Content\PropertyDetail.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -214,6 +281,26 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Areas\Listing\Views\web.config" />
+    <Content Include="Content\mytemplate\css\.DS_Store" />
+    <Content Include="Content\mytemplate\css\styles-merged.css.map" />
+    <Content Include="Content\mytemplate\fonts\.DS_Store" />
+    <Content Include="Content\mytemplate\fonts\icomoon\icomoon.eot" />
+    <Content Include="Content\mytemplate\fonts\icomoon\icomoon.ttf" />
+    <Content Include="Content\mytemplate\fonts\icomoon\icomoon.woff" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\.DS_Store" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\fonts\icomoon.eot" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\fonts\icomoon.ttf" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\fonts\icomoon.woff" />
+    <Content Include="Content\mytemplate\fonts\icomoon demo\selection.json" />
+    <Content Include="Content\mytemplate\img\.DS_Store" />
+    <Content Include="Content\mytemplate\img\flaticon\license\license.pdf" />
+    <Content Include="Content\mytemplate\js\.DS_Store" />
+    <Content Include="Content\mytemplate\js\vendor\.DS_Store" />
+    <Content Include="Content\mytemplate\scss\.DS_Store" />
+    <Content Include="Content\mytemplate\scss\_custom-settings.scss" />
+    <Content Include="Content\mytemplate\scss\style.scss" />
+    <None Include="Properties\PublishProfiles\jazmaxproperty - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\jazmaxproperty - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -259,12 +346,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\PropertyListing\Index.cshtml" />
+    <Content Include="Views\PropertyListing\PropertyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Listing\Controllers\" />
     <Folder Include="Areas\Listing\Models\" />
     <Folder Include="Areas\Listing\Views\Shared\" />
+    <Folder Include="Views\Leads\" />
+    <Folder Include="Views\Listing\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -285,6 +376,22 @@
     <ProjectReference Include="..\JazMax.BusinessLogic\JazMax.BusinessLogic.csproj">
       <Project>{95d501fc-6e06-4a01-9887-94ea243b86dc}</Project>
       <Name>JazMax.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.Common\JazMax.Common.csproj">
+      <Project>{fe4d7bd5-3cf8-4b41-ad27-ae7500110afc}</Project>
+      <Name>JazMax.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.Core.Blob\JazMax.Core.Blob.csproj">
+      <Project>{0672ce51-2f3b-4b48-916a-e4b10edf202d}</Project>
+      <Name>JazMax.Core.Blob</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.Core.Leads\JazMax.Core.Leads.csproj">
+      <Project>{0b1e9020-73fa-45a5-aa65-1d0392220a99}</Project>
+      <Name>JazMax.Core.Leads</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\JazMax.Core.Property\JazMax.Core.Property.csproj">
+      <Project>{574405bb-bf3a-432d-aeee-f27890edfe29}</Project>
+      <Name>JazMax.Core.Property</Name>
     </ProjectReference>
     <ProjectReference Include="..\JazMax.Core.SystemHelpers\JazMax.Core.SystemHelpers.csproj">
       <Project>{82fa27cf-5676-4490-b12e-025dbe4603e8}</Project>

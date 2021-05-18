@@ -11,6 +11,8 @@ namespace JazMax.BusinessLogic.UserAccounts
     {
         private static JazMax.DataAccess.JazMaxDBProdContext db = new DataAccess.JazMaxDBProdContext();
 
+    
+
         //LEGACY CODE
         public List<CoreUserView> GetAll()
         {
@@ -20,6 +22,41 @@ namespace JazMax.BusinessLogic.UserAccounts
 
             return ConvertListModelToView(query.ToList());
         }
+
+
+        public int GetCount()
+        {
+            var count = 0;
+            var query = (from t in db.CoreUserInTypes
+                        
+                        select t).FirstOrDefault();
+
+            if (query.CoreUserTypeId == 2)
+            {
+                var ok = GetAll().Where(x => x.CoreUserTypeId == 2).Count();
+                count = ok;
+            }
+            else if (query.CoreUserTypeId == 3)
+            {
+                var ok = GetAll().Where(x => x.CoreUserTypeId == 3).Count();
+                count = ok;
+            }
+            else if (query.CoreUserTypeId == 4)
+            {
+                var ok = GetAll().Where(x => x.CoreUserTypeId == 4).Count();
+                count = ok;
+            }
+
+            else if (query.CoreUserTypeId == 5)
+            {
+                var ok = GetAll().Where(x => x.CoreUserTypeId == 5).Count();
+                count = ok;
+            }
+
+
+            return count;
+        }
+        
 
         #region Get All CoreUsers
         public IQueryable<CoreUserDetails> GetAllSystemUsers(List<bool> isActiveList)
@@ -332,7 +369,6 @@ namespace JazMax.BusinessLogic.UserAccounts
                 AuditLog.ErrorLog.LogError(e, 0);
             }
         }
-        
 
         #region Move Agent
         public static void MoveAgent(int CoreUserId, int LoggedInUserId, int BranchId)

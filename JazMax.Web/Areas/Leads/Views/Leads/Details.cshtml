@@ -1,0 +1,265 @@
+﻿@model JazMax.Web.ViewModel.Leads.LeadCore
+
+@{
+    ViewBag.Title = "Lead Details";
+    TempData["Lead"] = Model.LeadId;
+}
+
+
+<div class="modal-body row">
+    <div class="col-md-3">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Lead Prospect</div>
+                <div class="panel-body">
+                    @Html.Partial("_LeadProspect", Model.LeadProspect)
+                </div>
+            </div>
+            <div class="panel-group">
+                <br />
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Lead Agents</div>
+                    <div class="panel-body">
+                        @Html.Partial("_LeadAgents", Model.LeadAgents)
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-group">
+                <br />
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Quick Actions</div>
+                    <div class="panel-body">
+                        @Html.Partial("_CreateLeadActivity", null)
+                        <br />
+                        <br />
+                        @Html.Partial("_CreateLeadReminder", null)
+                        
+                        <br />
+                        <br />
+                        @Html.Partial("_CloseLead", null)
+
+                        <br />
+                        <br />
+                        @{ 
+                          Html.RenderAction("AddAttachment", "LeadA");
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+            
+
+            @if (Model.HasLinkedLeads)
+            {
+            <div class="panel-group">
+                <br />
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Linked Leads</div>
+                    <div class="panel-body">
+                        @Html.Partial("_LinkedLeads", Model.LinkedLeadsList)
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Lead Details</div>
+                <div class="panel-body">
+                   @Html.Partial("_LeadDetail", Model)
+                </div>
+            </div>
+        </div>
+        <div class="panel-group">
+            <br />
+            <div class="panel panel-primary">
+                <div class="panel-heading">Property Item</div>
+                <div class="panel-body">
+                    @Html.Partial("_LeadProperty", Model.LeadProperty)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Lead Activities</div>
+                <div class="panel-body">
+                    @Html.Partial("_LeadActivities", Model.LeadActivities)
+                </div>
+            </div>
+        </div>
+        <div class="panel-group">
+            <br />
+            <div class="panel panel-primary">
+                <div class="panel-heading">Lead Reminders</div>
+                <div class="panel-body">
+                    @Html.Partial("_LeadReminder", Model.LeadReminder)
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-group">
+            <br />
+            <div class="panel panel-primary">
+                <div class="panel-heading">Lead Attachments</div>
+                <div class="panel-body">
+                    @{
+                        Html.RenderAction("Attachment", "LeadA");
+                    }
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    </div>
+
+
+
+<script>
+    function ResetForm() {
+        $('#Description').val(null);
+        $('#errorDescription').hide();
+    }
+
+    function CreateLeadActivity() {
+
+        var count = 0;
+
+        if ($('#Description').val() == '') {
+            $('#errorDescription').show();
+            count++;
+        }
+      
+        if (count == 0) {
+            $('#errorDescription').hide();
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data:
+                {
+                    LeadActivityId: $('#LeadActivityId').val(),
+                    Description: $('#Description').val(),
+                    LeadId: @Model.LeadId,
+                },
+                url: '/Leads/Leads/CreateActivity',
+                success: function (da) {
+                    if (da.Result == "Success") {
+
+                        document.location.reload(true)
+                    }
+                    else {
+
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    debugger;
+                    alert('Error');
+                }
+            });
+        }
+
+
+    }
+</script>
+
+
+<script>
+    function ResetFormReminder() {
+        $('#DescriptionReminder').val(null);
+        $('#errorDescriptionReminder').hide();
+    }
+
+    function CreateLeadReminder() {
+
+        var count = 0;
+
+        if ($('#DescriptionReminder').val() == '') {
+            $('#errorDescriptionReminder').show();
+            count++;
+        }
+
+        if (count == 0) {
+            $('#errorDescriptionReminder').hide();
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data:
+                {
+                    DescriptionReminder: $('#DescriptionReminder').val(),
+                    LeadId: @Model.LeadId,
+                    Date: $('#Date').val(),
+                },
+                url: '/Leads/Leads/CreateReminder',
+                success: function (da) {
+                    if (da.Result == "Success") {
+
+                        document.location.reload(true)
+                    }
+                    else {
+
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    debugger;
+                    alert('Error');
+                }
+            });
+        }
+
+
+    }
+</script>
+
+
+<script>
+    function ResetFormCloseLead() {
+        $('#DescriptionCloseText').val(null);
+        $('#errorDescriptionClose').hide();
+    }
+
+    function CaptureCloseLead() {
+
+        var count = 0;
+
+        if ($('#DescriptionCloseText').val() == '') {
+            $('#errorDescriptionClose').show();
+            count++;
+        }
+
+        if (count == 0) {
+            $('#errorDescriptionClose').hide();
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data:
+                {
+                    DescriptionText: $('#DescriptionCloseText').val(),
+                    LeadId: @Model.LeadId,
+                },
+                url: '/Leads/Leads/CloseLead',
+                success: function (da) {
+                    if (da.Result == "Success") {
+
+                        document.location.reload(true)
+                    }
+                    else {
+
+                        alert('Error' + da.Message);
+                    }
+                },
+                error: function (da) {
+                    debugger;
+                    alert('Error');
+                }
+            });
+        }
+
+
+    }
+</script>

@@ -1,0 +1,50 @@
+﻿@model JazMax.Web.ViewModel.Leads.LeadProperty
+
+@{
+    ViewBag.Title = "View1";
+}
+
+<div>
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.FriednlyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FriednlyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PropertyType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PropertyType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+        <strong> ZAR </strong>  @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PropertyPriceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PropertyPriceType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Province)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Province)
+        </dd>
+
+    </dl>
+</div>

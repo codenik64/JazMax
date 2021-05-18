@@ -1,0 +1,206 @@
+﻿@model JazMax.Web.ViewModel.PropertyManagement.CaptureListing.NewListingView
+@using JazMax.Core.SystemHelpers;
+@{
+    ViewBag.Title = "UpdateListings";
+}
+
+<h2>UpdateListings</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>NewListingView</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <h3>Listing Details</h3>
+        <div id="listing">
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.PropertyListingId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingView.PropertyListingId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.PropertyListingId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.PropertyTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.PropertyListingView.PropertyTypeId, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.PropertyListingView.PropertyTypeId, JazMaxDropDownList.GetAllPropertyTypes(), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.PropertyTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.BranchId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.PropertyListingView.BranchId, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.PropertyListingView.BranchId, JazMaxDropDownList.GetAllBranches(), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.BranchId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.ProvinceId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.PropertyListingView.ProvinceId, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.PropertyListingView.ProvinceId, JazMaxDropDownList.GetAllProvince(), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.ProvinceId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.FriendlyName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingView.FriendlyName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.FriendlyName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingView.Price, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.Price, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.PropertyListingPricingTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.PropertyListingView.ProvinceId, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(model => model.PropertyListingView.PropertyListingPricingTypeId, JazMaxDropDownList.GetAllPropertyPriceTypes(), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.PropertyListingPricingTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.ListingDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingView.ListingDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.ListingDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.LastUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingView.LastUpdate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.LastUpdate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.ProprtyDesciption, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingView.ProprtyDesciption, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingView.ProprtyDesciption, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingView.IsListingActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.PropertyListingView.IsListingActive)
+                        @Html.ValidationMessageFor(model => model.PropertyListingView.IsListingActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>Agent Details</h3>
+        <div id="agents">
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingAgentsView.PropertyListingAgentsId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingAgentsView.PropertyListingAgentsId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingAgentsView.PropertyListingAgentsId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            @*<div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingAgentsView.PropertyListingId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingAgentsView.PropertyListingId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingAgentsView.PropertyListingId, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingAgentsView.AgentId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingAgentsView.AgentId, new { htmlAttributes = new { @class = "form-control" } })
+                    @*<div id="dropAgent"></div>*@
+                    @Html.ValidationMessageFor(model => model.PropertyListingAgentsView.AgentId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingAgentsView.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.PropertyListingAgentsView.IsActive)
+                        @Html.ValidationMessageFor(model => model.PropertyListingAgentsView.IsActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>Listing Extras</h3>
+        <div id="extra">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfBathRooms, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfBathRooms, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfBathRooms, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfBedrooms, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfBedrooms, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfBedrooms, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfGarages, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfGarages, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfGarages, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfSquareMeters, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfSquareMeters, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfSquareMeters, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingDetailView.RatesAndTaxes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingDetailView.RatesAndTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.RatesAndTaxes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <h3>Listing Features</h3>
+        <div id="listingF">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingFeatureView.PropertyFeatureId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.PropertyListingFeatureView.PropertyFeatureId, JazMaxDropDownList.GetAllPropertyFeatures(), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PropertyListingFeatureView.PropertyFeatureId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <h3>YouTube Media</h3>
+        <div id="youtube">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PropertyListingYoutubeView.YoutubeVideoLink, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PropertyListingYoutubeView.YoutubeVideoLink, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PropertyListingYoutubeView.YoutubeVideoLink, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

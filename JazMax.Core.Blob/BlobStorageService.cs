@@ -8,7 +8,7 @@ using JazMax.Core.Blob.Model;
 using System.IO;
 using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+using cc;
 
 namespace JazMax.Core.Blob
 {
@@ -29,7 +29,7 @@ namespace JazMax.Core.Blob
                     var fileName = Path.GetFileName(file.FileName);
                     var blockBlob = container.GetBlockBlobReference(fileName);
                     blockBlob.UploadFromStream(file.InputStream);
-                    blobId = SaveImage(blockBlob.Uri.AbsolutePath, BlobType, FileType, file.FileName, file.ContentType, file.ContentLength);
+                    return SaveImage(blockBlob.Uri.AbsoluteUri, BlobType, FileType, file.FileName, file.ContentType, file.ContentLength);
                 }
 
                 blobId = -1;
@@ -61,7 +61,7 @@ namespace JazMax.Core.Blob
                 BlobStorageId = blob.BlobId;
                 return BlobStorageId;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 1);
                 return BlobStorageId;
@@ -84,7 +84,7 @@ namespace JazMax.Core.Blob
                 container.SetPermissions(permissions);
                 return container;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 JazMax.BusinessLogic.AuditLog.ErrorLog.LogError(e, 1);
                 return null;

@@ -12,5 +12,7 @@ namespace JazMax.Web.ViewModel.PropertyManagement
         public int PropertyFeatureId { get; set; } // PropertyFeatureId (Primary key)
         public int PropertyListingId { get; set; } // PropertyListingId (Primary key)
         public bool IsFeatureActive { get; set; } // IsFeatureActive (Primary key)
+
+        public string FeatureName { get; set; }
     }
 }

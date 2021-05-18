@@ -1,0 +1,71 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.PropertyManagement.CaptureListing.NewListingView>
+@using JazMax.Core.Property.PropertyManagement
+
+
+<h2>Property Listings</h2>
+<link href="~/Content/Property CSS/Card.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+
+<p>
+    <input type="button" class="btn btn-primary btn-sm" value="Add Property Listing" onclick="location.href='@Url.Action("Create", "PropertyListing", new { area = "Property"})'" />
+</p>
+
+<div class="row text-center">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+            <div class="index-content">
+                <div class="container">
+                    <a href="@Url.Action("PropertyDetails","PropertyListing", new { id = item.PropertyListingView.PropertyListingId , area = "Property" })">
+                        <div class="col-lg-4">
+                            <div class="card">
+                             @{
+                                 PropertyListingCoreService s = new PropertyListingCoreService();
+                                 var q = s.GetPropertyImages(Model.FirstOrDefault(), item.PropertyListingView.PropertyListingId);
+                                 JazMax.DataAccess.JazMaxDBProdContext dbn = new JazMax.DataAccess.JazMaxDBProdContext();
+
+                                 var images = dbn.PropertyImages.FirstOrDefault(x => x.PropertyListingId == item.PropertyListingView.PropertyListingId);
+                                 var blob = dbn.BlobCoreStorages.FirstOrDefault(x => x.BlobId == images.BlobId);
+                                
+
+                            }
+                                <img src="@blob.BlobUrl">
+                                <h4>@item.PropertyListingView.FriendlyName</h4>
+                         
+                               <div class="row">
+                                   <div class='list-bottom'>
+                                       <div class='list-bottom-section'>
+                                           <a href="#"><i class="fa fa-bed text-primary"></i></a>
+                                        
+                                           <span>@item.PropertyListingDetailView.NumberOfBedrooms</span>
+                                       </div>
+                                       <div class='list-bottom-section'>
+                                           <a href="#"><i class="glyphicon glyphicon-bed text-primary"></i></a>
+                                      
+                                           <span>@item.PropertyListingDetailView.NumberOfBathRooms</span>
+                                       </div>
+                                       <div class='list-bottom-section'>
+                                           <a href="#"><i class="fa fa-car text-primary"></i></a>
+                                           
+                                           <span>@item.PropertyListingDetailView.NumberOfGarages</span>
+                                       </div>
+                                   </div>
+                            <hr />
+                                   
+                                   <br/>
+                               </div>
+                                <a href="@Url.Action("PropertyDetails","PropertyListing", new { id = item.PropertyListingView.PropertyListingId , area = "Property" })" class="blue-button">More Details</a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+        </div>
+ </div>
+
+
+ 
+    }
+
+</div>

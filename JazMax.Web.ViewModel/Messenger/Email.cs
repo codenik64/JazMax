@@ -14,4 +14,13 @@ namespace JazMax.Web.ViewModel.Messenger
         public bool IsBodyHtml { get; set; }
         public bool IsAspUserId { get; set; }
     }
+
+    public class Message
+    {
+        public string SendTo { get; set; }
+        public string Subject { get; set; }
+        public string MessageBody { get; set; }
+        public bool IsBodyHtml { get; set; }
+        public int MessengerTriggerId { get; set; }
+    }
 }

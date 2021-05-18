@@ -20,11 +20,17 @@ namespace JazMax.BusinessLogic.Messenger
             SaveMessenger(ToAddress, model.Message, model.Subject, model.IsBodyHtml);
         }
 
+        public static void SendMail(Message model)
+        {
+            string ToAddress = model.SendTo;
+            SaveMessenger(ToAddress, model.MessageBody, model.Subject, model.IsBodyHtml, model.MessengerTriggerId);
+        }
+
         private static void SaveMessenger(string toAddress, string messageBody, string messageSubject, bool isBodyHtml)
         {
             try
             {
-                var a = db.SystemSettingsDatas.FirstOrDefault(x => x.SettingName == "GmailAddress").SettingValueA ?? "ashveebee@gmail.com";
+                var a = db.SystemSettingsDatas.FirstOrDefault(x => x.SettingName == "GmailAddress").SettingValueA ?? "nikhilchetty64@gmail.com";
                 JazMax.DataAccess.MessengerCoreLog log = new JazMax.DataAccess.MessengerCoreLog()
                 {
                     DateCreated = DateTime.Now,
@@ -34,7 +40,8 @@ namespace JazMax.BusinessLogic.Messenger
                     MessageTo = toAddress,
                     IsSent = false,
                     MessenegerTypeId = -1,
-                    MessageSubject = messageSubject
+                    MessageSubject = messageSubject,
+                    MessengerTriggerId = 0
                 };
                 db.MessengerCoreLogs.Add(log);
                 db.SaveChanges();
@@ -46,9 +53,37 @@ namespace JazMax.BusinessLogic.Messenger
             }
            
         }
-        
 
-  
+        private static void SaveMessenger(string toAddress, string messageBody, string messageSubject, bool isBodyHtml, int MessengerTriggerId)
+        {
+            try
+            {
+                var a = db.SystemSettingsDatas.FirstOrDefault(x => x.SettingName == "GmailAddress").SettingValueA ?? "nikhilchetty64@gmail.com";
+                JazMax.DataAccess.MessengerCoreLog log = new JazMax.DataAccess.MessengerCoreLog()
+                {
+                    DateCreated = DateTime.Now,
+                    IsHtml = isBodyHtml,
+                    MessageBody = messageBody,
+                    MessageFrom = a,
+                    MessageTo = toAddress,
+                    IsSent = false,
+                    MessenegerTypeId = -1,
+                    MessageSubject = messageSubject,
+                    MessengerTriggerId = MessengerTriggerId
+                };
+                db.MessengerCoreLogs.Add(log);
+                db.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                ErrorLog.LogError(e, 0);
+            }
+
+        }
+
+
+
 
     }
 }

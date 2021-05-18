@@ -54,7 +54,7 @@ namespace JazMax.Core.SystemHelpers
             string View = "Details";
             int Key = model.CoreUserId;
             string table1 = "<tr>";
-            string str1 = @"<td><a href=/" + Controller +"/" + View +"/" + model.CoreUserId + ">" + model.FirstName + "</a></td>";
+            string str1 = @"<td><a href=/" + Controller + "/" + View + "/" + model.CoreUserId + ">" + model.FirstName + "</a></td>";
             string str2 = @"<td><a href=/User/Details/" + model.CoreUserId + ">" + model.MiddleName + "</a></td>";
             string str3 = @"<td><a href=/User/Details/" + model.CoreUserId + ">" + model.LastName + "</a></td>";
             string str4 = @"<td><a href=/User/Details/" + model.CoreUserId + ">" + model.IDNumber + "</a></td>";
@@ -86,13 +86,13 @@ namespace JazMax.Core.SystemHelpers
         {
             string a = "<div id=" + model.PanelId + ">";
 
-            if(model.isHidden)
+            if (model.isHidden)
             {
                 a = "<div id=" + model.PanelId + " " + "hidden" + ">";
             }
 
             string str1 = "";
-            if(model.PanelType == PanelType.Success)
+            if (model.PanelType == PanelType.Success)
             {
                 str1 = "<div class='alert alert-success'>";
             }
@@ -110,7 +110,7 @@ namespace JazMax.Core.SystemHelpers
             }
 
 
-            string str2 = "<strong>" + model.Message + "</strong> </div> </div>";
+            string str2 = "<p>" + model.Message + "</p> </div> </div>";
             StringBuilder sb = new StringBuilder();
             sb.Append(a);
             sb.Append(str1);
@@ -122,10 +122,10 @@ namespace JazMax.Core.SystemHelpers
         public static string JaxMaxBootstrapTable(JazMaxTable table)
         {
             string script = "<script>";
-            string scripta = " $('#"+ table.TableId +"').DataTable();";
+            string scripta = " $('#" + table.TableId + "').DataTable();";
             string scriptc = "</script>";
 
-            string str1 = "     <table id='"+ table.TableId + "' class='table table-striped table - bordered dt - responsive nowrap' width='100 %' cellspacing='0'>";
+            string str1 = "     <table id='" + table.TableId + "' class='table table-striped table - bordered dt - responsive nowrap' width='100 %' cellspacing='0'>";
             StringBuilder sb = new StringBuilder();
             //sb.Append(script);
             //sb.Append(scripta);
@@ -142,7 +142,14 @@ namespace JazMax.Core.SystemHelpers
         public static object PrimaryKey { get; set; }
     }
 
-    public enum PanelType { Success, Info, Warning , Danger }
+    public enum PanelType
+    {
+        Success,
+        Info,
+        Warning,
+        Danger
+    }
+
     public class JazMaxPanel
     {
         public string PanelId { get; set; }
@@ -151,7 +158,7 @@ namespace JazMax.Core.SystemHelpers
         public string Message { get; set; }
     }
 
-    public  class JazMaxTable
+    public class JazMaxTable
     {
         public string TableId { get; set; }
     }

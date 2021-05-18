@@ -1,0 +1,52 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.Leads.LeadAttachments>
+
+<p>
+    @Html.ActionLink("Create New", "LeadAttachment")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.LeadId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileNames)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileAttachmentDescription)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeadId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileNames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FileAttachmentDescription)
+            </td>
+
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.FileAttachmentId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.FileAttachmentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.FileAttachmentId })
+            </td>
+        </tr>
+    }
+
+</table>

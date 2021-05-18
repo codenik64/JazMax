@@ -1,0 +1,70 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.Leads.Reports.LeadClosedReport>
+@using JazMax.Core.SystemHelpers
+
+@{
+    bool showField = JazMaxIdentityHelper.IsUserInRole("CEO");
+}
+
+<div class="panel - group">
+    <div class="col-md-0">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Leads Closed</div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.LeadID)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateCreated)
+                        </th>
+                        @if (showField)
+                        {
+                            <th>
+                                @Html.DisplayNameFor(model => model.BranchName)
+                            </th>
+                        }
+                        <th>
+                            @Html.DisplayNameFor(model => model.AgentName)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LeadID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateCreated)
+                            </td>
+                            @if (showField)
+                            {
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.BranchName)
+                                </td>
+                            }
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AgentName)
+                            </td>
+                            <td>
+
+                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#LeadGrid').dataTable({
+        "searching": true,
+        "pageLength": 50,
+        "lengthMenu": [5, 10, 20, 50, 100]
+    });
+</script>

@@ -24,6 +24,7 @@ namespace JazMax.Win.Messenger
         {
             m_thread = new Thread(new ThreadStart(ThreadProc));
             m_thread.Start();
+           
         }
 
         protected override void OnStop()

@@ -1,0 +1,120 @@
+﻿<script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/Circular.js"></script>
+<link href="~/Content/Circular.css" rel="stylesheet" />
+@using JazMax.Core.Leads.LeadPerfomance
+@{ 
+    LeadProcessor processor = new LeadProcessor();
+}
+<div class="container">
+
+    <h1 class="text-center">Leads Management</h1>
+    <br/>
+  
+    @*<a href="https://github.com/afuersch/css-percentage-circle">https://github.com/afuersch/css-percentage-circle</a>*@
+
+    <!-- default -->
+    <div class="row">
+
+        <div class="col-xs-6 col-sm-3">
+            <div class="inner-content text-center">
+
+                <div class="c100 p-@processor.ProcessedLeadCount() center">
+                    <span>@processor.ProcessedLeadCount()</span>
+                    <div class="slice"><div class="bar"></div><div class="fill"></div></div>
+                </div>
+
+                <p><em>Total processed Leads</em></p>
+
+            </div>
+        </div><!-- /.col -->
+
+        <div class="col-xs-6 col-sm-3">
+            <div class="inner-content text-center">
+
+                <div class="c100 p-@processor.RawLeadCount() center">
+                    <span>@processor.RawLeadCount()</span>
+                    <div class="slice"><div class="bar"></div><div class="fill"></div></div>
+                </div>
+
+                <p><em>Raw Leads</em></p>
+
+            </div>
+        </div><!-- /.col -->
+
+        <div class="col-xs-6 col-sm-3">
+            <div class="inner-content text-center">
+
+                <div class="c100 p-@processor.ManualCaptureCount() center">
+                    <span>@processor.ManualCaptureCount()</span>
+                    <div class="slice"><div class="bar"></div><div class="fill"></div></div>
+                </div>
+
+                <p><em>Manually Captured Leads</em></p>
+
+            </div>
+        </div><!-- /.col -->
+
+        <div class="col-xs-6 col-sm-3">
+            <div class="inner-content text-center">
+
+                <div class="c100 p-@processor.SystemProcessedCount() center">
+                    <span>@processor.SystemProcessedCount()</span>
+                    <div class="slice"><div class="bar"></div><div class="fill"></div></div>
+                </div>
+
+                <p><em>System Processed Leads</em></p>
+
+            </div>
+        </div><!-- /.col -->
+
+    </div><!-- /.row -->
+    <!-- big -->
+
+
+    <div class="row">
+
+        <div class="col-xs-6 col-sm-4">
+            <div class="inner-content text-center" style="margin-left:190px">
+
+                <div class="c100 p-@processor.NewLeadsCount() center">
+                    <span>@processor.NewLeadsCount()</span>
+                    <div class="slice"><div class="bar"></div><div class="fill"></div></div>
+                </div>
+
+                <p><em>Pending New Leads</em></p>
+
+            </div>
+        </div><!-- /.col -->
+
+        <div class="col-xs-6 col-sm-4">
+            <div class="inner-content text-center">
+
+                <div class="c100 p-@processor.WorkInProgressCount() center">
+                    <span>@processor.WorkInProgressCount()</span>
+                    <div class="slice"><div class="bar"></div><div class="fill"></div></div>
+                </div>
+
+                <p><em>Leads Currently In Progress</em></p>
+
+            </div>
+        </div><!-- /.col -->
+
+        <div class="col-xs-6 col-sm-2">
+            <div class="inner-content text-center">
+
+                <div class="c100 p-@processor.LeadsClosedCount() center">
+                    <span>@processor.LeadsClosedCount()</span>
+                    <div class="slice"><div class="bar"></div><div class="fill"></div></div>
+                </div>
+
+                <p><em>Closed Leads</em></p>
+
+            </div>
+        </div><!-- /.col -->
+
+       
+
+    </div><!-- /.row -->
+
+
+</div>

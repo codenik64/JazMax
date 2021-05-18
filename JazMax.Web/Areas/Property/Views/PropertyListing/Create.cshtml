@@ -4,229 +4,400 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<link href="~/Content/Property CSS/PropertyTab.css" rel="stylesheet" />
+<script src="~/Scripts/Property JS/Wizard.js"></script>
+<link href="~/Content/Chosen/chosen.min.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Create", "PropertyListing", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>NewListingView</h4>
-        <hr />
+    <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="container">
+            <div class="row">
+                <section>
+                    <div class="wizard">
+                        <div class="wizard-inner">
+                            <div class="connecting-line"></div>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Listing Details">
+                                        <span class="round-tab">
+                                            <i class="glyphicon glyphicon-folder-open"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li role="presentation" class="disabled">
+                                    <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Agent Details & Listing Extras">
+                                        <span class="round-tab">
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li role="presentation" class="disabled">
+                                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Listing Extras & Images">
+                                        <span class="round-tab">
+                                            <i class="glyphicon glyphicon-picture"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li role="presentation" class="disabled">
+                                    <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Features & Youtube Media">
+                                        <span class="round-tab">
+                                            <i class="glyphicon glyphicon-ok"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
 
-        <h3>Listing Details</h3>
-        <div id="listing">
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.PropertyListingId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingView.PropertyListingId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.PropertyListingId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
+                        <form role="form">
+                            <div class="tab-content">
+                                <div class="tab-pane active" role="tabpanel" id="step1">
+                                    <div class="step1">
+                                        <div class="step33">
+                                            <h5><strong>Listing Details</strong></h5>
+                                            <hr />
+                                            <br />
+                                            <div class="row">
+                                                <div style="margin-right:180px; margin-left:180px;">
+                                                    <div class="col-md-6">
+                                                        @Html.LabelFor(model => model.PropertyListingView.PropertyTypeId)
+                                                        @Html.DropDownListFor(model => model.PropertyListingView.PropertyTypeId, JazMaxDropDownList.GetAllPropertyTypes(), htmlAttributes: new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.PropertyListingView.PropertyTypeId, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.PropertyListingView.BranchId)
+                                                    @Html.DropDownListFor(model => model.PropertyListingView.BranchId, JazMaxDropDownList.GetAllBranches(), htmlAttributes: new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.PropertyListingView.BranchId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div style="margin-right:180px; margin-left:180px;">
+                                                    <div class="col-md-6">
+                                                        @Html.LabelFor(model => model.PropertyListingView.ProvinceId)
+                                                        @Html.DropDownListFor(model => model.PropertyListingView.ProvinceId, JazMaxDropDownList.GetAllProvince(), htmlAttributes: new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(model => model.PropertyListingView.ProvinceId, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.PropertyListingView.FriendlyName)
+                                                    @Html.EditorFor(model => model.PropertyListingView.FriendlyName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.PropertyListingView.FriendlyName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div style="margin-right:180px; margin-left:180px;">
+                                                    <div class="col-md-6">
+                                                        @Html.LabelFor(model => model.PropertyListingView.Price)
+                                                        @Html.EditorFor(model => model.PropertyListingView.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.PropertyListingView.Price, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.PropertyListingView.PropertyListingPricingTypeId)
+                                                    <div class="row">
+                                                        <div class="col-md-3 col-xs-3">
+                                                            @Html.DropDownListFor(model => model.PropertyListingView.PropertyListingPricingTypeId, JazMaxDropDownList.GetAllPropertyPriceTypes(), htmlAttributes: new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(model => model.PropertyListingView.PropertyListingPricingTypeId, "", new { @class = "text-danger" })
+                                                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.PropertyTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.PropertyListingView.PropertyTypeId, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @Html.DropDownListFor(model => model.PropertyListingView.PropertyTypeId, JazMaxDropDownList.GetAllPropertyTypes(), new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.PropertyTypeId, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                                                    </div>
+                                                    @Html.LabelFor(model => model.PropertyListingView.ProprtyDesciption)
+                                                    @Html.EditorFor(model => model.PropertyListingView.ProprtyDesciption, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.PropertyListingView.ProprtyDesciption, "", new { @class = "text-danger" })
+                                                    <br />
+                                                    <hr />
+                                                    <button type="button" class="btn btn-primary next-step">Save and continue</button>
+                                                </div>
+                                            </div>
+                                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.BranchId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.PropertyListingView.BranchId, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @Html.DropDownListFor(model => model.PropertyListingView.BranchId, JazMaxDropDownList.GetAllBranches(), new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.BranchId, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                                    </div>
+                                </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.ProvinceId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.PropertyListingView.ProvinceId, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @Html.DropDownListFor(model => model.PropertyListingView.ProvinceId, JazMaxDropDownList.GetAllProvince(), new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.ProvinceId, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.FriendlyName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingView.FriendlyName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.FriendlyName, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                                <div class="tab-pane" role="tabpanel" id="step2">
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingView.Price, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.Price, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                                    <div class="step33">
+                                        <h5><strong>Agent Details</strong></h5>
+                                        <hr />
+                                        <div class="row">
+                                            <div style="margin-right:180px; margin-left:180px;">
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.PropertyListingAgentsView.AgentId)
+                                                    @Html.DropDownListFor(model => model.PropertyListingAgentsView.AgentId, JazMaxDropDownList.GetAllAgents(), htmlAttributes: new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.PropertyListingAgentsView.AgentId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.PropertyListingPricingTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.PropertyListingView.ProvinceId, new { htmlAttributes = new { @class = "form-control" } })*@
-                    @Html.DropDownListFor(model => model.PropertyListingView.PropertyListingPricingTypeId, JazMaxDropDownList.GetAllPropertyPriceTypes(), new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.PropertyListingPricingTypeId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-           
+                                        </div>
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <br />
+                                    </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.ListingDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingView.ListingDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.ListingDate, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                        <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                    </ul>
+                                </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.LastUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingView.LastUpdate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.LastUpdate, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.ProprtyDesciption, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingView.ProprtyDesciption, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingView.ProprtyDesciption, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                                <div class="tab-pane" role="tabpanel" id="step3">
+                                    <div class="step33">
+                                        <h5><strong>Listing Extras & Image Details</strong></h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div style="margin-right:180px; margin-left:180px;">
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfBathRooms)
+                                                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfBathRooms, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfBathRooms, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfBedrooms)
+                                                @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfBedrooms, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfBedrooms, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingView.IsListingActive, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.PropertyListingView.IsListingActive)
-                        @Html.ValidationMessageFor(model => model.PropertyListingView.IsListingActive, "", new { @class = "text-danger" })
+                                        <div class="row">
+                                            <div style="margin-right:180px; margin-left:180px;">
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfGarages)
+                                                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfGarages, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfGarages, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfSquareMeters)
+                                                @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfSquareMeters, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfSquareMeters, "", new { @class = "text-danger" })
+                                            </div>
+                                            <br />
+                                        </div>
+
+                                        <div class="row">
+                                            <div style="margin-right:180px; margin-left:180px;">
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.PropertyListingDetailView.RatesAndTaxes)
+                                                    @Html.EditorFor(model => model.PropertyListingDetailView.RatesAndTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.RatesAndTaxes, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.PropertyImagesView.Imagebytes)
+                                                <input multiple type="file" name="file" value="Upload file" />
+                                                @Html.ValidationMessageFor(model => model.PropertyImagesView.Imagebytes, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <br />
+
+
+
+                                        <br />
+
+                                        <ul class="list-inline pull-right">
+                                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" role="tabpanel" id="complete">
+                                    <div class="step33">
+
+                                        <h5><strong>Listing Features & Youtube Media Details</strong></h5>
+                                        <hr>
+                                        <div class="row">
+                                            <div style="margin-right:180px; margin-left:180px;">
+                                                <div class="col-md-6">
+                                                    @Html.LabelFor(model => model.PropertyListingFeatureView.PropertyFeatureId)
+                                                    @Html.ListBoxFor(model => model.PropertyListingFeatureView.PropertyFeatureId, JazMaxDropDownList.GetAllPropertyFeatures(), htmlAttributes: new { @class = "form-control", multiple = "multiple" , id = "Chosen" })
+                                                    @Html.ValidationMessageFor(model => model.PropertyListingFeatureView.PropertyFeatureId, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.LabelFor(model => model.PropertyListingYoutubeView.YoutubeVideoLink)
+                                                @Html.EditorFor(model => model.PropertyListingYoutubeView.YoutubeVideoLink, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.PropertyListingYoutubeView.YoutubeVideoLink, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                            
+                                            <li><input type="submit" value="Complete Listing Upload" class="btn btn-primary btn-info-full" onclick="save();" /></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                           
+                            </div>
+                        </form>
                     </div>
-                </div>
-            </div>
-
-        </div>
-
-        <h3>Agent Details</h3>
-        <div id="agents">
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingAgentsView.PropertyListingAgentsId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingAgentsView.PropertyListingAgentsId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingAgentsView.PropertyListingAgentsId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-            @*<div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingAgentsView.PropertyListingId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingAgentsView.PropertyListingId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingAgentsView.PropertyListingId, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingAgentsView.AgentId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingAgentsView.AgentId, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingAgentsView.AgentId, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingAgentsView.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.PropertyListingAgentsView.IsActive)
-                        @Html.ValidationMessageFor(model => model.PropertyListingAgentsView.IsActive, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <h3>Listing Extras</h3>
-        <div id="extra">
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfBathRooms, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfBathRooms, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfBathRooms, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfBedrooms, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfBedrooms, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfBedrooms, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfGarages, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfGarages, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfGarages, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingDetailView.NumberOfSquareMeters, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingDetailView.NumberOfSquareMeters, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.NumberOfSquareMeters, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingDetailView.RatesAndTaxes, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingDetailView.RatesAndTaxes, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingDetailView.RatesAndTaxes, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-
-        </div>
-
-        <h3>Listing Features</h3>
-        <div id="listingF">
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingFeatureView.PropertyFeatureId, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.PropertyListingFeatureView.PropertyFeatureId, JazMaxDropDownList.GetAllPropertyFeatures(), new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingFeatureView.PropertyFeatureId, "", new { @class = "text-danger" })
-                </div>
+                </section>
             </div>
         </div>
-       
-        <h3>YouTube Media</h3>
-        <div id="youtube">
-            <div class="form-group">
-                @Html.LabelFor(model => model.PropertyListingYoutubeView.YoutubeVideoLink, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PropertyListingYoutubeView.YoutubeVideoLink, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.PropertyListingYoutubeView.YoutubeVideoLink, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
 }
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script>
+    debugger;
+    $(function () {
+        $("#Chosen").chosen({
+            width:"100%"
+        });
+    });
+</script>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#PropertyListingView_BranchId').change(function () {
+            $.ajax({
+                type: "post",
+                url: "/Property/PropertyListing/GetAgentForBranch",
+                data: { Id: $('#PropertyListingView_BranchId').val() },
+                datatype: "json",
+                traditional: true,
+                success: function (data) {
+                    var district = "<select id='ddlAgent' class='form-control'>";
+                    district = district + '<option value="" >--Select--</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        district = district + '<option value=' + data[i].Id + '>' + data[i].FirstName + '</option>';
+                    }
+                    district = district + '</select>';
+                    $('#dropAgent').html(district);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    function save() {
+                        var count = 0;
+                        if ($('#PropertyListingView_PropertyTypeId').val() == '') {
+                            toastr.error('Please select Property type');
+                            count++;
+                        }
+                        if ($('#PropertyListingView_BranchId').val() == '') {
+                            toastr.error('Please select Branch');
+                            count++;
+                        }
+                        if ($('#PropertyListingView_ProvinceId').val() == '') {
+                            toastr.error('Please Select province');
+                            count++;
+                        }
+                        if ($('#PropertyListingView_FriendlyName').val() == '') {
+                            toastr.error('Please enter Friendly Name');
+                            count++;
+                        }
+                        if ($('#PropertyListingView_Price').val() == '') {
+                            toastr.error('Please enter Property Price');
+                            count++;
+                        }
+                        if ($('#PropertyListingView_PropertyListingPricingTypeId').val() == '') {
+                            toastr.error('Please select property Listing Price');
+                            count++;
+                        }
+                        if ($('#PropertyListingView_ProprtyDesciption').val() == '') {
+                            toastr.error('Please enter Property Description');
+                            count++;
+                        }
+                        if ($('#PropertyListingAgentsView_AgentId').val() == '') {
+                            toastr.error('Please Select Agent');
+                            count++;
+                        }
+                        if ($('#PropertyListingDetailView_NumberOfBathRooms').val() == '') {
+                            toastr.error('Please enter Number of bathrooms');
+                            count++;
+                        }
+                        if ($('#PropertyListingDetailView_NumberOfBedrooms').val() == '') {
+                            toastr.error('Please enter Number of Bedrooms');
+                            count++;
+                        }
+                        if ($('#PropertyListingDetailView_NumberOfGarages').val() == '') {
+                            toastr.error('Please enter Number of Garages');
+                            count++;
+                        }
+                        if ($('#PropertyListingDetailView_NumberOfSquareMeters').val() == '') {
+                            toastr.error('Please enter Number of Square Metres');
+                            count++;
+                        }
+                        if ($('#PropertyListingDetailView_RatesAndTaxes').val() == '') {
+                            toastr.error('Please enter Rates and Taxes');
+                            count++;
+                        }
+
+                @*if (count == 0) {
+                   
+
+            $.ajax({
+                type: 'Post',
+                dataType: 'Json',
+                data: {
+                    PropertyListingView_PropertyTypeId: $('#PropertyListingView_PropertyTypeId').val(),
+                    PropertyListingView_BranchId: $('#PropertyListingView_BranchId').val(),
+                    PropertyListingView_ProvinceId: $('#PropertyListingView_ProvinceId').val(),
+                    PropertyListingView_FriendlyName: $('#PropertyListingView_FriendlyName').val(),
+                    PropertyListingView_Price: $('#PropertyListingView_Price').val(),
+                    PropertyListingView_PropertyListingPricingTypeId: $('#PropertyListingView_PropertyListingPricingTypeId').val(),
+                    PropertyListingView_ProprtyDesciption: $('#PropertyListingView_ProprtyDesciption').val(),
+                    PropertyListingView_IsListingActive: $('#PropertyListingView_IsListingActive').val(),
+                    PropertyListingAgentsView_AgentId: $('#PropertyListingAgentsView_AgentId').val(),
+                    PropertyListingAgentsView_IsActive: $('#PropertyListingAgentsView_IsActive').val(),
+                    PropertyListingDetailView_NumberOfBathRooms: $('#PropertyListingDetailView_NumberOfBathRooms').val(),
+                    PropertyListingDetailView_NumberOfBedrooms: $('#PropertyListingDetailView_NumberOfBedrooms').val(),
+                    PropertyListingDetailView_NumberOfGarages: $('#PropertyListingDetailView_NumberOfGarages').val(),
+                    PropertyListingDetailView_NumberOfSquareMeters: $('#PropertyListingDetailView_NumberOfSquareMeters').val(),
+                    PropertyListingDetailView_RatesAndTaxes: $('#PropertyListingDetailView_RatesAndTaxes').val(),
+                    PropertyListingFeatureView_SelectedFeatureArray: $('#PropertyListingFeatureView_PropertyFeatureId option:selected').val(),
+                    PropertyListingYoutubeView_YoutubeVideoLink: $('#PropertyListingYoutubeView_YoutubeVideoLink').val(),
+
+                },
+                url: '@Url.Action("CreateListing", "PropertyListing")',
+                success: function (da) {
+                                    if (da.Result == "Success") {
+                                        toastr.success('Property saved!');
+                                        $('#PropertyListingView_PropertyTypeId').val(null);
+                                        $('#PropertyListingView_BranchId').val(null);
+                                        $('#PropertyListingView_ProvinceId').val(null);
+                                        $('#PropertyListingView_FriendlyName').val(null);
+                                        $('#PropertyListingView_Price').val(null);
+                                        $('#PropertyListingView_PropertyListingPricingTypeId').val(null);
+                                        $('#PropertyListingView_ProprtyDesciption').val(null);
+                                        $('#PropertyListingView_IsListingActive').val(null);
+                                        $('#PropertyListingAgentsView_AgentId').val(null);
+                                        $('#PropertyListingAgentsView_IsActive').val(null);
+                                        $('#PropertyListingDetailView_NumberOfBathRooms').val(null);
+                                        $('#PropertyListingDetailView_NumberOfBedrooms').val(null);
+                                        $('#PropertyListingDetailView_NumberOfGarages').val(null);
+                                        $('#PropertyListingDetailView_NumberOfSquareMeters').val(null);
+                                        $('#PropertyListingDetailView_RatesAndTaxes').val(null);
+                                        $('#PropertyListingFeatureView_PropertyFeatureId').val(null);
+                                        $('#PropertyListingYoutubeView_YoutubeVideoLink').val(null);
+
+                                    }
+                                    else {
+                                        alert('Error' + da.Message);
+                                         }
+                                         },
+                                error: function (da) {
+                                    alert('Error');
+                                }
+                            }
+                       );
+                        }
+                    }*@
+</script>

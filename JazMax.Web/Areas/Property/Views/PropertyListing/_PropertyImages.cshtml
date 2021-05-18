@@ -1,0 +1,36 @@
+﻿
+@model IEnumerable<JazMax.Web.ViewModel.PropertyManagement.PropertyImagesView>
+
+
+<link href="~/Content/Property CSS/PropertyDetail.css" rel="stylesheet" />
+<!------ Include the above in your HEAD tag ---------->
+@*<script type="text/javascript " src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js "></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.css" />*@
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<!-- Page Content -->
+<div class="row carousel-holder">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        @foreach (var item in Model)
+        {
+
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="slide-image" src="@item.BlobImagePath" alt="">
+                </div>
+            </div>
+
+        }
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" style="color:red;"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" style="color:red;"></span>
+        </a>
+
+    </div>
+ </div>
+
+
+
+
+

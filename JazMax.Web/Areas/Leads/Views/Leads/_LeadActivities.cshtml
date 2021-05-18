@@ -1,0 +1,47 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.Leads.LeadActivites>
+
+<div>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateCreated)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ActivityTypeName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.AgentName)
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model.OrderByDescending(x =>x.DateCreated))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreated)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActivityTypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AgentName)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+

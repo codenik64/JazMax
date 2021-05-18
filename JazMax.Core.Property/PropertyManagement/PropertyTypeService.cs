@@ -9,18 +9,19 @@ namespace JazMax.Core.Property.PropertyManagement
 {
     public class PropertyTypeService
     {
-        private static JazMax.DataAccess.JazMaxDBProdContext db = new JazMax.DataAccess.JazMaxDBProdContext();
-
         public List<PropertyTypeView> GetAll(bool isActiveAction)
         {
-            return (from a in db.PropertyTypes
-                    where a.IsActive == isActiveAction
-                    select new PropertyTypeView
-                    {
-                        isActive = a.IsActive,
-                        PropertyTypeId = a.PropertyTypeId,
-                        TypeName = a.TypeName
-                    }).ToList();
+            using (JazMax.DataAccess.JazMaxDBProdContext db = new JazMax.DataAccess.JazMaxDBProdContext())
+            {
+                return (from a in db.PropertyTypes
+                        where a.IsActive == isActiveAction
+                        select new PropertyTypeView
+                        {
+                            isActive = a.IsActive,
+                            PropertyTypeId = a.PropertyTypeId,
+                            TypeName = a.TypeName
+                        })?.ToList();
+            }
         }
 
         public PropertyTypeView GetById(int? Id)
@@ -30,14 +31,17 @@ namespace JazMax.Core.Property.PropertyManagement
             {
                 if (Id != null)
                 {
-                    model = (db.PropertyTypes.Where(x => x.PropertyTypeId == Id).Select(x => new PropertyTypeView
+                    using (JazMax.DataAccess.JazMaxDBProdContext db = new JazMax.DataAccess.JazMaxDBProdContext())
                     {
-                        isActive = x.IsActive,
-                        PropertyTypeId = x.PropertyTypeId,
-                        TypeName = x.TypeName
+                        model = (db.PropertyTypes.Where(x => x.PropertyTypeId == Id).Select(x => new PropertyTypeView
+                        {
+                            isActive = x.IsActive,
+                            PropertyTypeId = x.PropertyTypeId,
+                            TypeName = x.TypeName
 
-                    })).FirstOrDefault();
-                    return model;
+                        }))?.FirstOrDefault();
+                        return model;
+                    }
                 }
             }
             catch (Exception e)
@@ -51,13 +55,16 @@ namespace JazMax.Core.Property.PropertyManagement
         {
             try
             {
-                DataAccess.PropertyType table = new DataAccess.PropertyType()
+                using (JazMax.DataAccess.JazMaxDBProdContext db = new JazMax.DataAccess.JazMaxDBProdContext())
                 {
-                    IsActive = true,
-                    TypeName = model.TypeName
-                };
-                db.PropertyTypes.Add(table);
-                db.SaveChanges();
+                    DataAccess.PropertyType table = new DataAccess.PropertyType()
+                    {
+                        IsActive = true,
+                        TypeName = model.TypeName
+                    };
+                    db.PropertyTypes.Add(table);
+                    db.SaveChanges();
+                }
             }
             catch (Exception e)
             {
@@ -69,17 +76,20 @@ namespace JazMax.Core.Property.PropertyManagement
         {
             try
             {
-                DataAccess.PropertyType table = db.PropertyTypes.FirstOrDefault(x => x.PropertyTypeId == model.PropertyTypeId);
-
-                LoadEditLogDetails(table.PropertyTypeId, CoreSystemUserId);
-
-                 JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(table.TypeName, model.TypeName, "Property Type");
-
-                if (table != null)
+                using (JazMax.DataAccess.JazMaxDBProdContext db = new JazMax.DataAccess.JazMaxDBProdContext())
                 {
-                    table.IsActive = true;
-                    table.TypeName = model.TypeName;
-                    db.SaveChanges();
+                    DataAccess.PropertyType table = db.PropertyTypes.FirstOrDefault(x => x.PropertyTypeId == model.PropertyTypeId);
+
+                    LoadEditLogDetails(table.PropertyTypeId, CoreSystemUserId);
+
+                    JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(table.TypeName, model.TypeName, "Property Type");
+
+                    if (table != null)
+                    {
+                        table.IsActive = true;
+                        table.TypeName = model.TypeName;
+                        db.SaveChanges();
+                    }
                 }
             }
             catch (Exception e)
@@ -92,29 +102,32 @@ namespace JazMax.Core.Property.PropertyManagement
         {
             try
             {
-                DataAccess.PropertyType table = db.PropertyTypes.FirstOrDefault(x => x.PropertyTypeId == PropertyTypeId);
-                LoadEditLogDetails(table.PropertyTypeId, UserId);
-
-                if (table != null)
+                using (JazMax.DataAccess.JazMaxDBProdContext db = new JazMax.DataAccess.JazMaxDBProdContext())
                 {
-                    if (isAction)
-                    {
-                        JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(
-                             JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(table.IsActive),
-                             JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(true), "Active Status");
+                    DataAccess.PropertyType table = db.PropertyTypes.FirstOrDefault(x => x.PropertyTypeId == PropertyTypeId);
+                    LoadEditLogDetails(table.PropertyTypeId, UserId);
 
-                        table.IsActive = true;
-                    }
-                    else
+                    if (table != null)
                     {
-                        JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(
-                            JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(table.IsActive),
-                            JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(false), "Active Status");
+                        if (isAction)
+                        {
+                            JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(
+                                 JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(table.IsActive),
+                                 JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(true), "Active Status");
 
-                        table.IsActive = false;
+                            table.IsActive = true;
+                        }
+                        else
+                        {
+                            JazMax.BusinessLogic.ChangeLog.ChangeLogService.LogChange(
+                                JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(table.IsActive),
+                                JazMax.BusinessLogic.ChangeLog.ChangeLogService.GetBoolString(false), "Active Status");
+
+                            table.IsActive = false;
+                        }
                     }
+                    db.SaveChanges();
                 }
-                db.SaveChanges();
             }
             catch (Exception e)
             {

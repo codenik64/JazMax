@@ -36,7 +36,8 @@ namespace JazMax.BusinessLogic.UserAccounts
                 CoreTeamLeaderId = x.CoreTeamLeaderId,
                 Phone = x.Phone,
                 ProvinceId = x.ProvinceId,
-                Suburb =x.Suburb
+                Suburb =x.Suburb,
+
             }).ToList();
         }
 
@@ -132,7 +133,7 @@ namespace JazMax.BusinessLogic.UserAccounts
                             ProvinceId = a.ProvinceId,
                             ProvinceName = d.ProvinceName,
                             Suburb = a.Suburb,
-                            TeamLeaderName = c.FirstName + " " + c.LastName
+                            TeamLeaderName = c.FirstName + "" + c.LastName
                         };
            
             return query.ToList();

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.Documents.DocumentTypesView>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2></h2>
+
+<p>
+   
+    <button class="btn btn-primary btn-sm" onclick="location.href='@Url.Action("CreateType","DocumentType")'"><i class="fa fa-plus"></i> Add Category</button>
+</p>
+
+<link href="~/Content/Docs.css" rel="stylesheet" />
+<script src="~/Scripts/DocsJs.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+@foreach (var item in Model)
+{
+    <div class="col-sm-2">
+        <div class="row">
+            <div class="drive-wrapper drive-grid-view">
+
+                <div class="grid-items-wrapper">
+                    <div class="drive-item module text-center">
+                        <div class="drive-item-inner module-inner">
+                            <div class="drive-item-title"><a href="#">@Html.DisplayFor(modelItem => item.CategoryName)</a></div>
+                            @if (Model.Count() == 0)
+                            {
+                                <div class="drive-item-thumb">
+                                    <a href="#"><i class="fa fa-folder text-primary"></i></a>
+                                    @*fa fa-folder-open*@
+                                </div>
+                            }
+                            @if (Model.Count() > 0)
+                            {
+                                <div class="drive-item-thumb">
+                                    <a href="#"><i class="fa fa-folder-open text-primary"></i></a>
+                                    @*fa fa-folder-open*@
+                                </div>
+                            }
+
+
+                        </div>
+                        <div class="drive-item-footer module-footer">
+                            <ul class="utilities list-inline">
+                                <li><a href="@Url.Action("Browse","DocumentType",new {  id=item.CoreFileCategoryId })" data-toggle="tooltip" data-placement="top" title="" data-original-title="Browse"><i class="fa fa-external-link"></i></a></li>
+                              
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CoreFileCategoryId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CoreFileCategoryId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CoreFileCategoryId })
+        </td>
+    </tr>
+}
+
+</table>*@

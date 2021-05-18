@@ -1,3 +1,31 @@
-﻿@{
+﻿@using JazMax.Core.SystemHelpers
+@{
+    if (HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        JazMaxIdentityHelper.UserName = User.Identity.Name;
+    }
+}
+
+
+@if (JazMaxIdentityHelper.IsUserInRole("PA"))
+{
+    Layout = "~/Views/Shared/_JazMaxPA.cshtml";
+}
+else if (JazMaxIdentityHelper.IsUserInRole("TeamLeader"))
+{
+    Layout = "~/Views/Shared/_JazMaxTeamleader.cshtml";
+}
+else if (JazMaxIdentityHelper.IsUserInRole("Agent"))
+{
+    Layout = "~/Views/Shared/_JazMaxAgent.cshtml";
+}
+else if (JazMaxIdentityHelper.IsUserInRole("CEO"))
+{
+    Layout = "~/Views/Shared/_LayoutCEO.cshtml";
+}
+else
+{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+

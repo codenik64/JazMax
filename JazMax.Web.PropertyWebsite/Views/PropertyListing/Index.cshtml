@@ -1,0 +1,57 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.PropertyManagement.CaptureListing.NewListingView>
+
+@{
+    ViewBag.Title = "Property Management";
+}
+
+
+<link href="~/Content/Card.css" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+<div class="row text-center">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-4">
+            <div class="index-content">
+                <div class="container">
+                    <a href="#">
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <img src="http://cevirdikce.com/proje/hasem-2/images/finance-1.jpg">
+                                <h4>@item.PropertyListingView.FriendlyName</h4>
+
+                                <div class="row">
+                                    <div class='list-bottom'>
+                                        <div class='list-bottom-section'>
+                                            <a href="#"><i class="fa fa-bed text-primary"></i></a>
+
+                                            <span>@item.PropertyListingDetailView.NumberOfBedrooms</span>
+                                        </div>
+                                        <div class='list-bottom-section'>
+                                            <a href="#"><i class="glyphicon glyphicon-bed text-primary"></i></a>
+
+                                            <span>@item.PropertyListingDetailView.NumberOfBathRooms</span>
+                                        </div>
+                                        <div class='list-bottom-section'>
+                                            <a href="#"><i class="fa fa-car text-primary"></i></a>
+
+                                            <span>@item.PropertyListingDetailView.NumberOfGarages</span>
+                                        </div>
+                                    </div>
+                                    <hr />
+
+                                    <br />
+                                </div>
+                                <a href="@Url.Action("PropertyDetails","PropertyListing", new { id = item.PropertyListingView.PropertyListingId , area = "Property" })" class="blue-button">More Details</a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+
+    }
+
+</div>

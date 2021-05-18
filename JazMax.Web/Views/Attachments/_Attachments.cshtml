@@ -1,0 +1,39 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.Documents.DocumentAttachments>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FileNames)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileAttachmentDescription)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileNames)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FileAttachmentDescription)
+            </td>
+            <td>
+                <h4><a href="@Url.Action("DownLoad","Attachments",new {  id=item.FileAttachmentId })" data-toggle="tooltip" data-placement="top" title="" data-original-title="Download"><i class="fa fa-download"></i></a></h4>
+            </td>
+</tr>
+
+    }
+
+</table>

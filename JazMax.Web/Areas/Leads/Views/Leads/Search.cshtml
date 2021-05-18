@@ -1,0 +1,94 @@
+﻿@model JazMax.Web.ViewModel.Leads.LeadIndexSearch
+@using JazMax.Core.SystemHelpers
+@{
+    ViewBag.Title = "Search";
+    JazMaxIdentityHelper.UserName = User.Identity.Name;
+}
+
+
+
+
+@{ 
+    Html.RenderAction("LeadDashboard", "Leads");
+}
+
+
+<br />
+@using (Html.BeginForm("Search", "Leads", new { area = "Leads" }, FormMethod.Get))
+{
+    <div class="panel - group">
+        <div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">Leads Search</div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <th>
+                                Prospect Name:
+                            </th>
+                            <td>
+                                @Html.TextBox("ProspectName", null, htmlAttributes: new { @class = "form-control" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Lead Type</th>
+                            <td>
+                                @Html.DropDownList("LeadTypeId", @JazMaxDropDownList.GetLeadTypes(), htmlAttributes: new { @class = "form-control" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Lead Status</th>
+                            <td>
+                                @Html.DropDownList("LeadStatusId", @JazMaxDropDownList.GetLeadStatusTypes(), htmlAttributes: new { @class = "form-control" })
+                            </td>
+                        </tr>
+                        @if (JazMaxIdentityHelper.IsUserInRole("CEO"))
+                        {
+                            <tr>
+                                <th>Branch</th>
+                                <td>
+                                    @Html.DropDownList("BranchId", @JazMaxDropDownList.GetAllBranches(), htmlAttributes: new { @class = "form-control" })
+                                </td>
+                            </tr>
+                        }
+                        @if (JazMaxIdentityHelper.IsUserInRole("CEO"))
+                        {
+                            <tr>
+                                <th>Agent</th>
+                                <td>
+                                    @Html.DropDownList("AngentId", @JazMaxDropDownList.GetAllAgents(), htmlAttributes: new { @class = "form-control" })
+                                </td>
+                            </tr>
+                        }
+                        @if (JazMaxIdentityHelper.IsUserInRole("PA"))
+                        {
+                            <tr>
+                                <td>Agent In Province</td>
+                                <td></td>
+                            </tr>
+                        }
+                        @if (JazMaxIdentityHelper.IsUserInRole("TeamLeader"))
+                        {
+                            <tr>
+                                <td>Agents</td>
+                                <td>
+                                    @Html.DropDownList("AngentId", @JazMaxDropDownList.GetAgentsForBranch(
+                   JazMaxIdentityHelper.GetTeamLeadersInfoNew().CoreBranchId), htmlAttributes: new { @class = "form-control" })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    <br />
+                    <br />
+                    <input type="submit" value="Search" class="btn btn-primary btn-sm">   <input type="button" class="btn btn-primary btn-sm" value="Clear" onclick="location.href='@Url.Action("Search", "Leads", new { area = "Leads" } )'" /
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@if (Model.ShowResult)
+{
+    @Html.Partial("_LeadList", Model.LeadIndex)
+}

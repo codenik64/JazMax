@@ -19,5 +19,10 @@ namespace JazMax.Web.ViewModel.PropertyManagement
         public string ProprtyDesciption { get; set; } // ProprtyDesciption (Primary key)
         public bool IsListingActive { get; set; } // IsListingActive (Primary key)
         public int PropertyListingPricingTypeId { get; set; }
+
+        public string BranchName { get; set; }
+        public string ProvinceName { get; set; }
+        public string PropertyPriceTypeName { get; set; }
+        public string PropertyTypeName { get; set; }
     }
 }

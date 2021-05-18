@@ -1,0 +1,80 @@
+﻿@model JazMax.DataAccess.CoreUser
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="chartArea"></div>
+    </div>
+</div>
+
+@section scripts
+{
+   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+    <script>
+        $(document)
+            .ready(function () {
+
+
+                //$('#chartbtn')
+                //   .click(function () {
+                       $.ajax({
+                           type: "GET",
+                           url: '@Url.Action("UserChart")',
+                           dataType: "json",
+                           success: function (data) {
+                               var series = [
+                                   {
+                                       type: 'pie',
+                                       name: '',
+                                       data: data
+                                   }
+                               ];
+                               createChart("#chartArea", "PIE Chart", series);
+
+                           }
+
+                       });
+
+                   });
+            //});
+
+        function createChart(chartcontainer, title, series) {
+
+            $(chartcontainer).highcharts({
+                charts: {
+                    type: 'pie',
+                },
+                credits: {
+                    enabled: false,
+                },
+                exporting: {
+                    enable: false,
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                            },
+                        }
+                    }
+                },
+                series: series,
+                title: {
+                    text: title
+                }
+            });
+
+        }
+
+    </script>
+
+}

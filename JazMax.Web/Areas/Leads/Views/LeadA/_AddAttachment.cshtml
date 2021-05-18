@@ -1,0 +1,74 @@
+﻿@model JazMax.Web.ViewModel.Leads.LeadAttachments
+
+
+@using JazMax.Core.SystemHelpers;
+@{
+    JazMaxDropDownList drops = new JazMaxDropDownList();
+}
+@using (Html.BeginForm("LeadAttachment", "LeadA", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idA">
+        Add Attachment
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="idA" tabindex="-1" role="dialog" aria-labelledby="idActivityLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="idActivityLabel">Add Lead Attachment</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="form-horizontal">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FileAttachmentDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.FileAttachmentDescription, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.FileAttachmentDescription, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FileContent, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <p><input multiple type="file" id="file" name="file" /></p>
+                                @Html.ValidationMessageFor(model => model.FileContent, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Add Lead Attachment" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+

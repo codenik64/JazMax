@@ -211,6 +211,7 @@ namespace JazMax.Web.Controllers
         {
             try
             {
+              
                 #region Capture CoreUser Details
 
                 JazMax.Web.ViewModel.UserAccountView.CoreUserView m = new ViewModel.UserAccountView.CoreUserView()
@@ -371,6 +372,23 @@ namespace JazMax.Web.Controllers
             {
                 return Json(new { Result = "Error!", Message = "Error, Please try again" }, JsonRequestBehavior.AllowGet);
             }
+        }
+        #endregion
+
+        #region User Pie Chart
+        public ActionResult Chart()
+        {
+            return View();
+        }
+
+
+        public ActionResult UserChart()
+        {
+            var data = obj.GetAllSystemUsers(new List<bool> { true, false });
+            var dataforchart = data.Select(x => new { name = x.UserType, y = obj.GetCount()});
+
+
+            return Json(dataforchart, JsonRequestBehavior.AllowGet);
         }
         #endregion
 

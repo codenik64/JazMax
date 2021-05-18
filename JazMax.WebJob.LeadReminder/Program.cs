@@ -10,6 +10,8 @@ namespace JazMax.WebJob.LeadReminder
     {
         static void Main(string[] args)
         {
+            LeadReminderCore core = new LeadReminderCore();
+            core.DoWork();
         }
     }
 }

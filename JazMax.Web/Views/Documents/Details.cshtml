@@ -1,0 +1,128 @@
+﻿@model JazMax.Web.ViewModel.Documents.UploadView
+
+@{ 
+    var a = Model.FileUploadId;
+    TempData["File"] = Model.FileUploadId;
+}
+<div class="modal-body row">
+   
+    </div>
+    <div class="col-md-4">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Document Details</div>
+                <div class="panel-body">
+                    <div>
+
+                        <dl>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FileNames)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.FileNames)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CoreUserId)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CoreUserId)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DateCreated)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DateCreated)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FileDescription)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.FileDescription)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.LastUpdated)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.LastUpdated)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.SentFrom)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.SentFrom)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.SentTo)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.SentTo)
+                            </dd>
+
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+     
+
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Add Note</div>
+                <div class="panel-body">
+                    @{
+                        Html.RenderAction("CreateNote", "Notes");
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="panel-group"style="width:800px">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Additional Notes(Comments)</div>
+                <div class="panel-body">
+              @{
+                  Html.RenderAction("Note", "Notes", new { id = Model.FileUploadId });
+               }
+                </div>
+            </div>
+        </div>
+        <div class="panel-group"style="width:800px">
+            <br />
+            <div class="panel panel-primary">
+                <div class="panel-heading">Document Attachments</div>
+                <div class="panel-body">
+                  @{
+                      Html.RenderAction("Attachment", "Attachments", new { id = Model.FileUploadId });
+                  }
+                </div>
+            </div>
+        </div>
+        <div class="panel-group" style="width:800px">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Add Attachment</div>
+                <div class="panel-body">
+                    @{
+                        Html.RenderAction("CreateAttachment", "Attachments");
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

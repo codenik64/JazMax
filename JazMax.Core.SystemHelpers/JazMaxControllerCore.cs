@@ -29,11 +29,6 @@ namespace JazMax.Core.SystemHelpers
             return sb.ToString();
         }
 
-        //public static ViewResult JazMaxView()
-        //{
-        //    return new ViewResult();
-        //}
-
         public static PartialViewResult JazMaxPartialView()
         {
             return new PartialViewResult();
@@ -44,9 +39,5 @@ namespace JazMax.Core.SystemHelpers
             return View();
         }
 
-        //public ActionResult JazMaxView()
-        //{
-        //    return View();
-        //}
     }
 }

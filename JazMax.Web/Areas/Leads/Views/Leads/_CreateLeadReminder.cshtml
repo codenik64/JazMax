@@ -1,0 +1,50 @@
+﻿@using JazMax.Core.SystemHelpers
+@{
+    ViewBag.Title = "View";
+}
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#idReminder">
+    Add Reminder
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="idReminder" tabindex="-1" role="dialog" aria-labelledby="idReminderLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="idReminderLabel">Create Lead Reminder</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+
+                    @Html.Label("Description")     @Html.Editor("DescriptionReminder", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                @Html.Label("Reminder Date") @Html.TextBox("Date", "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date" })
+                <br />
+
+                @Html.Raw(JazMaxMvcExtensions.DrawPanel(new JazMaxPanel
+          {
+              isHidden = true,
+              Message = "Please enter a description",
+              PanelId = "errorDescriptionReminder",
+              PanelType = PanelType.Danger
+          }))
+              
+
+                <button type="button" class="btn btn-success" onclick="CreateLeadReminder()">Add Reminder</button>
+                <button type="button" class="btn btn-primary" onclick="ResetFormReminder()">Reset</button>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

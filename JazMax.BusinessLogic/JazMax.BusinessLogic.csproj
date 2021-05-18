@@ -54,7 +54,7 @@
     <Compile Include="UserAccounts\CoreUserService.cs" />
     <Compile Include="UserAccounts\SearchCore\CoreUserSearchService.cs" />
     <Compile Include="UserAccounts\UserGroupService.cs" />
-    <Compile Include="WebJob\WebJobService.cs" />
+    <Compile Include="ChangeLog\WebJob\WebJobService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JazMax.Common\JazMax.Common.csproj">

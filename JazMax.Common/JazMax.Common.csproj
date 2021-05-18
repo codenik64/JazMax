@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Enum\BlobFileType.cs" />
     <Compile Include="Enum\BlobType.cs" />
+    <Compile Include="Enum\TriggerType.cs" />
     <Compile Include="Enum\UserType.cs" />
     <Compile Include="Models\JsonMessage.cs" />
     <Compile Include="Models\JsonResult.cs" />

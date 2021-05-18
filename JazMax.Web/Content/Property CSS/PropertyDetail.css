@@ -1,0 +1,114 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+    .form-control:focus {
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+.check {
+    background-image: url(http://individual.icons-land.com/IconsPreview/Medical/PNG/Documents/32x32/Calendar_DoctorVisit.png);
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    cursor: pointer;
+}
+
+.date {
+    background-image: url(images/watch.png);
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    cursor: pointer;
+}
+
+.ui-datepicker {
+    background: #333;
+    border: 1px solid #555;
+    color: #EEE;
+}
+
+.item-desc {
+    background: #E8E8E8 none repeat scroll 0% 0%;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    margin-top: 22px;
+    overflow: auto;
+}
+
+.date-time {
+    background-color: #E8E8E8;
+    margin-bottom: 20px;
+    padding-bottom: 1px;
+    padding-top: 16px;
+    max-width: 100%;
+    margin-left: -1px;
+}
+/**  Tabs Style  **/
+
+.nav-tabs {
+    border-bottom: 2px solid #DDD;
+}
+
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:focus,
+    .nav-tabs > li.active > a:hover {
+        border-width: 0px;
+    }
+
+    .nav-tabs > li > a {
+        border: none;
+        color: #666;
+    }
+
+        .nav-tabs > li.active > a,
+        .nav-tabs > li > a:hover {
+            border: none;
+            color: #4285F4 !important;
+            background: transparent;
+        }
+
+        .nav-tabs > li > a::after {
+            content: "";
+            background: #4285F4;
+            height: 2px;
+            position: absolute;
+            width: 100%;
+            left: 0px;
+            bottom: -1px;
+            transition: all 250ms ease 0s;
+            transform: scale(0);
+        }
+
+    .nav-tabs > li.active > a::after,
+    .nav-tabs > li:hover > a::after {
+        transform: scale(1);
+    }
+
+.tabnav > li > a::after {
+    background: #21527d none repeat scroll 0% 0%;
+    color: #fff;
+}
+
+.tab-pane {
+    padding: 15px 0;
+}
+
+.tab-content {
+    padding: 20px
+}
+
+.card {
+    background: #FFF none repeat scroll 0% 0%;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    margin-bottom: 30px;
+}
+
+section#map {
+    margin-top: 40px;
+}

@@ -9,7 +9,7 @@
 // The following connection settings were used to generate this file:
 //     Configuration file:     "JazMax.WebJob.Messenger\App.config"
 //     Connection String Name: "JazMaxDBProdContextA"
-//     Connection String:      "Data Source=ASH\SQLEXPRESS;initial catalog=JazMaxDBProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"
+//     Connection String:      "Data Source=DESKTOP-SGNFCGR\SQLEXPRESS;initial catalog=JazMaxDBProd;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework"
 // ------------------------------------------------------------------------------------------------
 // Database Edition       : Express Edition (64-bit)
 // Database Engine Edition: Express
@@ -44,16 +44,46 @@ namespace JazMax.DataAccess
         System.Data.Entity.DbSet<AzureWebJob> AzureWebJobs { get; set; } // AzureWebJob
         System.Data.Entity.DbSet<AzureWebJobLog> AzureWebJobLogs { get; set; } // AzureWebJobLog
         System.Data.Entity.DbSet<BlobCoreStorage> BlobCoreStorages { get; set; } // BlobCoreStorage
+        System.Data.Entity.DbSet<CoreAdditionalNote> CoreAdditionalNotes { get; set; } // CoreAdditionalNotes
         System.Data.Entity.DbSet<CoreAgent> CoreAgents { get; set; } // CoreAgent
         System.Data.Entity.DbSet<CoreBranch> CoreBranches { get; set; } // CoreBranch
+        System.Data.Entity.DbSet<CoreDocumentAttachment> CoreDocumentAttachments { get; set; } // CoreDocumentAttachments
+        System.Data.Entity.DbSet<CoreDocumentType> CoreDocumentTypes { get; set; } // CoreDocumentTypes
+        System.Data.Entity.DbSet<CoreFileType> CoreFileTypes { get; set; } // CoreFileTypes
+        System.Data.Entity.DbSet<CoreFileUpload> CoreFileUploads { get; set; } // CoreFileUploads
+        System.Data.Entity.DbSet<CoreLeadAttachment> CoreLeadAttachments { get; set; } // CoreLeadAttachments
         System.Data.Entity.DbSet<CorePa> CorePas { get; set; } // CorePA
         System.Data.Entity.DbSet<CoreProvince> CoreProvinces { get; set; } // CoreProvince
         System.Data.Entity.DbSet<CoreTeamLeader> CoreTeamLeaders { get; set; } // CoreTeamLeader
         System.Data.Entity.DbSet<CoreUser> CoreUsers { get; set; } // CoreUser
+        System.Data.Entity.DbSet<CoreUserAttachment> CoreUserAttachments { get; set; } // CoreUserAttachments
         System.Data.Entity.DbSet<CoreUserBranchMoveRequest> CoreUserBranchMoveRequests { get; set; } // CoreUserBranchMoveRequest
         System.Data.Entity.DbSet<CoreUserInType> CoreUserInTypes { get; set; } // CoreUserInType
         System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; } // CoreUserType
+        System.Data.Entity.DbSet<Lead> Leads { get; set; } // Lead
+        System.Data.Entity.DbSet<LeadActivity> LeadActivities { get; set; } // LeadActivity
+        System.Data.Entity.DbSet<LeadActivityForLead> LeadActivityForLeads { get; set; } // LeadActivityForLead
+        System.Data.Entity.DbSet<LeadAgent> LeadAgents { get; set; } // LeadAgents
+        System.Data.Entity.DbSet<LeadAgentCommunication> LeadAgentCommunications { get; set; } // LeadAgentCommunication
+        System.Data.Entity.DbSet<LeadAgentCommunicationType> LeadAgentCommunicationTypes { get; set; } // LeadAgentCommunicationType
+        System.Data.Entity.DbSet<LeadAttachment> LeadAttachments { get; set; } // LeadAttachments
+        System.Data.Entity.DbSet<LeadProspect> LeadProspects { get; set; } // LeadProspect
+        System.Data.Entity.DbSet<LeadRawData> LeadRawDatas { get; set; } // LeadRawData
+        System.Data.Entity.DbSet<LeadRawDataLog> LeadRawDataLogs { get; set; } // LeadRawDataLog
+        System.Data.Entity.DbSet<LeadReminder> LeadReminders { get; set; } // LeadReminder
+        System.Data.Entity.DbSet<LeadSource> LeadSources { get; set; } // LeadSource
+        System.Data.Entity.DbSet<LeadStatu> LeadStatus { get; set; } // LeadStatus
+        System.Data.Entity.DbSet<LeadStatusHistory> LeadStatusHistories { get; set; } // LeadStatusHistory
+        System.Data.Entity.DbSet<LeadType> LeadTypes { get; set; } // LeadType
+        System.Data.Entity.DbSet<LeadWithSameProspect> LeadWithSameProspects { get; set; } // LeadWithSameProspect
+        System.Data.Entity.DbSet<LeadWithSameProspectLink> LeadWithSameProspectLinks { get; set; } // LeadWithSameProspectLinks
+        System.Data.Entity.DbSet<LoggedCall> LoggedCalls { get; set; } // LoggedCalls
+        System.Data.Entity.DbSet<MessengerComType> MessengerComTypes { get; set; } // MessengerComType
         System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; } // MessengerCoreLog
+        System.Data.Entity.DbSet<MessengerTemplate> MessengerTemplates { get; set; } // MessengerTemplate
+        System.Data.Entity.DbSet<MessengerTemplateType> MessengerTemplateTypes { get; set; } // MessengerTemplateType
+        System.Data.Entity.DbSet<MessengerTrigger> MessengerTriggers { get; set; } // MessengerTrigger
+        System.Data.Entity.DbSet<MessengerTriggerLog> MessengerTriggerLogs { get; set; } // MessengerTriggerLog
         System.Data.Entity.DbSet<MessengerType> MessengerTypes { get; set; } // MessengerType
         System.Data.Entity.DbSet<PropertyFeature> PropertyFeatures { get; set; } // PropertyFeature
         System.Data.Entity.DbSet<PropertyImage> PropertyImages { get; set; } // PropertyImages
@@ -68,6 +98,7 @@ namespace JazMax.DataAccess
         System.Data.Entity.DbSet<SystemErrorLog> SystemErrorLogs { get; set; } // SystemErrorLog
         System.Data.Entity.DbSet<SystemSettingsData> SystemSettingsDatas { get; set; } // SystemSettingsData
         System.Data.Entity.DbSet<VwGetAgentsInformation> VwGetAgentsInformations { get; set; } // vw_GetAgentsInformation
+        System.Data.Entity.DbSet<VwGetLeadsByActivity> VwGetLeadsByActivities { get; set; } // vw_GetLeadsByActivity
         System.Data.Entity.DbSet<VwGetTeamLeadersInformation> VwGetTeamLeadersInformations { get; set; } // vw_GetTeamLeadersInformation
 
         int SaveChanges();
@@ -84,6 +115,18 @@ namespace JazMax.DataAccess
         string ToString();
 
         // Stored Procedures
+        System.Collections.Generic.List<SpLeadActivityByAgentReturnModel> SpLeadActivityByAgent(int? coreUserId);
+        System.Collections.Generic.List<SpLeadActivityByAgentReturnModel> SpLeadActivityByAgent(int? coreUserId, out int procResult);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<SpLeadActivityByAgentReturnModel>> SpLeadActivityByAgentAsync(int? coreUserId);
+
+        System.Collections.Generic.List<SpLeadByPropertyReturnModel> SpLeadByProperty(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo);
+        System.Collections.Generic.List<SpLeadByPropertyReturnModel> SpLeadByProperty(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo, out int procResult);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<SpLeadByPropertyReturnModel>> SpLeadByPropertyAsync(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo);
+
+        System.Collections.Generic.List<SpLeadClosedReportReturnModel> SpLeadClosedReport(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo);
+        System.Collections.Generic.List<SpLeadClosedReportReturnModel> SpLeadClosedReport(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo, out int procResult);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<SpLeadClosedReportReturnModel>> SpLeadClosedReportAsync(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo);
+
         int SpSaveEditLog(string tableName, string tableColum, int? tableKey, string valueBefore, string valueAfer, int? coreUserId, string comment);
         // SpSaveEditLogAsync cannot be created due to having out parameters, or is relying on the procedure result (int)
 
@@ -104,16 +147,46 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<AzureWebJob> AzureWebJobs { get; set; } // AzureWebJob
         public System.Data.Entity.DbSet<AzureWebJobLog> AzureWebJobLogs { get; set; } // AzureWebJobLog
         public System.Data.Entity.DbSet<BlobCoreStorage> BlobCoreStorages { get; set; } // BlobCoreStorage
+        public System.Data.Entity.DbSet<CoreAdditionalNote> CoreAdditionalNotes { get; set; } // CoreAdditionalNotes
         public System.Data.Entity.DbSet<CoreAgent> CoreAgents { get; set; } // CoreAgent
         public System.Data.Entity.DbSet<CoreBranch> CoreBranches { get; set; } // CoreBranch
+        public System.Data.Entity.DbSet<CoreDocumentAttachment> CoreDocumentAttachments { get; set; } // CoreDocumentAttachments
+        public System.Data.Entity.DbSet<CoreDocumentType> CoreDocumentTypes { get; set; } // CoreDocumentTypes
+        public System.Data.Entity.DbSet<CoreFileType> CoreFileTypes { get; set; } // CoreFileTypes
+        public System.Data.Entity.DbSet<CoreFileUpload> CoreFileUploads { get; set; } // CoreFileUploads
+        public System.Data.Entity.DbSet<CoreLeadAttachment> CoreLeadAttachments { get; set; } // CoreLeadAttachments
         public System.Data.Entity.DbSet<CorePa> CorePas { get; set; } // CorePA
         public System.Data.Entity.DbSet<CoreProvince> CoreProvinces { get; set; } // CoreProvince
         public System.Data.Entity.DbSet<CoreTeamLeader> CoreTeamLeaders { get; set; } // CoreTeamLeader
         public System.Data.Entity.DbSet<CoreUser> CoreUsers { get; set; } // CoreUser
+        public System.Data.Entity.DbSet<CoreUserAttachment> CoreUserAttachments { get; set; } // CoreUserAttachments
         public System.Data.Entity.DbSet<CoreUserBranchMoveRequest> CoreUserBranchMoveRequests { get; set; } // CoreUserBranchMoveRequest
         public System.Data.Entity.DbSet<CoreUserInType> CoreUserInTypes { get; set; } // CoreUserInType
         public System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; } // CoreUserType
+        public System.Data.Entity.DbSet<Lead> Leads { get; set; } // Lead
+        public System.Data.Entity.DbSet<LeadActivity> LeadActivities { get; set; } // LeadActivity
+        public System.Data.Entity.DbSet<LeadActivityForLead> LeadActivityForLeads { get; set; } // LeadActivityForLead
+        public System.Data.Entity.DbSet<LeadAgent> LeadAgents { get; set; } // LeadAgents
+        public System.Data.Entity.DbSet<LeadAgentCommunication> LeadAgentCommunications { get; set; } // LeadAgentCommunication
+        public System.Data.Entity.DbSet<LeadAgentCommunicationType> LeadAgentCommunicationTypes { get; set; } // LeadAgentCommunicationType
+        public System.Data.Entity.DbSet<LeadAttachment> LeadAttachments { get; set; } // LeadAttachments
+        public System.Data.Entity.DbSet<LeadProspect> LeadProspects { get; set; } // LeadProspect
+        public System.Data.Entity.DbSet<LeadRawData> LeadRawDatas { get; set; } // LeadRawData
+        public System.Data.Entity.DbSet<LeadRawDataLog> LeadRawDataLogs { get; set; } // LeadRawDataLog
+        public System.Data.Entity.DbSet<LeadReminder> LeadReminders { get; set; } // LeadReminder
+        public System.Data.Entity.DbSet<LeadSource> LeadSources { get; set; } // LeadSource
+        public System.Data.Entity.DbSet<LeadStatu> LeadStatus { get; set; } // LeadStatus
+        public System.Data.Entity.DbSet<LeadStatusHistory> LeadStatusHistories { get; set; } // LeadStatusHistory
+        public System.Data.Entity.DbSet<LeadType> LeadTypes { get; set; } // LeadType
+        public System.Data.Entity.DbSet<LeadWithSameProspect> LeadWithSameProspects { get; set; } // LeadWithSameProspect
+        public System.Data.Entity.DbSet<LeadWithSameProspectLink> LeadWithSameProspectLinks { get; set; } // LeadWithSameProspectLinks
+        public System.Data.Entity.DbSet<LoggedCall> LoggedCalls { get; set; } // LoggedCalls
+        public System.Data.Entity.DbSet<MessengerComType> MessengerComTypes { get; set; } // MessengerComType
         public System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; } // MessengerCoreLog
+        public System.Data.Entity.DbSet<MessengerTemplate> MessengerTemplates { get; set; } // MessengerTemplate
+        public System.Data.Entity.DbSet<MessengerTemplateType> MessengerTemplateTypes { get; set; } // MessengerTemplateType
+        public System.Data.Entity.DbSet<MessengerTrigger> MessengerTriggers { get; set; } // MessengerTrigger
+        public System.Data.Entity.DbSet<MessengerTriggerLog> MessengerTriggerLogs { get; set; } // MessengerTriggerLog
         public System.Data.Entity.DbSet<MessengerType> MessengerTypes { get; set; } // MessengerType
         public System.Data.Entity.DbSet<PropertyFeature> PropertyFeatures { get; set; } // PropertyFeature
         public System.Data.Entity.DbSet<PropertyImage> PropertyImages { get; set; } // PropertyImages
@@ -128,6 +201,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<SystemErrorLog> SystemErrorLogs { get; set; } // SystemErrorLog
         public System.Data.Entity.DbSet<SystemSettingsData> SystemSettingsDatas { get; set; } // SystemSettingsData
         public System.Data.Entity.DbSet<VwGetAgentsInformation> VwGetAgentsInformations { get; set; } // vw_GetAgentsInformation
+        public System.Data.Entity.DbSet<VwGetLeadsByActivity> VwGetLeadsByActivities { get; set; } // vw_GetLeadsByActivity
         public System.Data.Entity.DbSet<VwGetTeamLeadersInformation> VwGetTeamLeadersInformations { get; set; } // vw_GetTeamLeadersInformation
 
         static JazMaxDBProdContext()
@@ -186,16 +260,46 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new AzureWebJobConfiguration());
             modelBuilder.Configurations.Add(new AzureWebJobLogConfiguration());
             modelBuilder.Configurations.Add(new BlobCoreStorageConfiguration());
+            modelBuilder.Configurations.Add(new CoreAdditionalNoteConfiguration());
             modelBuilder.Configurations.Add(new CoreAgentConfiguration());
             modelBuilder.Configurations.Add(new CoreBranchConfiguration());
+            modelBuilder.Configurations.Add(new CoreDocumentAttachmentConfiguration());
+            modelBuilder.Configurations.Add(new CoreDocumentTypeConfiguration());
+            modelBuilder.Configurations.Add(new CoreFileTypeConfiguration());
+            modelBuilder.Configurations.Add(new CoreFileUploadConfiguration());
+            modelBuilder.Configurations.Add(new CoreLeadAttachmentConfiguration());
             modelBuilder.Configurations.Add(new CorePaConfiguration());
             modelBuilder.Configurations.Add(new CoreProvinceConfiguration());
             modelBuilder.Configurations.Add(new CoreTeamLeaderConfiguration());
             modelBuilder.Configurations.Add(new CoreUserConfiguration());
+            modelBuilder.Configurations.Add(new CoreUserAttachmentConfiguration());
             modelBuilder.Configurations.Add(new CoreUserBranchMoveRequestConfiguration());
             modelBuilder.Configurations.Add(new CoreUserInTypeConfiguration());
             modelBuilder.Configurations.Add(new CoreUserTypeConfiguration());
+            modelBuilder.Configurations.Add(new LeadConfiguration());
+            modelBuilder.Configurations.Add(new LeadActivityConfiguration());
+            modelBuilder.Configurations.Add(new LeadActivityForLeadConfiguration());
+            modelBuilder.Configurations.Add(new LeadAgentConfiguration());
+            modelBuilder.Configurations.Add(new LeadAgentCommunicationConfiguration());
+            modelBuilder.Configurations.Add(new LeadAgentCommunicationTypeConfiguration());
+            modelBuilder.Configurations.Add(new LeadAttachmentConfiguration());
+            modelBuilder.Configurations.Add(new LeadProspectConfiguration());
+            modelBuilder.Configurations.Add(new LeadRawDataConfiguration());
+            modelBuilder.Configurations.Add(new LeadRawDataLogConfiguration());
+            modelBuilder.Configurations.Add(new LeadReminderConfiguration());
+            modelBuilder.Configurations.Add(new LeadSourceConfiguration());
+            modelBuilder.Configurations.Add(new LeadStatuConfiguration());
+            modelBuilder.Configurations.Add(new LeadStatusHistoryConfiguration());
+            modelBuilder.Configurations.Add(new LeadTypeConfiguration());
+            modelBuilder.Configurations.Add(new LeadWithSameProspectConfiguration());
+            modelBuilder.Configurations.Add(new LeadWithSameProspectLinkConfiguration());
+            modelBuilder.Configurations.Add(new LoggedCallConfiguration());
+            modelBuilder.Configurations.Add(new MessengerComTypeConfiguration());
             modelBuilder.Configurations.Add(new MessengerCoreLogConfiguration());
+            modelBuilder.Configurations.Add(new MessengerTemplateConfiguration());
+            modelBuilder.Configurations.Add(new MessengerTemplateTypeConfiguration());
+            modelBuilder.Configurations.Add(new MessengerTriggerConfiguration());
+            modelBuilder.Configurations.Add(new MessengerTriggerLogConfiguration());
             modelBuilder.Configurations.Add(new MessengerTypeConfiguration());
             modelBuilder.Configurations.Add(new PropertyFeatureConfiguration());
             modelBuilder.Configurations.Add(new PropertyImageConfiguration());
@@ -210,6 +314,7 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new SystemErrorLogConfiguration());
             modelBuilder.Configurations.Add(new SystemSettingsDataConfiguration());
             modelBuilder.Configurations.Add(new VwGetAgentsInformationConfiguration());
+            modelBuilder.Configurations.Add(new VwGetLeadsByActivityConfiguration());
             modelBuilder.Configurations.Add(new VwGetTeamLeadersInformationConfiguration());
         }
 
@@ -223,16 +328,46 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new AzureWebJobConfiguration(schema));
             modelBuilder.Configurations.Add(new AzureWebJobLogConfiguration(schema));
             modelBuilder.Configurations.Add(new BlobCoreStorageConfiguration(schema));
+            modelBuilder.Configurations.Add(new CoreAdditionalNoteConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreAgentConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreBranchConfiguration(schema));
+            modelBuilder.Configurations.Add(new CoreDocumentAttachmentConfiguration(schema));
+            modelBuilder.Configurations.Add(new CoreDocumentTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new CoreFileTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new CoreFileUploadConfiguration(schema));
+            modelBuilder.Configurations.Add(new CoreLeadAttachmentConfiguration(schema));
             modelBuilder.Configurations.Add(new CorePaConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreProvinceConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreTeamLeaderConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreUserConfiguration(schema));
+            modelBuilder.Configurations.Add(new CoreUserAttachmentConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreUserBranchMoveRequestConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreUserInTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new CoreUserTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadActivityConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadActivityForLeadConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadAgentConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadAgentCommunicationConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadAgentCommunicationTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadAttachmentConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadProspectConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadRawDataConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadRawDataLogConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadReminderConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadSourceConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadStatuConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadStatusHistoryConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadWithSameProspectConfiguration(schema));
+            modelBuilder.Configurations.Add(new LeadWithSameProspectLinkConfiguration(schema));
+            modelBuilder.Configurations.Add(new LoggedCallConfiguration(schema));
+            modelBuilder.Configurations.Add(new MessengerComTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new MessengerCoreLogConfiguration(schema));
+            modelBuilder.Configurations.Add(new MessengerTemplateConfiguration(schema));
+            modelBuilder.Configurations.Add(new MessengerTemplateTypeConfiguration(schema));
+            modelBuilder.Configurations.Add(new MessengerTriggerConfiguration(schema));
+            modelBuilder.Configurations.Add(new MessengerTriggerLogConfiguration(schema));
             modelBuilder.Configurations.Add(new MessengerTypeConfiguration(schema));
             modelBuilder.Configurations.Add(new PropertyFeatureConfiguration(schema));
             modelBuilder.Configurations.Add(new PropertyImageConfiguration(schema));
@@ -247,11 +382,150 @@ namespace JazMax.DataAccess
             modelBuilder.Configurations.Add(new SystemErrorLogConfiguration(schema));
             modelBuilder.Configurations.Add(new SystemSettingsDataConfiguration(schema));
             modelBuilder.Configurations.Add(new VwGetAgentsInformationConfiguration(schema));
+            modelBuilder.Configurations.Add(new VwGetLeadsByActivityConfiguration(schema));
             modelBuilder.Configurations.Add(new VwGetTeamLeadersInformationConfiguration(schema));
             return modelBuilder;
         }
 
         // Stored Procedures
+        public System.Collections.Generic.List<SpLeadActivityByAgentReturnModel> SpLeadActivityByAgent(int? coreUserId)
+        {
+            int procResult;
+            return SpLeadActivityByAgent(coreUserId, out procResult);
+        }
+
+        public System.Collections.Generic.List<SpLeadActivityByAgentReturnModel> SpLeadActivityByAgent(int? coreUserId, out int procResult)
+        {
+            var coreUserIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@CoreUserId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = coreUserId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!coreUserId.HasValue)
+                coreUserIdParam.Value = System.DBNull.Value;
+
+            var procResultParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@procResult", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Output };
+            var procResultData = Database.SqlQuery<SpLeadActivityByAgentReturnModel>("EXEC @procResult = [dbo].[SPLeadActivityByAgent] @CoreUserId", coreUserIdParam, procResultParam).ToList();
+
+            procResult = (int) procResultParam.Value;
+            return procResultData;
+        }
+
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<SpLeadActivityByAgentReturnModel>> SpLeadActivityByAgentAsync(int? coreUserId)
+        {
+            var coreUserIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@CoreUserId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = coreUserId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!coreUserId.HasValue)
+                coreUserIdParam.Value = System.DBNull.Value;
+
+            var procResultData = await Database.SqlQuery<SpLeadActivityByAgentReturnModel>("EXEC [dbo].[SPLeadActivityByAgent] @CoreUserId", coreUserIdParam).ToListAsync();
+
+            return procResultData;
+        }
+
+        public System.Collections.Generic.List<SpLeadByPropertyReturnModel> SpLeadByProperty(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo)
+        {
+            int procResult;
+            return SpLeadByProperty(leadStatusId, coreBranchId, dateFrom, dateTo, out procResult);
+        }
+
+        public System.Collections.Generic.List<SpLeadByPropertyReturnModel> SpLeadByProperty(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo, out int procResult)
+        {
+            var leadStatusIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@LeadStatusId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = leadStatusId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!leadStatusId.HasValue)
+                leadStatusIdParam.Value = System.DBNull.Value;
+
+            var coreBranchIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@CoreBranchId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = coreBranchId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!coreBranchId.HasValue)
+                coreBranchIdParam.Value = System.DBNull.Value;
+
+            var dateFromParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@DateFrom", SqlDbType = System.Data.SqlDbType.DateTime, Direction = System.Data.ParameterDirection.Input, Value = dateFrom.GetValueOrDefault() };
+            if (!dateFrom.HasValue)
+                dateFromParam.Value = System.DBNull.Value;
+
+            var dateToParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@DateTo", SqlDbType = System.Data.SqlDbType.DateTime, Direction = System.Data.ParameterDirection.Input, Value = dateTo.GetValueOrDefault() };
+            if (!dateTo.HasValue)
+                dateToParam.Value = System.DBNull.Value;
+
+            var procResultParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@procResult", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Output };
+            var procResultData = Database.SqlQuery<SpLeadByPropertyReturnModel>("EXEC @procResult = [dbo].[SPLeadByProperty] @LeadStatusId, @CoreBranchId, @DateFrom, @DateTo", leadStatusIdParam, coreBranchIdParam, dateFromParam, dateToParam, procResultParam).ToList();
+
+            procResult = (int) procResultParam.Value;
+            return procResultData;
+        }
+
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<SpLeadByPropertyReturnModel>> SpLeadByPropertyAsync(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo)
+        {
+            var leadStatusIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@LeadStatusId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = leadStatusId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!leadStatusId.HasValue)
+                leadStatusIdParam.Value = System.DBNull.Value;
+
+            var coreBranchIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@CoreBranchId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = coreBranchId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!coreBranchId.HasValue)
+                coreBranchIdParam.Value = System.DBNull.Value;
+
+            var dateFromParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@DateFrom", SqlDbType = System.Data.SqlDbType.DateTime, Direction = System.Data.ParameterDirection.Input, Value = dateFrom.GetValueOrDefault() };
+            if (!dateFrom.HasValue)
+                dateFromParam.Value = System.DBNull.Value;
+
+            var dateToParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@DateTo", SqlDbType = System.Data.SqlDbType.DateTime, Direction = System.Data.ParameterDirection.Input, Value = dateTo.GetValueOrDefault() };
+            if (!dateTo.HasValue)
+                dateToParam.Value = System.DBNull.Value;
+
+            var procResultData = await Database.SqlQuery<SpLeadByPropertyReturnModel>("EXEC [dbo].[SPLeadByProperty] @LeadStatusId, @CoreBranchId, @DateFrom, @DateTo", leadStatusIdParam, coreBranchIdParam, dateFromParam, dateToParam).ToListAsync();
+
+            return procResultData;
+        }
+
+        public System.Collections.Generic.List<SpLeadClosedReportReturnModel> SpLeadClosedReport(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo)
+        {
+            int procResult;
+            return SpLeadClosedReport(leadStatusId, coreBranchId, dateFrom, dateTo, out procResult);
+        }
+
+        public System.Collections.Generic.List<SpLeadClosedReportReturnModel> SpLeadClosedReport(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo, out int procResult)
+        {
+            var leadStatusIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@LeadStatusId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = leadStatusId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!leadStatusId.HasValue)
+                leadStatusIdParam.Value = System.DBNull.Value;
+
+            var coreBranchIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@CoreBranchId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = coreBranchId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!coreBranchId.HasValue)
+                coreBranchIdParam.Value = System.DBNull.Value;
+
+            var dateFromParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@DateFrom", SqlDbType = System.Data.SqlDbType.DateTime, Direction = System.Data.ParameterDirection.Input, Value = dateFrom.GetValueOrDefault() };
+            if (!dateFrom.HasValue)
+                dateFromParam.Value = System.DBNull.Value;
+
+            var dateToParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@DateTo", SqlDbType = System.Data.SqlDbType.DateTime, Direction = System.Data.ParameterDirection.Input, Value = dateTo.GetValueOrDefault() };
+            if (!dateTo.HasValue)
+                dateToParam.Value = System.DBNull.Value;
+
+            var procResultParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@procResult", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Output };
+            var procResultData = Database.SqlQuery<SpLeadClosedReportReturnModel>("EXEC @procResult = [dbo].[SPLeadClosedReport] @LeadStatusId, @CoreBranchId, @DateFrom, @DateTo", leadStatusIdParam, coreBranchIdParam, dateFromParam, dateToParam, procResultParam).ToList();
+
+            procResult = (int) procResultParam.Value;
+            return procResultData;
+        }
+
+        public async System.Threading.Tasks.Task<System.Collections.Generic.List<SpLeadClosedReportReturnModel>> SpLeadClosedReportAsync(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo)
+        {
+            var leadStatusIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@LeadStatusId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = leadStatusId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!leadStatusId.HasValue)
+                leadStatusIdParam.Value = System.DBNull.Value;
+
+            var coreBranchIdParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@CoreBranchId", SqlDbType = System.Data.SqlDbType.Int, Direction = System.Data.ParameterDirection.Input, Value = coreBranchId.GetValueOrDefault(), Precision = 10, Scale = 0 };
+            if (!coreBranchId.HasValue)
+                coreBranchIdParam.Value = System.DBNull.Value;
+
+            var dateFromParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@DateFrom", SqlDbType = System.Data.SqlDbType.DateTime, Direction = System.Data.ParameterDirection.Input, Value = dateFrom.GetValueOrDefault() };
+            if (!dateFrom.HasValue)
+                dateFromParam.Value = System.DBNull.Value;
+
+            var dateToParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@DateTo", SqlDbType = System.Data.SqlDbType.DateTime, Direction = System.Data.ParameterDirection.Input, Value = dateTo.GetValueOrDefault() };
+            if (!dateTo.HasValue)
+                dateToParam.Value = System.DBNull.Value;
+
+            var procResultData = await Database.SqlQuery<SpLeadClosedReportReturnModel>("EXEC [dbo].[SPLeadClosedReport] @LeadStatusId, @CoreBranchId, @DateFrom, @DateTo", leadStatusIdParam, coreBranchIdParam, dateFromParam, dateToParam).ToListAsync();
+
+            return procResultData;
+        }
+
         public int SpSaveEditLog(string tableName, string tableColum, int? tableKey, string valueBefore, string valueAfer, int? coreUserId, string comment)
         {
             var tableNameParam = new System.Data.SqlClient.SqlParameter { ParameterName = "@tableName", SqlDbType = System.Data.SqlDbType.NVarChar, Direction = System.Data.ParameterDirection.Input, Value = tableName, Size = 50 };
@@ -317,16 +591,46 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<AzureWebJob> AzureWebJobs { get; set; }
         public System.Data.Entity.DbSet<AzureWebJobLog> AzureWebJobLogs { get; set; }
         public System.Data.Entity.DbSet<BlobCoreStorage> BlobCoreStorages { get; set; }
+        public System.Data.Entity.DbSet<CoreAdditionalNote> CoreAdditionalNotes { get; set; }
         public System.Data.Entity.DbSet<CoreAgent> CoreAgents { get; set; }
         public System.Data.Entity.DbSet<CoreBranch> CoreBranches { get; set; }
+        public System.Data.Entity.DbSet<CoreDocumentAttachment> CoreDocumentAttachments { get; set; }
+        public System.Data.Entity.DbSet<CoreDocumentType> CoreDocumentTypes { get; set; }
+        public System.Data.Entity.DbSet<CoreFileType> CoreFileTypes { get; set; }
+        public System.Data.Entity.DbSet<CoreFileUpload> CoreFileUploads { get; set; }
+        public System.Data.Entity.DbSet<CoreLeadAttachment> CoreLeadAttachments { get; set; }
         public System.Data.Entity.DbSet<CorePa> CorePas { get; set; }
         public System.Data.Entity.DbSet<CoreProvince> CoreProvinces { get; set; }
         public System.Data.Entity.DbSet<CoreTeamLeader> CoreTeamLeaders { get; set; }
         public System.Data.Entity.DbSet<CoreUser> CoreUsers { get; set; }
+        public System.Data.Entity.DbSet<CoreUserAttachment> CoreUserAttachments { get; set; }
         public System.Data.Entity.DbSet<CoreUserBranchMoveRequest> CoreUserBranchMoveRequests { get; set; }
         public System.Data.Entity.DbSet<CoreUserInType> CoreUserInTypes { get; set; }
         public System.Data.Entity.DbSet<CoreUserType> CoreUserTypes { get; set; }
+        public System.Data.Entity.DbSet<Lead> Leads { get; set; }
+        public System.Data.Entity.DbSet<LeadActivity> LeadActivities { get; set; }
+        public System.Data.Entity.DbSet<LeadActivityForLead> LeadActivityForLeads { get; set; }
+        public System.Data.Entity.DbSet<LeadAgent> LeadAgents { get; set; }
+        public System.Data.Entity.DbSet<LeadAgentCommunication> LeadAgentCommunications { get; set; }
+        public System.Data.Entity.DbSet<LeadAgentCommunicationType> LeadAgentCommunicationTypes { get; set; }
+        public System.Data.Entity.DbSet<LeadAttachment> LeadAttachments { get; set; }
+        public System.Data.Entity.DbSet<LeadProspect> LeadProspects { get; set; }
+        public System.Data.Entity.DbSet<LeadRawData> LeadRawDatas { get; set; }
+        public System.Data.Entity.DbSet<LeadRawDataLog> LeadRawDataLogs { get; set; }
+        public System.Data.Entity.DbSet<LeadReminder> LeadReminders { get; set; }
+        public System.Data.Entity.DbSet<LeadSource> LeadSources { get; set; }
+        public System.Data.Entity.DbSet<LeadStatu> LeadStatus { get; set; }
+        public System.Data.Entity.DbSet<LeadStatusHistory> LeadStatusHistories { get; set; }
+        public System.Data.Entity.DbSet<LeadType> LeadTypes { get; set; }
+        public System.Data.Entity.DbSet<LeadWithSameProspect> LeadWithSameProspects { get; set; }
+        public System.Data.Entity.DbSet<LeadWithSameProspectLink> LeadWithSameProspectLinks { get; set; }
+        public System.Data.Entity.DbSet<LoggedCall> LoggedCalls { get; set; }
+        public System.Data.Entity.DbSet<MessengerComType> MessengerComTypes { get; set; }
         public System.Data.Entity.DbSet<MessengerCoreLog> MessengerCoreLogs { get; set; }
+        public System.Data.Entity.DbSet<MessengerTemplate> MessengerTemplates { get; set; }
+        public System.Data.Entity.DbSet<MessengerTemplateType> MessengerTemplateTypes { get; set; }
+        public System.Data.Entity.DbSet<MessengerTrigger> MessengerTriggers { get; set; }
+        public System.Data.Entity.DbSet<MessengerTriggerLog> MessengerTriggerLogs { get; set; }
         public System.Data.Entity.DbSet<MessengerType> MessengerTypes { get; set; }
         public System.Data.Entity.DbSet<PropertyFeature> PropertyFeatures { get; set; }
         public System.Data.Entity.DbSet<PropertyImage> PropertyImages { get; set; }
@@ -341,6 +645,7 @@ namespace JazMax.DataAccess
         public System.Data.Entity.DbSet<SystemErrorLog> SystemErrorLogs { get; set; }
         public System.Data.Entity.DbSet<SystemSettingsData> SystemSettingsDatas { get; set; }
         public System.Data.Entity.DbSet<VwGetAgentsInformation> VwGetAgentsInformations { get; set; }
+        public System.Data.Entity.DbSet<VwGetLeadsByActivity> VwGetLeadsByActivities { get; set; }
         public System.Data.Entity.DbSet<VwGetTeamLeadersInformation> VwGetTeamLeadersInformations { get; set; }
 
         public FakeJazMaxDBProdContext()
@@ -353,16 +658,46 @@ namespace JazMax.DataAccess
             AzureWebJobs = new FakeDbSet<AzureWebJob>("AzureWebJobId");
             AzureWebJobLogs = new FakeDbSet<AzureWebJobLog>("AzureWebJobLogId");
             BlobCoreStorages = new FakeDbSet<BlobCoreStorage>("BlobId");
+            CoreAdditionalNotes = new FakeDbSet<CoreAdditionalNote>("AdditionalNoteId");
             CoreAgents = new FakeDbSet<CoreAgent>("CoreAgentId");
             CoreBranches = new FakeDbSet<CoreBranch>("BranchId");
+            CoreDocumentAttachments = new FakeDbSet<CoreDocumentAttachment>("FileAttachmentId");
+            CoreDocumentTypes = new FakeDbSet<CoreDocumentType>("CoreFileCategoryId");
+            CoreFileTypes = new FakeDbSet<CoreFileType>("CoreFileTypeId");
+            CoreFileUploads = new FakeDbSet<CoreFileUpload>("FileUploadId");
+            CoreLeadAttachments = new FakeDbSet<CoreLeadAttachment>("FileAttachmentId");
             CorePas = new FakeDbSet<CorePa>("CorePaId");
             CoreProvinces = new FakeDbSet<CoreProvince>("ProvinceId");
             CoreTeamLeaders = new FakeDbSet<CoreTeamLeader>("CoreTeamLeaderId");
             CoreUsers = new FakeDbSet<CoreUser>("CoreUserId");
+            CoreUserAttachments = new FakeDbSet<CoreUserAttachment>("UserAttachmentId");
             CoreUserBranchMoveRequests = new FakeDbSet<CoreUserBranchMoveRequest>("CoreUserMoveRequestId");
             CoreUserInTypes = new FakeDbSet<CoreUserInType>("CoreUserInTypeId");
             CoreUserTypes = new FakeDbSet<CoreUserType>("CoreUserTypeId");
+            Leads = new FakeDbSet<Lead>("LeadId");
+            LeadActivities = new FakeDbSet<LeadActivity>("LeadActivityId");
+            LeadActivityForLeads = new FakeDbSet<LeadActivityForLead>("LeadActivityForLeadId");
+            LeadAgents = new FakeDbSet<LeadAgent>("LeadAgentsId");
+            LeadAgentCommunications = new FakeDbSet<LeadAgentCommunication>("LeadAgentCommunicationId");
+            LeadAgentCommunicationTypes = new FakeDbSet<LeadAgentCommunicationType>("LeadAgentCommunicationTypeId");
+            LeadAttachments = new FakeDbSet<LeadAttachment>("LeadAttachmentsId");
+            LeadProspects = new FakeDbSet<LeadProspect>("LeadProspectId");
+            LeadRawDatas = new FakeDbSet<LeadRawData>("LeadRawDataId");
+            LeadRawDataLogs = new FakeDbSet<LeadRawDataLog>("LeadRawDataLogId");
+            LeadReminders = new FakeDbSet<LeadReminder>("LeadReminderId");
+            LeadSources = new FakeDbSet<LeadSource>("LeadSourceId");
+            LeadStatus = new FakeDbSet<LeadStatu>("LeadStatusId");
+            LeadStatusHistories = new FakeDbSet<LeadStatusHistory>("LeadStatusHistoryId");
+            LeadTypes = new FakeDbSet<LeadType>("LeadTypeId");
+            LeadWithSameProspects = new FakeDbSet<LeadWithSameProspect>("LeadWithSameProspectId");
+            LeadWithSameProspectLinks = new FakeDbSet<LeadWithSameProspectLink>("LeadWithSameProspectLinksId");
+            LoggedCalls = new FakeDbSet<LoggedCall>("Cid", "LeadProspectId", "CallDuration", "DateLogged", "Agentid");
+            MessengerComTypes = new FakeDbSet<MessengerComType>("MessengerTypeId");
             MessengerCoreLogs = new FakeDbSet<MessengerCoreLog>("MessengerCoreLogId");
+            MessengerTemplates = new FakeDbSet<MessengerTemplate>("MessengerTemplateId");
+            MessengerTemplateTypes = new FakeDbSet<MessengerTemplateType>("MessengerTemplateTypeId");
+            MessengerTriggers = new FakeDbSet<MessengerTrigger>("MessengerTriggerId");
+            MessengerTriggerLogs = new FakeDbSet<MessengerTriggerLog>("MessengerTriggerLogId");
             MessengerTypes = new FakeDbSet<MessengerType>("MessengerTypeId");
             PropertyFeatures = new FakeDbSet<PropertyFeature>("PropertyFeatureId", "FeatureName", "IsFeatureActive");
             PropertyImages = new FakeDbSet<PropertyImage>("PropertyImagesId");
@@ -377,6 +712,7 @@ namespace JazMax.DataAccess
             SystemErrorLogs = new FakeDbSet<SystemErrorLog>("SystemErrorLogId");
             SystemSettingsDatas = new FakeDbSet<SystemSettingsData>("SystemSettingsDataId");
             VwGetAgentsInformations = new FakeDbSet<VwGetAgentsInformation>("CoreUserId", "CoreAgentId", "BranchId", "ProvinceId");
+            VwGetLeadsByActivities = new FakeDbSet<VwGetLeadsByActivity>("LeadId", "DateCreated", "StatusName", "CoreBranchId", "LeadStatusId");
             VwGetTeamLeadersInformations = new FakeDbSet<VwGetTeamLeadersInformation>("CoreUserId", "CoreTeamLeaderId", "BranchId", "ProvinceId");
         }
 
@@ -441,6 +777,63 @@ namespace JazMax.DataAccess
 
 
         // Stored Procedures
+        public System.Collections.Generic.List<SpLeadActivityByAgentReturnModel> SpLeadActivityByAgent(int? coreUserId)
+        {
+            int procResult;
+            return SpLeadActivityByAgent(coreUserId, out procResult);
+        }
+
+        public System.Collections.Generic.List<SpLeadActivityByAgentReturnModel> SpLeadActivityByAgent(int? coreUserId, out int procResult)
+        {
+
+            procResult = 0;
+            return new System.Collections.Generic.List<SpLeadActivityByAgentReturnModel>();
+        }
+
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<SpLeadActivityByAgentReturnModel>> SpLeadActivityByAgentAsync(int? coreUserId)
+        {
+            int procResult;
+            return System.Threading.Tasks.Task.FromResult(SpLeadActivityByAgent(coreUserId, out procResult));
+        }
+
+        public System.Collections.Generic.List<SpLeadByPropertyReturnModel> SpLeadByProperty(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo)
+        {
+            int procResult;
+            return SpLeadByProperty(leadStatusId, coreBranchId, dateFrom, dateTo, out procResult);
+        }
+
+        public System.Collections.Generic.List<SpLeadByPropertyReturnModel> SpLeadByProperty(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo, out int procResult)
+        {
+
+            procResult = 0;
+            return new System.Collections.Generic.List<SpLeadByPropertyReturnModel>();
+        }
+
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<SpLeadByPropertyReturnModel>> SpLeadByPropertyAsync(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo)
+        {
+            int procResult;
+            return System.Threading.Tasks.Task.FromResult(SpLeadByProperty(leadStatusId, coreBranchId, dateFrom, dateTo, out procResult));
+        }
+
+        public System.Collections.Generic.List<SpLeadClosedReportReturnModel> SpLeadClosedReport(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo)
+        {
+            int procResult;
+            return SpLeadClosedReport(leadStatusId, coreBranchId, dateFrom, dateTo, out procResult);
+        }
+
+        public System.Collections.Generic.List<SpLeadClosedReportReturnModel> SpLeadClosedReport(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo, out int procResult)
+        {
+
+            procResult = 0;
+            return new System.Collections.Generic.List<SpLeadClosedReportReturnModel>();
+        }
+
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<SpLeadClosedReportReturnModel>> SpLeadClosedReportAsync(int? leadStatusId, int? coreBranchId, System.DateTime? dateFrom, System.DateTime? dateTo)
+        {
+            int procResult;
+            return System.Threading.Tasks.Task.FromResult(SpLeadClosedReport(leadStatusId, coreBranchId, dateFrom, dateTo, out procResult));
+        }
+
         public int SpSaveEditLog(string tableName, string tableColum, int? tableKey, string valueBefore, string valueAfer, int? coreUserId, string comment)
         {
 
@@ -791,6 +1184,21 @@ namespace JazMax.DataAccess
         public bool IsActive { get; set; } // IsActive
     }
 
+    // CoreAdditionalNotes
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreAdditionalNote
+    {
+        public int AdditionalNoteId { get; set; } // AdditionalNoteId (Primary key)
+        public int CoreUserId { get; set; } // CoreUserId
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public string DeletedBy { get; set; } // DeletedBy
+        public System.DateTime DeletedDate { get; set; } // DeletedDate
+        public int FileUploadId { get; set; } // FileUploadId
+        public string NotesArea { get; set; } // NotesArea
+        public bool? IsActive { get; set; } // IsActive
+        public bool? IsSent { get; set; } // IsSent
+    }
+
     // CoreAgent
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class CoreAgent
@@ -815,6 +1223,89 @@ namespace JazMax.DataAccess
         public string StreetAddress { get; set; } // StreetAddress
         public string City { get; set; } // City
         public string Suburb { get; set; } // Suburb
+    }
+
+    // CoreDocumentAttachments
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreDocumentAttachment
+    {
+        public int FileAttachmentId { get; set; } // FileAttachmentId (Primary key)
+        public int FileUploadId { get; set; } // FileUploadId
+        public string FileNames { get; set; } // FileNames
+        public int CoreUserId { get; set; } // CoreUserId
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public string DeletedBy { get; set; } // DeletedBy
+        public System.DateTime DeletedDate { get; set; } // DeletedDate
+        public int BranchId { get; set; } // BranchId
+        public int ProvinceId { get; set; } // ProvinceId
+        public string FileAttachmentDescription { get; set; } // FileAttachmentDescription
+        public System.DateTime LastUpdated { get; set; } // LastUpdated
+        public bool? IsActive { get; set; } // IsActive
+        public bool? IsRecieved { get; set; } // IsRecieved
+        public byte[] FileContent { get; set; } // FileContent
+    }
+
+    // CoreDocumentTypes
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreDocumentType
+    {
+        public int CoreFileCategoryId { get; set; } // CoreFileCategoryId (Primary key)
+        public string CategoryName { get; set; } // CategoryName
+        public bool? IsActive { get; set; } // IsActive
+    }
+
+    // CoreFileTypes
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreFileType
+    {
+        public int CoreFileTypeId { get; set; } // CoreFileTypeId (Primary key)
+        public string TypeName { get; set; } // TypeName
+        public bool? IsActive { get; set; } // IsActive
+    }
+
+    // CoreFileUploads
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreFileUpload
+    {
+        public int FileUploadId { get; set; } // FileUploadId (Primary key)
+        public string FileNames { get; set; } // FileNames
+        public int CoreUserId { get; set; } // CoreUserId
+        public int CoreUserTypeId { get; set; } // CoreUserTypeId
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public string DeletedBy { get; set; } // DeletedBy
+        public System.DateTime DeletedDate { get; set; } // DeletedDate
+        public int BranchId { get; set; } // BranchId
+        public int ProvinceId { get; set; } // ProvinceId
+        public int CoreFileTypeId { get; set; } // CoreFileTypeId
+        public string FileDescription { get; set; } // FileDescription
+        public int CoreFileCategoryId { get; set; } // CoreFileCategoryId
+        public System.DateTime LastUpdated { get; set; } // LastUpdated
+        public bool? IsActive { get; set; } // IsActive
+        public bool? IsSent { get; set; } // IsSent
+        public bool? IsRecieved { get; set; } // IsRecieved
+        public byte[] FileContent { get; set; } // FileContent
+        public string SentFrom { get; set; } // SentFrom
+        public string SentTo { get; set; } // SentTo
+    }
+
+    // CoreLeadAttachments
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreLeadAttachment
+    {
+        public int FileAttachmentId { get; set; } // FileAttachmentId (Primary key)
+        public int LeadId { get; set; } // LeadId
+        public string FileNames { get; set; } // FileNames
+        public int CoreUserId { get; set; } // CoreUserId
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public string DeletedBy { get; set; } // DeletedBy
+        public System.DateTime DeletedDate { get; set; } // DeletedDate
+        public int BranchId { get; set; } // BranchId
+        public int ProvinceId { get; set; } // ProvinceId
+        public string FileAttachmentDescription { get; set; } // FileAttachmentDescription
+        public System.DateTime LastUpdated { get; set; } // LastUpdated
+        public bool? IsActive { get; set; } // IsActive
+        public bool? IsRecieved { get; set; } // IsRecieved
+        public byte[] FileContent { get; set; } // FileContent
     }
 
     // CorePA
@@ -867,6 +1358,22 @@ namespace JazMax.DataAccess
         public bool? IsActive { get; set; } // IsActive
     }
 
+    // CoreUserAttachments
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreUserAttachment
+    {
+        public int UserAttachmentId { get; set; } // UserAttachmentId (Primary key)
+        public string FileNames { get; set; } // FileNames
+        public int CoreUserId { get; set; } // CoreUserId
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public string DeletedBy { get; set; } // DeletedBy
+        public System.DateTime DeletedDate { get; set; } // DeletedDate
+        public string FileAttachmentDescription { get; set; } // FileAttachmentDescription
+        public bool? IsActive { get; set; } // IsActive
+        public bool? IsRecieved { get; set; } // IsRecieved
+        public byte[] FileContent { get; set; } // FileContent
+    }
+
     // CoreUserBranchMoveRequest
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class CoreUserBranchMoveRequest
@@ -905,6 +1412,214 @@ namespace JazMax.DataAccess
         public bool? IsActive { get; set; } // IsActive
     }
 
+    // Lead
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class Lead
+    {
+        public int LeadId { get; set; } // LeadID (Primary key)
+        public int LeadTypeId { get; set; } // LeadTypeId
+        public int CoreBranchId { get; set; } // CoreBranchId
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public int LeadSourceId { get; set; } // LeadSourceID
+        public int PropertyListingId { get; set; } // PropertyListingID
+        public bool IsCompleted { get; set; } // IsCompleted
+        public int LeadStatusId { get; set; } // LeadStatusID
+        public bool HasLinkedLead { get; set; } // HasLinkedLead
+        public bool ServiceCompleted { get; set; } // ServiceCompleted
+    }
+
+    // LeadActivity
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadActivity
+    {
+        public int LeadActivityId { get; set; } // LeadActivityID (Primary key)
+        public string ActivityName { get; set; } // ActivityName
+        public bool IsSystem { get; set; } // IsSystem
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // LeadActivityForLead
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadActivityForLead
+    {
+        public int LeadActivityForLeadId { get; set; } // LeadActivityForLeadID (Primary key)
+        public int LeadActivityId { get; set; } // LeadActivityID
+        public string Description { get; set; } // Description
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public int CoreUserId { get; set; } // CoreUserId
+        public int LeadId { get; set; } // LeadID
+        public bool IsSystem { get; set; } // IsSystem
+        public bool IsDeleted { get; set; } // IsDeleted
+    }
+
+    // LeadAgents
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadAgent
+    {
+        public int LeadAgentsId { get; set; } // LeadAgentsID (Primary key)
+        public int LeadId { get; set; } // LeadID
+        public int AgentId { get; set; } // AgentID
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // LeadAgentCommunication
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadAgentCommunication
+    {
+        public int LeadAgentCommunicationId { get; set; } // LeadAgentCommunicationID (Primary key)
+        public int AgentId { get; set; } // AgentID
+        public int? LeadAgentCommunicationTypeId { get; set; } // LeadAgentCommunicationTypeID
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // LeadAgentCommunicationType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadAgentCommunicationType
+    {
+        public int LeadAgentCommunicationTypeId { get; set; } // LeadAgentCommunicationTypeID (Primary key)
+        public string TypeName { get; set; } // TypeName
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // LeadAttachments
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadAttachment
+    {
+        public int LeadAttachmentsId { get; set; } // LeadAttachmentsID (Primary key)
+        public int BlobId { get; set; } // BlobID
+        public int LeadId { get; set; } // LeadID
+        public bool IsDeleted { get; set; } // IsDeleted
+    }
+
+    // LeadProspect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadProspect
+    {
+        public int LeadProspectId { get; set; } // LeadProspectID (Primary key)
+        public int LeadId { get; set; } // LeadID
+        public string FullName { get; set; } // FullName
+        public string ContactNumber { get; set; } // ContactNumber (length: 10)
+        public string Email { get; set; } // Email
+        public string Comments { get; set; } // Comments
+    }
+
+    // LeadRawData
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadRawData
+    {
+        public int LeadRawDataId { get; set; } // LeadRawDataID (Primary key)
+        public string FullName { get; set; } // FullName
+        public string ContactNumber { get; set; } // ContactNumber (length: 10)
+        public string Email { get; set; } // Email
+        public string Comments { get; set; } // Comments
+        public string SourceName { get; set; } // SourceName
+        public int PropertyListingId { get; set; } // PropertyListingID
+        public bool IsManualCapture { get; set; } // IsManualCapture
+        public int? CoreUserId { get; set; } // CoreUserID
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public bool ServiceCompleted { get; set; } // ServiceCompleted
+        public System.DateTime? ServiceCompletedDate { get; set; } // ServiceCompletedDate
+    }
+
+    // LeadRawDataLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadRawDataLog
+    {
+        public int LeadRawDataLogId { get; set; } // LeadRawDataLogId (Primary key)
+        public int LeadRawDataId { get; set; } // LeadRawDataId
+        public int LeadId { get; set; } // LeadId
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public string Message { get; set; } // Message
+    }
+
+    // LeadReminder
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadReminder
+    {
+        public int LeadReminderId { get; set; } // LeadReminderID (Primary key)
+        public int LeadId { get; set; } // LeadID
+        public int CoreUserId { get; set; } // CoreUserID
+        public string Description { get; set; } // Description
+        public System.DateTime DateCreated { get; set; } // DateCreated
+        public System.DateTime ReminderDate { get; set; } // ReminderDate
+        public bool WebJobCompleted { get; set; } // WebJobCompleted
+        public System.DateTime? WebJobCompletedDate { get; set; } // WebJobCompletedDate
+    }
+
+    // LeadSource
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadSource
+    {
+        public int LeadSourceId { get; set; } // LeadSourceID (Primary key)
+        public string SourceName { get; set; } // SourceName
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // LeadStatus
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadStatu
+    {
+        public int LeadStatusId { get; set; } // LeadStatusID (Primary key)
+        public string StatusName { get; set; } // StatusName
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // LeadStatusHistory
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadStatusHistory
+    {
+        public int LeadStatusHistoryId { get; set; } // LeadStatusHistoryID (Primary key)
+        public int LeadStatusId { get; set; } // LeadStatusID
+        public int LeadId { get; set; } // LeadID
+        public System.DateTime StatusDateTime { get; set; } // StatusDateTime
+    }
+
+    // LeadType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadType
+    {
+        public int LeadTypeId { get; set; } // LeadTypeId (Primary key)
+        public string TypeName { get; set; } // TypeName
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // LeadWithSameProspect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadWithSameProspect
+    {
+        public int LeadWithSameProspectId { get; set; } // LeadWithSameProspectId (Primary key)
+        public int LeadId { get; set; } // LeadID
+    }
+
+    // LeadWithSameProspectLinks
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadWithSameProspectLink
+    {
+        public int LeadWithSameProspectLinksId { get; set; } // LeadWithSameProspectLinksID (Primary key)
+        public int LeadWithSameProspectId { get; set; } // LeadWithSameProspectId
+        public int LinkedLeadId { get; set; } // LinkedLeadID
+    }
+
+    // LoggedCalls
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LoggedCall
+    {
+        public int Cid { get; set; } // CID (Primary key)
+        public int LeadProspectId { get; set; } // LeadProspectID (Primary key)
+        public string CallDuration { get; set; } // CallDuration (Primary key)
+        public System.DateTime DateLogged { get; set; } // DateLogged (Primary key)
+        public int Agentid { get; set; } // Agentid (Primary key)
+    }
+
+    // MessengerComType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerComType
+    {
+        public int MessengerTypeId { get; set; } // MessengerTypeId (Primary key)
+        public string TypeName { get; set; } // TypeName (length: 50)
+        public bool IsActive { get; set; } // IsActive
+    }
+
     // MessengerCoreLog
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class MessengerCoreLog
@@ -920,6 +1635,63 @@ namespace JazMax.DataAccess
         public System.DateTime? DateSent { get; set; } // DateSent
         public string MessengerResponse { get; set; } // MessengerResponse (length: 255)
         public bool? IsSent { get; set; } // IsSent
+        public int? MessengerTriggerId { get; set; } // MessengerTriggerId
+    }
+
+    // MessengerTemplate
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerTemplate
+    {
+        public int MessengerTemplateId { get; set; } // MessengerTemplateId (Primary key)
+        public int MessengerTemplateTypeId { get; set; } // MessengerTemplateTypeId
+        public string TemplateName { get; set; } // TemplateName
+        public int CoreBranchId { get; set; } // CoreBranchId
+        public string TemplateHtml { get; set; } // TemplateHTML
+        public int CoreUserId { get; set; } // CoreUserId
+        public System.DateTime CreatedDate { get; set; } // CreatedDate
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // MessengerTemplateType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerTemplateType
+    {
+        public int MessengerTemplateTypeId { get; set; } // MessengerTemplateTypeId (Primary key)
+        public string TemplateName { get; set; } // TemplateName
+        public bool IsActive { get; set; } // IsActive
+    }
+
+    // MessengerTrigger
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerTrigger
+    {
+        public int MessengerTriggerId { get; set; } // MessengerTriggerId (Primary key)
+        public int MessengerComTypeId { get; set; } // MessengerComTypeId
+        public System.DateTime SendingDate { get; set; } // SendingDate
+        public int MessengerTemplateId { get; set; } // MessengerTemplateId
+        public string MessageBody { get; set; } // MessageBody
+        public int SendingTo { get; set; } // SendingTo
+        public string MessageSubject { get; set; } // MessageSubject
+        public int BranchId { get; set; } // BranchId
+        public int CoreUserTypeId { get; set; } // CoreUserTypeId
+        public int CoreProvinceId { get; set; } // CoreProvinceId
+        public string TriggerSetup { get; set; } // TriggerSetup
+        public System.DateTime CreatedDate { get; set; } // CreatedDate
+        public int CoreUserId { get; set; } // CoreUserId
+        public bool HasBeenProcessed { get; set; } // HasBeenProcessed
+        public System.DateTime? ProcessedDateTime { get; set; } // ProcessedDateTime
+        public int? NumberOfContacts { get; set; } // NumberOfContacts
+        public int IsCancelled { get; set; } // IsCancelled
+    }
+
+    // MessengerTriggerLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerTriggerLog
+    {
+        public int MessengerTriggerLogId { get; set; } // MessengerTriggerLogId (Primary key)
+        public int MessengerTriggerId { get; set; } // MessengerTriggerId
+        public string SendToValue { get; set; } // SendToValue
+        public System.DateTime DateAdded { get; set; } // DateAdded
     }
 
     // MessengerType
@@ -1089,6 +1861,19 @@ namespace JazMax.DataAccess
         public string BranchName { get; set; } // BranchName
         public int ProvinceId { get; set; } // ProvinceId (Primary key)
         public string ProvinceName { get; set; } // ProvinceName
+    }
+
+    // vw_GetLeadsByActivity
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class VwGetLeadsByActivity
+    {
+        public int LeadId { get; set; } // LeadID (Primary key)
+        public System.DateTime DateCreated { get; set; } // DateCreated (Primary key)
+        public string BranchName { get; set; } // BranchName
+        public string StatusName { get; set; } // StatusName (Primary key)
+        public int? NumberOfActivities { get; set; } // NumberOfActivities
+        public int CoreBranchId { get; set; } // CoreBranchId (Primary key)
+        public int LeadStatusId { get; set; } // LeadStatusID (Primary key)
     }
 
     // vw_GetTeamLeadersInformation
@@ -1284,6 +2069,32 @@ namespace JazMax.DataAccess
         }
     }
 
+    // CoreAdditionalNotes
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreAdditionalNoteConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreAdditionalNote>
+    {
+        public CoreAdditionalNoteConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CoreAdditionalNoteConfiguration(string schema)
+        {
+            ToTable("CoreAdditionalNotes", schema);
+            HasKey(x => x.AdditionalNoteId);
+
+            Property(x => x.AdditionalNoteId).HasColumnName(@"AdditionalNoteId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DeletedBy).HasColumnName(@"DeletedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.DeletedDate).HasColumnName(@"DeletedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.FileUploadId).HasColumnName(@"FileUploadId").HasColumnType("int").IsRequired();
+            Property(x => x.NotesArea).HasColumnName(@"NotesArea").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsOptional();
+            Property(x => x.IsSent).HasColumnName(@"IsSent").HasColumnType("bit").IsOptional();
+        }
+    }
+
     // CoreAgent
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class CoreAgentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreAgent>
@@ -1329,6 +2140,144 @@ namespace JazMax.DataAccess
             Property(x => x.StreetAddress).HasColumnName(@"StreetAddress").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.City).HasColumnName(@"City").HasColumnType("nvarchar(max)").IsOptional();
             Property(x => x.Suburb).HasColumnName(@"Suburb").HasColumnType("nvarchar(max)").IsOptional();
+        }
+    }
+
+    // CoreDocumentAttachments
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreDocumentAttachmentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreDocumentAttachment>
+    {
+        public CoreDocumentAttachmentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CoreDocumentAttachmentConfiguration(string schema)
+        {
+            ToTable("CoreDocumentAttachments", schema);
+            HasKey(x => x.FileAttachmentId);
+
+            Property(x => x.FileAttachmentId).HasColumnName(@"FileAttachmentId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.FileUploadId).HasColumnName(@"FileUploadId").HasColumnType("int").IsRequired();
+            Property(x => x.FileNames).HasColumnName(@"FileNames").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DeletedBy).HasColumnName(@"DeletedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.DeletedDate).HasColumnName(@"DeletedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.BranchId).HasColumnName(@"BranchId").HasColumnType("int").IsRequired();
+            Property(x => x.ProvinceId).HasColumnName(@"ProvinceId").HasColumnType("int").IsRequired();
+            Property(x => x.FileAttachmentDescription).HasColumnName(@"FileAttachmentDescription").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.LastUpdated).HasColumnName(@"LastUpdated").HasColumnType("datetime").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsOptional();
+            Property(x => x.IsRecieved).HasColumnName(@"IsRecieved").HasColumnType("bit").IsOptional();
+            Property(x => x.FileContent).HasColumnName(@"FileContent").HasColumnType("varbinary(max)").IsOptional();
+        }
+    }
+
+    // CoreDocumentTypes
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreDocumentTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreDocumentType>
+    {
+        public CoreDocumentTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CoreDocumentTypeConfiguration(string schema)
+        {
+            ToTable("CoreDocumentTypes", schema);
+            HasKey(x => x.CoreFileCategoryId);
+
+            Property(x => x.CoreFileCategoryId).HasColumnName(@"CoreFileCategoryId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.CategoryName).HasColumnName(@"CategoryName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsOptional();
+        }
+    }
+
+    // CoreFileTypes
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreFileTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreFileType>
+    {
+        public CoreFileTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CoreFileTypeConfiguration(string schema)
+        {
+            ToTable("CoreFileTypes", schema);
+            HasKey(x => x.CoreFileTypeId);
+
+            Property(x => x.CoreFileTypeId).HasColumnName(@"CoreFileTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TypeName).HasColumnName(@"TypeName").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsOptional();
+        }
+    }
+
+    // CoreFileUploads
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreFileUploadConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreFileUpload>
+    {
+        public CoreFileUploadConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CoreFileUploadConfiguration(string schema)
+        {
+            ToTable("CoreFileUploads", schema);
+            HasKey(x => x.FileUploadId);
+
+            Property(x => x.FileUploadId).HasColumnName(@"FileUploadId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.FileNames).HasColumnName(@"FileNames").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsRequired();
+            Property(x => x.CoreUserTypeId).HasColumnName(@"CoreUserTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DeletedBy).HasColumnName(@"DeletedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.DeletedDate).HasColumnName(@"DeletedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.BranchId).HasColumnName(@"BranchId").HasColumnType("int").IsRequired();
+            Property(x => x.ProvinceId).HasColumnName(@"ProvinceId").HasColumnType("int").IsRequired();
+            Property(x => x.CoreFileTypeId).HasColumnName(@"CoreFileTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.FileDescription).HasColumnName(@"FileDescription").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.CoreFileCategoryId).HasColumnName(@"CoreFileCategoryId").HasColumnType("int").IsRequired();
+            Property(x => x.LastUpdated).HasColumnName(@"LastUpdated").HasColumnType("datetime").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsOptional();
+            Property(x => x.IsSent).HasColumnName(@"IsSent").HasColumnType("bit").IsOptional();
+            Property(x => x.IsRecieved).HasColumnName(@"IsRecieved").HasColumnType("bit").IsOptional();
+            Property(x => x.FileContent).HasColumnName(@"FileContent").HasColumnType("varbinary(max)").IsOptional();
+            Property(x => x.SentFrom).HasColumnName(@"SentFrom").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.SentTo).HasColumnName(@"SentTo").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+        }
+    }
+
+    // CoreLeadAttachments
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreLeadAttachmentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreLeadAttachment>
+    {
+        public CoreLeadAttachmentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CoreLeadAttachmentConfiguration(string schema)
+        {
+            ToTable("CoreLeadAttachments", schema);
+            HasKey(x => x.FileAttachmentId);
+
+            Property(x => x.FileAttachmentId).HasColumnName(@"FileAttachmentId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadId).HasColumnName(@"LeadId").HasColumnType("int").IsRequired();
+            Property(x => x.FileNames).HasColumnName(@"FileNames").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DeletedBy).HasColumnName(@"DeletedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.DeletedDate).HasColumnName(@"DeletedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.BranchId).HasColumnName(@"BranchId").HasColumnType("int").IsRequired();
+            Property(x => x.ProvinceId).HasColumnName(@"ProvinceId").HasColumnType("int").IsRequired();
+            Property(x => x.FileAttachmentDescription).HasColumnName(@"FileAttachmentDescription").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.LastUpdated).HasColumnName(@"LastUpdated").HasColumnType("datetime").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsOptional();
+            Property(x => x.IsRecieved).HasColumnName(@"IsRecieved").HasColumnType("bit").IsOptional();
+            Property(x => x.FileContent).HasColumnName(@"FileContent").HasColumnType("varbinary(max)").IsOptional();
         }
     }
 
@@ -1426,6 +2375,33 @@ namespace JazMax.DataAccess
         }
     }
 
+    // CoreUserAttachments
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class CoreUserAttachmentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreUserAttachment>
+    {
+        public CoreUserAttachmentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public CoreUserAttachmentConfiguration(string schema)
+        {
+            ToTable("CoreUserAttachments", schema);
+            HasKey(x => x.UserAttachmentId);
+
+            Property(x => x.UserAttachmentId).HasColumnName(@"UserAttachmentId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.FileNames).HasColumnName(@"FileNames").HasColumnType("varchar(max)").IsRequired().IsUnicode(false);
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.DeletedBy).HasColumnName(@"DeletedBy").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.DeletedDate).HasColumnName(@"DeletedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.FileAttachmentDescription).HasColumnName(@"FileAttachmentDescription").HasColumnType("varchar(max)").IsOptional().IsUnicode(false);
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsOptional();
+            Property(x => x.IsRecieved).HasColumnName(@"IsRecieved").HasColumnType("bit").IsOptional();
+            Property(x => x.FileContent).HasColumnName(@"FileContent").HasColumnType("varbinary(max)").IsOptional();
+        }
+    }
+
     // CoreUserBranchMoveRequest
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class CoreUserBranchMoveRequestConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<CoreUserBranchMoveRequest>
@@ -1497,6 +2473,423 @@ namespace JazMax.DataAccess
         }
     }
 
+    // Lead
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<Lead>
+    {
+        public LeadConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadConfiguration(string schema)
+        {
+            ToTable("Lead", schema);
+            HasKey(x => x.LeadId);
+
+            Property(x => x.LeadId).HasColumnName(@"LeadID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadTypeId).HasColumnName(@"LeadTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.CoreBranchId).HasColumnName(@"CoreBranchId").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.LeadSourceId).HasColumnName(@"LeadSourceID").HasColumnType("int").IsRequired();
+            Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingID").HasColumnType("int").IsRequired();
+            Property(x => x.IsCompleted).HasColumnName(@"IsCompleted").HasColumnType("bit").IsRequired();
+            Property(x => x.LeadStatusId).HasColumnName(@"LeadStatusID").HasColumnType("int").IsRequired();
+            Property(x => x.HasLinkedLead).HasColumnName(@"HasLinkedLead").HasColumnType("bit").IsRequired();
+            Property(x => x.ServiceCompleted).HasColumnName(@"ServiceCompleted").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadActivity
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadActivityConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadActivity>
+    {
+        public LeadActivityConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadActivityConfiguration(string schema)
+        {
+            ToTable("LeadActivity", schema);
+            HasKey(x => x.LeadActivityId);
+
+            Property(x => x.LeadActivityId).HasColumnName(@"LeadActivityID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.ActivityName).HasColumnName(@"ActivityName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.IsSystem).HasColumnName(@"IsSystem").HasColumnType("bit").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadActivityForLead
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadActivityForLeadConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadActivityForLead>
+    {
+        public LeadActivityForLeadConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadActivityForLeadConfiguration(string schema)
+        {
+            ToTable("LeadActivityForLead", schema);
+            HasKey(x => x.LeadActivityForLeadId);
+
+            Property(x => x.LeadActivityForLeadId).HasColumnName(@"LeadActivityForLeadID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadActivityId).HasColumnName(@"LeadActivityID").HasColumnType("int").IsRequired();
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsRequired();
+            Property(x => x.LeadId).HasColumnName(@"LeadID").HasColumnType("int").IsRequired();
+            Property(x => x.IsSystem).HasColumnName(@"IsSystem").HasColumnType("bit").IsRequired();
+            Property(x => x.IsDeleted).HasColumnName(@"IsDeleted").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadAgents
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadAgentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadAgent>
+    {
+        public LeadAgentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadAgentConfiguration(string schema)
+        {
+            ToTable("LeadAgents", schema);
+            HasKey(x => x.LeadAgentsId);
+
+            Property(x => x.LeadAgentsId).HasColumnName(@"LeadAgentsID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadId).HasColumnName(@"LeadID").HasColumnType("int").IsRequired();
+            Property(x => x.AgentId).HasColumnName(@"AgentID").HasColumnType("int").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadAgentCommunication
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadAgentCommunicationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadAgentCommunication>
+    {
+        public LeadAgentCommunicationConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadAgentCommunicationConfiguration(string schema)
+        {
+            ToTable("LeadAgentCommunication", schema);
+            HasKey(x => x.LeadAgentCommunicationId);
+
+            Property(x => x.LeadAgentCommunicationId).HasColumnName(@"LeadAgentCommunicationID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.AgentId).HasColumnName(@"AgentID").HasColumnType("int").IsRequired();
+            Property(x => x.LeadAgentCommunicationTypeId).HasColumnName(@"LeadAgentCommunicationTypeID").HasColumnType("int").IsOptional();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadAgentCommunicationType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadAgentCommunicationTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadAgentCommunicationType>
+    {
+        public LeadAgentCommunicationTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadAgentCommunicationTypeConfiguration(string schema)
+        {
+            ToTable("LeadAgentCommunicationType", schema);
+            HasKey(x => x.LeadAgentCommunicationTypeId);
+
+            Property(x => x.LeadAgentCommunicationTypeId).HasColumnName(@"LeadAgentCommunicationTypeID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TypeName).HasColumnName(@"TypeName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadAttachments
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadAttachmentConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadAttachment>
+    {
+        public LeadAttachmentConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadAttachmentConfiguration(string schema)
+        {
+            ToTable("LeadAttachments", schema);
+            HasKey(x => x.LeadAttachmentsId);
+
+            Property(x => x.LeadAttachmentsId).HasColumnName(@"LeadAttachmentsID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.BlobId).HasColumnName(@"BlobID").HasColumnType("int").IsRequired();
+            Property(x => x.LeadId).HasColumnName(@"LeadID").HasColumnType("int").IsRequired();
+            Property(x => x.IsDeleted).HasColumnName(@"IsDeleted").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadProspect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadProspectConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadProspect>
+    {
+        public LeadProspectConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadProspectConfiguration(string schema)
+        {
+            ToTable("LeadProspect", schema);
+            HasKey(x => x.LeadProspectId);
+
+            Property(x => x.LeadProspectId).HasColumnName(@"LeadProspectID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadId).HasColumnName(@"LeadID").HasColumnType("int").IsRequired();
+            Property(x => x.FullName).HasColumnName(@"FullName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.ContactNumber).HasColumnName(@"ContactNumber").HasColumnType("nvarchar").IsRequired().HasMaxLength(10);
+            Property(x => x.Email).HasColumnName(@"Email").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.Comments).HasColumnName(@"Comments").HasColumnType("nvarchar(max)").IsRequired();
+        }
+    }
+
+    // LeadRawData
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadRawDataConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadRawData>
+    {
+        public LeadRawDataConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadRawDataConfiguration(string schema)
+        {
+            ToTable("LeadRawData", schema);
+            HasKey(x => x.LeadRawDataId);
+
+            Property(x => x.LeadRawDataId).HasColumnName(@"LeadRawDataID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.FullName).HasColumnName(@"FullName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.ContactNumber).HasColumnName(@"ContactNumber").HasColumnType("nvarchar").IsRequired().HasMaxLength(10);
+            Property(x => x.Email).HasColumnName(@"Email").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.Comments).HasColumnName(@"Comments").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.SourceName).HasColumnName(@"SourceName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.PropertyListingId).HasColumnName(@"PropertyListingID").HasColumnType("int").IsRequired();
+            Property(x => x.IsManualCapture).HasColumnName(@"IsManualCapture").HasColumnType("bit").IsRequired();
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserID").HasColumnType("int").IsOptional();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.ServiceCompleted).HasColumnName(@"ServiceCompleted").HasColumnType("bit").IsRequired();
+            Property(x => x.ServiceCompletedDate).HasColumnName(@"ServiceCompletedDate").HasColumnType("datetime").IsOptional();
+        }
+    }
+
+    // LeadRawDataLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadRawDataLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadRawDataLog>
+    {
+        public LeadRawDataLogConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadRawDataLogConfiguration(string schema)
+        {
+            ToTable("LeadRawDataLog", schema);
+            HasKey(x => x.LeadRawDataLogId);
+
+            Property(x => x.LeadRawDataLogId).HasColumnName(@"LeadRawDataLogId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadRawDataId).HasColumnName(@"LeadRawDataId").HasColumnType("int").IsRequired();
+            Property(x => x.LeadId).HasColumnName(@"LeadId").HasColumnType("int").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.Message).HasColumnName(@"Message").HasColumnType("nvarchar(max)").IsOptional();
+        }
+    }
+
+    // LeadReminder
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadReminderConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadReminder>
+    {
+        public LeadReminderConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadReminderConfiguration(string schema)
+        {
+            ToTable("LeadReminder", schema);
+            HasKey(x => x.LeadReminderId);
+
+            Property(x => x.LeadReminderId).HasColumnName(@"LeadReminderID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadId).HasColumnName(@"LeadID").HasColumnType("int").IsRequired();
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserID").HasColumnType("int").IsRequired();
+            Property(x => x.Description).HasColumnName(@"Description").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired();
+            Property(x => x.ReminderDate).HasColumnName(@"ReminderDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.WebJobCompleted).HasColumnName(@"WebJobCompleted").HasColumnType("bit").IsRequired();
+            Property(x => x.WebJobCompletedDate).HasColumnName(@"WebJobCompletedDate").HasColumnType("datetime").IsOptional();
+        }
+    }
+
+    // LeadSource
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadSourceConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadSource>
+    {
+        public LeadSourceConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadSourceConfiguration(string schema)
+        {
+            ToTable("LeadSource", schema);
+            HasKey(x => x.LeadSourceId);
+
+            Property(x => x.LeadSourceId).HasColumnName(@"LeadSourceID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.SourceName).HasColumnName(@"SourceName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadStatus
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadStatuConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadStatu>
+    {
+        public LeadStatuConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadStatuConfiguration(string schema)
+        {
+            ToTable("LeadStatus", schema);
+            HasKey(x => x.LeadStatusId);
+
+            Property(x => x.LeadStatusId).HasColumnName(@"LeadStatusID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.StatusName).HasColumnName(@"StatusName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadStatusHistory
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadStatusHistoryConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadStatusHistory>
+    {
+        public LeadStatusHistoryConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadStatusHistoryConfiguration(string schema)
+        {
+            ToTable("LeadStatusHistory", schema);
+            HasKey(x => x.LeadStatusHistoryId);
+
+            Property(x => x.LeadStatusHistoryId).HasColumnName(@"LeadStatusHistoryID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadStatusId).HasColumnName(@"LeadStatusID").HasColumnType("int").IsRequired();
+            Property(x => x.LeadId).HasColumnName(@"LeadID").HasColumnType("int").IsRequired();
+            Property(x => x.StatusDateTime).HasColumnName(@"StatusDateTime").HasColumnType("datetime").IsRequired();
+        }
+    }
+
+    // LeadType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadType>
+    {
+        public LeadTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadTypeConfiguration(string schema)
+        {
+            ToTable("LeadType", schema);
+            HasKey(x => x.LeadTypeId);
+
+            Property(x => x.LeadTypeId).HasColumnName(@"LeadTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TypeName).HasColumnName(@"TypeName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // LeadWithSameProspect
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadWithSameProspectConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadWithSameProspect>
+    {
+        public LeadWithSameProspectConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadWithSameProspectConfiguration(string schema)
+        {
+            ToTable("LeadWithSameProspect", schema);
+            HasKey(x => x.LeadWithSameProspectId);
+
+            Property(x => x.LeadWithSameProspectId).HasColumnName(@"LeadWithSameProspectId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadId).HasColumnName(@"LeadID").HasColumnType("int").IsRequired();
+        }
+    }
+
+    // LeadWithSameProspectLinks
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LeadWithSameProspectLinkConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LeadWithSameProspectLink>
+    {
+        public LeadWithSameProspectLinkConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LeadWithSameProspectLinkConfiguration(string schema)
+        {
+            ToTable("LeadWithSameProspectLinks", schema);
+            HasKey(x => x.LeadWithSameProspectLinksId);
+
+            Property(x => x.LeadWithSameProspectLinksId).HasColumnName(@"LeadWithSameProspectLinksID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadWithSameProspectId).HasColumnName(@"LeadWithSameProspectId").HasColumnType("int").IsRequired();
+            Property(x => x.LinkedLeadId).HasColumnName(@"LinkedLeadID").HasColumnType("int").IsRequired();
+        }
+    }
+
+    // LoggedCalls
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class LoggedCallConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<LoggedCall>
+    {
+        public LoggedCallConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public LoggedCallConfiguration(string schema)
+        {
+            ToTable("LoggedCalls", schema);
+            HasKey(x => new { x.Cid, x.LeadProspectId, x.CallDuration, x.DateLogged, x.Agentid });
+
+            Property(x => x.Cid).HasColumnName(@"CID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.LeadProspectId).HasColumnName(@"LeadProspectID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.CallDuration).HasColumnName(@"CallDuration").HasColumnType("varchar(max)").IsRequired().IsUnicode(false).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.DateLogged).HasColumnName(@"DateLogged").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.Agentid).HasColumnName(@"Agentid").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
+    // MessengerComType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerComTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessengerComType>
+    {
+        public MessengerComTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MessengerComTypeConfiguration(string schema)
+        {
+            ToTable("MessengerComType", schema);
+            HasKey(x => x.MessengerTypeId);
+
+            Property(x => x.MessengerTypeId).HasColumnName(@"MessengerTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TypeName).HasColumnName(@"TypeName").HasColumnType("varchar").IsRequired().IsUnicode(false).HasMaxLength(50);
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
     // MessengerCoreLog
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class MessengerCoreLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessengerCoreLog>
@@ -1522,6 +2915,107 @@ namespace JazMax.DataAccess
             Property(x => x.DateSent).HasColumnName(@"DateSent").HasColumnType("datetime").IsOptional();
             Property(x => x.MessengerResponse).HasColumnName(@"MessengerResponse").HasColumnType("nvarchar").IsOptional().HasMaxLength(255);
             Property(x => x.IsSent).HasColumnName(@"IsSent").HasColumnType("bit").IsOptional();
+            Property(x => x.MessengerTriggerId).HasColumnName(@"MessengerTriggerId").HasColumnType("int").IsOptional();
+        }
+    }
+
+    // MessengerTemplate
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerTemplateConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessengerTemplate>
+    {
+        public MessengerTemplateConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MessengerTemplateConfiguration(string schema)
+        {
+            ToTable("MessengerTemplate", schema);
+            HasKey(x => x.MessengerTemplateId);
+
+            Property(x => x.MessengerTemplateId).HasColumnName(@"MessengerTemplateId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.MessengerTemplateTypeId).HasColumnName(@"MessengerTemplateTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.TemplateName).HasColumnName(@"TemplateName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.CoreBranchId).HasColumnName(@"CoreBranchId").HasColumnType("int").IsRequired();
+            Property(x => x.TemplateHtml).HasColumnName(@"TemplateHTML").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsRequired();
+            Property(x => x.CreatedDate).HasColumnName(@"CreatedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // MessengerTemplateType
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerTemplateTypeConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessengerTemplateType>
+    {
+        public MessengerTemplateTypeConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MessengerTemplateTypeConfiguration(string schema)
+        {
+            ToTable("MessengerTemplateType", schema);
+            HasKey(x => x.MessengerTemplateTypeId);
+
+            Property(x => x.MessengerTemplateTypeId).HasColumnName(@"MessengerTemplateTypeId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.TemplateName).HasColumnName(@"TemplateName").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.IsActive).HasColumnName(@"IsActive").HasColumnType("bit").IsRequired();
+        }
+    }
+
+    // MessengerTrigger
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerTriggerConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessengerTrigger>
+    {
+        public MessengerTriggerConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MessengerTriggerConfiguration(string schema)
+        {
+            ToTable("MessengerTrigger", schema);
+            HasKey(x => x.MessengerTriggerId);
+
+            Property(x => x.MessengerTriggerId).HasColumnName(@"MessengerTriggerId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.MessengerComTypeId).HasColumnName(@"MessengerComTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.SendingDate).HasColumnName(@"SendingDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.MessengerTemplateId).HasColumnName(@"MessengerTemplateId").HasColumnType("int").IsRequired();
+            Property(x => x.MessageBody).HasColumnName(@"MessageBody").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.SendingTo).HasColumnName(@"SendingTo").HasColumnType("int").IsRequired();
+            Property(x => x.MessageSubject).HasColumnName(@"MessageSubject").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.BranchId).HasColumnName(@"BranchId").HasColumnType("int").IsRequired();
+            Property(x => x.CoreUserTypeId).HasColumnName(@"CoreUserTypeId").HasColumnType("int").IsRequired();
+            Property(x => x.CoreProvinceId).HasColumnName(@"CoreProvinceId").HasColumnType("int").IsRequired();
+            Property(x => x.TriggerSetup).HasColumnName(@"TriggerSetup").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.CreatedDate).HasColumnName(@"CreatedDate").HasColumnType("datetime").IsRequired();
+            Property(x => x.CoreUserId).HasColumnName(@"CoreUserId").HasColumnType("int").IsRequired();
+            Property(x => x.HasBeenProcessed).HasColumnName(@"HasBeenProcessed").HasColumnType("bit").IsRequired();
+            Property(x => x.ProcessedDateTime).HasColumnName(@"ProcessedDateTime").HasColumnType("datetime").IsOptional();
+            Property(x => x.NumberOfContacts).HasColumnName(@"NumberOfContacts").HasColumnType("int").IsOptional();
+            Property(x => x.IsCancelled).HasColumnName(@"IsCancelled").HasColumnType("int").IsRequired();
+        }
+    }
+
+    // MessengerTriggerLog
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class MessengerTriggerLogConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<MessengerTriggerLog>
+    {
+        public MessengerTriggerLogConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public MessengerTriggerLogConfiguration(string schema)
+        {
+            ToTable("MessengerTriggerLog", schema);
+            HasKey(x => x.MessengerTriggerLogId);
+
+            Property(x => x.MessengerTriggerLogId).HasColumnName(@"MessengerTriggerLogId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            Property(x => x.MessengerTriggerId).HasColumnName(@"MessengerTriggerId").HasColumnType("int").IsRequired();
+            Property(x => x.SendToValue).HasColumnName(@"SendToValue").HasColumnType("nvarchar(max)").IsRequired();
+            Property(x => x.DateAdded).HasColumnName(@"DateAdded").HasColumnType("datetime").IsRequired();
         }
     }
 
@@ -1848,6 +3342,30 @@ namespace JazMax.DataAccess
         }
     }
 
+    // vw_GetLeadsByActivity
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class VwGetLeadsByActivityConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<VwGetLeadsByActivity>
+    {
+        public VwGetLeadsByActivityConfiguration()
+            : this("dbo")
+        {
+        }
+
+        public VwGetLeadsByActivityConfiguration(string schema)
+        {
+            ToTable("vw_GetLeadsByActivity", schema);
+            HasKey(x => new { x.LeadId, x.DateCreated, x.StatusName, x.CoreBranchId, x.LeadStatusId });
+
+            Property(x => x.LeadId).HasColumnName(@"LeadID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.DateCreated).HasColumnName(@"DateCreated").HasColumnType("datetime").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.BranchName).HasColumnName(@"BranchName").HasColumnType("nvarchar(max)").IsOptional();
+            Property(x => x.StatusName).HasColumnName(@"StatusName").HasColumnType("nvarchar(max)").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.NumberOfActivities).HasColumnName(@"NumberOfActivities").HasColumnType("int").IsOptional();
+            Property(x => x.CoreBranchId).HasColumnName(@"CoreBranchId").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+            Property(x => x.LeadStatusId).HasColumnName(@"LeadStatusID").HasColumnType("int").IsRequired().HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.None);
+        }
+    }
+
     // vw_GetTeamLeadersInformation
     [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
     public class VwGetTeamLeadersInformationConfiguration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<VwGetTeamLeadersInformation>
@@ -1877,6 +3395,42 @@ namespace JazMax.DataAccess
     #endregion
 
     #region Stored procedure return models
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class SpLeadActivityByAgentReturnModel
+    {
+        public System.Int32 LeadID { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.String BranchName { get; set; }
+        public System.String StatusName { get; set; }
+        public System.Int32? NumberOfActivities { get; set; }
+        public System.Int32 CoreBranchId { get; set; }
+        public System.Int32 LeadStatusID { get; set; }
+        public System.Int32 CoreUserId { get; set; }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class SpLeadByPropertyReturnModel
+    {
+        public System.Int32? TotalLeads { get; set; }
+        public System.String FriendlyName { get; set; }
+        public System.Int32 PropertyListingID { get; set; }
+        public System.String TypeName { get; set; }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("EF.Reverse.POCO.Generator", "2.36.1.0")]
+    public class SpLeadClosedReportReturnModel
+    {
+        public System.Int32 LeadID { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.String BranchName { get; set; }
+        public System.String StatusName { get; set; }
+        public System.Int32? NumberOfActivities { get; set; }
+        public System.Int32 CoreBranchId { get; set; }
+        public System.Int32 LeadStatusID { get; set; }
+        public System.Int32 CoreUserId { get; set; }
+        public System.String AgentName { get; set; }
+    }
 
     #endregion
 

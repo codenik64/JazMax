@@ -1,0 +1,58 @@
+﻿@model IEnumerable<JazMax.Web.ViewModel.Leads.Reports.LeadsByProperty>
+<div class="panel - group">
+    <div class="col-md-0">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Leads By Properties</div>
+            <div class="panel-body">
+                @if (Model.Any())
+                {
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyFriendlyName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TotalLeads)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PropertyType)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PropertyFriendlyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TotalLeads)
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PropertyType)
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                }
+                else
+                {
+                    <p>No Records Found</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#LeadGrid').dataTable({
+        "searching": true,
+        "pageLength": 50,
+        "lengthMenu": [5, 10, 20, 50, 100]
+    });
+</script>
